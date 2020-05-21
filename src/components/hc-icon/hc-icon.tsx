@@ -35,7 +35,7 @@ export class HcIcon implements ComponentInterface {
   renderIcon() {
     const use = this.el.shadowRoot.querySelector('#use') as HTMLElement;
     const svg = this.el.shadowRoot.querySelector('.hc-icon') as HTMLElement;
-    use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `../assets/iconfont.svg#icon-${this.name}`);
+    use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `./assets/iconfont.svg#icon-${this.name}`);
     if (this.size) {
       svg.style.fontSize = `${this.size}px`
       svg.style.width = `${this.size}px`
