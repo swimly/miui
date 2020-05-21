@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>picker</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>选择</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-picker id="auto" current="1">
+          <hc-picker-item value="0">2020</hc-picker-item>
+          <hc-picker-item value="1">2019</hc-picker-item>
+          <hc-picker-item value="1">2018</hc-picker-item>
+          <hc-picker-item value="1">2017</hc-picker-item>
+          <hc-picker-item value="1">2016</hc-picker-item>
+          <hc-picker-item value="1">2015</hc-picker-item>
+          <hc-picker-item value="1">2014</hc-picker-item>
+          <hc-picker-item value="1">2013</hc-picker-item>
+          <hc-picker-item value="1">2012</hc-picker-item>
+          <hc-picker-item value="0">2011</hc-picker-item>
+          <hc-picker-item value="1">2010</hc-picker-item>
+          <hc-picker-item value="1">2009</hc-picker-item>
+          <hc-picker-item value="1">2008</hc-picker-item>
+          <hc-picker-item value="1">2007</hc-picker-item>
+          <hc-picker-item value="1">2006</hc-picker-item>
+          <hc-picker-item value="1">2005</hc-picker-item>
+          <hc-picker-item value="1">2004</hc-picker-item>
+          <hc-picker-item value="1">2003</hc-picker-item>
+          <hc-picker-item value="0">2020</hc-picker-item>
+          <hc-picker-item value="1">2019</hc-picker-item>
+          <hc-picker-item value="1">2018</hc-picker-item>
+          <hc-picker-item value="1">2017</hc-picker-item>
+          <hc-picker-item value="1">2016</hc-picker-item>
+          <hc-picker-item value="1">2015</hc-picker-item>
+          <hc-picker-item value="1">2014</hc-picker-item>
+          <hc-picker-item value="1">2013</hc-picker-item>
+          <hc-picker-item value="1">2012</hc-picker-item>
+          <hc-picker-item value="0">2011</hc-picker-item>
+          <hc-picker-item value="1">2010</hc-picker-item>
+          <hc-picker-item value="1">2009</hc-picker-item>
+          <hc-picker-item value="1">2008</hc-picker-item>
+          <hc-picker-item value="1">2007</hc-picker-item>
+          <hc-picker-item value="1">2006</hc-picker-item>
+          <hc-picker-item value="1">2005</hc-picker-item>
+          <hc-picker-item value="1">2004</hc-picker-item>
+          <hc-picker-item value="1">2003</hc-picker-item>
+        </hc-picker>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>slot</hc-title>
+        <hc-picker-view>
+          <p slot="handle">点击选择</p>
+          <hc-picker>
+            <hc-picker-item value="0">湖北</hc-picker-item>
+            <hc-picker-item value="1">湖南</hc-picker-item>
+            <hc-picker-item value="0">广东</hc-picker-item>
+            <hc-picker-item value="1">广西</hc-picker-item>
+          </hc-picker>
+        </hc-picker-view>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>指令调用</hc-title>
+        <div id="zl"></div>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script type="module">
+    import china from '../src/utils/china.js'
+    import {hc_picker_view} from '../www/build/hc-picker-view.entry.js'
+    // const picker = new hc_picker_view({})
+    // const p1 = picker.generate({
+    //   data: china,
+    //   value: '湖北省,武汉市,江夏区',
+    //   parent: document.querySelector('#zl')
+    // })
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+  <script>
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+:host {
+  display: inline-flex;
+  flex-direction: row;
+  font-size:$--app-checkbox-size;
+  color: $--app-checkbox-color;
+  align-items:center;
+  .frame{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    width: $--app-checkbox-size * 1.4;
+    height: $--app-checkbox-size * 1.4;
+    color:$--app-checkbox-background;
+    background: $--app-checkbox-background;
+    margin-right:0.4rem;
+    overflow:hidden;
+    transition:0.3s;
+    border:1px solid $--app-checkbox-border;
+    slot{
+      display:inline-block;
+      font-size:0;
+      transform: scale(0);
+      transition:0.3s;
+    }
+  }
+  slot{
+    display:block;
+    font-size:inherit;
+    color:inherit;
+    flex:1;
+  }
+}
+:host([conner]) {
+  .frame{
+    border-radius:$--app-checkbox-conner;
+  }
+}
+:host([rounder]) {
+  .frame{
+    border-radius:$--app-checkbox-size;
+  }
+}
+:host([checked]){
+  .frame{
+    background: $--app-checkbox-active;
+    border-color:$--app-checkbox-active;
+    slot{
+      transform: scale(1);
+    }
+  }
+}
+:host([checked][type="danger"]){
+  .frame{
+    background: $--app-checkbox-danger;
+    border-color:$--app-checkbox-danger;
+  }
+}
+:host([reverse]){
+  flex-direction: row-reverse;
+  display:flex;
+}

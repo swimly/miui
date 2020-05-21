@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  font-size: $--app-switch-label-size;
+  color: $--app-switch-label-color;
+  flex-direction: row;
+  align-items:center;
+  hc-icon{
+    font-size: $--app-switch-size;
+    color: $--app-switch-icon-color;
+    transition:0.3s;
+  }
+  .active{
+    opacity:0;
+    color: $--app-switch-active-color;
+    transform: scale(2);
+    transform-origin: center center;
+  }
+  .switch{
+    display:flex;
+    flex-direction:row;
+    height: $--app-switch-size;
+    width: $--app-switch-size * 1.8;
+    background-color: $--app-switch-default-color;
+    border-radius: $--app-switch-size / 2;
+    margin-right:0.4rem;
+    align-items:center;
+    padding:$--app-switch-size / 6;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    transition: 0.3s;
+    &:before{
+      content:"";
+      display:inline-block;
+      width: $--app-switch-size / 5 * 3;
+      height: $--app-switch-size / 5 * 3;
+      background-color: $--app-switch-default-dot-color;
+      border-radius:50%;
+      transition:0.3s;
+    }
+  }
+}
+:host([checked]){
+  .off{
+    opacity:0;
+  }
+  .active{
+    opacity:1;
+    transform:scale(1);
+  }
+  .switch{
+    background-color:$--app-switch-active-color;
+    &:before{
+      transform: translateX($--app-switch-size * 0.8);
+      background-color:$--app-switch-active-dot-color;
+    }
+  }
+}

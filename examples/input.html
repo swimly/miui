@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    hc-input{
+      margin:0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>输入框</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-input placeholder="请填写"></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>不同形状</hc-title>
+        <hc-input conner placeholder="请填写"></hc-input>
+        <hc-input rounder placeholder="请填写"></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>朴素按钮</hc-title>
+        <hc-input placeholder="请填写" plain></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>文本右对齐</hc-title>
+        <hc-input align="right" placeholder="请填写" plain></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>带图标的输入框</hc-title>
+        <hc-input prefix-icon="map" placeholder="请填写"></hc-input>
+        <hc-input suffix-icon="map" placeholder="请填写"></hc-input>
+        <hc-input icon-color="#409EFF" suffix-icon="map" placeholder="请填写"></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>多行输入框</hc-title>
+        <hc-input type="textarea" placeholder="请填写"></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>清空</hc-title>
+        <hc-input placeholder="请填写" clearable="true"></hc-input>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>限制字数</hc-title>
+        <hc-input max-length="20" placeholder="请填写" clearable="true"></hc-input>
+        <hc-input min-length="4" placeholder="请填写" clearable="true" suffix-icon="map" icon-color="#409EFF"></hc-input>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script nomodule src="../www.build/miui.js"></script>
+  <script>
+    var icons = document.querySelectorAll('hc-icon')
+    icons.forEach(icon => {
+      icon.addEventListener('vclick', () => {
+        alert(icon.getAttribute('name'))
+      })
+    })
+  </script>
+</body>
+</html>

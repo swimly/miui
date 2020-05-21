@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  height: $--app-picker-item-height;
+  align-items: center;
+  flex-direction: row;
+  font-size:$--app-picker-fontsize;
+  justify-content: center;
+}
+:host([active]) {
+  color:$--app-picker-active;
+}

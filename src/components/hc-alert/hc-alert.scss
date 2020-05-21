@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  background:$--app-alert-background;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate3d(-50%,-50%, 0);
+  width:80%;
+  min-height:4rem;
+  font-size:$--app-alert-fontsize;
+  padding: $--app-alert-padding;
+  color: $--app-alert-color;
+  box-sizing: border-box;
+  transition:0.3s ease-out;
+  z-index:100;
+  border-radius: $--app-alert-radius;
+  .close{
+    margin:0;
+    position: absolute;
+    right: $--app-alert-padding;
+    top: $--app-alert-padding;
+    color:$--app-alert-close-color;
+  }
+  .title{
+    font-size: $--app-alert-title-fontsize;
+    color: $--app-alert-title-color;
+    text-align:center;
+    margin:0;
+  }
+  .content{
+    margin: $--app-alert-padding * 1.5 0;
+    display:block;
+  }
+  .footer{
+    margin-bottom: -$--app-alert-padding/2;
+    margin-left: -$--app-alert-padding;
+    margin-right: -$--app-alert-padding;
+  }
+}
+:host([type="zoomIn"]){
+  transform: translate3d(-50%,-50%, 0) scale(0.7);
+  opacity:0;
+}
+:host([type="slideInDown"]){
+  transform: translate3d(-50%,-100%, 0) scale(1);
+  top:40%;
+}
+:host([type="slideInUp"]){
+  transform: translate3d(-50%,100%, 0) scale(1);
+  top:50%;
+}
+:host([type="fadeInDown"]){
+  transform: translate3d(-50%,-100%, 0) scale(1);
+  top:40;
+  opacity:0;
+}
+:host([type="fadeInUp"]){
+  transform: translate3d(-50%,100%, 0) scale(1);
+  top:50%;
+  opacity:0;
+}
+:host([type="zoomInDown"]){
+  transform: translate3d(-50%,-100%, 0) scale(0.7);
+  top:40%;
+}
+:host([type="zoomInUp"]){
+  transform: translate3d(-50%,100%, 0) scale(0.7);
+  top:50%;
+}
+:host([type="fadeIn"]){
+  transform: translate3d(-50%,-50%, 0) scale(1);
+  opacity:0.1;
+}
+:host([display]){
+  transform: translate3d(-50%,-50%, 0) scale(1);
+  opacity:1;
+  top:50%;
+  z-index:100;
+}

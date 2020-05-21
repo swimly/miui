@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alert</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    p{
+      font-size:0.7rem;
+      margin:0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>弹出提示</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-button type="primary" id="b1" size="small">放大</hc-button>
+        <hc-alert type="zoomIn" id="a1">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>不同打开形式</hc-title>
+        <p>从上掉下来</p>
+        <hc-button type="primary" plain id="b2" size="small">slideInDown</hc-button>
+        <hc-alert type="slideInDown" id="a2">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>从下弹出来</p>
+        <hc-button type="primary" plain id="b3" size="small">slideInUp</hc-button>
+        <hc-alert type="slideInUp" id="a3">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>从上渐隐出现</p>
+        <hc-button type="primary" plain id="b4" size="small">fadeInDown</hc-button>
+        <hc-alert type="fadeInDown" id="a4">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>从下渐隐出现</p>
+        <hc-button type="primary" plain id="b5" size="small">fadeInUp</hc-button>
+        <hc-alert type="fadeInUp" id="a5">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>从上放大出现</p>
+        <hc-button type="primary" plain id="b6" size="small">zoomInDown</hc-button>
+        <hc-alert type="zoomInDown" id="a6">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>从下放大出现</p>
+        <hc-button type="primary" plain id="b7" size="small">zoomInUp</hc-button>
+        <hc-alert type="zoomInUp" id="a7">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+        <p>渐隐出现</p>
+        <hc-button type="primary" plain id="b8" size="small">fadeIn</hc-button>
+        <hc-alert type="fadeIn" id="a8">
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>带标题</hc-title>
+        <hc-button type="primary" plain id="b9" size="small">弹出</hc-button>
+        <hc-alert type="zoomIn" id="a9">
+          <span slot="title">提示</span>
+          <span>你好呀！问候消息</span>
+        </hc-alert>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>带按钮</hc-title>
+        <hc-button type="primary" plain id="b10" size="small">弹出</hc-button>
+        <hc-alert type="slideInDown" id="a10">
+          <h2 slot="title">提示</h2>
+          <p>你好呀！问候消息</p>
+          <hc-row slot="footer" style="margin:1rem 1rem 0.5rem 1rem;">
+            <hc-col span="12">
+              <hc-button rounder type="info" style="margin-right:0.5rem;">取消</hc-button>
+            </hc-col>
+            <hc-col span="12">
+              <hc-button rounder type="primary" style="margin-left:0.5rem;">确认</hc-button>
+            </hc-col>
+          </hc-row>
+        </hc-alert>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    document.querySelector('#b1').addEventListener('click', () => {
+      document.querySelector('#a1').generate()
+    })
+    document.querySelector('#b2').addEventListener('click', () => {
+      document.querySelector('#a2').generate()
+    })
+    document.querySelector('#b3').addEventListener('click', () => {
+      document.querySelector('#a3').generate()
+    })
+    document.querySelector('#b4').addEventListener('click', () => {
+      document.querySelector('#a4').generate()
+    })
+    document.querySelector('#b5').addEventListener('click', () => {
+      document.querySelector('#a5').generate()
+    })
+    document.querySelector('#b6').addEventListener('click', () => {
+      document.querySelector('#a6').generate()
+    })
+    document.querySelector('#b7').addEventListener('click', () => {
+      document.querySelector('#a7').generate()
+    })
+    document.querySelector('#b8').addEventListener('click', () => {
+      document.querySelector('#a8').generate()
+    })
+    document.querySelector('#b9').addEventListener('click', () => {
+      document.querySelector('#a9').generate()
+    })
+    document.querySelector('#b10').addEventListener('click', () => {
+      document.querySelector('#a10').generate()
+    })
+  </script>
+</body>
+</html>

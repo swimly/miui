@@ -1,0 +1,77 @@
+:host {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: $--app-tag-default-size / 2;
+  height: $--app-tag-default-size;
+  color: $--app-tag-default-color;
+  border:1px solid $--app-tag-default-border;
+  padding:0 $--app-tag-default-size / 2;
+  max-width: 100%;
+  box-sizing: border-box;
+  .label{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex:1;
+  }
+  hc-icon{
+    transform: translateX(30%);
+    position: relative;
+    font-size: $--app-tag-default-size;
+    z-index:10;
+  }
+}
+:host([conner]){
+  border-radius: $--app-tag-default-conner;
+}
+:host([rounder]){
+  border-radius:$--app-tag-default-size;
+}
+:host([type]) {
+  color: $--app-tag-type-color;
+}
+:host([type="primary"]) {
+  background-color: $--app-tag-primary;
+  border-color: $--app-tag-primary;
+}
+:host([type="success"]) {
+  background-color: $--app-tag-success;
+  border-color: $--app-tag-success;
+}
+:host([type="warning"]) {
+  background-color: $--app-tag-warning;
+  border-color: $--app-tag-warning;
+}
+:host([type="danger"]) {
+  background-color: $--app-tag-danger;
+  border-color: $--app-tag-danger;
+}
+:host([size="mini"]){
+  font-size: $--app-tag-mini-size / 2;
+  height: $--app-tag-mini-size;
+}
+:host([size="small"]){
+  font-size: $--app-tag-small-size / 2;
+  height: $--app-tag-small-size;
+}
+:host([size="large"]){
+  font-size: $--app-tag-large-size / 2;
+  height: $--app-tag-large-size;
+}
+
+:host([plain]){
+  background-color: transparent;
+}
+:host([type="primary"][plain]){
+  color:$--app-tag-primary;
+}
+:host([type="warning"][plain]){
+  color:$--app-tag-warning;
+}
+:host([type="success"][plain]){
+  color:$--app-tag-success;
+}
+:host([type="danger"][plain]){
+  color:$--app-tag-danger;
+}

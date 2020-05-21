@@ -1,0 +1,28 @@
+:host {
+  font-size: $--app-title-size;
+  padding: $--app-title-padding;
+  margin: $--app-title-margin;
+  display:block;
+  color: $--app-title-color;
+  @include border_1px('bottom', $--app-button-default-border, 0);
+  h2{
+    font-size:inherit;
+    display:flex;
+    flex-direction: row;
+    margin:0;
+    align-items:center;
+    .label{
+      font-size:inherit;
+      font-weight: normal;
+      flex:1;
+    }
+    .more{
+      font-size: $--app-title-sub-size;
+      font-weight: normal;
+      color: $--app-title-sub-color;
+    }
+  }
+  .sub{
+    margin:0;
+  }
+}

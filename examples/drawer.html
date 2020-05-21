@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>drawer</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    hc-button{
+      margin:0 0.5rem 0.5rem 0;
+    }
+    p{
+      font-size:0.7rem;
+      line-height:1.6;
+      text-indent:2em;
+      color:var(--color-black);
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>抽屉</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-button id="a1" type="primary" size="small" conner plain>从下往上</hc-button>
+        <hc-button id="a2" type="primary" size="small" conner plain>从上往下</hc-button>
+        <hc-button id="a3" type="primary" size="small" conner plain>从左往右</hc-button>
+        <hc-button id="a4" type="primary" size="small" conner plain>从右往左</hc-button>
+        <hc-drawer id="d1" place="up">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+        </hc-drawer>
+        <hc-drawer id="d2" place="down">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+        </hc-drawer>
+        <hc-drawer id="d3" place="left">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+        </hc-drawer>
+        <hc-drawer id="d4" place="right">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+        </hc-drawer>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>没有遮罩</hc-title>
+        <hc-button id="a5" type="danger" size="small" conner plain>从下往上</hc-button>
+        <hc-button id="a6" type="danger" size="small" conner plain>从上往下</hc-button>
+        <hc-button id="a7" type="danger" size="small" conner plain>从左往右</hc-button>
+        <hc-button id="a8" type="danger" size="small" conner plain>从右往左</hc-button>
+        <hc-drawer id="d5" place="up" masker="false">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+          <hc-icon name="close"></hc-icon>
+        </hc-drawer>
+        <hc-drawer id="d6" place="down" masker="false">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+          <hc-icon name="close"></hc-icon>
+        </hc-drawer>
+        <hc-drawer id="d7" place="left" masker="false">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+          <hc-icon name="close"></hc-icon>
+        </hc-drawer>
+        <hc-drawer id="d8" place="right" masker="false">
+          <p>自从苹果的新系统Mojave发布后，暗黑模式终于在一片期待和欢呼中到来！而对应的各大软件APP，都开始对自己的产品开发了相应的深色主题，来匹配MAC的暗黑模式。对比正常的主题模式，深色的UI主题降低了设备发出亮度的同时，仍然满足最低的颜色对比度。而且在环境照明条件下调节亮度，并促进在黑暗环境中屏幕的使用，改善视觉人体工程，还减少眼睛的疲劳度。当然还可以节省电池的电量。</p>
+          <hc-icon name="close"></hc-icon>
+        </hc-drawer>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>指令调用</hc-title>
+        <hc-button id="zl" type="warning" size="small" conner>自定义</hc-button>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script type="module">
+    import {hc_drawer} from '../www/build/hc-drawer.entry.js'
+    var drawer = new hc_drawer({})
+    document.querySelector('#zl').addEventListener('click', () => {
+      if (drawer) {
+        drawer.generate({
+          place: 'down',
+          content: `弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示弹出层容器，用于展示弹窗、信息提示等内容，支持多个弹出层叠加展示`
+        })
+      }
+    })
+  </script>
+  <script>
+    document.querySelector('#a1').addEventListener('click', () => {
+      document.querySelector('#d1').generate()
+    })
+    document.querySelector('#a2').addEventListener('click', () => {
+      document.querySelector('#d2').generate()
+    })
+    document.querySelector('#a3').addEventListener('click', () => {
+      document.querySelector('#d3').generate()
+    })
+    document.querySelector('#a4').addEventListener('click', () => {
+      document.querySelector('#d4').generate()
+    })
+    document.querySelector('#a5').addEventListener('click', () => {
+      document.querySelector('#d5').generate()
+      document.querySelector('#d5').querySelector('hc-icon').addEventListener('click', () => {
+        document.querySelector('#d5').destory()
+      })
+    })
+    document.querySelector('#a6').addEventListener('click', () => {
+      document.querySelector('#d6').generate()
+      document.querySelector('#d6').querySelector('hc-icon').addEventListener('click', () => {
+        document.querySelector('#d6').destory()
+      })
+    })
+    document.querySelector('#a7').addEventListener('click', () => {
+      document.querySelector('#d7').generate()
+      document.querySelector('#d7').querySelector('hc-icon').addEventListener('click', () => {
+        document.querySelector('#d7').destory()
+      })
+    })
+    document.querySelector('#a8').addEventListener('click', () => {
+      document.querySelector('#d8').generate()
+      document.querySelector('#d8').querySelector('hc-icon').addEventListener('click', () => {
+        document.querySelector('#d8').destory()
+      })
+    })
+  </script>
+</body>
+</html>

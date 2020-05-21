@@ -1,0 +1,24 @@
+:host {
+  display:block;
+  overflow:hidden;
+  position: relative;
+  box-shadow: inset 0px -1px 1px -1px $--app-tab-border;
+  .wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: $--app-tab-height;
+    transition:0.3s;
+  }
+  .indicate{
+    position: absolute;
+    display:block;
+    width:1rem;
+    height:0.2rem;
+    background:$--app-tab-active-color;
+    left:0;
+    bottom:0;
+    border-radius:0.2rem;
+    transition:0.3s;
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rate</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>评分</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-rate>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+        </hc-rate>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义图标</hc-title>
+        <hc-rate void-icon="favorites" active-icon="favorites-fill">
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+        </hc-rate>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义主题</hc-title>
+        <hc-rate active-color="#f00" value="2">
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+        </hc-rate>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>半星</hc-title>
+        <hc-rate value="2.5">
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+          <hc-rate-item></hc-rate-item>
+        </hc-rate>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>文本</hc-title>
+        <hc-rate value="2">
+          <hc-rate-item label="差"></hc-rate-item>
+          <hc-rate-item label="一般"></hc-rate-item>
+          <hc-rate-item label="好"></hc-rate-item>
+          <hc-rate-item label="很好"></hc-rate-item>
+          <hc-rate-item label="非常好"></hc-rate-item>
+        </hc-rate>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+</body>
+</html>

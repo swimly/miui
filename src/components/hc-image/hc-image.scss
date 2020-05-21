@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  position: relative;
+  background:$--app-image-fill;
+  font-size: $--app-image-fontsize;
+  color: $--app-image-color;
+  overflow:hidden;
+  height:8rem;
+  .core{
+    transition:0.3s;
+    opacity:0;
+  }
+  .watermark{
+    font-size:$--app-image-fontsize;
+    color:$--app-image-color;
+    position: absolute;
+    right:0;
+    bottom:0;
+    margin:0;
+    padding:0.5rem;
+  }
+  slot{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    height:100%;
+    &[name="error"] {
+      display:none;
+    }
+  }
+}
+:host([status="0"]) {
+  slot{
+    display:none;
+    &[name="loading"] {
+      display:flex;
+    }
+    &[name="error"] {
+      display:none;
+    }
+  }
+}
+:host([status="1"]){
+  slot{
+    display:block;
+    img{
+      opacity:1;
+    }
+    &[name="loading"]{
+      display:none;
+    }
+    &[name="error"]{
+      display:none;
+    }
+  }
+}
+:host([status="-1"]){
+  slot{
+    display:none;
+    img{
+      opacity:0;
+    }
+    &[name="loading"]{
+      display:none;
+    }
+    &[name="error"]{
+      display:flex;
+    }
+  }
+}

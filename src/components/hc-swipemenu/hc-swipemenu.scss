@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  position: relative;
+  overflow:hidden;
+  .content{
+    background:$--app-swipemenu-background;
+    position: relative;
+    z-index:10;
+    display:block;
+  }
+  .handle{
+    position: absolute;
+    right:0;
+    top:0;
+    height:100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow:hidden;
+    justify-content: flex-end;
+    width:auto;
+    z-index:9;
+  }
+}

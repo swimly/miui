@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页</title>
+  <link rel="stylesheet" href="./www/build/miui.css">
+  <style>
+    a{
+      display: block;
+      text-decoration: none;
+      color:var(--color-dark);
+      font-size:0.8rem;
+      padding:1rem 0;
+      border-bottom:1px dashed var(--border-default);
+      -webkit-tap-highlight-color: transparent;
+    }
+    p{
+      font-size:0.8rem;
+    }
+    p span{
+      color:var(--color-primary);
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>首页<span slot="left"></span></hc-header>
+    <hc-view>
+      <hc-panel>
+        <p>当前总计 <span id="count"></span> 个组件</p>
+      </hc-panel>
+      <hc-panel id="component">
+        <a href="examples/button.html">button</a>
+        <a href="examples/image.html">image</a>
+        <a href="examples/icon.html">icon</a>
+        <a href="examples/form.html">form</a>
+        <a href="examples/list.html">list</a>
+        <a href="examples/tag.html">tag</a>
+        <a href="examples/cell.html">cell</a>
+        <a href="examples/input.html">input</a>
+        <a href="examples/checkbox.html">checkbox</a>
+        <a href="examples/radio.html">radio</a>
+        <a href="examples/switch.html">switch</a>
+        <a href="examples/toast.html">toast</a>
+        <a href="examples/masker.html">masker</a>
+        <a href="examples/drawer.html">drawer</a>
+        <a href="examples/swiper.html">swiper</a>
+        <a href="examples/alert.html">alert</a>
+        <a href="examples/ripple.html">ripple</a>
+        <a href="examples/skeleton.html">skeleton</a>
+        <a href="examples/tab.html">tab</a>
+        <a href="examples/actionsheet.html">actionsheet</a>
+        <a href="examples/picker.html">picker</a>
+        <a href="examples/swipemenu.html">swipemenu</a>
+        <a href="examples/popover.html">popover</a>
+        <a href="examples/notify.html">notify</a>
+        <a href="examples/sticky.html">sticky</a>
+        <a href="examples/slider.html">slider</a>
+        <a href="examples/rate.html">rate</a>
+        <!-- <a href="examples/code.html">code</a> -->
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="./www/build/miui.esm.js"></script>
+  <script>
+    var length = document.querySelector('#component').children.length;
+    document.querySelector('#count').innerHTML = length
+  </script>
+</body>
+</html>

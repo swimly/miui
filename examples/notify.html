@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>notify</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>提示栏</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-button type="primary" id="a1" conner size="small">顶部</hc-button>
+        <hc-button type="primary" id="a2" conner size="small">底部</hc-button>
+        <hc-notify id="n1">
+          <span>恭喜您，注册成功！</span>
+        </hc-notify>
+        <hc-notify id="n2" place="down" align="center">
+          <span>恭喜您，注册成功！</span>
+        </hc-notify>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>带小图标</hc-title>
+        <hc-button type="primary" id="a3" conner size="small">顶部</hc-button>
+        <hc-notify id="n3" icon="reduce">
+          <span>恭喜您，注册成功！</span>
+        </hc-notify>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>不会自动关闭</hc-title>
+        <hc-button type="primary" id="a4" conner size="small">顶部</hc-button>
+        <hc-notify id="n4" icon="reduce" closable="true">
+          <span>恭喜您，注册成功！</span>
+        </hc-notify>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>文字超过</hc-title>
+        <hc-button type="primary" id="a5" conner size="small">顶部</hc-button>
+        <hc-notify id="n5" icon="reduce" closable="true">
+          <span>现在我们来看看在HTML文档中是如何执行的。假设已经将domReady函数写到一个名为domready.js的外部文件中</span>
+        </hc-notify>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    document.querySelector('#a1').addEventListener('click', () => {
+      document.querySelector('#n1').generate()
+    })
+    document.querySelector('#a2').addEventListener('click', () => {
+      document.querySelector('#n2').generate()
+    })
+    document.querySelector('#a3').addEventListener('click', () => {
+      document.querySelector('#n3').generate()
+    })
+    document.querySelector('#a4').addEventListener('click', () => {
+      document.querySelector('#n4').generate()
+    })
+    document.querySelector('#a5').addEventListener('click', () => {
+      document.querySelector('#n5').generate()
+    })
+  </script>
+</body>
+</html>

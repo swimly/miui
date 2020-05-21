@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkbox</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    hc-panel > hc-checkbox{
+      margin:0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>复选框</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-checkbox value="1" checked>前端开发</hc-checkbox>
+        <hc-checkbox value="0">设计ui</hc-checkbox>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>圆角</hc-title>
+        <hc-checkbox conner value="1" checked>前端开发</hc-checkbox>
+        <hc-checkbox rounder value="0">设计ui</hc-checkbox>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>其他颜色</hc-title>
+        <hc-checkbox type="primary" conner value="1" checked>前端开发</hc-checkbox>
+        <hc-checkbox type="danger" rounder value="0">设计ui</hc-checkbox>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>配合list使用</hc-title>
+        <hc-list>
+          <hc-list-item>
+            <hc-checkbox name="list" slot="heading" reverse type="primary" rounder value="0">反转</hc-checkbox>
+          </hc-list-item>
+          <hc-list-item>
+            <hc-checkbox name="list" slot="heading" reverse type="primary" rounder value="1" checked>反转</hc-checkbox>
+          </hc-list-item>
+        </hc-list>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script nomodule src="../www.build/miui.js"></script>
+  <script>
+    var icons = document.querySelectorAll('hc-icon')
+    icons.forEach(icon => {
+      icon.addEventListener('vclick', () => {
+        alert(icon.getAttribute('name'))
+      })
+    })
+  </script>
+</body>
+</html>

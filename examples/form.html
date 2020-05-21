@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>表单</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-form>
+          <hc-form-item label="姓名">刘勇</hc-form-item>
+          <hc-form-item label="性别" value="男"></hc-form-item>
+          <hc-form-item label="手机号码">18827078587</hc-form-item>
+          <hc-form-item label="居住地址">湖北省武汉市江夏区保利清能西海岸</hc-form-item>
+        </hc-form>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>可编辑</hc-title>
+        <hc-form>
+          <hc-form-item label="姓名">
+            <hc-input plain align="right"></hc-input>
+          </hc-form-item>
+          <hc-form-item label="性别">
+            <hc-checkbox rounder>男</hc-checkbox>
+          </hc-form-item>
+          <hc-form-item label="手机号码">18827078587</hc-form-item>
+          <hc-form-item label="居住地址">湖北省武汉市江夏区保利清能西海岸南区G15栋1单元1603</hc-form-item>
+        </hc-form>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+</body>
+</html>

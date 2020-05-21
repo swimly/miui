@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>switch</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>开关</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-switch>收藏</hc-switch>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义图标</hc-title>
+        <hc-switch type="favorites" off-icon="favorites" active-icon="favorites-fill">收藏</hc-switch>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script nomodule src="../www.build/miui.js"></script>
+  <script>
+    var icons = document.querySelectorAll('hc-icon')
+    icons.forEach(icon => {
+      icon.addEventListener('vclick', () => {
+        alert(icon.getAttribute('name'))
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+:host {
+  display: flex;
+  background-color:$--app-input-default-background;
+  box-shadow: 0 0 0.5px $--app-input-default-border;
+  color: $--app-input-icon-color;
+  font-size: $--app-input-default-size;
+  padding: $--app-input-default-size / 3 * 2;
+  align-items:center;
+  input,
+  textarea{
+    flex:1;
+    background:none;
+    border:none;
+    outline:none;
+    position: relative;
+    z-index:10;
+    color: $--app-input-default-color;
+    caret-color: $--app-input-default-caret;
+    line-height:1.6;
+    font-size: inherit;
+    resize:none;
+    &::-webkit-input-placeholder{
+      color:$--app-input-default-placeholder;
+    }
+  }
+  hc-icon{
+    font-size: $--app-input-icon-size;
+    position: relative;
+    z-index:10;
+  }
+  .count{
+    font-size:$--app-input-count-size;
+    color: $--app-input-count-color;
+  }
+  .clear{
+    margin-left:$--app-input-default-size / 2;
+  }
+  .suffixIcon{
+    margin-left:$--app-input-default-size / 2;
+  }
+  .prefixIcon{
+    margin-right:$--app-input-default-size / 2;
+  }
+}
+:host([conner]){
+  border-radius:$--app-input-conner;
+}
+:host([rounder]){
+  border-radius:$--app-input-default-size * 3;
+}
+:host([plain]) {
+  padding:0;
+  &:after{
+    display:none;
+  }
+}

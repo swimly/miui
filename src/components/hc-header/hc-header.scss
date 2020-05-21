@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  height: $--app-header-height;
+  align-items:center;
+  background-color: $--app-header-background;
+  color:$--app-header-color;
+  padding:0 0.6rem;
+  h1{
+    font-size:$--app-header-size;
+    color:inherit;
+    flex:1;
+    text-align:center;
+    font-weight: normal;
+  }
+  .area{
+    width:4rem;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    .label{
+      transform: scale(0.7);
+      transform-origin: left center;
+    }
+    &.right{
+      justify-content: flex-end;
+    }
+  }
+}

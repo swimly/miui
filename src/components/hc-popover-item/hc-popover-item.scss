@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  font-size: $--app-popover-fontsize;
+  color: $--app-popover-color;
+  height: $--app-popover-height;
+  flex-direction: row;
+  align-items:center;
+  padding: 0 $--app-popover-padding;
+  border-radius:$--app-popover-radius;
+  @include border_1px('bottom', $--app-popover-line, 0);
+}

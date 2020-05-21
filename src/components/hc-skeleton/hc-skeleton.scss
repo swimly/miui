@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  slot{
+    display:none;
+  }
+  .skeleton{
+    display:flex;
+    flex-direction: row;
+    align-items:flex-start;
+    &.animation{
+      .title,
+      .row,
+      .avatar,
+      .cover{
+        animation: light 1s linear infinite;
+      }
+    }
+    .content{
+      flex:1;
+      .title{
+        height: $--app-skeleton-title;
+        background: $--app-skeleton-color;
+        margin:0 0 0.8rem 0;
+        border-radius:0.1rem;
+        width:40%;
+        position: relative;
+        overflow:hidden;
+      }
+      .row{
+        height: $--app-skeleton-row;
+        background: $--app-skeleton-color;
+        margin:0.4rem 0;
+        border-radius:0.1rem;
+        &:last-child{
+          width:60%;
+        }
+      }
+    }
+    .avatar{
+      height: $--app-skeleton-avatar;
+      width: $--app-skeleton-avatar;
+      border-radius:50%;
+      background: $--app-skeleton-color;
+      margin-right:0.5rem;
+    }
+    .cover{
+      height: $--app-skeleton-cover / 4 * 3;
+      width: $--app-skeleton-cover;
+      border-radius:0.1rem;
+      background: $--app-skeleton-color;
+      margin-right:0.5rem;
+    }
+  }
+}
+:host([reverse]) {
+  .skeleton{
+    flex-direction: row-reverse;
+    .cover{
+      margin:0 0 0 0.5rem;
+    }
+  }
+}
+:host([visible]) {
+  .skeleton{
+    display:none;
+  }
+  slot{
+    display:block;
+  }
+}
+@keyframes light {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity:0.5;
+  }
+  100%{
+    opacity:1;
+  }
+}

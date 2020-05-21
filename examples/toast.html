@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>toast</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>吐司</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-button id="a1" size="small" type="primary" conner plain>中间提示</hc-button>
+        <hc-button id="a2" size="small" type="primary" conner plain>顶部提示</hc-button>
+        <hc-button id="a3" size="small" type="primary" conner plain>底部提示</hc-button>
+        <hc-toast id="center">恭喜登陆成功</hc-toast>
+        <hc-toast place="start" id="start">恭喜登陆成功</hc-toast>
+        <hc-toast place="end" id="end">恭喜登陆成功</hc-toast>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>带图标</hc-title>
+        <hc-button id="b1" size="small" type="success" conner plain>成功</hc-button>
+        <hc-button id="b2" size="small" type="warning" conner plain>提示</hc-button>
+        <hc-button id="b3" size="small" type="danger" conner plain>错误</hc-button>
+        <hc-button id="b4" size="small" type="primary" conner plain>禁止</hc-button>
+        <hc-toast icon="success-fill" id="success">操作成功</hc-toast>
+        <hc-toast icon="prompt-fill1" id="warning">操作提示</hc-toast>
+        <hc-toast icon="reeor-fill" id="danger">操作错误</hc-toast>
+        <hc-toast icon="reduce-fill" id="dely">禁止操作</hc-toast>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义颜色</hc-title>
+        <hc-button id="c1" size="small" type="primary" conner plain>中间提示</hc-button>
+        <hc-toast id="color" fill="#f00">恭喜登陆成功</hc-toast>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>slot形式插入图标</hc-title>
+        <hc-button id="d1" size="small" type="primary" conner plain>中间提示</hc-button>
+        <hc-toast id="slot" theme="light">
+          <hc-image slot="icon" src="../assets/word.png"></hc-image>
+          <span>提交成功</span>
+        </hc-toast>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>指令</hc-title>
+        <hc-button id="t1" size="small" type="primary" conner plain>普通提示</hc-button>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script type="module">
+    import {hc_toast} from '../www/build/hc-toast.entry.js'
+    const toast = new hc_toast({})
+    window.Toast = toast
+  </script>
+  <script>
+    document.querySelector('#a1').addEventListener('click', () => {
+      var toast = document.querySelector('#center')
+      toast.generate();
+    })
+    document.querySelector('#a2').addEventListener('click', () => {
+      var toast = document.querySelector('#start')
+      toast.generate();
+    })
+    document.querySelector('#a3').addEventListener('click', () => {
+      var toast = document.querySelector('#end')
+      toast.generate();
+    })
+    document.querySelector('#b1').addEventListener('click', () => {
+      var toast = document.querySelector('#success')
+      toast.generate();
+    })
+    document.querySelector('#b2').addEventListener('click', () => {
+      var toast = document.querySelector('#warning')
+      toast.generate();
+    })
+    document.querySelector('#b3').addEventListener('click', () => {
+      var toast = document.querySelector('#danger')
+      toast.generate();
+    })
+    document.querySelector('#b4').addEventListener('click', () => {
+      var toast = document.querySelector('#dely')
+      toast.generate();
+    })
+    document.querySelector('#c1').addEventListener('click', () => {
+      var toast = document.querySelector('#color')
+      toast.generate();
+    })
+    document.querySelector('#d1').addEventListener('click', () => {
+      var toast = document.querySelector('#slot')
+      toast.generate();
+    })
+    document.querySelector('#t1').addEventListener('click', () => {
+      Toast.generate()
+    })
+  </script>
+</body>
+</html>

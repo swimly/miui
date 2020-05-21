@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ripple</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    p{
+      font-size:0.75rem;
+      margin:0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>水波纹</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <p>一切组件皆可添加水波纹效果！</p>
+        <p>按钮</p>
+        <hc-ripple>
+          <hc-button>按钮</hc-button>
+        </hc-ripple>
+        <p>列表</p>
+        <hc-list>
+          <hc-ripple size="200">
+            <hc-list-item heading="内部呈批: 关于机构改革中涉改党委工作机关和政府工作部门刻制印章的函内部呈批: 关于机构改革中涉改党委工作机关和政府工作部门刻制印章的函"></hc-list-item>
+          </hc-ripple>
+          <hc-ripple size="200">
+            <hc-list-item heading="内部呈批: 关于机构改革中涉改党委工作机关和政府工作部门刻制印章的函内部呈批: 关于机构改革中涉改党委工作机关和政府工作部门刻制印章的函"></hc-list-item>
+          </hc-ripple>
+        </hc-list>
+        <p>单元格</p>
+        <hc-ripple>
+          <hc-cell label="手机号码" value="18837268900"></hc-cell>
+        </hc-ripple>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+</body>
+</html>

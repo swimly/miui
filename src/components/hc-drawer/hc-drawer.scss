@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  background-color: $--app-drawer-background;
+  position: fixed;
+  z-index:101;
+}
+:host([place="up"]){
+  top:0;
+  left:0;
+  width:100%;
+  transform: translateY(-100%);
+}
+:host([place="up"][rounder]){
+  border-radius: 0 0 $--app-drawer-radius $--app-drawer-radius;
+}
+:host([place="down"]){
+  bottom:0;
+  left:0;
+  width:100%;
+  transform: translateY(100%);
+}
+:host([place="down"][rounder]){
+  border-radius: $--app-drawer-radius $--app-drawer-radius 0 0;
+}
+:host([place="left"]){
+  top:0;
+  left:0;
+  height:100%;
+  transform: translateX(-100%);
+}
+:host([place="left"][rounder]){
+  border-radius: 0 $--app-drawer-radius $--app-drawer-radius 0;
+}
+:host([place="right"]){
+  top:0;
+  right:0;
+  height:100%;
+  transform: translateX(100%);
+}
+:host([place="right"][rounder]){
+  border-radius: $--app-drawer-radius 0 0 $--app-drawer-radius;
+}
+:host([display="true"]){
+  transform: translate(0,0);
+}

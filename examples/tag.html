@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tag</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    hc-tag{
+      margin:0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <hc-page>
+    <hc-header>标签</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-tag>标签</hc-tag>
+        <hc-tag conner>标签</hc-tag>
+        <hc-tag rounder>标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>不同主题</hc-title>
+        <hc-tag type="primary" conner>标签</hc-tag>
+        <hc-tag type="warning" rounder>标签</hc-tag>
+        <hc-tag type="success">标签</hc-tag>
+        <hc-tag type="danger">标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义颜色</hc-title>
+        <hc-tag background="#FEC006" color="#fff" conner>标签</hc-tag>
+        <hc-tag background="#FEC006" color="#fff" rounder>标签</hc-tag>
+        <hc-tag background="#FEC006" color="#fff" plain>标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>朴素标签</hc-title>
+        <hc-tag plain type="primary" conner>标签</hc-tag>
+        <hc-tag plain type="warning" rounder>标签</hc-tag>
+        <hc-tag plain type="success">标签</hc-tag>
+        <hc-tag plain type="danger">标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>不同尺寸</hc-title>
+        <hc-tag size="mini">标签</hc-tag>
+        <hc-tag size="small">标签</hc-tag>
+        <hc-tag size="default">标签</hc-tag>
+        <hc-tag size="large">标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>加上关闭按钮</hc-title>
+        <hc-tag closable="true">标签</hc-tag>
+        <hc-tag size="small" type="primary" rounder closable="true">标签</hc-tag>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>文字超长</hc-title>
+        <hc-tag closable="true">请示报告: 深圳市宝安区人大常委会办公室
+          关于转交《区六届人大四次会议人大…</hc-tag>
+        <hc-tag size="small" type="primary" rounder closable="true">请示报告: 深圳市宝安区人大常委会办公室
+          关于转交《区六届人大四次会议人大…</hc-tag>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script nomodule src="../www.build/miui.js"></script>
+</body>
+</html>

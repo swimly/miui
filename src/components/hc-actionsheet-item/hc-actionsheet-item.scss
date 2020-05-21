@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: flex-start;
+  height: $--app-actionsheet-height;
+  font-size:$--app-actionsheet-fontsize;
+  color: $--app-actionsheet-color;
+  padding: 0 $--app-actionsheet-padding;
+  position: relative;
+  &:after{
+    content:"";
+    display:block;
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    transition: 0.3s;
+    opacity:0;
+  }
+  slot{
+    flex:1;
+    display:block;
+  }
+  hc-icon{
+    transition:0.3s;
+    transform: scale(0);
+  }
+}
+:host([active]){
+  color: $--app-actionsheet-active-color;
+  &:after{
+    background:$--app-actionsheet-active-color;
+    opacity:0.1;
+  }
+  hc-icon{
+    transform: scale(1);
+  }
+}

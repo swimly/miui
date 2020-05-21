@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  flex-shrink: 0;
+  font-size:$--app-tab-fontsize;
+  color: $--app-tab-color;
+  margin: 0 $--app-tab-padding 0 0;
+  transition:0.3s;
+}
+:host([active]) {
+  color:$--app-tab-active-color;
+}

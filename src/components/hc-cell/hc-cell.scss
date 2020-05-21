@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  font-size: $--app-cell-size;
+  height: $--app-cell-size * 3.5;
+  align-items:center;
+  color: $--app-cell-arrow-color;
+  @include border_1px('bottom', $--app-cell-line, 0);
+  hc-image{
+    margin-right:$--app-cell-size / 2;
+  }
+  .label{
+    flex:1;
+    color: $--app-cell-label-color;
+  }
+  .value{
+    color:$--app-cell-value-color;
+  }
+}

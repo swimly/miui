@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  position: relative;
+  .content{
+    display:none;
+    position: fixed;
+    min-width: 6em;
+    background:$--app-popover-background;
+    border-radius: $--app-popover-radius;
+    transform: scale(0.6);
+    opacity:0;
+    transition:0.3s;
+    z-index:102;
+    box-shadow: 0 0 0.5px $--app-popover-border;
+    overflow: hidden;
+  }
+  slot[name="handle"]{
+    display:block;
+    position:static;
+    min-width:0;
+    box-shadow: 0 0 0 transparent !important;
+    opacity:1 !important;
+    transform: scale(1) !important;
+    border:none;
+  }
+}
+:host([visible]){
+  .content{
+    display:block;
+    opacity:1;
+    transform: scale(1);
+  }
+}
+:host([place="bottom,right"]) {
+  .content{
+    // box-shadow: -2px 2px 4px $--app-popover-shadow;
+    transform-origin: top right;
+  }
+}
+:host([place="top,right"]) {
+  .content{
+    // box-shadow: -2px -2px 4px $--app-popover-shadow;
+    transform-origin: bottom right;
+  }
+}
+:host([place="bottom,left"]) {
+  .content{
+    // box-shadow: 2px 2px 4px $--app-popover-shadow;
+    transform-origin: top left;
+  }
+}
+:host([place="top,left"]) {
+  .content{
+    // box-shadow: 2px -2px 4px $--app-popover-shadow;
+    transform-origin: bottom left;
+  }
+}

@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  color: $--app-rate-color;
+  position: relative;
+  hc-icon{
+    position: absolute;
+    top:0;
+    left:0;
+    &:last-child{
+      opacity:0;
+    }
+  }
+}
+:host([active]),
+:host([half]){
+  color: $--app-rate-active-color;
+  hc-icon{
+    &:first-child{
+      opacity:0;
+    }
+    &:last-child{
+      opacity:1;
+    }
+  }
+}

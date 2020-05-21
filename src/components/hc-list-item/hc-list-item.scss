@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  padding: $--app-list-padding 0;
+  @include border_1px('bottom', $--app-list-line, 0);
+  flex-direction: row;
+  .cover{
+    width: $--app-list-cover-size;
+    height: $--app-list-cover-size;
+    margin-right:0.5rem;
+    
+  }
+  .content{
+    flex:1;
+    .heading {
+      font-size: $--app-list-heading-size;
+      color: $--app-list-heading-color;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $--app-list-heading-ellipsis;
+      overflow: hidden;
+      line-height:1.6;
+      text-align:justify;
+    }
+    .append{
+      color: $--app-list-append-color;
+    }
+    .date{
+      font-size: $--app-list-date-size;
+      color: $--app-list-date-color;
+    }
+  }
+}
+
+:host([reverse]){
+  flex-direction: row-reverse;
+  .cover{
+    margin: 0 0 0 0.5rem;
+  }
+}

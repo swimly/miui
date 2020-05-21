@@ -1,0 +1,49 @@
+:host {
+  display: inline-flex;
+  flex-direction: column;
+  font-size:$--app-toast-size;
+  background-color: $--app-toast-background;
+  color: $--app-toast-color;
+  padding: $--app-toast-size / 3 * 2 $--app-toast-size;
+  border-radius: $--app-toast-conner;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,$--app-toast-size) scale(0.9);
+  opacity:0.1;
+  z-index:-1;
+  transition: 0.3s;
+  align-items:center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+:host([theme="light"]){
+  color: $--app-toast-light-color;
+  background-color: $--app-toast-light-background;
+}
+:host([icon]){
+  width: $--app-toast-size * 8;
+  height: $--app-toast-size * 8;
+  hc-icon{
+    margin-bottom:0.3rem;
+  }
+}
+:host([display]) {
+  transform: translate(-50%,-50%) scale(1);
+  opacity:1;
+  z-index:100;
+}
+:host([place="start"]){
+  top:5%;
+  transform: translate(-50%,200%) scale(0.9);
+}
+:host([place="start"][display]){
+  transform: translate(-50%,100%) scale(1);
+}
+:host([place="end"]){
+  top:95%;
+  transform: translate(-50%,0) scale(0.9);
+}
+:host([place="end"][display]){
+  transform: translate(-50%,-100%) scale(1);
+}

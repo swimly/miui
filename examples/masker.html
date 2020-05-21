@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>masker</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>遮罩</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <p>正常的遮罩是透明黑色</p>
+        <hc-button id="a1" type="primary" size="small" conner plain>打开遮罩</hc-button>
+        <hc-masker id="m1"></hc-masker>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义遮罩颜色</hc-title>
+        <p>可以根据fill来自定义遮罩的颜色</p>
+        <hc-button id="a2" type="primary" size="small" conner plain>白色遮罩</hc-button>
+        <hc-masker fill="rgba(255,255,255,0.7)" id="m2"></hc-masker>
+        <hc-button id="a3" type="primary" size="small" conner plain>透明遮罩</hc-button>
+        <hc-masker fill="transparent" id="m3"></hc-masker>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>指令形式</hc-title>
+        <p>为了代码更简洁，可以不用写太多dom，利用js自动生成dom结构</p>
+        <hc-button id="z1" type="primary" size="small" conner plain>打开遮罩</hc-button>
+        <hc-button id="z2" type="primary" size="small" conner plain>自定义颜色</hc-button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>遮罩部分</hc-title>
+        <p>会根据当前点击的对象位置，生成向上或者向下的遮罩</p>
+        <hc-button id="z3" type="primary" size="small" conner plain>当前位置往下</hc-button>
+        <hc-button id="z4" type="primary" size="small" conner plain>当前位置往上</hc-button>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script type="module">
+    import {hc_masker} from '../www/build/hc-masker.entry.js'
+    const masker = new hc_masker({})
+    window.Masker = masker;
+  </script>
+  <script>
+    document.querySelector('#a1').addEventListener('click', () => {
+      document.querySelector('#m1').generate()
+    })
+    document.querySelector('#a2').addEventListener('click', () => {
+      document.querySelector('#m2').generate()
+    })
+    document.querySelector('#a3').addEventListener('click', () => {
+      document.querySelector('#m3').generate()
+    })
+    document.querySelector('#z1').addEventListener('click', () => {
+      Masker.generate({})
+    })
+    document.querySelector('#z2').addEventListener('click', () => {
+      Masker.generate({
+        fill: 'rgba(255,255,255,0.9)'
+      })
+    })
+    document.querySelector('#z3').addEventListener('click', (e) => {
+      Masker.generate({
+        event: e,
+        place: 'bottom'
+      })
+    })
+    document.querySelector('#z4').addEventListener('click', (e) => {
+      Masker.generate({
+        event: e,
+        place: 'top'
+      })
+    })
+  </script>
+</body>
+</html>

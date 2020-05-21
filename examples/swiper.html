@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>swiper</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>轮播图</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-swiper loop id="control">
+          <hc-swiper-item>1</hc-swiper-item>
+          <hc-swiper-item>2</hc-swiper-item>
+          <hc-swiper-item>3</hc-swiper-item>
+        </hc-swiper>
+        <button id="prev">left</button>
+        <button id="next">right</button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>水平自动轮播</hc-title>
+        <hc-swiper autoplay loop>
+          <hc-swiper-item>1</hc-swiper-item>
+          <hc-swiper-item>2</hc-swiper-item>
+          <hc-swiper-item>3</hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>垂直自动轮播</hc-title>
+        <hc-swiper autoplay loop vertical>
+          <hc-swiper-item>1</hc-swiper-item>
+          <hc-swiper-item>2</hc-swiper-item>
+          <hc-swiper-item>3</hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>无限循环</hc-title>
+        <hc-swiper loop>
+          <hc-swiper-item>1</hc-swiper-item>
+          <hc-swiper-item>2</hc-swiper-item>
+          <hc-swiper-item>3</hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>垂直方向</hc-title>
+        <hc-swiper vertical>
+          <hc-swiper-item>
+            <hc-image src="../assets/img1.png"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="../assets/img2.png"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="../assets/img3.png"></hc-image>
+          </hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>垂直无限轮播</hc-title>
+        <hc-swiper vertical loop>
+          <hc-swiper-item>
+            <hc-image src="../assets/img1.png"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="../assets/img2.png"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="../assets/img3.png"></hc-image>
+          </hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    var swiper = document.querySelector('#control')
+    var prev = document.querySelector('#prev')
+    var next = document.querySelector('#next')
+    setTimeout(() => {
+      swiper.slideTo(1)
+    }, 1000)
+    prev.addEventListener('click', () => {
+      swiper.slidePrev()
+    })
+    next.addEventListener('click', () => {
+      swiper.slideNext()
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+:host {
+  display: inline-flex;
+  flex-direction: row;
+  align-items:center;
+  transform-origin: center center;
+  font-size:inherit;
+  .hc-icon{
+    width:1rem;
+    height:1rem;
+    font-size:inherit;
+    fill: currentColor;
+    overflow:hidden;
+    svg{
+      color:inherit;
+      font-size: inherit;
+    }
+  }
+}
+
+:host([spin]){
+  .hc-icon{
+    animation: rotate 0.8s linear infinite;
+  }
+}
+@keyframes rotate{
+  to{
+      transform: rotate(360deg); 
+  }
+}

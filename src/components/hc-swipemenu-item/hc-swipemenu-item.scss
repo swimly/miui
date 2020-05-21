@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  background:$--app-swipemenu-default-fill;
+  color: $--app-swipemenu-default-color;
+  font-size: $--app-swipemenu-fontsize;
+  height:100%;
+  flex-direction: row;
+  align-items: center;
+  padding:0 1rem;
+  writing-mode: vertical-lr;
+  justify-content: center;
+}

@@ -1,0 +1,7 @@
+:host {
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  background-color: $--app-page-background;
+  -webkit-user-select: none;
+}

@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  font-size:0.8rem;
+  .star{
+    hc-icon{
+      color: $--app-rate-color;
+      &:last-child{
+        display:none;
+      }
+    }
+    &.active{
+      color: $--app-rate-active-color;
+      hc-icon{
+        &:last-child{
+          display:block;
+        }
+        &:first-child{
+          display:none;
+        }
+      }
+    }
+  }
+}

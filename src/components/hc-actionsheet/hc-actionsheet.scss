@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  .title{
+    font-size: $--app-actionsheet-title-fontsize;
+    color: $--app-actionsheet-title-color;
+    text-align:center;
+    margin:1rem 0;
+    font-weight: normal;
+  }
+  .wrap{
+    max-height: $--app-actionsheet-maxheight;
+    overflow:auto;
+  }
+  .footer{
+    padding: $--app-actionsheet-padding;
+    hc-col{
+      &:first-child{
+        padding-right: $--app-actionsheet-padding / 2;
+      }
+      &:last-child{
+        padding-left: $--app-actionsheet-padding / 2;
+      }
+    }
+  }
+}
