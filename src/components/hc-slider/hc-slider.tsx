@@ -38,17 +38,19 @@ export class HcSlider {
     var offset = Math.round((value - min) / (max - min) * this.el.offsetWidth)
     return (
       <Host onClick={this.jump.bind(this)}>
-        <div class="bar" style={{
-          width: `${offset}px`,
-          background: `${this.color}`
-        }}></div>
-        <div class="handle" style={{
-          transform: `translate3d(${offset}px, 0, 0)`,
-          background: `${this.color}`
-        }}></div>
-        <slot>
-          {this.renderDiv()}
-        </slot>
+        <div class="slider">
+          <div class="bar" style={{
+            width: `${offset}px`,
+            background: `${this.color}`
+          }}></div>
+          <div class="handle" style={{
+            transform: `translate3d(${offset}px, 0, 0)`,
+            background: `${this.color}`
+          }}></div>
+          <slot>
+            {this.renderDiv()}
+          </slot>
+        </div>
       </Host>
     );
   }

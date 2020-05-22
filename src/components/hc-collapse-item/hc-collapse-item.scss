@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: $--app-collapse-padding;
+  margin: $--app-collapse-padding;
+  @include border_1px('bottom', $--app-collapse-border, 0);
+  hc-row{
+    font-size: $--app-collapse-title-fontsize;
+    color: $--app-collapse-title-color;
+    hc-icon{
+      color: $--app-collapse-indicate-color;
+      transition:0.3s;
+    }
+  }
+  .content{
+    overflow:hidden;
+    box-sizing: border-box;
+    transition:0.3s;
+  }
+}
+:host([visible]){
+  hc-row{
+    hc-icon{
+      transform: rotate(-180deg);
+    }
+  }
+}

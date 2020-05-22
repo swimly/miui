@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Element, Prop } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Element, Prop, Watch, EventEmitter, Event } from '@stencil/core';
 
 @Component({
   tag: 'hc-tab',
@@ -19,6 +19,13 @@ export class HcTab implements ComponentInterface {
   $wrap;
   $indicate: HTMLElement;
   $children: Element[];
+  @Event() vchange: EventEmitter;
+  @Watch('current')
+  currentHandle (v: number) {
+    this.vchange.emit({
+      current: v
+    })
+  }
   componentDidLoad () {
     this.$slot = this.el.shadowRoot.querySelector('slot')
     this.$wrap = this.el.shadowRoot.querySelector('.wrap')

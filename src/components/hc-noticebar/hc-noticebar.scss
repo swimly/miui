@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  position: relative;
+  height: $--app-noticebar-fontsize * 3;
+  padding:0 0.5rem;
+  font-size: $--app-noticebar-fontsize;
+  color: $--app-noticebar-color;
+  .bg{
+    content:"";
+    display:block;
+    position: absolute;
+    right:0;
+    bottom:0;
+    left:0;
+    top:0;
+    background:$--app-noticebar-color;
+    opacity:0.1;
+    z-index: 1;
+  }
+  .content{
+    flex:1;
+    white-space: nowrap;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    overflow:hidden;
+    position: relative;
+    margin:0 0.5rem;
+    .wrap{
+      position: absolute;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+      overflow:hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  .close{
+    position: relative;
+    z-index:2;
+  }
+}

@@ -12,12 +12,17 @@ export class HcInput implements ComponentInterface {
   @Prop() prefixIcon: string;
   @Prop() suffixIcon: string;
   @Prop() iconColor: string;
+  @Prop() iconSize: number;
   @Prop() align: string;
   @Prop() rows: number = 3;
   @Prop() clearable: boolean = false;
   @Prop() clearIcon: string = 'reeor-fill'
   @Prop() maxLength: number;
   @Prop() minLength: number;
+  @Prop() size: string;
+  @Prop() light: boolean;
+  @Prop() conner: boolean;
+  @Prop() dark: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('value')
@@ -25,6 +30,20 @@ export class HcInput implements ComponentInterface {
     this.vchange.emit({
       value: v
     })
+  }
+  componentDidLoad () {
+    if (this.size) {
+      this.el.setAttribute('size', this.size)
+    }
+    if (this.light) {
+      this.el.setAttribute('light', `${this.light}`)
+    }
+    if (this.conner) {
+      this.el.setAttribute('conner', `${this.conner}`)
+    }
+    if (this.dark) {
+      this.el.setAttribute('dark', `${this.dark}`)
+    }
   }
   render() {
     return (
@@ -46,7 +65,7 @@ export class HcInput implements ComponentInterface {
   renderIcon (name) {
     if (this[name]) {
       return (
-        <hc-icon class={name} color={this.iconColor} name={this[name]}></hc-icon>
+        <hc-icon size={this.iconSize} class={name} color={this.iconColor} name={this[name]}></hc-icon>
       )
     }
   }

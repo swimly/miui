@@ -14,6 +14,7 @@ export class HcListItem implements ComponentInterface {
   @Prop() appendColor: string;
   @Prop() coverWidth: number = 36;
   @Prop() coverHeight: number = 36;
+  @Prop() size: string;
   render() {
     return (
       <Host>

@@ -55,6 +55,12 @@ export namespace Components {
         "span": number;
     }
     interface HcCollapse {
+        "accordion": boolean;
+    }
+    interface HcCollapseItem {
+        "destory": () => Promise<void>;
+        "generate": () => Promise<void>;
+        "visible": boolean;
     }
     interface HcCountdown {
     }
@@ -102,6 +108,15 @@ export namespace Components {
         "width": number;
     }
     interface HcIndexbar {
+        "index": number;
+        "letter": string;
+        "offset": number;
+    }
+    interface HcIndexbarGroup {
+    }
+    interface HcIndexbarItem {
+    }
+    interface HcIndexbarTitle {
     }
     interface HcInfinite {
     }
@@ -109,17 +124,23 @@ export namespace Components {
         "align": string;
         "clearIcon": string;
         "clearable": boolean;
+        "conner": boolean;
+        "dark": boolean;
         "iconColor": string;
+        "iconSize": number;
+        "light": boolean;
         "maxLength": number;
         "minLength": number;
         "placeholder": string;
         "prefixIcon": string;
         "rows": number;
+        "size": string;
         "suffixIcon": string;
         "type": string;
         "value": string;
     }
     interface HcList {
+        "size": string;
     }
     interface HcListItem {
         "appendColor": string;
@@ -129,6 +150,7 @@ export namespace Components {
         "coverWidth": number;
         "date": string;
         "heading": string;
+        "size": string;
         "type": string;
     }
     interface HcMasker {
@@ -142,6 +164,12 @@ export namespace Components {
         "place": string;
     }
     interface HcNoticebar {
+        "closable": boolean;
+        "color": string;
+        "destory": () => Promise<void>;
+        "icon": string;
+        "scrollable": boolean;
+        "speed": number;
     }
     interface HcNotify {
         "align": string;
@@ -228,6 +256,11 @@ export namespace Components {
     interface HcScore {
     }
     interface HcSearch {
+        "clearable": boolean;
+        "icon": string;
+        "iconSize": number;
+        "placeholder": string;
+        "shape": string;
     }
     interface HcSelect {
     }
@@ -388,6 +421,12 @@ declare global {
         prototype: HTMLHcCollapseElement;
         new (): HTMLHcCollapseElement;
     };
+    interface HTMLHcCollapseItemElement extends Components.HcCollapseItem, HTMLStencilElement {
+    }
+    var HTMLHcCollapseItemElement: {
+        prototype: HTMLHcCollapseItemElement;
+        new (): HTMLHcCollapseItemElement;
+    };
     interface HTMLHcCountdownElement extends Components.HcCountdown, HTMLStencilElement {
     }
     var HTMLHcCountdownElement: {
@@ -447,6 +486,24 @@ declare global {
     var HTMLHcIndexbarElement: {
         prototype: HTMLHcIndexbarElement;
         new (): HTMLHcIndexbarElement;
+    };
+    interface HTMLHcIndexbarGroupElement extends Components.HcIndexbarGroup, HTMLStencilElement {
+    }
+    var HTMLHcIndexbarGroupElement: {
+        prototype: HTMLHcIndexbarGroupElement;
+        new (): HTMLHcIndexbarGroupElement;
+    };
+    interface HTMLHcIndexbarItemElement extends Components.HcIndexbarItem, HTMLStencilElement {
+    }
+    var HTMLHcIndexbarItemElement: {
+        prototype: HTMLHcIndexbarItemElement;
+        new (): HTMLHcIndexbarItemElement;
+    };
+    interface HTMLHcIndexbarTitleElement extends Components.HcIndexbarTitle, HTMLStencilElement {
+    }
+    var HTMLHcIndexbarTitleElement: {
+        prototype: HTMLHcIndexbarTitleElement;
+        new (): HTMLHcIndexbarTitleElement;
     };
     interface HTMLHcInfiniteElement extends Components.HcInfinite, HTMLStencilElement {
     }
@@ -695,6 +752,7 @@ declare global {
         "hc-code": HTMLHcCodeElement;
         "hc-col": HTMLHcColElement;
         "hc-collapse": HTMLHcCollapseElement;
+        "hc-collapse-item": HTMLHcCollapseItemElement;
         "hc-countdown": HTMLHcCountdownElement;
         "hc-dialog": HTMLHcDialogElement;
         "hc-drawer": HTMLHcDrawerElement;
@@ -705,6 +763,9 @@ declare global {
         "hc-icon": HTMLHcIconElement;
         "hc-image": HTMLHcImageElement;
         "hc-indexbar": HTMLHcIndexbarElement;
+        "hc-indexbar-group": HTMLHcIndexbarGroupElement;
+        "hc-indexbar-item": HTMLHcIndexbarItemElement;
+        "hc-indexbar-title": HTMLHcIndexbarTitleElement;
         "hc-infinite": HTMLHcInfiniteElement;
         "hc-input": HTMLHcInputElement;
         "hc-list": HTMLHcListElement;
@@ -794,6 +855,11 @@ declare namespace LocalJSX {
         "span"?: number;
     }
     interface HcCollapse {
+        "accordion"?: boolean;
+    }
+    interface HcCollapseItem {
+        "onVchange"?: (event: CustomEvent<any>) => void;
+        "visible"?: boolean;
     }
     interface HcCountdown {
     }
@@ -840,6 +906,16 @@ declare namespace LocalJSX {
         "width"?: number;
     }
     interface HcIndexbar {
+        "index"?: number;
+        "letter"?: string;
+        "offset"?: number;
+        "onVchange"?: (event: CustomEvent<any>) => void;
+    }
+    interface HcIndexbarGroup {
+    }
+    interface HcIndexbarItem {
+    }
+    interface HcIndexbarTitle {
     }
     interface HcInfinite {
     }
@@ -847,18 +923,24 @@ declare namespace LocalJSX {
         "align"?: string;
         "clearIcon"?: string;
         "clearable"?: boolean;
+        "conner"?: boolean;
+        "dark"?: boolean;
         "iconColor"?: string;
+        "iconSize"?: number;
+        "light"?: boolean;
         "maxLength"?: number;
         "minLength"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "placeholder"?: string;
         "prefixIcon"?: string;
         "rows"?: number;
+        "size"?: string;
         "suffixIcon"?: string;
         "type"?: string;
         "value"?: string;
     }
     interface HcList {
+        "size"?: string;
     }
     interface HcListItem {
         "appendColor"?: string;
@@ -868,6 +950,7 @@ declare namespace LocalJSX {
         "coverWidth"?: number;
         "date"?: string;
         "heading"?: string;
+        "size"?: string;
         "type"?: string;
     }
     interface HcMasker {
@@ -880,6 +963,12 @@ declare namespace LocalJSX {
         "place"?: string;
     }
     interface HcNoticebar {
+        "closable"?: boolean;
+        "color"?: string;
+        "icon"?: string;
+        "onVhide"?: (event: CustomEvent<any>) => void;
+        "scrollable"?: boolean;
+        "speed"?: number;
     }
     interface HcNotify {
         "align"?: string;
@@ -959,6 +1048,11 @@ declare namespace LocalJSX {
     interface HcScore {
     }
     interface HcSearch {
+        "clearable"?: boolean;
+        "icon"?: string;
+        "iconSize"?: number;
+        "placeholder"?: string;
+        "shape"?: string;
     }
     interface HcSelect {
     }
@@ -1015,6 +1109,7 @@ declare namespace LocalJSX {
         "align"?: string;
         "current"?: number;
         "direction"?: string;
+        "onVchange"?: (event: CustomEvent<any>) => void;
     }
     interface HcTabItem {
         "index"?: number;
@@ -1057,6 +1152,7 @@ declare namespace LocalJSX {
         "hc-code": HcCode;
         "hc-col": HcCol;
         "hc-collapse": HcCollapse;
+        "hc-collapse-item": HcCollapseItem;
         "hc-countdown": HcCountdown;
         "hc-dialog": HcDialog;
         "hc-drawer": HcDrawer;
@@ -1067,6 +1163,9 @@ declare namespace LocalJSX {
         "hc-icon": HcIcon;
         "hc-image": HcImage;
         "hc-indexbar": HcIndexbar;
+        "hc-indexbar-group": HcIndexbarGroup;
+        "hc-indexbar-item": HcIndexbarItem;
+        "hc-indexbar-title": HcIndexbarTitle;
         "hc-infinite": HcInfinite;
         "hc-input": HcInput;
         "hc-list": HcList;
@@ -1124,6 +1223,7 @@ declare module "@stencil/core" {
             "hc-code": LocalJSX.HcCode & JSXBase.HTMLAttributes<HTMLHcCodeElement>;
             "hc-col": LocalJSX.HcCol & JSXBase.HTMLAttributes<HTMLHcColElement>;
             "hc-collapse": LocalJSX.HcCollapse & JSXBase.HTMLAttributes<HTMLHcCollapseElement>;
+            "hc-collapse-item": LocalJSX.HcCollapseItem & JSXBase.HTMLAttributes<HTMLHcCollapseItemElement>;
             "hc-countdown": LocalJSX.HcCountdown & JSXBase.HTMLAttributes<HTMLHcCountdownElement>;
             "hc-dialog": LocalJSX.HcDialog & JSXBase.HTMLAttributes<HTMLHcDialogElement>;
             "hc-drawer": LocalJSX.HcDrawer & JSXBase.HTMLAttributes<HTMLHcDrawerElement>;
@@ -1134,6 +1234,9 @@ declare module "@stencil/core" {
             "hc-icon": LocalJSX.HcIcon & JSXBase.HTMLAttributes<HTMLHcIconElement>;
             "hc-image": LocalJSX.HcImage & JSXBase.HTMLAttributes<HTMLHcImageElement>;
             "hc-indexbar": LocalJSX.HcIndexbar & JSXBase.HTMLAttributes<HTMLHcIndexbarElement>;
+            "hc-indexbar-group": LocalJSX.HcIndexbarGroup & JSXBase.HTMLAttributes<HTMLHcIndexbarGroupElement>;
+            "hc-indexbar-item": LocalJSX.HcIndexbarItem & JSXBase.HTMLAttributes<HTMLHcIndexbarItemElement>;
+            "hc-indexbar-title": LocalJSX.HcIndexbarTitle & JSXBase.HTMLAttributes<HTMLHcIndexbarTitleElement>;
             "hc-infinite": LocalJSX.HcInfinite & JSXBase.HTMLAttributes<HTMLHcInfiniteElement>;
             "hc-input": LocalJSX.HcInput & JSXBase.HTMLAttributes<HTMLHcInputElement>;
             "hc-list": LocalJSX.HcList & JSXBase.HTMLAttributes<HTMLHcListElement>;

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2.加载模型(this.forms2)示例</title>
+  <link href="../../../HCResourceV6/JavaScript/Control/PhoneStyle/hc_global/css/base.css"
+    path="LEAP/HCResourceV6/JavaScript/Control/PhoneStyle/hc_global/css/base.css" rel="stylesheet" type="text/css" />
+  <script src="../../../HCResourceV6/JavaScript/Base/network.js" path="LEAP/HCResourceV6/JavaScript/Base/network.js"
+    async></script>
+  <style>
+    html {
+      font-size: 125%;
+    }
+
+    .hc-step-handle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      padding: 0;
+    }
+
+    .hc-step-handle-item {
+      font-size: 0.7rem;
+      color: #8c8c8c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hc-step-handle-item:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 5rem;
+      height: 1px;
+      background: #e6e6e6;
+      top: 0.4rem;
+      right: 50%;
+    }
+
+    .hc-step-handle-item:first-child:after {
+      display: none;
+    }
+
+    .hc-step-handle-circle {
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.8rem;
+      border: 0.1rem solid #e6e6e6;
+      border-radius: 50%;
+      box-sizing: border-box;
+      background: #fff;
+      position: relative;
+      z-index: 10;
+      outline: 0.3rem solid #fff;
+    }
+
+    .hc-step-handle-label {
+      margin: 0.5rem 0 0 0;
+    }
+
+    .hc-step-handle-item.hc-active {
+      color: #f00;
+    }
+
+    .hc-step-handle-item.hc-active .hc-step-handle-circle {
+      border-color: #f00;
+    }
+
+    .hc-step-handle-item.hc-active:after {
+      background: #f00;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hc-page" module="forms2Demo" moduletype="search">
+    <section class="hc-page-view">
+      <div class="hc-step" ct="hc_step" ut="hc_step" data-options='{}'>
+        <ul class="hc-step-handle" ctf="hc_tabulbox">
+          <li class="hc-step-handle-item hc-active" ctf="hc_tabitem">
+            <div class="hc-step-handle-circle"></div>
+            <p class="hc-step-handle-label">身份认证</p>
+          </li>
+          <li class="hc-step-handle-item hc-active" ctf="hc_tabitem">
+            <div class="hc-step-handle-circle"></div>
+            <p class="hc-step-handle-label">房屋信息</p>
+          </li>
+          <li class="hc-step-handle-item" ctf="hc_tabitem">
+            <div class="hc-step-handle-circle"></div>
+            <p class="hc-step-handle-label">出租信息</p>
+          </li>
+          <li class="hc-stepv-item" ctf="hc_tabitem">
+            <div class="hc-step-handle-circle"></div>
+            <p class="hc-step-handle-label">房源上架</p>
+          </li>
+        </ul>
+        <div class="hc-step-panel">
+          <div class="hc-step-wrap" ctf="hc_stepcontentbox">
+            <div class="hc-step-item" ctf="hc_contentitem" st="DIV_123">
+              第一页
+            </div>
+            <div class="hc-step-item" ctf="hc_contentitem" st="DIV_456">
+              第二页
+            </div>
+            <div class="hc-step-item" ctf="hc_contentitem" st="DIV_789">
+              第三页
+            </div>
+            <div class="hc-step-item" ctf="hc_contentitem" st="DIV_796">
+              第四页
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+
+</html>

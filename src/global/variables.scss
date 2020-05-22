@@ -55,6 +55,8 @@ $--app-list-append-color: var(--color-gray);
 $--app-list-heading-ellipsis: 2;
 $--app-list-line: var(--border-default);
 $--app-list-padding: var(--padding-default);
+$--app-list-small-padding: 0.7rem;
+$--app-list-mini-padding: 0.5rem;
 $--app-list-date-size: 0.6rem;
 $--app-list-date-color: var(--color-gray);
 $--app-list-cover-size: 4rem;
@@ -89,6 +91,7 @@ $--app-input-icon-color: var(--color-gray);
 $--app-input-icon-size: 1rem;
 $--app-input-count-size: 0.6rem;
 $--app-input-count-color: var(--color-gray);
+$--app-input-dark: var(--bg-light);
 // checkbox
 $--app-checkbox-size: 0.75rem;
 $--app-checkbox-border: var(--border-default);
@@ -195,3 +198,27 @@ $--app-slider-active-background: var(--color-primary);
 // rate
 $--app-rate-color: var(--color-dark);
 $--app-rate-active-color: var(--color-primary);
+// collapse
+$--app-collapse-title-fontsize: 0.75rem;
+$--app-collapse-title-color: var(--color-dark);
+$--app-collapse-indicate-color: var(--color-light);
+$--app-collapse-padding: 0.3rem 0;
+$--app-collapse-border: var(--border-default);
+// search
+$--app-search-fontsize: 0.75rem;
+$--app-search-color: var(--color-gray);
+// noticebar
+$--app-noticebar-fontsize: 0.7rem;
+$--app-noticebar-color: var(--color-warning);
+// indexbar
+$--app-indexbar-fontsize: 0.6rem;
+$--app-indexbar-color: var(--color-dark);
+$--app-indexbar-background: var(--bg-white);
+$--app-indexbar-handle-background: var(--bg-light);
+$--app-indexbar-active-color: var(--color-primary);
+$--app-indexbar-indicate-fontsize: 0.6rem;
+$--app-indexbar-indicate-color: var(--color-light);
+$--app-indexbar-indicate-background: var(--bg-light);
+$--app-indexbar-item-fontsize: 0.75rem;
+$--app-indexbar-item-color: var(--color-dark);
+$--app-indexbar-line: var(--border-default);

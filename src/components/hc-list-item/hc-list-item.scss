@@ -37,3 +37,9 @@
     margin: 0 0 0 0.5rem;
   }
 }
+:host([size="small"]){
+  padding: $--app-list-small-padding 0;
+}
+:host([size="mini"]){
+  padding: $--app-list-mini-padding 0;
+}

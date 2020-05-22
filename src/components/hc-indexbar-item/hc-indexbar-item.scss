@@ -1,0 +1,7 @@
+:host {
+  display: block;
+  font-size: $--app-indexbar-item-fontsize;
+  color: $--app-indexbar-item-color;
+  padding: $--app-indexbar-item-fontsize;
+  @include border_1px('bottom', $--app-indexbar-line, 0);
+}
