@@ -1,0 +1,26 @@
+:host {
+  display: inline-block;
+  position: relative;
+  .number{
+    position: absolute;
+    font-size: $--app-badge-fontsize;
+    background: $--app-badge-background;
+    color: $--app-badge-color;
+    padding: 0 $--app-badge-fontsize / 2.4;
+    border-radius: $--app-badge-fontsize * 2;
+    left:0;
+    top:0;
+    transform: translate(-$--app-badge-fontsize / 2, -50%);
+    box-sizing: border-box;
+    border:1px solid $--app-badge-color;
+    z-index:10;
+  }
+}
+:host([dot]){
+  .number{
+    font-size:0;
+    width: $--app-badge-fontsize / 1.2;
+    height: $--app-badge-fontsize / 1.2;
+    padding:0;
+  }
+}

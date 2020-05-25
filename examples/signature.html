@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>signature</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>签名</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-signature></hc-signature>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义笔触粗细颜色</hc-title>
+        <hc-signature pen-color="#f00" pen-weight="1.2"></hc-signature>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义画布颜色</hc-title>
+        <hc-signature background="#eee"></hc-signature>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>获取签名图片</hc-title>
+        <hc-signature id="s"></hc-signature>
+        <hc-row>
+          <hc-col span="12">
+            <hc-button type="danger" id="clear">清空</hc-button>
+          </hc-col>
+          <hc-col span="12">
+            <hc-button type="primary" id="confirm">确定</hc-button>
+          </hc-col>
+        </hc-row>
+        <hc-image id="preview" height="150"></hc-image>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    var signature = document.querySelector('#s')
+    var image = document.querySelector('#preview')
+    document.querySelector('#clear').addEventListener('click', () => {
+      signature.clear()
+    })
+    document.querySelector('#confirm').addEventListener('click', () => {
+      signature.fetchData().then(res => {
+        image.setAttribute('src', res)
+      })
+    })
+  </script>
+</body>
+</html>

@@ -7,32 +7,32 @@ import Hammer from 'hammerjs'
   shadow: true,
 })
 export class HcSwiper implements ComponentInterface {
-  @Prop() height: number = 200;
+  @Prop() height: number;
+  @Prop() width: number;
   @Prop() current: number = 0;
   @Prop() vertical: boolean;
   @Prop() loop: boolean = false;
   @Prop() autoplay: boolean = false;
   @Prop() duration: number = 3000;
+  @Prop() indicate: string;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
   children: Element[];
   $wrap: HTMLElement;
   offset: number;
   timer;
-  componentWillLoad () {
-  }
-  componentWillRender () {
-  }
-  componentDidRender () {
-  }
   componentDidLoad () {
+    if (this.indicate) {
+      this.el.setAttribute('indicate', this.indicate)
+    }
     this.bindTouch()
     this.autoMove()
   }
   render() {
     var children = Array.from(this.el.children)
+    var width = this.width ? this.width : this.el.clientWidth
     children.forEach((item) => {
-      item.setAttribute('width', `${this.el.clientWidth}`)
+      item.setAttribute('width', `${width}`)
       item.setAttribute('height', `${this.height}`)
     })
     this.children = this.loop ? [...children, ...children, ...children] : children
@@ -46,7 +46,8 @@ export class HcSwiper implements ComponentInterface {
     return (
       <Host
         style={{
-          height: `${this.height}px`
+          height: `${this.height}px`,
+          width: `${this.width}px`
         }}
       >
         <div class="wrap" 

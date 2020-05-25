@@ -6,7 +6,7 @@ import { Component, ComponentInterface, Host, h, Prop, Element, Watch } from '@s
 })
 export class HcImage implements ComponentInterface {
   @Prop() src: string;
-  @Prop() lazy: boolean = true;
+  @Prop() lazy: boolean;
   @Prop() width: number;
   @Prop() height: number;
   @Prop() radius: number;
@@ -14,7 +14,13 @@ export class HcImage implements ComponentInterface {
   @Prop() fit: string = 'cover'
   @Prop() watermark: string;
   @Element() el:HTMLElement;
+  $image;
+  @Watch('src')
+  srcHandle () {
+    this.loadImage(this.$image)
+  }
   loadImage(image) {
+    if (!this.src) return
     image.src = this.src
     var width = this.el.offsetWidth
     image.onload = () => {
@@ -29,9 +35,9 @@ export class HcImage implements ComponentInterface {
   }
   componentDidLoad () {
     // this.el.setAttribute('status', `${this.status}`)
-    const image = this.el.shadowRoot.querySelector('.core') as HTMLElement;
+    this.$image = this.el.shadowRoot.querySelector('.core') as HTMLElement;
     if (!this.lazy) {
-      this.loadImage(image)
+      this.loadImage(this.$image)
     } else {
       const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -43,7 +49,7 @@ export class HcImage implements ComponentInterface {
           }
         })
       })
-      io.observe(image)
+      io.observe(this.$image)
     }
   }
   @Watch('status')

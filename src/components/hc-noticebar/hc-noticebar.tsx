@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Prop, Watch, EventEmitter, Event, Method } from '@stencil/core';
+import { Component, Host, h, Element, Prop, EventEmitter, Event, Method } from '@stencil/core';
 
 @Component({
   tag: 'hc-noticebar',

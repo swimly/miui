@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Watch, Element } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event } from '@stencil/core';
 
 @Component({
   tag: 'hc-switch',
@@ -12,13 +12,17 @@ export class HcSwitch implements ComponentInterface {
   @Prop() checked: boolean;
   @Prop() type: string = 'default';
   @Element() el:HTMLElement;
+  @Event() vchange: EventEmitter;
   @Watch('checked')
-  checkedHandle (v) {
+  checkedHandle (v: boolean) {
     if (v) {
       this.el.setAttribute('checked', 'true')
     } else {
       this.el.removeAttribute('checked')
     }
+    this.vchange.emit({
+      checked: v
+    })
   }
   render() {
     return (

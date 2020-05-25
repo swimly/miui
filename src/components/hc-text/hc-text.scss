@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  font-size:$--app-text-fontsize;
+  color: $--app-text-color;
+  line-height:1.6;
+  text-align: justify;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  .more{
+    color: $--app-text-more-color;
+    white-space: nowrap;
+  }
+  .more-text{
+    display:none;
+  }
+  .indicate{
+    display:inline-block;
+    width:1px;
+    height:1px;
+  }
+}
+:host([right]){
+  .more{
+    position: absolute;
+    right:0;
+  }
+}
+:host([max]){
+  .more-text{
+    display:inline-block;
+  }
+}
+:host([open]){
+  .more-text{
+    display:none;
+  }
+}
