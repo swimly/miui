@@ -139,6 +139,13 @@ interface HcInput {
 'type': string;
 'value': string;
 }
+interface HcKeyboard {
+'change': boolean;
+'current': string;
+'destory': () => Promise<void>;
+'type': string;
+'value': string;
+}
 interface HcList {
 'size': string;
 }
@@ -550,6 +557,12 @@ var HTMLHcInputElement: {
   new (): HTMLHcInputElement;
 };
 
+interface HTMLHcKeyboardElement extends Components.HcKeyboard, HTMLStencilElement {}
+var HTMLHcKeyboardElement: {
+  prototype: HTMLHcKeyboardElement;
+  new (): HTMLHcKeyboardElement;
+};
+
 interface HTMLHcListElement extends Components.HcList, HTMLStencilElement {}
 var HTMLHcListElement: {
   prototype: HTMLHcListElement;
@@ -824,6 +837,7 @@ var HTMLHcViewElement: {
     'hc-indexbar-title': HTMLHcIndexbarTitleElement;
     'hc-infinite': HTMLHcInfiniteElement;
     'hc-input': HTMLHcInputElement;
+    'hc-keyboard': HTMLHcKeyboardElement;
     'hc-list': HTMLHcListElement;
     'hc-list-item': HTMLHcListItemElement;
     'hc-masker': HTMLHcMaskerElement;
@@ -995,6 +1009,13 @@ interface HcActionsheet {
 'rows'?: number;
 'size'?: string;
 'suffixIcon'?: string;
+'type'?: string;
+'value'?: string;
+}
+  interface HcKeyboard {
+'change'?: boolean;
+'current'?: string;
+'onVchange'?: (event: CustomEvent<any>) => void;
 'type'?: string;
 'value'?: string;
 }
@@ -1268,6 +1289,7 @@ interface HcActionsheet {
     'hc-indexbar-title': HcIndexbarTitle;
     'hc-infinite': HcInfinite;
     'hc-input': HcInput;
+    'hc-keyboard': HcKeyboard;
     'hc-list': HcList;
     'hc-list-item': HcListItem;
     'hc-masker': HcMasker;
@@ -1346,6 +1368,7 @@ declare module "@stencil/core" {
     'hc-indexbar-title': LocalJSX.HcIndexbarTitle & JSXBase.HTMLAttributes<HTMLHcIndexbarTitleElement>;
     'hc-infinite': LocalJSX.HcInfinite & JSXBase.HTMLAttributes<HTMLHcInfiniteElement>;
     'hc-input': LocalJSX.HcInput & JSXBase.HTMLAttributes<HTMLHcInputElement>;
+    'hc-keyboard': LocalJSX.HcKeyboard & JSXBase.HTMLAttributes<HTMLHcKeyboardElement>;
     'hc-list': LocalJSX.HcList & JSXBase.HTMLAttributes<HTMLHcListElement>;
     'hc-list-item': LocalJSX.HcListItem & JSXBase.HTMLAttributes<HTMLHcListItemElement>;
     'hc-masker': LocalJSX.HcMasker & JSXBase.HTMLAttributes<HTMLHcMaskerElement>;

@@ -37,7 +37,6 @@ export class HcMasker implements ComponentInterface {
     if (this.place == 'top') {
       background = `linear-gradient(${this.fill} 0px, ${this.fill} ${this.offset}px, rgba(0,0,0,0) ${this.offset}px, rgba(0,0,0,0) 100%)`
     }
-    console.log(background)
     return (
       <Host 
         onClick={this.onClick.bind(this)} 
@@ -78,7 +77,6 @@ export class HcMasker implements ComponentInterface {
     for (let key in option) {
       dom.setAttribute(key, option[key])
     }
-    console.log(dom)
     document.body.appendChild(dom)
     dom.generate()
     return dom
