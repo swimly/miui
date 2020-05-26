@@ -275,6 +275,7 @@ interface HcSlider {
 'max': number;
 'min': number;
 'readonly': boolean;
+'size': string;
 'step': number;
 'value': number;
 }
@@ -1129,6 +1130,7 @@ interface HcActionsheet {
 'min'?: number;
 'onVchange'?: (event: CustomEvent<any>) => void;
 'readonly'?: boolean;
+'size'?: string;
 'step'?: number;
 'value'?: number;
 }

@@ -30,11 +30,14 @@ export class HcVideo {
   }
   @Watch('duration')
   durationHandle (v: number) {
-    console.log(v)
-    this.$control.setAttribute('duration', v)
+    this.el.shadowRoot.querySelector('hc-video-controls').setAttribute('duration', `${v}`)
+  }
+  @Watch('current')
+  currentHandle (v: number) {
+    this.el.shadowRoot.querySelector('hc-video-controls').setAttribute('current', `${v}`)
   }
   componentDidLoad () {
-    this.$video = this.el.shadowRoot.querySelector('video') as HTMLElement
+    this.$video = this.el.shadowRoot.querySelector('video')
     this.$control = this.el.shadowRoot.querySelector('hc-video-controls')
     if (this.autoplay) {
       this.play = true
@@ -42,6 +45,7 @@ export class HcVideo {
     if (this.muted) {
       this.muted = true
     }
+    console.log('didloaded')
   }
   render() {
     return (
@@ -69,23 +73,25 @@ export class HcVideo {
     );
   }
   onEnded () {
-    this.play = !this.play
+    console.log('onended', this.$video)
   }
   onCanPlay () {
-    this.duration = this.$video.duration
+    console.log('oncanplay')
+    this.duration = this.el.shadowRoot.querySelector('video').duration
   }
-  onLoadedMetaData () {
-    this.duration = this.$video.duration;
-
+  onLoadedMetaData (e) {
+    console.log('onloadedmetadata', this.$video, e)
   }
   onDurationChange () {
-    this.duration = this.$video.duration
+    console.log('ondurationchange', this.$video)
   }
   onTimeUpdate () {
-    this.current = this.$video.currentTime;
+    console.log('timeupdate')
+    this.current = this.el.shadowRoot.querySelector('video').currentTime
   }
   onPlaying () {
-    this.loaded = Math.round((this.$video.buffered.end(0) / this.duration)*100)
+    console.log('onProgress', this.$video)
+    // this.loaded = Math.round((this.$video.buffered.end(0) / this.duration)*100)
   }
   onProgress (e) {
     console.log(e.detail.value)
@@ -94,7 +100,6 @@ export class HcVideo {
     this.muted = e.detail.value
   }
   onPlay (e) {
-    console.log(e.detail.value)
     this.play = e.detail.value
   }
   bindPlay (v) {

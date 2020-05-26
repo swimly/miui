@@ -13,7 +13,7 @@
       position: absolute;
       left:0;
       top:0;
-      height: $--app-slider-height;
+      height: 100%;
       background: $--app-slider-active-background;
       border-radius: $--app-slider-height 0 0 $--app-slider-height;
     }
@@ -21,25 +21,18 @@
       display:flex;
       width: $--app-slider-height * 1.4;
       height: $--app-slider-height * 1.4;
-      background:$--app-slider-active-background;
+      background:var(--bg-white);
+      border:0.1rem solid $--app-slider-active-background;
       border-radius:50%;
       position: absolute;
       top:50%;
       left:0;
       margin-top: -$--app-slider-height * 0.7;
-      margin-left: -$--app-slider-height * 0.5;
+      // margin-left: -$--app-slider-height * 0.5;
       flex-direction: row;
       align-items:center;
       justify-content: center;
       box-sizing: border-box;
-      &:after{
-        content:"";
-        display:inline-block;
-        width: $--app-slider-height;
-        height: $--app-slider-height;
-        border-radius:50%;
-        background:var(--bg-white);
-      }
     }
     .step{
       display:flex;
@@ -62,4 +55,38 @@
 }
 :host([disabled]){
   opacity:0.7;
+}
+:host([size="mini"]) {
+  .slider{
+    height: $--app-slider-height * 0.7;
+    .handle{
+      width:$--app-slider-height * 0.7;
+      height:$--app-slider-height * 0.7;
+      margin-top:-$--app-slider-height * 0.35;
+      background-color: $--app-slider-default-background;
+      border-color: $--app-slider-default-background;
+      border-radius:0;
+      border-right-width:1rem;
+    }
+  }
+}
+:host([size="small"]) {
+  .slider{
+    height: $--app-slider-height * 0.8;
+    .handle{
+      width:$--app-slider-height * 0.8 * 1.5;
+      height:$--app-slider-height * 0.8 * 1.5;
+      margin-top:-$--app-slider-height * 0.8 * 0.75;
+    }
+  }
+}
+:host([size="large"]) {
+  .slider{
+    height: $--app-slider-height * 1.1;
+    .handle{
+      width:$--app-slider-height * 1.1 * 1.5;
+      height:$--app-slider-height * 1.1 * 1.5;
+      margin-top:-$--app-slider-height * 1.1 * 0.75;
+    }
+  }
 }
