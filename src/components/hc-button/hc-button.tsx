@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Element } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Element, Method, Watch } from '@stencil/core';
 
 @Component({
   tag: 'hc-button',
@@ -10,8 +10,29 @@ export class HcButton implements ComponentInterface {
   @Prop() rounder: boolean;
   @Prop() conner: boolean;
   @Prop() plain: boolean;
-  @Prop() icon: string;
+  @Prop() icon: string = '';
+  @Prop() ripple: boolean;
+  @Prop() rippleColor: string;
+  @Prop() loading: boolean;
+  @Prop() disabled: boolean;
+  @Prop() backgroundColor: string;
+  @Prop() color: string;
+  @Prop() borderColor: string;
+  @Prop() label: string;
   @Element() el: HTMLElement;
+  @Watch('loading')
+  loadingHandle (v:boolean) {
+    var $icon = this.el.shadowRoot.querySelector('hc-icon')
+    var icon = this.icon ? this.icon : ''
+    console.log(v, $icon, icon)
+    if (v) {
+      $icon.setAttribute('name', 'loading')
+      $icon.setAttribute('spin', 'true')
+    } else {
+      $icon.setAttribute('name', icon)
+      $icon.removeAttribute('spin')
+    }
+  }
   componentDidLoad () {
     if (this.type) {
       this.el.setAttribute('type', `${this.type}`)
@@ -29,11 +50,27 @@ export class HcButton implements ComponentInterface {
   render() {
     return (
       <Host>
-        <slot name="icon">
-          <hc-icon name={this.icon}></hc-icon>
-        </slot>
-        <slot></slot>
+        <hc-ripple mask={!this.ripple} color={this.rippleColor}>
+          <div class="button" style={{
+            backgroundColor: this.backgroundColor,
+            color: this.color
+          }}>
+            <span class="line" style={{
+              borderColor: this.borderColor
+            }}></span>
+            <hc-icon name={this.icon}></hc-icon>
+            <span class="label"><slot>{this.label}</slot></span>
+          </div>
+        </hc-ripple>
       </Host>
     );
+  }
+  @Method()
+  async Loading () {
+    this.loading = true
+  }
+  @Method()
+  async Loaded () {
+    this.loading = false
   }
 }

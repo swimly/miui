@@ -10,6 +10,7 @@ export class HcKeyboard {
   @Prop() type: string;
   @Prop() change: boolean = false;
   @Prop() value: string = '';
+  @Prop() vibrate: number = 100;
   @Prop() current: string;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
@@ -91,6 +92,7 @@ export class HcKeyboard {
   }
   onClick (item) {
     this.current = item.label
+    this.touchVibrate()
     if (item.label == 'back') {
       this.value = this.value.substring(0, this.value.length - 1)
     } else if (item.label == '完成'){
@@ -120,7 +122,17 @@ export class HcKeyboard {
   @Method()
   async destory () {
     this.vchange.emit(this.value)
-    console.log(this.value)
     this.$drawer.destory()
+  }
+  touchVibrate() {
+    if (this.vibrate !== null) {
+      var timer
+      if (this.vibrate >= 0) {
+        timer = this.vibrate;
+      }
+      if (navigator.vibrate) {
+        navigator.vibrate(timer);
+      }
+    }
   }
 }

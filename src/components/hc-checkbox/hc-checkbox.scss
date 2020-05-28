@@ -4,6 +4,7 @@
   font-size:$--app-checkbox-size;
   color: $--app-checkbox-color;
   align-items:center;
+  margin-right:0.5rem;
   .frame{
     display:flex;
     flex-direction: row;
@@ -56,7 +57,22 @@
     border-color:$--app-checkbox-danger;
   }
 }
+:host([checked][type="warning"]){
+  .frame{
+    background: $--app-checkbox-warning;
+    border-color:$--app-checkbox-warning;
+  }
+}
+:host([checked][type="success"]){
+  .frame{
+    background: $--app-checkbox-success;
+    border-color:$--app-checkbox-success;
+  }
+}
 :host([reverse]){
   flex-direction: row-reverse;
   display:flex;
+}
+:host([vertical]){
+  margin:0 0 0.5rem 0;
 }

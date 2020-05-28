@@ -8,7 +8,7 @@ import { Component, ComponentInterface, Host, h, Prop } from '@stencil/core';
 export class HcTitle implements ComponentInterface {
   @Prop() label: string;
   @Prop() subTitle: string;
-  @Prop() more: string = '查看更多';
+  @Prop() more: string = '';
   render() {
     return (
       <Host>

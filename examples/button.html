@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>button</title>
+  <title>button 按钮</title>
   <link rel="stylesheet" href="../www/build/miui.css">
   <style>
-    hc-button,
-    hc-ripple{
+    hc-button{
       margin-bottom:0.5rem;
-    }
-    hc-button:last-child{
-      margin-bottom:0;
     }
     p{
       font-size:0.7rem;
@@ -21,20 +17,28 @@
 </head>
 <body>
   <hc-page>
-    <hc-header>按钮</hc-header>
+    <hc-header>
+      <span>按钮</span>
+      <hc-text onclick="javascript:window.location.href='./docs/#/../../src/components/hc-button/readme';" slot="right">文档</hc-text>
+    </hc-header>
     <hc-view>
       <hc-panel>
-        <hc-title label="普通按钮"></hc-title>
-        <p>按钮默认是没有点击反馈效果的，需要配合hc-ripple添加遮罩或者水波纹效果</p>
-        <hc-ripple mask="true">
-          <hc-button>按钮</hc-button>
-        </hc-ripple>
-        <hc-ripple>
-          <hc-button>按钮</hc-button>
-        </hc-ripple>
+        <hc-title label="默认按钮"></hc-title>
+        <hc-button>按钮</hc-button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title label="水波纹按钮"></hc-title>
+        <p>可通过ripple添加按钮点击水波纹效果</p>
+        <hc-button ripple>按钮</hc-button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title label="自定义波纹颜色"></hc-title>
+        <p>可通过ripple-color自定义水波纹颜色！</p>
+        <hc-button ripple ripple-color="#ccc">按钮</hc-button>
       </hc-panel>
       <hc-panel>
         <hc-title label="不同主题"></hc-title>
+        <p>按钮默认设置了五种颜色：primary, warning, success, danger,info，通过type进行设定</p>
         <hc-button type="primary">按钮</hc-button>
         <hc-button type="warning">按钮</hc-button>
         <hc-button type="success">按钮</hc-button>
@@ -42,30 +46,81 @@
         <hc-button type="info">按钮</hc-button>
       </hc-panel>
       <hc-panel>
+        <hc-title label="自定义按钮颜色"></hc-title>
+        <p>通过background-color,color,border-color可以组合出任何按钮样式！</p>
+        <hc-button background-color="#3E97DF" color="#fff" border-color="#3E97DF">按钮</hc-button>
+        <hc-button background-color="#3E97DF" color="#fff" border-color="#3E97DF" conner>按钮</hc-button>
+        <hc-button background-color="#fff" color="#3E97DF" border-color="#3E97DF" rounder>按钮</hc-button>
+      </hc-panel>
+      <hc-panel>
         <hc-title label="不同形状"></hc-title>
+        <p>根据圆角的弧度分为：conner，rounder，default</p>
         <hc-button conner>按钮</hc-button>
         <hc-button rounder>按钮</hc-button>
+        <hc-button rounder type="primary">按钮</hc-button>
+        <hc-button icon="loading" rounder type="primary" size="small">按钮</hc-button>
       </hc-panel>
       <hc-panel>
         <hc-title label="朴素按钮"></hc-title>
+        <p>通过plain添加朴素按钮样式</p>
         <hc-button type="primary" plain>按钮</hc-button>
         <hc-button type="warning" plain>按钮</hc-button>
         <hc-button type="success" plain>按钮</hc-button>
         <hc-button type="danger" plain>按钮</hc-button>
       </hc-panel>
       <hc-panel>
+        <hc-title label="简洁按钮"></hc-title>
+        <p>通过outline添加简洁按钮样式</p>
+        <hc-button type="primary" outline>按钮</hc-button>
+        <hc-button type="warning" outline>按钮</hc-button>
+        <hc-button type="success" outline>按钮</hc-button>
+        <hc-button type="danger" outline>按钮</hc-button>
+      </hc-panel>
+      <hc-panel>
         <hc-title label="不同尺寸"></hc-title>
-        <hc-button size="mini">按钮</hc-button>
-        <hc-button size="small">按钮</hc-button>
-        <hc-button size="default">按钮</hc-button>
-        <hc-button size="large">按钮</hc-button>
+        按钮大小分为：mini, small, default, large，通过size进行设置
+        <hc-button size="mini">迷你按钮</hc-button>
+        <hc-button size="small">小按钮</hc-button>
+        <hc-button size="default">默认按钮</hc-button>
+        <hc-button size="large">大按钮</hc-button>
+        <hc-button size="mini" type="primary" conner>迷你按钮</hc-button>
+        <hc-button size="small" type="primary" conner>小按钮</hc-button>
+        <hc-button size="default" type="primary" conner>默认按钮</hc-button>
+        <hc-button size="large" type="primary" conner>大按钮</hc-button>
       </hc-panel>
       <hc-panel>
         <hc-title label="带图标的按钮""></hc-title>
+        <p>通过icon给按钮添加图标。</p>
         <hc-button conner icon="add">按钮</hc-button>
+        <hc-button conner icon="add" type="primary">按钮</hc-button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title label="点击加载""></hc-title>
+        <p>dom.Loading()调用加载样式，dom.Loaded()加载完成！</p>
+        <hc-button class="click" conner icon="add">提交</hc-button>
+        <hc-button class="click" conner type="primary">提交</hc-button>
+      </hc-panel>
+      <hc-panel>
+        <hc-title label="禁用""></hc-title>
+        <p>disabled设置按钮禁用！</p>
+        <hc-button conner icon="add" disabled>提交</hc-button>
+        <hc-button conner type="primary" disabled>提交</hc-button>
       </hc-panel>
     </hc-view>
   </hc-page>
   <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    var clicks = document.querySelectorAll('.click')
+    clicks.forEach(click => {
+      click.addEventListener('click', () => {
+        click.Loading()
+        setTimeout(() => {
+          click.Loaded()
+        }, 3000)
+      })
+    })
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
 </body>
 </html>

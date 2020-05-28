@@ -13,7 +13,10 @@
 </head>
 <body>
   <hc-page>
-    <hc-header>输入框</hc-header>
+    <hc-header>
+      <span>输入框</span>
+      <hc-text onclick="javascript:window.location.href='./docs/#/../../src/components/hc-input/readme';" slot="right">文档</hc-text>
+    </hc-header>
     <hc-view>
       <hc-panel>
         <hc-title>普通</hc-title>
@@ -25,8 +28,8 @@
         <hc-input rounder placeholder="请填写"></hc-input>
       </hc-panel>
       <hc-panel>
-        <hc-title>朴素按钮</hc-title>
-        <hc-input placeholder="请填写" plain></hc-input>
+        <hc-title>无边框</hc-title>
+        <hc-input placeholder="请填写" light></hc-input>
       </hc-panel>
       <hc-panel>
         <hc-title>文本右对齐</hc-title>

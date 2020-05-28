@@ -12,9 +12,8 @@ export class HcIcon implements ComponentInterface {
   @Prop() color: string;
   @Prop() spin: boolean = false
   @Element() el: HTMLElement;
-  componentDidLoad() {
-    this.renderIcon()
-  }
+  $use;
+  $svg;
   @Watch('spin')
   spinHandle(newValue: boolean) {
     if (newValue) {
@@ -24,36 +23,38 @@ export class HcIcon implements ComponentInterface {
     }
   }
   @Watch('name')
-  nameHandle() {
+  nameHandle(v) {
     this.renderIcon()
+    if (v) {
+      this.el.style.display = 'inline-block'
+    } else {
+      this.el.style.display = 'none'
+    }
   }
   @Watch('color')
   colorHandle () {
     this.renderIcon()
   }
   @Event() vclick: EventEmitter;
-  renderIcon() {
-    const use = this.el.shadowRoot.querySelector('#use') as HTMLElement;
-    const svg = this.el.shadowRoot.querySelector('.hc-icon') as HTMLElement;
-    use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `./assets/iconfont.svg#icon-${this.name}`);
-    if (this.size) {
-      svg.style.fontSize = `${this.size}px`
-      svg.style.width = `${this.size}px`
-      svg.style.height = `${this.size}px`
-    }
-    if (this.color) {
-      svg.style.color = this.color;
-    }
+  componentDidLoad() {
+    this.$use = this.el.shadowRoot.querySelector('#use') as HTMLElement;
+    this.$svg = this.el.shadowRoot.querySelector('.hc-icon') as HTMLElement;
+    this.renderIcon()
     if (!this.name) {
       this.el.style.display = 'none'
     }
-    if (this.spin) {
-      this.el.setAttribute('spin', 'true')
-    }
+  }
+  renderIcon() {
+    this.$use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `./assets/iconfont.svg#icon-${this.name}`);
   }
   render() {
     return (
-      <Host onClick={this.onClick.bind(this)}>
+      <Host onClick={this.onClick.bind(this)} style={{
+        fontSize: `${this.size}px`,
+        width: `${this.size}px`,
+        height: `${this.size}px`,
+        color: this.color
+      }}>
         <svg class="hc-icon" aria-hidden="true">
           <use id="use" />
         </svg>

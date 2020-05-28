@@ -1,11 +1,12 @@
 :host {
   display: flex;
   background-color:$--app-input-default-background;
-  border:1px solid $--app-input-default-border;
+  // border:1px solid $--app-input-default-border;
   color: $--app-input-icon-color;
   font-size: $--app-input-default-size;
   padding: $--app-input-default-size / 3 * 2;
   align-items:center;
+  @include border_1px('default', $--app-input-default-border, 0);
   input,
   textarea{
     flex:1;
@@ -46,12 +47,16 @@
   }
 }
 :host([conner]){
-  border-radius:$--app-input-conner;
+  &:after{
+    border-radius:$--app-input-conner * 2;
+  }
 }
 :host([rounder]){
-  border-radius:$--app-input-default-size * 3;
+  &:after{
+    border-radius:$--app-input-default-size * 3;
+  }
 }
-:host([plain]) {
+:host([light]) {
   padding:0;
   &:after{
     display:none;
@@ -69,5 +74,41 @@
 }
 :host([dark]){
   background:$--app-input-dark;
-  border-color:$--app-input-dark;
+  &:after{
+    border-color:$--app-input-dark;
+  }
+}
+:host([type="textarea"]){
+  align-items:flex-start;
+  padding:0.5rem 0.8rem 0.8rem 0.8rem;
+  .clear{
+    position: absolute;
+    right:$--app-input-icon-size / 2;
+    bottom:$--app-input-icon-size / 2;
+  }
+  .count{
+    position: absolute;
+    bottom:$--app-input-icon-size / 2;
+    left: $--app-input-icon-size / 2;
+  }
+}
+:host([focusin]){
+  &:after{
+    border-color: $--app-input-focus-color;
+  }
+}
+:host([verify="error"]){
+  &:after{
+    border-color: $--app-input-error;
+  }
+}
+:host([verify="success"]){
+  &:after{
+    border-color: $--app-input-success;
+  }
+}
+:host([verify="warning"]){
+  &:after{
+    border-color: $--app-input-warning;
+  }
 }

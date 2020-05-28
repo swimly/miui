@@ -30,7 +30,7 @@ export class HcRipple implements ComponentInterface {
   onClick (e) {
     if (this.mask) return false;
     var circle = this.el.shadowRoot.querySelector('.ripple') as HTMLElement
-    var rect = e.target.getBoundingClientRect()
+    var rect = this.el.getBoundingClientRect()
     var top = rect.y;
     var left = rect.x;
     var x = e.pageX;

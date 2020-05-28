@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event, Method } from '@stencil/core';
 
 @Component({
   tag: 'hc-input',
@@ -23,6 +23,8 @@ export class HcInput implements ComponentInterface {
   @Prop() light: boolean;
   @Prop() conner: boolean;
   @Prop() dark: boolean;
+  @Prop() focusin: boolean;
+  @Prop() verify: string;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('value')
@@ -30,6 +32,18 @@ export class HcInput implements ComponentInterface {
     this.vchange.emit({
       value: v
     })
+  }
+  @Watch('verify')
+  verifyHandle (v: string) {
+    this.el.setAttribute('verify', v)
+  }
+  @Watch('focusin')
+  focusHandle (v: boolean) {
+    if (v) {
+      this.el.setAttribute('focusin', `${v}`)
+    } else {
+      this.el.removeAttribute('focusin')
+    }
   }
   componentDidLoad () {
     if (this.size) {
@@ -43,6 +57,11 @@ export class HcInput implements ComponentInterface {
     }
     if (this.dark) {
       this.el.setAttribute('dark', `${this.dark}`)
+    }
+    if (this.focusin) {
+      this.el.setAttribute('focus', `${this.focusin}`)
+      var core = this.el.shadowRoot.querySelector('#core') as HTMLElement
+      core.focus()
     }
   }
   render() {
@@ -72,13 +91,43 @@ export class HcInput implements ComponentInterface {
   renderCore () {
     if (this.type == 'textarea') {
       return (
-        <textarea maxLength={this.maxLength} minLength={this.minLength} id="core" onKeyUp={this.onChange.bind(this)} value={this.value} rows={this.rows} style={{textAlign: this.align}} placeholder={this.placeholder}></textarea>
+        <textarea 
+          onBlur={this.bindBlur.bind(this)} 
+          onFocus={this.bindFocus.bind(this)} 
+          maxLength={this.maxLength} 
+          minLength={this.minLength} 
+          id="core" 
+          onKeyUp={this.onChange.bind(this)} 
+          value={this.value} 
+          rows={this.rows} 
+          style={{textAlign: this.align}} 
+          placeholder={this.placeholder}
+        ></textarea>
       )
     } else {
       return (
-        <input maxLength={this.maxLength} minLength={this.minLength} value={this.value} id="core" onKeyUp={this.onChange.bind(this)} style={{textAlign: this.align}} type={this.type} placeholder={this.placeholder}/>
+        <input 
+          onBlur={this.bindBlur.bind(this)} 
+          onFocus={this.bindFocus.bind(this)} 
+          maxLength={this.maxLength} 
+          minLength={this.minLength} 
+          value={this.value} 
+          id="core" 
+          onKeyUp={this.onChange.bind(this)} 
+          style={{textAlign: this.align}} 
+          type={this.type} 
+          placeholder={this.placeholder}
+        />
       )
     }
+  }
+  bindBlur () {
+    this.focusin = false
+    console.log('blur')
+  }
+  bindFocus () {
+    console.log('focus')
+    this.focusin = true
   }
   onChange (e) {
     this.value = e.target.value
@@ -105,5 +154,9 @@ export class HcInput implements ComponentInterface {
         <span class="count">{this.minLength}/{current}</span>
       )
     }
+  }
+  @Method()
+  async Verify (status) {
+    this.verify = status
   }
 }

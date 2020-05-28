@@ -20,60 +20,30 @@ dd{
 }
 
 html {
-  font-size: calc(100vw/18.75);
+  font-size: 20px;
 }
 
-
-:root {
-  --padding-default: 1rem;
-  /* new verion */
-  --color-black: #000;
-  --color-dark: #333;
-  --color-gray: #666;
-  --color-grey: #808080;
-  --color-lightgray: #999;
-  --color-light: #B2B2B2;
-  --color-primary: #0c84ff;
-  --color-success: #13ca8a;
-  --color-danger: #f32326;
-  --color-warning: #ffa43b;
-  --color-orange: #FD7B65;
-  --color-purple: #566EFE;
-  --color-info: #A7BDEA;
-  --color-white: #fff;
-  --bg-white: #fff;
-  --bg-light:#F7F7F7;
-  --bg-gray: #DFDFDF;
-  --bg-dark: #808080;
-  --bg-black-transparent: rgba(0,0,0,0.7);
-  --bg-white-transparent: rgba(255,255,255,0.7);
-  --bg-lightgray: #fbfbfb;
-  --border-default: #eaeaea;
-}
-
-
-
-@media (prefers-color-scheme: dark) {
-  :root{
-    --color-black: #9c9c9c;
-    --color-dark: #757575;
-    --color-gray: #747272;
-    --color-grey: #797878;
-    --color-lightgray: #6e6d6d;
-    --color-light: #494949;
-    --color-primary: #175982;
-    --color-success: #227448;
-    --color-danger: #823948;
-    --color-warning: #826421;
-    --color-orange: #813F33;
-    --color-purple: #2C3881;
-    --color-info: #556077;
-    --color-white: #fff;
-    --bg-white: #2D343C;
-    --bg-light: #22272B;
-    --bg-lightgray: #292929;
-    --bg-black-transparent: rgba(0,0,0,0.7);
-    --bg-white-transparent: rgba(255,255,255,0.7);
-    --border-default: #5c5b5b;
-  }
+:root{
+  /* functionalcolor */
+  --color-primary: #409EFF;
+  --color-warning: #E6A23C;
+  --color-success: #67C23A;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+  /* fontcolor */
+  --color-text-primary: #262626;
+  --color-text-regular: #666;
+  --color-text-secondary: #8c8c8c;
+  --color-text-placeholder: #b2b2b2;
+  --color-text-white: #fff;
+  /* bordercolor */
+  --border-color-base: #DCDFE6;
+  --border-color-light: #E4E7ED;
+  --border-color-lighter: #EBEEF5;
+  --border-color-extra-light: #F2F6FC;
+  /* backgroundcolor */
+  --background-color-white: #fff;
+  --background-color-black: #000;
+  --background-color-base: #F5F7FA;
+  --background-color-dark: #ededed;
 }

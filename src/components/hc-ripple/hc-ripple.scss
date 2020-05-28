@@ -1,14 +1,9 @@
 :host {
-  display:flex;
-  position: relative;
+  display:block;
   overflow:hidden;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height:100%;
-  width:100%;
+  position: relative;
   .ripple{
-    display:inline-block;
+    display:block;
     position: absolute;
     z-index:98;
     top:0;

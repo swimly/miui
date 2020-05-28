@@ -6,39 +6,44 @@
     border-radius:$radius;
     position: absolute;
     box-sizing: border-box;
+    transition:0.3s;
     @if $type == default {
       top: 0;
       left: 0;
       width: 200%;
       height: 200%;
       border: 1px solid $color;
+      transform-origin: left top;
+      transform: scale(0.5);
     } @else if $type == top {
       top: 0;
       left: 0;
-      width: 200%;
+      width: 100%;
       height: 1px;
       background: $color;
+      transform: scaleY(0.5);
     } @else if $type == bottom {
       bottom: 0;
       left: 0;
-      width: 200%;
+      width: 100%;
       height: 1px;
       background: $color;
-      transform-origin: 0 100%;
+      transform-origin: left bottom;
+      transform: scaleY(0.5);
     } @else if $type == left {
       top: 0;
       left: 0;
       width: 1px;
-      height: 200%;
+      height: 100%;
       background: $color;
+      transform: scaleX(0.5);
     } @else if $type == right {
       top: 0;
       right: 0;
       width: 1px;
-      height: 200%;
+      height: 100%;
       background: $color;
+      transform: scaleX(0.5);
     }
-    transform: scale(0.5);
-    transform-origin: 0 0;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Element, Event, Watch, EventEmitter } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Element, Event, Watch, EventEmitter, Method } from '@stencil/core';
 
 @Component({
   tag: 'hc-radio',
@@ -10,6 +10,8 @@ export class HcRadio implements ComponentInterface {
   @Prop() value: string;
   @Prop() checked: boolean;
   @Prop() icon: string = 'seleted';
+  @Prop() vertical: boolean;
+  @Prop() reverse: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('checked')
@@ -19,21 +21,9 @@ export class HcRadio implements ComponentInterface {
     } else {
       this.el.removeAttribute('checked')
     }
-    if (this.name) {
-      // 获取该组选中的值
-      var checkboxs = document.querySelectorAll('hc-checkbox')
-      var select = []
-      checkboxs.forEach((checkbox) => {
-        if (checkbox.name == this.name && checkbox.checked) {
-          select.push(checkbox.value)
-        }
-      })
-      this.vchange.emit({
-        value: select,
-        current: this.el,
-        currentValue: this.value
-      })
-    }
+    this.vchange.emit({
+      value: this.value
+    })
   }
   render() {
     return (
@@ -49,5 +39,9 @@ export class HcRadio implements ComponentInterface {
   }
   onClick () {
     this.checked = true
+  }
+  @Method()
+  async Check (status) {
+    this.checked = status
   }
 }

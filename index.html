@@ -9,10 +9,10 @@
     a{
       display: block;
       text-decoration: none;
-      color:var(--color-dark);
+      color:var(--color-text-primary);
       font-size:0.8rem;
       padding:1rem 0;
-      border-bottom:1px dashed var(--border-default);
+      border-bottom:1px dashed var(--border-color-base);
       -webkit-tap-highlight-color: transparent;
     }
     a:last-child{
@@ -20,7 +20,7 @@
     }
     p{
       font-size:0.8rem;
-      color: var(--color-dark);
+      color: var(--color-text-primary);
     }
     p span{
       color:var(--color-primary);
@@ -30,22 +30,21 @@
 </head>
 <body>
   <hc-page>
-    <hc-header>首页<span slot="left"></span></hc-header>
     <hc-view>
       <hc-panel>
         <p>当前总计 <span id="count"></span> 个组件</p>
       </hc-panel>
       <hc-panel id="component">
         <a href="examples/button.html">button 按钮</a>
+        <a href="examples/input.html">input 输入框</a>
+        <a href="examples/radio.html">radio 单选框</a>
+        <a href="examples/checkbox.html">checkbox 复选框</a>
         <a href="examples/image.html">image 图片</a>
         <a href="examples/icon.html">icon 图标</a>
         <a href="examples/form.html">form 表单</a>
         <a href="examples/list.html">list 列表</a>
         <a href="examples/tag.html">tag 标签</a>
         <a href="examples/cell.html">cell 单元格</a>
-        <a href="examples/input.html">input 输入框</a>
-        <a href="examples/checkbox.html">checkbox 复选框</a>
-        <a href="examples/radio.html">radio 单选框</a>
         <a href="examples/switch.html">switch 开关</a>
         <a href="examples/toast.html">toast 吐司</a>
         <a href="examples/masker.html">masker 遮罩</a>

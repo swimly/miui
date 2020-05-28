@@ -28,9 +28,19 @@ interface HcBadge {
 'value': number;
 }
 interface HcButton {
+'Loaded': () => Promise<void>;
+'Loading': () => Promise<void>;
+'backgroundColor': string;
+'borderColor': string;
+'color': string;
 'conner': boolean;
+'disabled': boolean;
 'icon': string;
+'label': string;
+'loading': boolean;
 'plain': boolean;
+'ripple': boolean;
+'rippleColor': string;
 'rounder': boolean;
 'type': string;
 }
@@ -49,7 +59,15 @@ interface HcCheckbox {
 'name': string;
 'value': string;
 }
-interface HcCheckboxGroup {}
+interface HcCheckboxGroup {
+'conner': boolean;
+'name': string;
+'reverse': boolean;
+'rounder': boolean;
+'type': string;
+'value': string;
+'vertical': boolean;
+}
 interface HcCol {
 'align': string;
 'flex': number;
@@ -121,11 +139,13 @@ interface HcIndexbarItem {}
 interface HcIndexbarTitle {}
 interface HcInfinite {}
 interface HcInput {
+'Verify': (status: any) => Promise<void>;
 'align': string;
 'clearIcon': string;
 'clearable': boolean;
 'conner': boolean;
 'dark': boolean;
+'focusin': boolean;
 'iconColor': string;
 'iconSize': number;
 'light': boolean;
@@ -138,6 +158,7 @@ interface HcInput {
 'suffixIcon': string;
 'type': string;
 'value': string;
+'verify': string;
 }
 interface HcKeyboard {
 'change': boolean;
@@ -145,6 +166,7 @@ interface HcKeyboard {
 'destory': () => Promise<void>;
 'type': string;
 'value': string;
+'vibrate': number;
 }
 interface HcList {
 'size': string;
@@ -215,12 +237,23 @@ interface HcPopover {
 interface HcPopoverItem {}
 interface HcProgress {}
 interface HcRadio {
+'Check': (status: any) => Promise<void>;
 'checked': boolean;
 'icon': string;
 'name': string;
+'reverse': boolean;
 'value': string;
+'vertical': boolean;
 }
-interface HcRadioGroup {}
+interface HcRadioGroup {
+'conner': boolean;
+'name': string;
+'reverse': boolean;
+'rounder': boolean;
+'type': string;
+'value': string;
+'vertical': boolean;
+}
 interface HcRate {
 'activeColor': string;
 'activeIcon': string;
@@ -900,9 +933,17 @@ interface HcActionsheet {
 'value'?: number;
 }
   interface HcButton {
+'backgroundColor'?: string;
+'borderColor'?: string;
+'color'?: string;
 'conner'?: boolean;
+'disabled'?: boolean;
 'icon'?: string;
+'label'?: string;
+'loading'?: boolean;
 'plain'?: boolean;
+'ripple'?: boolean;
+'rippleColor'?: string;
 'rounder'?: boolean;
 'type'?: string;
 }
@@ -922,7 +963,16 @@ interface HcActionsheet {
 'onVchange'?: (event: CustomEvent<any>) => void;
 'value'?: string;
 }
-  interface HcCheckboxGroup {}
+  interface HcCheckboxGroup {
+'conner'?: boolean;
+'name'?: string;
+'onVchange'?: (event: CustomEvent<any>) => void;
+'reverse'?: boolean;
+'rounder'?: boolean;
+'type'?: string;
+'value'?: string;
+'vertical'?: boolean;
+}
   interface HcCol {
 'align'?: string;
 'flex'?: number;
@@ -998,6 +1048,7 @@ interface HcActionsheet {
 'clearable'?: boolean;
 'conner'?: boolean;
 'dark'?: boolean;
+'focusin'?: boolean;
 'iconColor'?: string;
 'iconSize'?: number;
 'light'?: boolean;
@@ -1011,6 +1062,7 @@ interface HcActionsheet {
 'suffixIcon'?: string;
 'type'?: string;
 'value'?: string;
+'verify'?: string;
 }
   interface HcKeyboard {
 'change'?: boolean;
@@ -1018,6 +1070,7 @@ interface HcActionsheet {
 'onVchange'?: (event: CustomEvent<any>) => void;
 'type'?: string;
 'value'?: string;
+'vibrate'?: number;
 }
   interface HcList {
 'size'?: string;
@@ -1089,9 +1142,20 @@ interface HcActionsheet {
 'icon'?: string;
 'name'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
+'reverse'?: boolean;
 'value'?: string;
+'vertical'?: boolean;
 }
-  interface HcRadioGroup {}
+  interface HcRadioGroup {
+'conner'?: boolean;
+'name'?: string;
+'onVchange'?: (event: CustomEvent<any>) => void;
+'reverse'?: boolean;
+'rounder'?: boolean;
+'type'?: string;
+'value'?: string;
+'vertical'?: boolean;
+}
   interface HcRate {
 'activeColor'?: string;
 'activeIcon'?: string;

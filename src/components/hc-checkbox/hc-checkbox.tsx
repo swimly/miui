@@ -19,21 +19,10 @@ export class HcCheckbox implements ComponentInterface {
     } else {
       this.el.removeAttribute('checked')
     }
-    if (this.name) {
-      // 获取该组选中的值
-      var checkboxs = document.querySelectorAll('hc-checkbox')
-      var select = []
-      checkboxs.forEach((checkbox) => {
-        if (checkbox.name == this.name && checkbox.checked) {
-          select.push(checkbox.value)
-        }
-      })
-      this.vchange.emit({
-        value: select,
-        current: this.el,
-        currentValue: this.value
-      })
-    }
+    this.vchange.emit({
+      value: this.value,
+      checked: v
+    })
   }
   render() {
     return (
