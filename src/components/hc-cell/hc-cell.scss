@@ -10,10 +10,11 @@
     margin-right:$--app-cell-size / 2;
   }
   .label{
-    flex:1;
     color: $--app-cell-label-color;
+    margin-right: $--app-cell-size * 2;
   }
   .value{
     color:$--app-cell-value-color;
+    flex:1;
   }
 }

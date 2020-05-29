@@ -4,7 +4,7 @@
   font-size:$--app-checkbox-size;
   color: $--app-checkbox-color;
   align-items:center;
-  margin-right:0.5rem;
+  margin-right:$--app-checkbox-size;
   .frame{
     display:flex;
     flex-direction: row;
@@ -14,18 +14,23 @@
     height: $--app-checkbox-size * 1.4;
     color:$--app-checkbox-background;
     background: $--app-checkbox-background;
-    margin-right:0.4rem;
+    margin-right:$--app-checkbox-size/ 3;
     overflow:hidden;
     transition:0.3s;
     border:1px solid $--app-checkbox-border;
-    slot{
+    box-sizing: border-box;
+    &:after{
+      content:"";
       display:inline-block;
-      font-size:0;
+      width:$--app-checkbox-size;
+      height: $--app-checkbox-size;
+      border-radius:50%;
+      background:$--app-checkbox-background;
       transform: scale(0);
-      transition:0.3s;
+      transition: 0.3s ease-out;
     }
   }
-  slot{
+  .label{
     display:block;
     font-size:inherit;
     color:inherit;
@@ -46,7 +51,7 @@
   .frame{
     background: $--app-checkbox-active;
     border-color:$--app-checkbox-active;
-    slot{
+    &:after{
       transform: scale(1);
     }
   }
@@ -74,5 +79,9 @@
   display:flex;
 }
 :host([vertical]){
-  margin:0 0 0.5rem 0;
+  margin:0;
+  padding:$--app-checkbox-size * 0.8 0;
+}
+:host([subline]){
+  @include border_1px('bottom', $--app-checkbox-line, 0);
 }

@@ -32,7 +32,7 @@ export class HcListItem implements ComponentInterface {
               </slot>
             </hc-col>
           </hc-row>
-          <hc-row class="date" justify="space-between">
+          <hc-row class="date" align="space-between">
             {
               (() => {
                 if (this.type == "complex") {

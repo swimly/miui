@@ -24,6 +24,22 @@
   <hc-input rounder placeholder="请填写"></hc-input>
 </div>
 
+###### 不同大小
+输入框根据尺寸的不同分为：`mini`，`small`，`default`，`large`，通过`size`赋值！
+
+``` html
+  <hc-input size="mini" placeholder="请填写"></hc-input>
+  <hc-input size="small" placeholder="请填写"></hc-input>
+  <hc-input size="default" placeholder="请填写"></hc-input>
+  <hc-input size="large" placeholder="请填写"></hc-input>
+```
+<div class="phone">
+  <hc-input size="mini" placeholder="请填写"></hc-input>
+  <hc-input size="small" placeholder="请填写"></hc-input>
+  <hc-input size="default" placeholder="请填写"></hc-input>
+  <hc-input size="large" placeholder="请填写"></hc-input>
+</div>
+
 ###### 无边框输入框
 `light`形式的输入框默认是看不到的，隐藏了边框，适合配合`hc-form-item`使用！
 ``` html

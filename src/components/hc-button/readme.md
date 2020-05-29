@@ -11,6 +11,18 @@
   <hc-button label="按钮"></hc-button>
 </div>
 
+###### 按钮点击效果
+默认点击效果是变色，可以通过添加`ripple`来添加水波纹效果,可通过 `ripple-color`添加水波纹颜色，
+
+``` html
+  <hc-button ripple>按钮</hc-button>
+  <hc-button ripple ripple-color="#f00">按钮</hc-button>
+```
+<div class="phone">
+  <hc-button ripple>按钮</hc-button>
+  <hc-button ripple ripple-color="#f00">按钮</hc-button>
+</div>
+
 ###### 不同主题
 
 按照颜色划分按钮有5种默认主题： `primary` ,`warning`,`success`,`danger`,`info`，通过属性`type`来设置！

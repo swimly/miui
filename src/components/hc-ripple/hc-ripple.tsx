@@ -28,18 +28,19 @@ export class HcRipple implements ComponentInterface {
     );
   }
   onClick (e) {
-    if (this.mask) return false;
-    var circle = this.el.shadowRoot.querySelector('.ripple') as HTMLElement
-    var rect = this.el.getBoundingClientRect()
-    var top = rect.y;
-    var left = rect.x;
-    var x = e.pageX;
-    var y = e.pageY;
-    circle.style.left = `${x - left}px`;
-    circle.style.top = `${y - top}px`;
-    circle.classList.add('active');
-    setTimeout(() => {
-      circle.classList.remove('active')
-    }, 400)
+    if (!this.mask) {
+      var circle = this.el.shadowRoot.querySelector('.ripple') as HTMLElement
+      var rect = this.el.getBoundingClientRect()
+      var top = rect.y;
+      var left = rect.x;
+      var x = e.clientX;
+      var y = e.clientY;
+      circle.style.left = `${x - left}px`;
+      circle.style.top = `${y - top}px`;
+      circle.classList.add('active');
+      setTimeout(() => {
+        circle.classList.remove('active')
+      }, 400)
+    }
   }
 }

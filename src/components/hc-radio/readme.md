@@ -75,6 +75,25 @@
   </hc-radio-group>
 </div>
 
+可通过添加`subline`来添加下划线
+
+``` html
+  <hc-radio-group value="3" rounder vertical reverse subline>
+    <hc-radio value="0">支付宝</hc-radio>
+    <hc-radio value="1">微信</hc-radio>
+    <hc-radio value="2">银联</hc-radio>
+    <hc-radio value="3">其他</hc-radio>
+  </hc-radio-group>
+```
+<div class="phone">
+  <hc-radio-group value="3" rounder vertical reverse subline>
+    <hc-radio value="0">支付宝</hc-radio>
+    <hc-radio value="1">微信</hc-radio>
+    <hc-radio value="2">银联</hc-radio>
+    <hc-radio value="3">其他</hc-radio>
+  </hc-radio-group>
+</div>
+
 ###### 单选框组
 上面介绍那么多样式，其实并非单选框的真正用法，在实际项目中还是需要配合 `hc-radio-group`使用！切记在使用中 `hc-radio`必须配置不同的 `value`值!
 ``` html

@@ -12,6 +12,7 @@
   box-sizing: border-box;
   transition:0.3s;
   overflow:hidden;
+  z-index: 100;
   .content{
     margin: 0 0.3rem;
     flex:1;

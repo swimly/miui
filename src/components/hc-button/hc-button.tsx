@@ -46,6 +46,9 @@ export class HcButton implements ComponentInterface {
     if (this.plain) {
       this.el.setAttribute('plain', 'true')
     }
+    if (this.ripple) {
+      this.el.setAttribute('ripple', 'true')
+    }
   }
   render() {
     return (

@@ -10,7 +10,11 @@ export class HcSwitch implements ComponentInterface {
   @Prop() offIcon: string;
   @Prop() iconSize: number = 36;
   @Prop() checked: boolean;
-  @Prop() type: string = 'default';
+  @Prop() type: string;
+  @Prop() custom: boolean;
+  @Prop() activeColor: string;
+  @Prop() readonly: boolean;
+  @Prop() disabled: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('checked')
@@ -32,20 +36,21 @@ export class HcSwitch implements ComponentInterface {
           <hc-icon class="off" size={this.iconSize} name={this.offIcon}></hc-icon>
         </slot>
         <slot name="active">
-          <hc-icon style={{marginLeft: `-${this.iconSize}px`}} class="active" size={this.iconSize} name={this.activeIcon}></hc-icon>
+          <hc-icon style={{marginLeft: `-${this.iconSize}px`}} class="active" size={this.iconSize} name={this.activeIcon} color={this.activeColor}></hc-icon>
         </slot>
         <slot></slot>
       </Host>
     );
   }
   renderSwitch () {
-    if (this.type == 'default') {
+    if (!this.custom) {
       return (
         <span class="switch"></span>
       )
     }
   }
   onClick () {
+    if (this.disabled || this.readonly) return;
     this.checked = !this.checked;
   }
 }

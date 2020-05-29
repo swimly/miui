@@ -62,11 +62,20 @@
     display:none;
   }
 }
+:host([size]){
+  display:inline-flex;
+}
 :host([size="small"]){
-  padding: $--app-input-default-size / 2 $--app-input-default-size;
+  padding: $--app-input-default-size * 0.3 $--app-input-default-size / 2;
 }
 :host([size="mini"]){
-  padding: 0 $--app-input-default-size / 2;
+  padding: $--app-input-default-size *0.2 $--app-input-default-size / 2;
+}
+:host([size="default"]){
+  padding: $--app-input-default-size *0.4 $--app-input-default-size / 2;
+}
+:host([size="large"]){
+  padding: $--app-input-default-size *0.5 $--app-input-default-size / 2;
 }
 :host([light]){
   border:none;

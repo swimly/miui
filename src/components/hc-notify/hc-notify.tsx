@@ -12,6 +12,8 @@ export class HcNotify {
   @Prop() duration: number = 3000
   @Prop() icon: string;
   @Prop() closable: boolean;
+  @Prop() command: boolean;
+  @Prop() content: string;
   @Element() el:HTMLElement
   @Watch('visible')
   visibleHandle (v:boolean) {
@@ -32,7 +34,7 @@ export class HcNotify {
           <hc-icon size={24} name={this.icon}></hc-icon>
         </slot>
         <div class="content">
-          <slot></slot>
+          <slot>{this.content}</slot>
         </div>
         <slot name="close">
           {this.renderClose()}
@@ -63,7 +65,21 @@ export class HcNotify {
   @Method()
   async generate (option: Object = null) {
     if (option) {
-
+      var notify = document.createElement('hc-notify')
+      for (let key in option) {
+        var prop;
+        if (typeof option[key] == 'object') {
+          prop = JSON.stringify(option[key])
+        } else {
+          prop = option[key]
+        }
+        notify.setAttribute(key, prop)
+      }
+      notify.setAttribute('command', 'true')
+      document.body.appendChild(notify)
+      setTimeout(() => {
+        notify.generate()
+      }, 100)
     } else {
       this.show()
     }

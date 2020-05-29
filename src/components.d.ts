@@ -16,10 +16,16 @@ interface HcActionsheet {
 interface HcActionsheetItem {}
 interface HcAlert {
 'clickable': boolean;
-'destory': () => Promise<void>;
-'display': boolean;
+'command': boolean;
+'content': string;
+'destory': (data?: object) => Promise<void>;
+'duration': number;
+'footer': string;
 'generate': (option?: object) => Promise<void>;
+'head': string;
 'masker': boolean;
+'type': string;
+'visible': boolean;
 }
 interface HcBadge {
 'background': string;
@@ -46,17 +52,20 @@ interface HcButton {
 }
 interface HcCalendar {}
 interface HcCell {
+'align': string;
 'arrowIcon': string;
 'href': string;
 'icon': string;
 'iconSize': number;
 'label': string;
+'valign': string;
 'value': string;
 }
 interface HcCheckbox {
 'checked': boolean;
 'icon': string;
 'name': string;
+'subline': boolean;
 'value': string;
 }
 interface HcCheckboxGroup {
@@ -64,6 +73,7 @@ interface HcCheckboxGroup {
 'name': string;
 'reverse': boolean;
 'rounder': boolean;
+'subline': boolean;
 'type': string;
 'value': string;
 'vertical': boolean;
@@ -116,8 +126,10 @@ interface HcHeader {
 interface HcIcon {
 'color': string;
 'name': string;
+'path': string;
 'size': number;
 'spin': boolean;
+'view': number;
 }
 interface HcImage {
 'fit': string;
@@ -203,6 +215,8 @@ interface HcNoticebar {
 interface HcNotify {
 'align': string;
 'closable': boolean;
+'command': boolean;
+'content': string;
 'destory': () => Promise<void>;
 'duration': number;
 'generate': (option?: Object) => Promise<void>;
@@ -242,6 +256,7 @@ interface HcRadio {
 'icon': string;
 'name': string;
 'reverse': boolean;
+'subline': boolean;
 'value': string;
 'vertical': boolean;
 }
@@ -250,6 +265,7 @@ interface HcRadioGroup {
 'name': string;
 'reverse': boolean;
 'rounder': boolean;
+'subline': boolean;
 'type': string;
 'value': string;
 'vertical': boolean;
@@ -280,8 +296,9 @@ interface HcRipple {
 'size': number;
 }
 interface HcRow {
-'justify': string;
+'align': string;
 'valign': string;
+'wrap': boolean;
 }
 interface HcSearch {
 'clearable': boolean;
@@ -351,10 +368,14 @@ interface HcSwiperItem {
 'width': number;
 }
 interface HcSwitch {
+'activeColor': string;
 'activeIcon': string;
 'checked': boolean;
+'custom': boolean;
+'disabled': boolean;
 'iconSize': number;
 'offIcon': string;
+'readonly': boolean;
 'type': string;
 }
 interface HcTab {
@@ -369,6 +390,8 @@ interface HcTag {
 'background': string;
 'closable': boolean;
 'color': string;
+'light': boolean;
+'outline': boolean;
 'plain': boolean;
 }
 interface HcText {
@@ -387,6 +410,9 @@ interface HcTitle {
 'subTitle': string;
 }
 interface HcToast {
+'command': boolean;
+'content': string;
+'destory': () => Promise<void>;
 'display': boolean;
 'duration': number;
 'fill': string;
@@ -923,8 +949,14 @@ interface HcActionsheet {
   interface HcActionsheetItem {}
   interface HcAlert {
 'clickable'?: boolean;
-'display'?: boolean;
+'command'?: boolean;
+'content'?: string;
+'duration'?: number;
+'footer'?: string;
+'head'?: string;
 'masker'?: boolean;
+'type'?: string;
+'visible'?: boolean;
 }
   interface HcBadge {
 'background'?: string;
@@ -949,11 +981,13 @@ interface HcActionsheet {
 }
   interface HcCalendar {}
   interface HcCell {
+'align'?: string;
 'arrowIcon'?: string;
 'href'?: string;
 'icon'?: string;
 'iconSize'?: number;
 'label'?: string;
+'valign'?: string;
 'value'?: string;
 }
   interface HcCheckbox {
@@ -961,6 +995,7 @@ interface HcActionsheet {
 'icon'?: string;
 'name'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
+'subline'?: boolean;
 'value'?: string;
 }
   interface HcCheckboxGroup {
@@ -969,6 +1004,7 @@ interface HcActionsheet {
 'onVchange'?: (event: CustomEvent<any>) => void;
 'reverse'?: boolean;
 'rounder'?: boolean;
+'subline'?: boolean;
 'type'?: string;
 'value'?: string;
 'vertical'?: boolean;
@@ -1019,8 +1055,10 @@ interface HcActionsheet {
 'color'?: string;
 'name'?: string;
 'onVclick'?: (event: CustomEvent<any>) => void;
+'path'?: string;
 'size'?: number;
 'spin'?: boolean;
+'view'?: number;
 }
   interface HcImage {
 'fit'?: string;
@@ -1106,6 +1144,8 @@ interface HcActionsheet {
   interface HcNotify {
 'align'?: string;
 'closable'?: boolean;
+'command'?: boolean;
+'content'?: string;
 'duration'?: number;
 'icon'?: string;
 'place'?: string;
@@ -1143,6 +1183,7 @@ interface HcActionsheet {
 'name'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
 'reverse'?: boolean;
+'subline'?: boolean;
 'value'?: string;
 'vertical'?: boolean;
 }
@@ -1152,6 +1193,7 @@ interface HcActionsheet {
 'onVchange'?: (event: CustomEvent<any>) => void;
 'reverse'?: boolean;
 'rounder'?: boolean;
+'subline'?: boolean;
 'type'?: string;
 'value'?: string;
 'vertical'?: boolean;
@@ -1182,8 +1224,9 @@ interface HcActionsheet {
 'size'?: number;
 }
   interface HcRow {
-'justify'?: string;
+'align'?: string;
 'valign'?: string;
+'wrap'?: boolean;
 }
   interface HcSearch {
 'clearable'?: boolean;
@@ -1249,11 +1292,15 @@ interface HcActionsheet {
 'width'?: number;
 }
   interface HcSwitch {
+'activeColor'?: string;
 'activeIcon'?: string;
 'checked'?: boolean;
+'custom'?: boolean;
+'disabled'?: boolean;
 'iconSize'?: number;
 'offIcon'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
+'readonly'?: boolean;
 'type'?: string;
 }
   interface HcTab {
@@ -1270,7 +1317,9 @@ interface HcActionsheet {
 'background'?: string;
 'closable'?: boolean;
 'color'?: string;
+'light'?: boolean;
 'onVclose'?: (event: CustomEvent<any>) => void;
+'outline'?: boolean;
 'plain'?: boolean;
 }
   interface HcText {
@@ -1289,6 +1338,8 @@ interface HcActionsheet {
 'subTitle'?: string;
 }
   interface HcToast {
+'command'?: boolean;
+'content'?: string;
 'display'?: boolean;
 'duration'?: number;
 'fill'?: string;

@@ -1,9 +1,10 @@
 :host {
-  display: flex;
+  display: inline-flex;
   font-size: $--app-switch-label-size;
   color: $--app-switch-label-color;
   flex-direction: row;
   align-items:center;
+  vertical-align: middle;
   hc-icon{
     font-size: $--app-switch-size;
     color: $--app-switch-icon-color;
@@ -54,4 +55,23 @@
       background-color:$--app-switch-active-dot-color;
     }
   }
+}
+:host([type="warning"][checked]){
+  .switch{
+    background-color: $--app-switch-warning;
+  }
+}
+:host([type="success"][checked]){
+  .switch{
+    background-color: $--app-switch-success;
+  }
+}
+:host([type="danger"][checked]){
+  .switch{
+    background-color: $--app-switch-danger;
+  }
+}
+
+:host([disabled]){
+  opacity:0.6;
 }

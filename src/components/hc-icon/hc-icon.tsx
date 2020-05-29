@@ -11,9 +11,12 @@ export class HcIcon implements ComponentInterface {
   @Prop() size: number;
   @Prop() color: string;
   @Prop() spin: boolean = false
+  @Prop() path: string;
+  @Prop() view: number = 1024;
   @Element() el: HTMLElement;
   $use;
   $svg;
+  $path;
   @Watch('spin')
   spinHandle(newValue: boolean) {
     if (newValue) {
@@ -31,6 +34,10 @@ export class HcIcon implements ComponentInterface {
       this.el.style.display = 'none'
     }
   }
+  @Watch('path')
+  pathHandle (v: string) {
+    this.$path.setAttribute('d', v)
+  }
   @Watch('color')
   colorHandle () {
     this.renderIcon()
@@ -40,23 +47,33 @@ export class HcIcon implements ComponentInterface {
     this.$use = this.el.shadowRoot.querySelector('#use') as HTMLElement;
     this.$svg = this.el.shadowRoot.querySelector('.hc-icon') as HTMLElement;
     this.renderIcon()
-    if (!this.name) {
-      this.el.style.display = 'none'
-    }
   }
   renderIcon() {
-    this.$use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `./assets/iconfont.svg#icon-${this.name}`);
+    const svg = this.el.shadowRoot.querySelector('.hc-icon') as HTMLElement;
+    if (this.path) {
+      this.$path = this.el.shadowRoot.querySelector('#path')
+      this.$path.setAttribute('d', this.path)
+    } else if (this.name) {
+      this.$use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `./assets/iconfont.svg#icon-${this.name}`);
+    } else {
+      this.el.style.display = 'none'
+    }
+    if (this.size) {
+      svg.style.fontSize = `${this.size}px`
+      svg.style.width = `${this.size}px`
+      svg.style.height = `${this.size}px`
+    }
+    svg.style.color = this.color;
+    if (this.spin) {
+      this.el.setAttribute('spin', 'true')
+    }
+    
   }
   render() {
     return (
-      <Host onClick={this.onClick.bind(this)} style={{
-        fontSize: `${this.size}px`,
-        width: `${this.size}px`,
-        height: `${this.size}px`,
-        color: this.color
-      }}>
-        <svg class="hc-icon" aria-hidden="true">
-          <use id="use" />
+      <Host onClick={this.onClick.bind(this)}>
+        <svg class="hc-icon" aria-hidden="true" viewBox={`0 0 ${this.view} ${this.view}`}>
+          {this.renderCore()}
         </svg>
       </Host>
     );
@@ -64,5 +81,15 @@ export class HcIcon implements ComponentInterface {
   onClick (e) {
     this.vclick.emit(e)
   }
-
+  renderCore () {
+    if (this.path) {
+      return (
+        <path id="path"></path>
+      )
+    } else {
+      return (
+        <use id="use" />
+      )
+    }
+  }
 }

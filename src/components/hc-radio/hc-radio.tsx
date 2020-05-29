@@ -9,9 +9,10 @@ export class HcRadio implements ComponentInterface {
   @Prop() name: string;
   @Prop() value: string;
   @Prop() checked: boolean;
-  @Prop() icon: string = 'seleted';
+  @Prop() icon: string;
   @Prop() vertical: boolean;
   @Prop() reverse: boolean;
+  @Prop() subline: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('checked')
@@ -33,7 +34,9 @@ export class HcRadio implements ComponentInterface {
             <hc-icon name={this.icon}></hc-icon>
           </slot>
         </span>
-        <slot></slot>
+        <span class="label">
+          <slot></slot>
+        </span>
       </Host>
     );
   }

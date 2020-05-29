@@ -9,10 +9,22 @@
   padding:0 $--app-tag-default-size / 2;
   max-width: 100%;
   box-sizing: border-box;
+  position: relative;
+  overflow:hidden;
+  .bg{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+  }
   .label{
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    position: relative;
+    z-index:10;
+    color:inherit;
     flex:1;
   }
   hc-icon{
@@ -28,24 +40,36 @@
 :host([rounder]){
   border-radius:$--app-tag-default-size;
 }
-:host([type]) {
-  color: $--app-tag-type-color;
-}
 :host([type="primary"]) {
-  background-color: $--app-tag-primary;
+  .bg{
+    background-color: $--app-tag-primary;
+  }
   border-color: $--app-tag-primary;
+  color: $--app-tag-primary;
 }
 :host([type="success"]) {
-  background-color: $--app-tag-success;
+  .bg{
+    background-color: $--app-tag-success;
+  }
   border-color: $--app-tag-success;
+  color: $--app-tag-success;
 }
 :host([type="warning"]) {
-  background-color: $--app-tag-warning;
+  .bg{
+    background-color: $--app-tag-warning;
+  }
   border-color: $--app-tag-warning;
+  color: $--app-tag-warning;
 }
 :host([type="danger"]) {
-  background-color: $--app-tag-danger;
+  .bg{
+    background-color: $--app-tag-danger;
+  }
   border-color: $--app-tag-danger;
+  color: $--app-tag-danger;
+}
+:host([type]) {
+  color: $--app-tag-type-color;
 }
 :host([size="mini"]){
   font-size: $--app-tag-mini-size / 2;
@@ -60,18 +84,37 @@
   height: $--app-tag-large-size;
 }
 
-:host([plain]){
-  background-color: transparent;
+:host([plain]),
+:host([light]){
+  .bg{
+    opacity:0.1;
+  }
 }
-:host([type="primary"][plain]){
+:host([type="primary"][plain]),
+:host([type="primary"][outline]),
+:host([type="primary"][light]){
   color:$--app-tag-primary;
 }
-:host([type="warning"][plain]){
+:host([type="warning"][plain]),
+:host([type="warning"][outline]),
+:host([type="warning"][light]){
   color:$--app-tag-warning;
 }
-:host([type="success"][plain]){
+:host([type="success"][plain]),
+:host([type="success"][outline]),
+:host([type="success"][light]){
   color:$--app-tag-success;
 }
-:host([type="danger"][plain]){
+:host([type="danger"][plain]),
+:host([type="danger"][outline]),
+:host([type="danger"][light]){
   color:$--app-tag-danger;
+}
+:host([outline]){
+  .bg{
+    display:none;
+  }
+}
+:host([light]){
+  border:none;
 }

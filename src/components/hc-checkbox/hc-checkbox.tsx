@@ -10,6 +10,7 @@ export class HcCheckbox implements ComponentInterface {
   @Prop() value: string;
   @Prop() checked: boolean;
   @Prop() icon: string = 'seleted';
+  @Prop() subline: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('checked')
@@ -32,7 +33,9 @@ export class HcCheckbox implements ComponentInterface {
             <hc-icon name={this.icon}></hc-icon>
           </slot>
         </span>
-        <slot></slot>
+        <span class="label">
+          <slot></slot>
+        </span>
       </Host>
     );
   }

@@ -1,6 +1,7 @@
 :host {
   display: inline-block;
   position: relative;
+  vertical-align: middle;
   .number{
     position: absolute;
     font-size: $--app-badge-fontsize;

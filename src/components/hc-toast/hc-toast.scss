@@ -4,7 +4,7 @@
   font-size:$--app-toast-size;
   background-color: $--app-toast-background;
   color: $--app-toast-color;
-  padding: $--app-toast-size / 3 * 2 $--app-toast-size;
+  padding: $--app-toast-size * 0.4 $--app-toast-size;
   border-radius: $--app-toast-conner;
   position: fixed;
   top:50%;

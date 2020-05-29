@@ -12,17 +12,34 @@ export class HcCell implements ComponentInterface {
   @Prop() href: string;
   @Prop() icon: string;
   @Prop() iconSize: number = 28;
+  @Prop() valign: string = "center";
+  @Prop() align: string;
   render() {
+    var pos = {
+      top: 'flex-start',
+      center: 'center',
+      bottom: 'flex-end'
+    }
     return (
-      <Host>
-        {this.renderIcon()}
-        <span class="label">
+      <Host onClick={this.onClick.bind(this)} style={{
+        alignItems: `${pos[this.valign]}`
+      }}>
+        <slot name="icon">
+          {this.renderIcon()}
+        </slot>
+        <span class="label" style={{
+          display: this.label ? 'inline-block' : 'none'
+        }}>
           <slot name="label">{this.label}</slot>
         </span>
-        <span class="value">
+        <span class="value" style={{
+          textAlign: this.align
+        }}>
           <slot>{this.value}</slot>
         </span>
-        {this.renderArrow()}
+        <slot name="arrow">
+          {this.renderArrow()}
+        </slot>
       </Host>
     );
   }
@@ -38,6 +55,11 @@ export class HcCell implements ComponentInterface {
       return (
         <hc-icon name={this.arrowIcon}></hc-icon>
       )
+    }
+  }
+  onClick () {
+    if (this.href) {
+      window.location.href = this.href
     }
   }
 }

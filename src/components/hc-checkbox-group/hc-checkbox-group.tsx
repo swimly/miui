@@ -14,6 +14,7 @@ export class HcCheckboxGroup implements ComponentInterface {
   @Prop() type: string;
   @Prop() vertical: boolean;
   @Prop() reverse: boolean;
+  @Prop() subline: boolean;
   @Event() vchange: EventEmitter;
   $children;
   @Element() el: HTMLElement;
@@ -49,6 +50,9 @@ export class HcCheckboxGroup implements ComponentInterface {
       }
       if (this.type) {
         child.setAttribute('type', `${this.type}`)
+      }
+      if (this.subline) {
+        child.setAttribute('subline', `${this.subline}`)
       }
       if (value.indexOf(child.getAttribute('value')) >= 0) {
         child.setAttribute('checked', `true`)

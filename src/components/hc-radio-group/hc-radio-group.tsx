@@ -13,6 +13,7 @@ export class HcRadioGroup implements ComponentInterface {
   @Prop() type: string;
   @Prop() vertical: boolean;
   @Prop() reverse: boolean;
+  @Prop() subline: boolean;
   @Event() vchange: EventEmitter;
   $children;
   @Element() el: HTMLElement;
@@ -44,6 +45,9 @@ export class HcRadioGroup implements ComponentInterface {
       }
       if (this.type) {
         child.setAttribute('type', `${this.type}`)
+      }
+      if (this.subline) {
+        child.setAttribute('subline', `${this.subline}`)
       }
       if (child.getAttribute('value') == this.value) {
         child.setAttribute('checked', `true`)

@@ -78,6 +78,25 @@
   </hc-checkbox-group>
 </div>
 
+可通过添加`subline`来添加下划线
+
+``` html
+  <hc-checkbox-group value="3" rounder vertical reverse subline>
+    <hc-checkbox value="0">支付宝</hc-checkbox>
+    <hc-checkbox value="1">微信</hc-checkbox>
+    <hc-checkbox value="2">银联</hc-checkbox>
+    <hc-checkbox value="3">其他</hc-checkbox>
+  </hc-checkbox-group>
+```
+<div class="phone">
+  <hc-checkbox-group value="3" rounder vertical reverse subline>
+    <hc-checkbox value="0">支付宝</hc-checkbox>
+    <hc-checkbox value="1">微信</hc-checkbox>
+    <hc-checkbox value="2">银联</hc-checkbox>
+    <hc-checkbox value="3">其他</hc-checkbox>
+  </hc-checkbox-group>
+</div>
+
 ###### 复选框组
 上面介绍那么多样式，其实并非单选框的真正用法，在实际项目中还是需要配合 `hc-checkbox-group`使用！切记在使用中 `hc-checkbox`必须配置不同的 `value`值!
 ``` html

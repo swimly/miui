@@ -39,6 +39,9 @@
     .markdown-section code{
       font-size:0.7rem;
     }
+    main{
+      position:static !important;
+    }
   </style>
 </head>
 <body>
@@ -84,5 +87,13 @@
   <script src="assets/docsify-themeable.min.js"></script>
   <script type="module" src="../../www/build/miui.esm.js"></script>
   <script nomodule src="../../www/build/miui.js"></script>
+  <script type="module">
+    import {hc_alert} from '../../www/build/hc-alert.entry.js'
+    window.Alert = new hc_alert({})
+    import {hc_toast} from '../../www/build/hc-toast.entry.js'
+    window.Toast = new hc_toast({})
+    import {hc_notify} from '../../www/build/hc-notify.entry.js'
+    window.Notify = new hc_notify({})
+  </script>
 </body>
 </html>

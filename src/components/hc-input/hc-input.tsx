@@ -29,6 +29,7 @@ export class HcInput implements ComponentInterface {
   @Event() vchange: EventEmitter;
   @Watch('value')
   valueHandle (v) {
+    this.el.setAttribute('value', v)
     this.vchange.emit({
       value: v
     })

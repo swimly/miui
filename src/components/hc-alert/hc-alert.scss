@@ -6,6 +6,7 @@
   left:50%;
   transform: translate3d(-50%,-50%, 0);
   width:80%;
+  max-width: 400px;
   min-height:4rem;
   font-size:$--app-alert-fontsize;
   padding: $--app-alert-padding;
@@ -36,6 +37,10 @@
     margin-left: -$--app-alert-padding;
     margin-right: -$--app-alert-padding;
   }
+}
+:host([type="none"]){
+  transform: translate3d(-50%,-50%, 0) scale(1);
+  opacity:1;
 }
 :host([type="zoomIn"]){
   transform: translate3d(-50%,-50%, 0) scale(0.7);
@@ -71,7 +76,7 @@
   transform: translate3d(-50%,-50%, 0) scale(1);
   opacity:0.1;
 }
-:host([display]){
+:host([visible]){
   transform: translate3d(-50%,-50%, 0) scale(1);
   opacity:1;
   top:50%;

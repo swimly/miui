@@ -90,6 +90,7 @@ $--app-input-error: var(--color-danger);
 // checkbox
 $--app-checkbox-size: 0.75rem;
 $--app-checkbox-border: var(--border-color-base);
+$--app-checkbox-line: var(--border-color-light);
 $--app-checkbox-conner: 0.2rem;
 $--app-checkbox-color: var(--color-text-primary);
 $--app-checkbox-background: var(--background-color-white);
@@ -103,13 +104,16 @@ $--app-switch-icon-color: var(--color-text-regular);
 $--app-switch-size: 1.2rem;
 $--app-switch-label-size: 0.75rem;
 $--app-switch-label-color: var(--color-text-primary);
-$--app-switch-default-color: var(--background-color-basegray);
+$--app-switch-default-color: var(--background-color-darker);
 $--app-switch-default-dot-color: var(--background-color-white);
 $--app-switch-active-dot-color: var(--background-color-white);
 $--app-switch-active-color: var(--color-primary);
+$--app-switch-warning: var(--color-warning);
+$--app-switch-success: var(--color-success);
+$--app-switch-danger: var(--color-danger);
 // toast
 $--app-toast-size: 0.7rem;
-$--app-toast-background: var(--bg-black-transparent);
+$--app-toast-background: var(--background-color-black-transparent);
 $--app-toast-color: var(--color-text-white);
 $--app-toast-conner: 0.2rem;
 $--app-toast-light-color: var(--color-text-primary);

@@ -46,4 +46,6 @@ html {
   --background-color-black: #000;
   --background-color-base: #F5F7FA;
   --background-color-dark: #ededed;
+  --background-color-darker: #ccc;
+  --background-color-black-transparent: rgba(0,0,0,0.7);
 }

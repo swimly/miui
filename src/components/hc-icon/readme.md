@@ -1,73 +1,66 @@
-# hc-icon
+##### hc-icon
 
+图标组件基于字体图标[iconfont](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.11&manage_type=myprojects&projectId=1692579)来做的，跟普通web有些许不同，该组件库利用的是`svg`形式引入！
 
+###### 普通用法
 
-<!-- Auto Generated Below -->
+下面列出极少数的图标，完整的图标库有`476`个图标，详细可参考上面链接！
 
-
-## Properties
-
-| Property | Attribute | Description | Type      | Default     |
-| -------- | --------- | ----------- | --------- | ----------- |
-| `color`  | `color`   |             | `string`  | `undefined` |
-| `name`   | `name`    |             | `string`  | `undefined` |
-| `size`   | `size`    |             | `number`  | `undefined` |
-| `spin`   | `spin`    |             | `boolean` | `false`     |
-
-
-## Events
-
-| Event    | Description | Type               |
-| -------- | ----------- | ------------------ |
-| `vclick` |             | `CustomEvent<any>` |
-
-
-## Dependencies
-
-### Used by
-
- - [hc-actionsheet-item](../hc-actionsheet-item)
- - [hc-alert](../hc-alert)
- - [hc-button](../hc-button)
- - [hc-cell](../hc-cell)
- - [hc-checkbox](../hc-checkbox)
- - [hc-collapse-item](../hc-collapse-item)
- - [hc-header](../hc-header)
- - [hc-image](../hc-image)
- - [hc-input](../hc-input)
- - [hc-keyboard](../hc-keyboard)
- - [hc-list-item](../hc-list-item)
- - [hc-noticebar](../hc-noticebar)
- - [hc-notify](../hc-notify)
- - [hc-radio](../hc-radio)
- - [hc-rate-item](../hc-rate-item)
- - [hc-switch](../hc-switch)
- - [hc-tag](../hc-tag)
- - [hc-toast](../hc-toast)
-
-### Graph
-```mermaid
-graph TD;
-  hc-actionsheet-item --> hc-icon
-  hc-alert --> hc-icon
-  hc-button --> hc-icon
-  hc-cell --> hc-icon
-  hc-checkbox --> hc-icon
-  hc-collapse-item --> hc-icon
-  hc-header --> hc-icon
-  hc-image --> hc-icon
-  hc-input --> hc-icon
-  hc-keyboard --> hc-icon
-  hc-list-item --> hc-icon
-  hc-noticebar --> hc-icon
-  hc-notify --> hc-icon
-  hc-radio --> hc-icon
-  hc-rate-item --> hc-icon
-  hc-switch --> hc-icon
-  hc-tag --> hc-icon
-  hc-toast --> hc-icon
-  style hc-icon fill:#f9f,stroke:#333,stroke-width:4px
+``` html
+  <hc-icon name="loading"></hc-icon>
 ```
+<div class="phone">
+  <hc-icon name="map"></hc-icon>
+  <hc-icon name="camera"></hc-icon>
+  <hc-icon name="Newuserzone"></hc-icon>
+  <hc-icon name="arrow-down"></hc-icon>
+  <hc-icon name="multi-language"></hc-icon>
+  <hc-icon name="account"></hc-icon>
+  <hc-icon name="office"></hc-icon>
+  <hc-icon name="comments"></hc-icon>
+  <hc-icon name="notice"></hc-icon>
+  <hc-icon name="cart-Empty1"></hc-icon>
+  <hc-icon name="favorites"></hc-icon>
+  <hc-icon name="office-supplies"></hc-icon>
+  <hc-icon name="order"></hc-icon>
+</div>
+
+###### 改变样式
+
+可通过 `size`，`color`来改变图标的大小以及颜色！
+
+``` html
+  <hc-icon name="map" size="32"></hc-icon>
+  <hc-icon name="map" size="32" color="#f00"></hc-icon>
+```
+<div class="phone">
+  <hc-icon name="map" size="32"></hc-icon>
+  <hc-icon name="map" size="32" color="#f00"></hc-icon>
+</div>
+
+###### 自定义图标
+
+虽然说组件库有那么多图标，但是总有其他需求，可通过`path`来自定义自己的图标需求！
+
+``` html
+  <hc-icon path="M858.5 763.6c-18.9-44.8-46.1-85-80.6-119.5-34.5-34.5-74.7-61.6-119.5-80.6-0.4-0.2-0.8-0.3-1.2-0.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-0.4 0.2-0.8 0.3-1.2 0.5-44.8 18.9-85 46-119.5 80.6-34.5 34.5-61.6 74.7-80.6 119.5C146.9 807.5 137 854 136 901.8c-0.1 4.5 3.5 8.2 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c0.1 4.4 3.6 7.8 8 7.8h60c4.5 0 8.1-3.7 8-8.2-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></hc-icon>
+```
+<div class="phone">
+  <hc-icon path="M858.5 763.6c-18.9-44.8-46.1-85-80.6-119.5-34.5-34.5-74.7-61.6-119.5-80.6-0.4-0.2-0.8-0.3-1.2-0.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-0.4 0.2-0.8 0.3-1.2 0.5-44.8 18.9-85 46-119.5 80.6-34.5 34.5-61.6 74.7-80.6 119.5C146.9 807.5 137 854 136 901.8c-0.1 4.5 3.5 8.2 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c0.1 4.4 3.6 7.8 8 7.8h60c4.5 0 8.1-3.7 8-8.2-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></hc-icon>
+  <hc-icon size="32" color="#f00" path="M858.5 763.6c-18.9-44.8-46.1-85-80.6-119.5-34.5-34.5-74.7-61.6-119.5-80.6-0.4-0.2-0.8-0.3-1.2-0.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-0.4 0.2-0.8 0.3-1.2 0.5-44.8 18.9-85 46-119.5 80.6-34.5 34.5-61.6 74.7-80.6 119.5C146.9 807.5 137 854 136 901.8c-0.1 4.5 3.5 8.2 8 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c0.1 4.4 3.6 7.8 8 7.8h60c4.5 0 8.1-3.7 8-8.2-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></hc-icon>
+</div>
+
+###### 旋转的图标
+
+通过`spin`来控制图标的旋转动画！
+
+``` html
+  <hc-icon name="loading" size="32" color="#f00" spin></hc-icon>
+```
+<div class="phone">
+  <hc-icon name="loading" size="32" color="#f00" spin></hc-icon>
+</div>
+<!-- Auto Generated Below -->
 
 ----------------------------------------------
 

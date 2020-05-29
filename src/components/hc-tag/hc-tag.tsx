@@ -10,18 +10,28 @@ export class HcTag implements ComponentInterface {
   @Prop() color: string;
   @Prop() plain: boolean;
   @Prop() background: string;
+  @Prop() outline: boolean;
+  @Prop() light: boolean;
   @Element() el:HTMLElement;
   @Event() vclose: EventEmitter;
   render() {
+    var color;
+    if (this.plain || this.light || this.outline) {
+      color = this.background;
+    } else {
+      color = this.color
+    }
     return (
       <Host style={{
-        backgroundColor: this.plain ? 'none' : this.background,
-        color: this.plain ? this.background : this.color,
+        color: color,
         borderColor: this.background
       }}>
         <span class="label">
           <slot></slot>
         </span>
+        <span class="bg" style={{
+          backgroundColor: this.background
+        }}></span>
         {this.renderClose()}
       </Host>
     );
@@ -34,6 +44,8 @@ export class HcTag implements ComponentInterface {
     }
   }
   onClose (e) {
+    var parent = this.el.parentNode
+    parent.removeChild(this.el)
     this.vclose.emit(e)
   }
 
