@@ -1,38 +1,51 @@
-# hc-search
+##### hc-search
+常用的搜索组件布局！
 
+###### 普通用法
 
+``` html
+  <hc-search placeholder="请输入"></hc-search>
+```
+
+<div class="phone">
+  <hc-search placeholder="请输入"></hc-search>
+</div>
+
+###### 圆弧形状
+
+``` html
+  <hc-search shape="rounder" placeholder="请输入"></hc-search>
+```
+
+<div class="phone">
+  <hc-search shape="rounder" placeholder="请输入"></hc-search>
+</div>
+
+###### 带清空
+
+``` html
+  <hc-search placeholder="请输入" clearable></hc-search>
+```
+
+<div class="phone">
+  <hc-search placeholder="请输入" clearable></hc-search>
+</div>
+
+###### 可取消
+
+``` html
+  <hc-search placeholder="请输入" clearable>
+    <span style="margin-left:0.5rem;">取消</span>
+  </hc-search>
+```
+
+<div class="phone">
+  <hc-search placeholder="请输入" clearable>
+    <span style="margin-left:0.5rem;">取消</span>
+  </hc-search>
+</div>
 
 <!-- Auto Generated Below -->
-
-
-## Properties
-
-| Property      | Attribute     | Description | Type      | Default     |
-| ------------- | ------------- | ----------- | --------- | ----------- |
-| `clearable`   | `clearable`   |             | `boolean` | `undefined` |
-| `icon`        | `icon`        |             | `string`  | `'search'`  |
-| `iconSize`    | `icon-size`   |             | `number`  | `24`        |
-| `placeholder` | `placeholder` |             | `string`  | `undefined` |
-| `shape`       | `shape`       |             | `string`  | `'conner'`  |
-
-
-## Dependencies
-
-### Depends on
-
-- [hc-row](../hc-row)
-- [hc-col](../hc-col)
-- [hc-input](../hc-input)
-
-### Graph
-```mermaid
-graph TD;
-  hc-search --> hc-row
-  hc-search --> hc-col
-  hc-search --> hc-input
-  hc-input --> hc-icon
-  style hc-search fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

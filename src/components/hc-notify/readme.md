@@ -54,6 +54,20 @@
   </hc-notify>
 </div>
 
+###### 自定义颜色
+`background`可以更改颜色！
+``` html
+  <hc-notify id="n4" icon="reduce" background="#E6A23C">
+    <span>恭喜您，注册成功！</span>
+  </hc-notify>
+```
+<div class="phone">
+  <hc-button type="primary" id="a5" conner size="small">顶部</hc-button>
+  <hc-notify id="n5" icon="reduce" background="#E6A23C">
+    <span>恭喜您，注册成功！</span>
+  </hc-notify>
+</div>
+
 ###### 文字对齐方式
 `align`控制文字水平对齐方式！
 ``` html

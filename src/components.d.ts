@@ -9,11 +9,18 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
 interface HcActionsheet {
-'destory': () => Promise<void>;
+'command': boolean;
+'content': string;
+'destory': (label: any) => Promise<void>;
+'generate': (option?: object) => Promise<HTMLHcActionsheetElement>;
+'head': string;
 'mode': string;
-'titles': string;
+'value': string;
 }
-interface HcActionsheetItem {}
+interface HcActionsheetContent {}
+interface HcActionsheetItem {
+'value': string;
+}
 interface HcAlert {
 'clickable': boolean;
 'command': boolean;
@@ -69,6 +76,7 @@ interface HcCheckbox {
 'value': string;
 }
 interface HcCheckboxGroup {
+'align': string;
 'conner': boolean;
 'name': string;
 'reverse': boolean;
@@ -115,9 +123,9 @@ interface HcForm {
 'range': string;
 }
 interface HcFormItem {
+'align': string;
 'direction': string;
 'label': string;
-'range': string;
 'value': string;
 }
 interface HcHeader {
@@ -190,7 +198,7 @@ interface HcListItem {
 'coverHeight': number;
 'coverWidth': number;
 'date': string;
-'heading': string;
+'head': string;
 'size': string;
 'type': string;
 }
@@ -214,6 +222,7 @@ interface HcNoticebar {
 }
 interface HcNotify {
 'align': string;
+'background': string;
 'closable': boolean;
 'command': boolean;
 'content': string;
@@ -261,6 +270,7 @@ interface HcRadio {
 'vertical': boolean;
 }
 interface HcRadioGroup {
+'align': string;
 'conner': boolean;
 'name': string;
 'reverse': boolean;
@@ -345,6 +355,7 @@ interface HcSquareItem {}
 interface HcStepper {}
 interface HcSticky {
 'offset': number;
+'parent': string;
 }
 interface HcSwipemenu {}
 interface HcSwipemenuItem {
@@ -452,6 +463,12 @@ interface HTMLHcActionsheetElement extends Components.HcActionsheet, HTMLStencil
 var HTMLHcActionsheetElement: {
   prototype: HTMLHcActionsheetElement;
   new (): HTMLHcActionsheetElement;
+};
+
+interface HTMLHcActionsheetContentElement extends Components.HcActionsheetContent, HTMLStencilElement {}
+var HTMLHcActionsheetContentElement: {
+  prototype: HTMLHcActionsheetContentElement;
+  new (): HTMLHcActionsheetContentElement;
 };
 
 interface HTMLHcActionsheetItemElement extends Components.HcActionsheetItem, HTMLStencilElement {}
@@ -869,6 +886,7 @@ var HTMLHcViewElement: {
 };
   interface HTMLElementTagNameMap {
     'hc-actionsheet': HTMLHcActionsheetElement;
+    'hc-actionsheet-content': HTMLHcActionsheetContentElement;
     'hc-actionsheet-item': HTMLHcActionsheetItemElement;
     'hc-alert': HTMLHcAlertElement;
     'hc-badge': HTMLHcBadgeElement;
@@ -943,10 +961,18 @@ var HTMLHcViewElement: {
 
 declare namespace LocalJSX {
 interface HcActionsheet {
+'command'?: boolean;
+'content'?: string;
+'head'?: string;
 'mode'?: string;
-'titles'?: string;
+'onVchange'?: (event: CustomEvent<any>) => void;
+'onVdone'?: (event: CustomEvent<any>) => void;
+'value'?: string;
 }
-  interface HcActionsheetItem {}
+  interface HcActionsheetContent {}
+  interface HcActionsheetItem {
+'value'?: string;
+}
   interface HcAlert {
 'clickable'?: boolean;
 'command'?: boolean;
@@ -999,6 +1025,7 @@ interface HcActionsheet {
 'value'?: string;
 }
   interface HcCheckboxGroup {
+'align'?: string;
 'conner'?: boolean;
 'name'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
@@ -1043,9 +1070,9 @@ interface HcActionsheet {
 'range'?: string;
 }
   interface HcFormItem {
+'align'?: string;
 'direction'?: string;
 'label'?: string;
-'range'?: string;
 'value'?: string;
 }
   interface HcHeader {
@@ -1120,7 +1147,7 @@ interface HcActionsheet {
 'coverHeight'?: number;
 'coverWidth'?: number;
 'date'?: string;
-'heading'?: string;
+'head'?: string;
 'size'?: string;
 'type'?: string;
 }
@@ -1143,6 +1170,7 @@ interface HcActionsheet {
 }
   interface HcNotify {
 'align'?: string;
+'background'?: string;
 'closable'?: boolean;
 'command'?: boolean;
 'content'?: string;
@@ -1188,6 +1216,7 @@ interface HcActionsheet {
 'vertical'?: boolean;
 }
   interface HcRadioGroup {
+'align'?: string;
 'conner'?: boolean;
 'name'?: string;
 'onVchange'?: (event: CustomEvent<any>) => void;
@@ -1271,6 +1300,7 @@ interface HcActionsheet {
   interface HcStepper {}
   interface HcSticky {
 'offset'?: number;
+'parent'?: string;
 }
   interface HcSwipemenu {}
   interface HcSwipemenuItem {
@@ -1377,6 +1407,7 @@ interface HcActionsheet {
 
   interface IntrinsicElements {
     'hc-actionsheet': HcActionsheet;
+    'hc-actionsheet-content': HcActionsheetContent;
     'hc-actionsheet-item': HcActionsheetItem;
     'hc-alert': HcAlert;
     'hc-badge': HcBadge;
@@ -1456,6 +1487,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
     'hc-actionsheet': LocalJSX.HcActionsheet & JSXBase.HTMLAttributes<HTMLHcActionsheetElement>;
+    'hc-actionsheet-content': LocalJSX.HcActionsheetContent & JSXBase.HTMLAttributes<HTMLHcActionsheetContentElement>;
     'hc-actionsheet-item': LocalJSX.HcActionsheetItem & JSXBase.HTMLAttributes<HTMLHcActionsheetItemElement>;
     'hc-alert': LocalJSX.HcAlert & JSXBase.HTMLAttributes<HTMLHcAlertElement>;
     'hc-badge': LocalJSX.HcBadge & JSXBase.HTMLAttributes<HTMLHcBadgeElement>;

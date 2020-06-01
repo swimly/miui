@@ -22,7 +22,6 @@ export class HcSearch {
                 [this.shape]: 'true', 
                 clearable: this.clearable
               }} 
-              size="small" 
               dark 
               type="search" 
               icon-size={this.iconSize}

@@ -26,6 +26,10 @@
     &::-webkit-input-placeholder{
       color:$--app-input-default-placeholder;
     }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+    }
   }
   hc-icon{
     font-size: $--app-input-icon-size;
@@ -86,6 +90,9 @@
   &:after{
     border-color:$--app-input-dark;
   }
+}
+:host([type="textarea"][light]){
+  padding:0;
 }
 :host([type="textarea"]){
   align-items:flex-start;

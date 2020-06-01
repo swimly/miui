@@ -7,6 +7,7 @@ import {getparents} from '../../utils/dom'
 })
 export class HcSticky {
   @Prop() offset: number = 0;
+  @Prop() parent: string;
   @Element() el:HTMLElement
   $view;
   pos;

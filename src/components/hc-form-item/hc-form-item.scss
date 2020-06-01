@@ -17,5 +17,7 @@
     margin:0;
     margin-left: $--app-form-split;
     overflow:hidden;
+    display:flex;
+    flex-direction: row;
   }
 }

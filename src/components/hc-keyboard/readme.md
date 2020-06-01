@@ -1,60 +1,52 @@
-# hc-keyboard
+<style>
+  hc-button{
+    margin-bottom:10px;
+  }
+</style>
+##### hc-keyboard
+替代默认的键盘输入法！
 
+###### 普通用法
+
+键盘类型有：`primary`、`en`、`char`、`EN`、`carnumber`
+
+``` html
+  <hc-keyboard type="number">
+    <hc-button type="primary">数字键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="en">
+    <hc-button type="primary">英文键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="char">
+    <hc-button type="primary">符号键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="EN">
+    <hc-button type="primary">大写字母键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="carnumber">
+    <hc-button type="primary">车牌号</hc-button>
+  </hc-keyboard>
+```
+<div class="phone">
+  <hc-keyboard type="number">
+    <hc-button type="primary">数字键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="en">
+    <hc-button type="primary">英文键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="char">
+    <hc-button type="primary">符号键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="EN">
+    <hc-button type="primary">大写字母键盘</hc-button>
+  </hc-keyboard>
+  <hc-keyboard type="carnumber">
+    <hc-button type="primary">车牌号</hc-button>
+  </hc-keyboard>
+</div>
 
 
 <!-- Auto Generated Below -->
-
-
-## Properties
-
-| Property  | Attribute | Description | Type      | Default     |
-| --------- | --------- | ----------- | --------- | ----------- |
-| `change`  | `change`  |             | `boolean` | `false`     |
-| `current` | `current` |             | `string`  | `undefined` |
-| `type`    | `type`    |             | `string`  | `undefined` |
-| `value`   | `value`   |             | `string`  | `''`        |
-| `vibrate` | `vibrate` |             | `number`  | `100`       |
-
-
-## Events
-
-| Event     | Description | Type               |
-| --------- | ----------- | ------------------ |
-| `vchange` |             | `CustomEvent<any>` |
-
-
-## Methods
-
-### `destory() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-
-## Dependencies
-
-### Depends on
-
-- [hc-drawer](../hc-drawer)
-- [hc-row](../hc-row)
-- [hc-col](../hc-col)
-- [hc-icon](../hc-icon)
-
-### Graph
-```mermaid
-graph TD;
-  hc-keyboard --> hc-drawer
-  hc-keyboard --> hc-row
-  hc-keyboard --> hc-col
-  hc-keyboard --> hc-icon
-  hc-drawer --> hc-masker
-  style hc-keyboard fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

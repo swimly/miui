@@ -6,7 +6,7 @@ import { Component, ComponentInterface, Host, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class HcListItem implements ComponentInterface {
-  @Prop() heading: string;
+  @Prop() head: string;
   @Prop() date: string;
   @Prop() type: string = 'simple';
   @Prop() cover: string;
@@ -23,8 +23,8 @@ export class HcListItem implements ComponentInterface {
         </slot>
         <div class="content">
           <hc-row>
-            <hc-col class="heading" flex={1}>
-              <slot name="heading">{this.heading}</slot>
+            <hc-col class="head" flex={1}>
+              <slot name="head">{this.head}</slot>
             </hc-col>
             <hc-col class="append">
               <slot name="append">

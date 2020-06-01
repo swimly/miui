@@ -46,7 +46,7 @@ export class HcSquare {
     } else {
       var str = this.el.innerHTML
       return (
-        <hc-row innerHTML={str}></hc-row>
+        <hc-row innerHTML={str} wrap></hc-row>
       )
     }
   }

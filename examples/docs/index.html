@@ -58,6 +58,7 @@
       autoHeader: false,
       executeScript: true,
       notFoundPage: true,
+      auto2top: true,
       themeable: {
         readyTransition: true,
         responsiveTables: true
@@ -94,6 +95,8 @@
     window.Toast = new hc_toast({})
     import {hc_notify} from '../../www/build/hc-notify.entry.js'
     window.Notify = new hc_notify({})
+    import {hc_actionsheet} from '../../www/build/hc-actionsheet.entry.js'
+    window.Actionsheet = new hc_actionsheet({})
   </script>
 </body>
 </html>

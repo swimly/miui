@@ -93,11 +93,9 @@ export class HcSwiper implements ComponentInterface {
       var dis = this.vertical ? e.deltaY : e.deltaX
       this.$wrap.style.transition = '0.3s'
       if (dis > 50) {
-        console.log('+')
         this.slidePrev()
       }
       if (dis < -50) {
-        console.log('-')
         this.slideNext()
       }
       this.autoMove()

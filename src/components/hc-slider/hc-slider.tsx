@@ -60,7 +60,7 @@ export class HcSlider {
   }
   jump (e) {
     if (this.step) return
-    var left = this.el.offsetLeft
+    var left = this.el.getBoundingClientRect().x
     this.offset = e.x - left
     this.$handle.style.transform = `translate3d(${Math.round(e.x - left)}px, 0, 0)`
     this.$bar.style.width = `${Math.round(e.x -left + this.el.offsetHeight / 2)}px`
@@ -88,12 +88,12 @@ export class HcSlider {
         this.offset += s * stepwidth
         this.$handle.style.transition = '0.3s'
         this.$bar.style.transition = '0.3s'
-        this.$handle.style.transform = `translate3d(${Math.round(this.offset)}px, 0, 0)`
-        this.$bar.style.width = `${Math.round(this.offset + this.el.clientHeight / 2)}px`
       } else {
         this.offset += e.deltaX
         this.offset = this.offset < 0 ? 0 : this.offset > this.el.offsetWidth ? this.el.offsetWidth : this.offset
       }
+      this.$handle.style.transform = `translate3d(${Math.round(this.offset)}px, 0, 0)`
+      this.$bar.style.width = `${Math.round(this.offset + this.el.clientHeight / 2)}px`
       var bili = Math.round(this.offset / this.el.offsetWidth * 100)
       var result = {
         bili: bili,

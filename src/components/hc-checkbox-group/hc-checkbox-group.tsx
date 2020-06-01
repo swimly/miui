@@ -15,6 +15,7 @@ export class HcCheckboxGroup implements ComponentInterface {
   @Prop() vertical: boolean;
   @Prop() reverse: boolean;
   @Prop() subline: boolean;
+  @Prop() align: string;
   @Event() vchange: EventEmitter;
   $children;
   @Element() el: HTMLElement;
@@ -70,8 +71,15 @@ export class HcCheckboxGroup implements ComponentInterface {
     })
   }
   render() {
+    var pos = {
+      left: 'flex-start',
+      center: 'center',
+      right: 'flex-end'
+    }
     return (
-      <Host>
+      <Host style={{
+        justifyContent: pos[this.align]
+      }}>
         <slot></slot>
       </Host>
     );

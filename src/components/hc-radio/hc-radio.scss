@@ -10,8 +10,8 @@
     flex-direction: row;
     align-items:center;
     justify-content: center;
-    width: $--app-checkbox-size * 1.4;
-    height: $--app-checkbox-size * 1.4;
+    width: $--app-checkbox-size;
+    height: $--app-checkbox-size;
     color:$--app-checkbox-background;
     background: $--app-checkbox-background;
     margin-right:$--app-checkbox-size/ 3;
@@ -22,8 +22,8 @@
     &:after{
       content:"";
       display:inline-block;
-      width:$--app-checkbox-size;
-      height: $--app-checkbox-size;
+      width:$--app-checkbox-size * 0.7;
+      height: $--app-checkbox-size * 0.7;
       border-radius:50%;
       background:$--app-checkbox-background;
       transform: scale(0);

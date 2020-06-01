@@ -14,6 +14,7 @@ export class HcNotify {
   @Prop() closable: boolean;
   @Prop() command: boolean;
   @Prop() content: string;
+  @Prop() background: string;
   @Element() el:HTMLElement
   @Watch('visible')
   visibleHandle (v:boolean) {
@@ -29,7 +30,7 @@ export class HcNotify {
   }
   render() {
     return (
-      <Host>
+      <Host style={{backgroundColor: this.background}}>
         <slot name="icon">
           <hc-icon size={24} name={this.icon}></hc-icon>
         </slot>
@@ -61,6 +62,13 @@ export class HcNotify {
   @Method()
   async destory () {
     this.visible = false
+    setTimeout(() => {
+      if (this.command) {
+        setTimeout(() => {
+          document.body.removeChild(this.el)
+        }, 300)
+      }
+    }, 300)
   }
   @Method()
   async generate (option: Object = null) {
