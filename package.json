@@ -1,7 +1,7 @@
 {
-  "name": "miui",
-  "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "name": "@swimly/miui",
+  "version": "0.2.1",
+  "description": "一个漂亮的webcomponent组件库！",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -15,12 +15,13 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "dev": "stencil build --dev --watch",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "publish": "npm publish --access=publish"
   },
   "devDependencies": {
     "@stencil/core": "^1.14.0",
@@ -32,8 +33,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "echarts": "^4.7.0",
-    "hammerjs": "^2.0.8",
-    "impetus": "^0.8.8"
+    "hammerjs": "^2.0.8"
   }
 }

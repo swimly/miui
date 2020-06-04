@@ -10,6 +10,7 @@ export class HcButton implements ComponentInterface {
   @Prop() rounder: boolean;
   @Prop() conner: boolean;
   @Prop() plain: boolean;
+  @Prop() light: boolean;
   @Prop() icon: string = '';
   @Prop() ripple: boolean;
   @Prop() rippleColor: string;
