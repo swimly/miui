@@ -1,6 +1,6 @@
 import { r as registerInstance, h, H as Host, g as getElement } from './index-e5ececff.js';
 
-const hcToastCss = ":host{display:inline-flex;flex-direction:column;font-size:0.7rem;background-color:var(--background-color-black-transparent);color:var(--color-text-white);padding:0.28rem 0.7rem;border-radius:0.2rem;position:fixed;top:50%;left:50%;transform:translate(-50%, 0.7rem) scale(0.9);opacity:0.1;z-index:-1;transition:0.3s;align-items:center;justify-content:center;box-sizing:border-box}:host([theme=light]){color:var(--color-text-primary);background-color:var(--background-color-white-transparent)}:host([icon]){width:5.6rem;height:5.6rem}:host([icon]) hc-icon{margin-bottom:0.3rem}:host([display]){transform:translate(-50%, -50%) scale(1);opacity:1;z-index:100}:host([place=start]){top:5%;transform:translate(-50%, 200%) scale(0.9)}:host([place=start][display]){transform:translate(-50%, 100%) scale(1)}:host([place=end]){top:95%;transform:translate(-50%, 0) scale(0.9)}:host([place=end][display]){transform:translate(-50%, -100%) scale(1)}";
+const hcToastCss = ":host{display:inline-flex;flex-direction:column;font-size:0.7rem;background-color:var(--background-color-black-transparent);color:var(--color-text-white);padding:0.28rem 0.7rem;border-radius:0.2rem;position:fixed;top:50%;left:50%;transform:translate(-50%, 0.7rem) scale(0.9);opacity:0.1;z-index:-1;transition:0.3s;align-items:center;justify-content:center;box-sizing:border-box}:host([theme=light]){color:var(--color-text-primary);background-color:var(--background-color-white-transparent)}:host([icon]){width:5.6rem;height:5.6rem}:host([icon]) hc-icon{margin-bottom:0.3rem}:host([display]){transform:translate(-50%, -50%) scale(1);opacity:1;z-index:100}:host([place=up]){top:5%;transform:translate(-50%, 200%) scale(0.9)}:host([place=up][display]){transform:translate(-50%, 100%) scale(1)}:host([place=down]){top:95%;transform:translate(-50%, 0) scale(0.9)}:host([place=down][display]){transform:translate(-50%, -100%) scale(1)}";
 
 class HcToast {
     constructor(hostRef) {
@@ -21,6 +21,12 @@ class HcToast {
     }
     componentDidLoad() {
         this.el.style.display = 'none';
+        if (this.place) {
+            this.el.setAttribute('place', this.place);
+        }
+        if (this.theme) {
+            this.el.setAttribute('theme', this.theme);
+        }
     }
     render() {
         return (h(Host, { style: { backgroundColor: this.fill } }, h("slot", { name: "icon" }, h("hc-icon", { name: this.icon, size: this.iconSize })), h("slot", null, this.content)));

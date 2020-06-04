@@ -5,8 +5,18 @@ miui作为一个致敬miui12的前端ui组件库，其很多组件的样式都�
 #### 安装
 
 ``` bash
-npm install --save @swimly/miui
-yarn add @swimly/miui
+  npm install --save @swimly/miui
+  yarn add @swimly/miui
+```
+
+#### CDN
+
+`@0.2.2`为版本号，替换相应版本号即可！
+
+``` html
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/miui.css">
+  <script type="module" src="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/miui.esm.js"></script>
+  <script nomodule="" src="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/dist/miui.js"></script>
 ```
 
 #### HTML使用
@@ -15,16 +25,16 @@ yarn add @swimly/miui
 
 ###### 引入样式
 ``` html
-<link rel="stylesheet" href="miui/dist/miui/miui.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/miui.css">
 ```
 ###### 引入插件
 ``` html
-<script type="module" src="miui/dist/miui/miui.esm.js"></script>
-<script nomodule="" src="miui/dist/miui.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/miui.esm.js"></script>
+  <script nomodule="" src="https://cdn.jsdelivr.net/gh/swimly/miui@v0.2.2/dist/miui.js"></script>
 ```
 ###### 使用插件
 所有的控件都可以直接写一个标签名就可以，极大的减少了常用ui组件库的繁琐程度。
 ``` html
-<hc-button>按钮</hc-button>
+  <hc-button>按钮</hc-button>
 ```
 其他使用方式，后续完善！

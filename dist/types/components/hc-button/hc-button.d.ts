@@ -1,4 +1,4 @@
-import { ComponentInterface } from '../../stencil-public-runtime';
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
 export declare class HcButton implements ComponentInterface {
     type: string;
     rounder: boolean;
@@ -14,10 +14,13 @@ export declare class HcButton implements ComponentInterface {
     color: string;
     borderColor: string;
     label: string;
+    errorText: string;
     el: HTMLElement;
+    vclick: EventEmitter;
     loadingHandle(v: boolean): void;
     componentDidLoad(): void;
     render(): any;
+    onClick(e: any): void;
     Loading(): Promise<void>;
     Loaded(): Promise<void>;
 }

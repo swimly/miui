@@ -47,6 +47,7 @@ export namespace Components {
         "color": string;
         "conner": boolean;
         "disabled": boolean;
+        "errorText": string;
         "icon": string;
         "label": string;
         "light": boolean;
@@ -1010,10 +1011,12 @@ declare namespace LocalJSX {
         "color"?: string;
         "conner"?: boolean;
         "disabled"?: boolean;
+        "errorText"?: string;
         "icon"?: string;
         "label"?: string;
         "light"?: boolean;
         "loading"?: boolean;
+        "onVclick"?: (event: CustomEvent<any>) => void;
         "plain"?: boolean;
         "ripple"?: boolean;
         "rippleColor"?: string;

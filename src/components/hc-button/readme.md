@@ -92,6 +92,23 @@
 如果觉得朴素按钮还不够简洁，`outline`将会是你的最优选。
 
 ``` html
+  <hc-button type="primary" light>按钮</hc-button>
+  <hc-button type="warning" light>按钮</hc-button>
+  <hc-button type="success" light>按钮</hc-button>
+  <hc-button type="danger" light>按钮</hc-button>
+```
+
+<div class="phone">
+  <hc-button type="primary" light>按钮</hc-button>
+  <hc-button type="warning" light>按钮</hc-button>
+  <hc-button type="success" light>按钮</hc-button>
+  <hc-button type="danger" light>按钮</hc-button>
+</div>
+
+###### 边框按钮
+如果觉得朴素按钮还不够简洁，`outline`将会是你的最优选。
+
+``` html
   <hc-button type="primary" outline>按钮</hc-button>
   <hc-button type="warning" outline>按钮</hc-button>
   <hc-button type="success" outline>按钮</hc-button>
@@ -180,19 +197,43 @@
 
 ###### 禁用按钮
 
-通过添加`disabled`来禁用按钮！
+通过添加`disabled`来禁用按钮！通过`error-text`来自定义禁用按钮的时候，用户点击之后给的提示信息，默认是没有的！
 
 ``` html
   <hc-button conner icon="add" disabled>提交</hc-button>
   <hc-button conner type="primary" disabled>提交</hc-button>
+  <hc-button plain type="primary" disabled>提交</hc-button>
+  <hc-button outline type="primary" disabled>提交</hc-button>
+  <hc-button light type="primary" disabled error-text="别点了，都已经禁用了，点个什么劲">提交</hc-button>
 ```
 
 <div class="phone">
   <hc-button conner icon="add" disabled>提交</hc-button>
   <hc-button conner type="primary" disabled>提交</hc-button>
+  <hc-button plain type="primary" disabled>提交</hc-button>
+  <hc-button outline type="primary" disabled>提交</hc-button>
+  <hc-button light type="primary" disabled error-text="别点了，都已经禁用了，点个什么劲">提交</hc-button>
 </div>
 
-*Built with [StencilJS](https://stenciljs.com/)*
+###### 属性
 
+常用属性汇总！
 
-[cinwell website](../../../examples/button.html ':include :type=iframe width=375px height=667px')
+名称|描述|类型|可选值|默认值
+--|--|:--:|--|:--:
+type|按钮类型|string|`primary`、`warning`、`success`、`danger`|-
+size|按钮大小|string|`mini`、`small`、`default`、`large`|-
+plain|是否朴素按钮|boolean|`true`、`false`|false
+outline|是否边框按钮|boolean|`true`、`false`|false
+light|是否简单按钮|boolean|`true`、`false`|false
+ripple|是否有水波纹效果|boolean|`true`、`false`|false
+conner|是否圆角按钮|boolean|`true`、`false`|false
+rounder|是否圆弧按钮|boolean|`true`、`false`|false
+loading|是否加载中|boolean|`true`、`false`|false
+disabled|是否禁用|boolean|`true`、`false`|false
+background-color|按钮背景颜色|string|`color`|-
+color|按钮字体颜色|string|任意颜色值|-
+icon|按钮图标|string|参照`hc-icon`|-
+label|按钮文字|string|任意字符|-
+
+*组件维护人： [swimly](https://github.com/swimly)*

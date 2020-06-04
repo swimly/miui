@@ -1,1 +1,0 @@
-<hc-icon name="arrow-lift" onclick="window.history.go(-1)"></hc-icon>

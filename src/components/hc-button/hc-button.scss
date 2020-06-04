@@ -17,6 +17,12 @@
     // @include border_1px('default', $--app-button-default-border, 0);
     .label{
       font-size: $--app-button-fontsize;
+      position: relative;
+      z-index:11;
+    }
+    hc-icon{
+      position: relative;
+      z-index:11;
     }
     .line{
       position: absolute;
@@ -40,8 +46,6 @@
       top:-1px;
       left:-1px;
       bottom:-1px;
-      opacity:0.1;
-      display:none;
       z-index:10;
     }
   }
@@ -54,14 +58,36 @@
 :host([plain]){
   .button{
     &:before{
-      display:block;
+      opacity:0.1
+    }
+    .line{
+      opacity:0.3;
+    }
+  }
+}
+:host([light]){
+  .button{
+    &:before{
+      opacity:0.1;
+    }
+  }
+}
+:host([outline]){
+  .button{
+    &:before{
+      display:none;
+    }
+    .line{
+      opacity:0.3;
     }
   }
 }
 :host([type="primary"]){
   .button{
-    background-color: $--app-button-primary;
     border-color:$--app-button-primary;
+    &:before{
+      background-color: $--app-button-primary;
+    }
     .line{
       border-color: $--app-button-primary;
     }
@@ -70,22 +96,31 @@
 :host([type="primary"][plain]){
   .button{
     color: $--app-button-primary;
-    background:rgba($--app-button-primary, 0.2);
+    background:none;
     &:before{
       background-color: $--app-button-primary;
+    }
+  }
+}
+:host([type="primary"][light]){
+  .button{
+    color: $--app-button-primary;
+    .line{
+      display:none;
     }
   }
 }
 :host([type="primary"][outline]) {
   .button{
     color: $--app-button-primary;
-    background:none;
   }
 }
 :host([type="warning"]){
   .button{
-    background-color: $--app-button-warning;
     border-color:$--app-button-warning;
+    &:before{
+      background-color: $--app-button-warning;
+    }
     .line{
       border-color: $--app-button-warning;
     }
@@ -94,7 +129,6 @@
 :host([type="warning"][plain]){
   .button{
     color: $--app-button-warning;
-    background:rgba($--app-button-warning, 0.2);
     &:before{
       background-color: $--app-button-warning;
     }
@@ -103,14 +137,23 @@
 :host([type="warning"][outline]) {
   .button{
     color: $--app-button-warning;
-    background:none;
+  }
+}
+:host([type="warning"][light]){
+  .button{
+    color: $--app-button-warning;
+    .line{
+      display:none;
+    }
   }
 }
 
 :host([type="success"]){
   .button{
-    background-color: $--app-button-success;
     border-color:$--app-button-success;
+    &:before{
+      background-color: $--app-button-success;
+    }
     .line{
       border-color: $--app-button-success;
     }
@@ -119,22 +162,27 @@
 :host([type="success"][plain]){
   .button{
     color: $--app-button-success;
-    background:rgba($--app-button-success, 0.2);
-    &:before{
-      background-color: $--app-button-success;
-    }
   }
 }
 :host([type="success"][outline]) {
   .button{
     color: $--app-button-success;
-    background:none;
+  }
+}
+:host([type="success"][light]){
+  .button{
+    color: $--app-button-success;
+    .line{
+      display:none;
+    }
   }
 }
 :host([type="danger"]){
   .button{
-    background-color: $--app-button-danger;
     border-color:$--app-button-danger;
+    &:before{
+      background-color: $--app-button-danger;
+    }
     .line{
       border-color: $--app-button-danger;
     }
@@ -143,18 +191,23 @@
 :host([type="danger"][plain]){
   .button{
     color: $--app-button-danger;
-    background:rgba($--app-button-danger, 0.2);
-    &:before{
-      background-color: $--app-button-danger;
-    }
   }
 }
 :host([type="danger"][outline]) {
   .button{
     color: $--app-button-danger;
-    background:none;
   }
 }
+
+:host([type="danger"][light]){
+  .button{
+    color: $--app-button-danger;
+    .line{
+      display:none;
+    }
+  }
+}
+
 :host([type="info"]){
   .button{
     background-color: $--app-button-info;
@@ -226,8 +279,11 @@
   .button{
     &:before{
       display:block;
-      background: $--app-button-default-background;
-      opacity: 0.8;
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .line{
+      display:none;
     }
   }
 }

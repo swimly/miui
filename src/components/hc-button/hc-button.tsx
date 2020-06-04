@@ -1,5 +1,5 @@
-import { Component, ComponentInterface, Host, h, Prop, Element, Method, Watch } from '@stencil/core';
-
+import { Component, ComponentInterface, Host, h, Prop, Element, Method, Watch, Event, EventEmitter } from '@stencil/core';
+import {hc_toast} from '../../../dist/miui/hc-toast.entry.js'
 @Component({
   tag: 'hc-button',
   styleUrl: 'hc-button.scss',
@@ -20,12 +20,13 @@ export class HcButton implements ComponentInterface {
   @Prop() color: string;
   @Prop() borderColor: string;
   @Prop() label: string;
+  @Prop() errorText: string;
   @Element() el: HTMLElement;
+  @Event() vclick: EventEmitter;
   @Watch('loading')
   loadingHandle (v:boolean) {
     var $icon = this.el.shadowRoot.querySelector('hc-icon')
     var icon = this.icon ? this.icon : ''
-    console.log(v, $icon, icon)
     if (v) {
       $icon.setAttribute('name', 'loading')
       $icon.setAttribute('spin', 'true')
@@ -53,7 +54,7 @@ export class HcButton implements ComponentInterface {
   }
   render() {
     return (
-      <Host>
+      <Host onclick={this.onClick.bind(this)}>
         <hc-ripple mask={!this.ripple} color={this.rippleColor}>
           <div class="button" style={{
             backgroundColor: this.backgroundColor,
@@ -68,6 +69,19 @@ export class HcButton implements ComponentInterface {
         </hc-ripple>
       </Host>
     );
+  }
+  onClick (e) {
+    if (!this.disabled) {
+      this.vclick.emit(e)
+    } else {
+      if (this.errorText) {
+        const Toast = new hc_toast({})
+        Toast.generate({
+          content: this.errorText,
+          place: 'down'
+        })
+      }
+    }
   }
   @Method()
   async Loading () {

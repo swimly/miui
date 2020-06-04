@@ -18,7 +18,7 @@
       margin-bottom:10px;
     }
     .markdown-section{
-      max-width:95%;
+      max-width:80%;
     }
     .app-nav{
       position:fixed;
@@ -43,7 +43,8 @@
       position:static !important;
     }
     .markdown-section{
-      padding-right:400px;
+      /* padding-right:400px; */
+      text-align:left;
     }
     .markdown-section iframe{
       min-width:375px;
@@ -51,15 +52,23 @@
       right:20px;
       top:80px;
     }
+    .app-name-link{
+      font-size:48px;
+      color:#42b983 !important;
+      font-weight: bold;
+    }
+    .markdown-section table{
+      display:table !important;
+    }
   </style>
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: 'miui',
+      name: 'MIUI',
       repo: 'https://github.com/swimly/miui',
-      repo: '',
+      // logo: './assets/logo.png',
       loadSidebar: true,
       loadNavbar: true,
       coverpage: true,
@@ -77,6 +86,11 @@
       pagination: {
         previousText: '上一章节',
         nextText: '下一章节',
+      },
+      copyCode: {
+        buttonText: '复制代码',
+        errorText: '复制失败',
+        successText: '复制成功！'
       }
     }
   </script>
@@ -84,7 +98,7 @@
   <script src="assets/external-script.min.js"></script>
   <script src="assets/docsify-pagination.min.js"></script>
   <script src="assets/docsify-copy-code.min.js"></script>
-
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
   <!-- docsify-themeable -->
   <!-- <script src="assets/docsify-themeable.min.js"></script> -->
   <script type="module" src="../../www/build/miui.esm.js"></script>

@@ -26,6 +26,12 @@ export class HcToast implements ComponentInterface {
   }
   componentDidLoad () {
     this.el.style.display = 'none'
+    if (this.place) {
+      this.el.setAttribute('place', this.place)
+    }
+    if (this.theme) {
+      this.el.setAttribute('theme', this.theme)
+    }
   }
   render() {
     return (
