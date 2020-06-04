@@ -1,0 +1,38 @@
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+export declare class HcInput implements ComponentInterface {
+    type: string;
+    value: string;
+    placeholder: string;
+    prefixIcon: string;
+    suffixIcon: string;
+    iconColor: string;
+    iconSize: number;
+    align: string;
+    rows: number;
+    clearable: boolean;
+    clearIcon: string;
+    maxLength: number;
+    minLength: number;
+    size: string;
+    light: boolean;
+    conner: boolean;
+    dark: boolean;
+    focusin: boolean;
+    verify: string;
+    el: HTMLElement;
+    vchange: EventEmitter;
+    valueHandle(v: any): void;
+    verifyHandle(v: string): void;
+    focusHandle(v: boolean): void;
+    componentDidLoad(): void;
+    render(): any;
+    renderIcon(name: any): any;
+    renderCore(): any;
+    bindBlur(): void;
+    bindFocus(): void;
+    onChange(e: any): void;
+    renderClear(): any;
+    onClear(): void;
+    renderCount(): any;
+    Verify(status: any): Promise<void>;
+}
