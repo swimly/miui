@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  font-size: $--app-calendar-fontsize;
+  color: $--app-calendar-color;
+  flex:1;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+}

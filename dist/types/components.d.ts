@@ -20,6 +20,8 @@ export namespace Components {
     interface HcActionsheetItem {
         "value": string;
     }
+    interface HcAddress {
+    }
     interface HcAlert {
         "clickable": boolean;
         "command": boolean;
@@ -59,6 +61,19 @@ export namespace Components {
         "type": string;
     }
     interface HcCalendar {
+        "date": string;
+        "type": string;
+    }
+    interface HcCalendarContent {
+        "width": number;
+    }
+    interface HcCalendarDay {
+    }
+    interface HcCalendarMonth {
+        "width": number;
+    }
+    interface HcCalendarWeek {
+        "width": number;
     }
     interface HcCell {
         "align": string;
@@ -174,6 +189,7 @@ export namespace Components {
         "clearable": boolean;
         "conner": boolean;
         "dark": boolean;
+        "disabled": boolean;
         "focusin": boolean;
         "iconColor": string;
         "iconSize": number;
@@ -182,6 +198,8 @@ export namespace Components {
         "minLength": number;
         "placeholder": string;
         "prefixIcon": string;
+        "readonly": boolean;
+        "rounder": boolean;
         "rows": number;
         "size": string;
         "suffixIcon": string;
@@ -248,19 +266,27 @@ export namespace Components {
     interface HcPanel {
     }
     interface HcPicker {
-        "current": number;
-        "itemHeight": number;
-        "rate": number;
-        "vis": number;
+        "destory": () => Promise<void>;
+        "parse": (source: any, value: any) => Promise<{ source: any; data: any[]; value: any[]; valueString: any; }>;
+        "titles": string;
+        "value": string;
+    }
+    interface HcPickerContent {
+        "current": string;
+        "value": string;
+    }
+    interface HcPickerHandle {
     }
     interface HcPickerItem {
         "active": boolean;
         "height": number;
     }
     interface HcPickerView {
-        "destory": () => Promise<void>;
-        "parse": (source: any, value: any) => Promise<{ source: any; data: any[]; value: any[]; valueString: any; }>;
-        "titles": string;
+        "Moving": (number: any) => Promise<void>;
+        "current": number;
+        "itemHeight": number;
+        "rate": number;
+        "vis": number;
     }
     interface HcPopover {
         "masker": boolean;
@@ -329,6 +355,28 @@ export namespace Components {
         "iconSize": number;
         "placeholder": string;
         "shape": string;
+    }
+    interface HcSelection {
+        "Finish": () => Promise<void>;
+        "SetData": (arr: any) => Promise<void>;
+        "command": boolean;
+        "data": string;
+        "destory": () => Promise<void>;
+        "generate": (option?: object) => Promise<void>;
+        "heading": string;
+        "level": number;
+        "value": string;
+    }
+    interface HcSelectionContent {
+        "Loaded": () => Promise<void>;
+        "Loading": () => Promise<void>;
+        "loading": boolean;
+        "value": string;
+    }
+    interface HcSelectionHandle {
+    }
+    interface HcSelectionItem {
+        "value": string;
     }
     interface HcSignature {
         "background": string;
@@ -406,9 +454,12 @@ export namespace Components {
         "type": string;
     }
     interface HcTab {
+        "Switch": (number: any) => Promise<void>;
         "align": string;
+        "auto": boolean;
         "current": number;
         "direction": string;
+        "touch": boolean;
     }
     interface HcTabItem {
         "index": number;
@@ -491,6 +542,12 @@ declare global {
         prototype: HTMLHcActionsheetItemElement;
         new (): HTMLHcActionsheetItemElement;
     };
+    interface HTMLHcAddressElement extends Components.HcAddress, HTMLStencilElement {
+    }
+    var HTMLHcAddressElement: {
+        prototype: HTMLHcAddressElement;
+        new (): HTMLHcAddressElement;
+    };
     interface HTMLHcAlertElement extends Components.HcAlert, HTMLStencilElement {
     }
     var HTMLHcAlertElement: {
@@ -514,6 +571,30 @@ declare global {
     var HTMLHcCalendarElement: {
         prototype: HTMLHcCalendarElement;
         new (): HTMLHcCalendarElement;
+    };
+    interface HTMLHcCalendarContentElement extends Components.HcCalendarContent, HTMLStencilElement {
+    }
+    var HTMLHcCalendarContentElement: {
+        prototype: HTMLHcCalendarContentElement;
+        new (): HTMLHcCalendarContentElement;
+    };
+    interface HTMLHcCalendarDayElement extends Components.HcCalendarDay, HTMLStencilElement {
+    }
+    var HTMLHcCalendarDayElement: {
+        prototype: HTMLHcCalendarDayElement;
+        new (): HTMLHcCalendarDayElement;
+    };
+    interface HTMLHcCalendarMonthElement extends Components.HcCalendarMonth, HTMLStencilElement {
+    }
+    var HTMLHcCalendarMonthElement: {
+        prototype: HTMLHcCalendarMonthElement;
+        new (): HTMLHcCalendarMonthElement;
+    };
+    interface HTMLHcCalendarWeekElement extends Components.HcCalendarWeek, HTMLStencilElement {
+    }
+    var HTMLHcCalendarWeekElement: {
+        prototype: HTMLHcCalendarWeekElement;
+        new (): HTMLHcCalendarWeekElement;
     };
     interface HTMLHcCellElement extends Components.HcCell, HTMLStencilElement {
     }
@@ -701,6 +782,18 @@ declare global {
         prototype: HTMLHcPickerElement;
         new (): HTMLHcPickerElement;
     };
+    interface HTMLHcPickerContentElement extends Components.HcPickerContent, HTMLStencilElement {
+    }
+    var HTMLHcPickerContentElement: {
+        prototype: HTMLHcPickerContentElement;
+        new (): HTMLHcPickerContentElement;
+    };
+    interface HTMLHcPickerHandleElement extends Components.HcPickerHandle, HTMLStencilElement {
+    }
+    var HTMLHcPickerHandleElement: {
+        prototype: HTMLHcPickerHandleElement;
+        new (): HTMLHcPickerHandleElement;
+    };
     interface HTMLHcPickerItemElement extends Components.HcPickerItem, HTMLStencilElement {
     }
     var HTMLHcPickerItemElement: {
@@ -772,6 +865,30 @@ declare global {
     var HTMLHcSearchElement: {
         prototype: HTMLHcSearchElement;
         new (): HTMLHcSearchElement;
+    };
+    interface HTMLHcSelectionElement extends Components.HcSelection, HTMLStencilElement {
+    }
+    var HTMLHcSelectionElement: {
+        prototype: HTMLHcSelectionElement;
+        new (): HTMLHcSelectionElement;
+    };
+    interface HTMLHcSelectionContentElement extends Components.HcSelectionContent, HTMLStencilElement {
+    }
+    var HTMLHcSelectionContentElement: {
+        prototype: HTMLHcSelectionContentElement;
+        new (): HTMLHcSelectionContentElement;
+    };
+    interface HTMLHcSelectionHandleElement extends Components.HcSelectionHandle, HTMLStencilElement {
+    }
+    var HTMLHcSelectionHandleElement: {
+        prototype: HTMLHcSelectionHandleElement;
+        new (): HTMLHcSelectionHandleElement;
+    };
+    interface HTMLHcSelectionItemElement extends Components.HcSelectionItem, HTMLStencilElement {
+    }
+    var HTMLHcSelectionItemElement: {
+        prototype: HTMLHcSelectionItemElement;
+        new (): HTMLHcSelectionItemElement;
     };
     interface HTMLHcSignatureElement extends Components.HcSignature, HTMLStencilElement {
     }
@@ -903,10 +1020,15 @@ declare global {
         "hc-actionsheet": HTMLHcActionsheetElement;
         "hc-actionsheet-content": HTMLHcActionsheetContentElement;
         "hc-actionsheet-item": HTMLHcActionsheetItemElement;
+        "hc-address": HTMLHcAddressElement;
         "hc-alert": HTMLHcAlertElement;
         "hc-badge": HTMLHcBadgeElement;
         "hc-button": HTMLHcButtonElement;
         "hc-calendar": HTMLHcCalendarElement;
+        "hc-calendar-content": HTMLHcCalendarContentElement;
+        "hc-calendar-day": HTMLHcCalendarDayElement;
+        "hc-calendar-month": HTMLHcCalendarMonthElement;
+        "hc-calendar-week": HTMLHcCalendarWeekElement;
         "hc-cell": HTMLHcCellElement;
         "hc-checkbox": HTMLHcCheckboxElement;
         "hc-checkbox-group": HTMLHcCheckboxGroupElement;
@@ -938,6 +1060,8 @@ declare global {
         "hc-page": HTMLHcPageElement;
         "hc-panel": HTMLHcPanelElement;
         "hc-picker": HTMLHcPickerElement;
+        "hc-picker-content": HTMLHcPickerContentElement;
+        "hc-picker-handle": HTMLHcPickerHandleElement;
         "hc-picker-item": HTMLHcPickerItemElement;
         "hc-picker-view": HTMLHcPickerViewElement;
         "hc-popover": HTMLHcPopoverElement;
@@ -950,6 +1074,10 @@ declare global {
         "hc-ripple": HTMLHcRippleElement;
         "hc-row": HTMLHcRowElement;
         "hc-search": HTMLHcSearchElement;
+        "hc-selection": HTMLHcSelectionElement;
+        "hc-selection-content": HTMLHcSelectionContentElement;
+        "hc-selection-handle": HTMLHcSelectionHandleElement;
+        "hc-selection-item": HTMLHcSelectionItemElement;
         "hc-signature": HTMLHcSignatureElement;
         "hc-skeleton": HTMLHcSkeletonElement;
         "hc-slider": HTMLHcSliderElement;
@@ -988,6 +1116,8 @@ declare namespace LocalJSX {
     interface HcActionsheetItem {
         "value"?: string;
     }
+    interface HcAddress {
+    }
     interface HcAlert {
         "clickable"?: boolean;
         "command"?: boolean;
@@ -1024,6 +1154,19 @@ declare namespace LocalJSX {
         "type"?: string;
     }
     interface HcCalendar {
+        "date"?: string;
+        "type"?: string;
+    }
+    interface HcCalendarContent {
+        "width"?: number;
+    }
+    interface HcCalendarDay {
+    }
+    interface HcCalendarMonth {
+        "width"?: number;
+    }
+    interface HcCalendarWeek {
+        "width"?: number;
     }
     interface HcCell {
         "align"?: string;
@@ -1077,6 +1220,7 @@ declare namespace LocalJSX {
         "content"?: string;
         "display"?: boolean;
         "masker"?: boolean;
+        "onVshow"?: (event: CustomEvent<any>) => void;
         "place"?: string;
         "rounder"?: boolean;
     }
@@ -1139,6 +1283,7 @@ declare namespace LocalJSX {
         "clearable"?: boolean;
         "conner"?: boolean;
         "dark"?: boolean;
+        "disabled"?: boolean;
         "focusin"?: boolean;
         "iconColor"?: string;
         "iconSize"?: number;
@@ -1148,6 +1293,8 @@ declare namespace LocalJSX {
         "onVchange"?: (event: CustomEvent<any>) => void;
         "placeholder"?: string;
         "prefixIcon"?: string;
+        "readonly"?: boolean;
+        "rounder"?: boolean;
         "rows"?: number;
         "size"?: string;
         "suffixIcon"?: string;
@@ -1210,18 +1357,26 @@ declare namespace LocalJSX {
     interface HcPanel {
     }
     interface HcPicker {
-        "current"?: number;
-        "itemHeight"?: number;
+        "titles"?: string;
+        "value"?: string;
+    }
+    interface HcPickerContent {
+        "current"?: string;
         "onVchange"?: (event: CustomEvent<any>) => void;
-        "rate"?: number;
-        "vis"?: number;
+        "value"?: string;
+    }
+    interface HcPickerHandle {
     }
     interface HcPickerItem {
         "active"?: boolean;
         "height"?: number;
     }
     interface HcPickerView {
-        "titles"?: string;
+        "current"?: number;
+        "itemHeight"?: number;
+        "onVchange"?: (event: CustomEvent<any>) => void;
+        "rate"?: number;
+        "vis"?: number;
     }
     interface HcPopover {
         "masker"?: boolean;
@@ -1292,6 +1447,26 @@ declare namespace LocalJSX {
         "iconSize"?: number;
         "placeholder"?: string;
         "shape"?: string;
+    }
+    interface HcSelection {
+        "command"?: boolean;
+        "data"?: string;
+        "heading"?: string;
+        "level"?: number;
+        "onVchoice"?: (event: CustomEvent<any>) => void;
+        "onVlevel"?: (event: CustomEvent<any>) => void;
+        "value"?: string;
+    }
+    interface HcSelectionContent {
+        "loading"?: boolean;
+        "onVchange"?: (event: CustomEvent<any>) => void;
+        "value"?: string;
+    }
+    interface HcSelectionHandle {
+    }
+    interface HcSelectionItem {
+        "onVclick"?: (event: CustomEvent<any>) => void;
+        "value"?: string;
     }
     interface HcSignature {
         "background"?: string;
@@ -1367,13 +1542,16 @@ declare namespace LocalJSX {
     }
     interface HcTab {
         "align"?: string;
+        "auto"?: boolean;
         "current"?: number;
         "direction"?: string;
         "onVchange"?: (event: CustomEvent<any>) => void;
+        "touch"?: boolean;
     }
     interface HcTabItem {
         "index"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVclick"?: (event: CustomEvent<any>) => void;
     }
     interface HcTag {
         "background"?: string;
@@ -1440,10 +1618,15 @@ declare namespace LocalJSX {
         "hc-actionsheet": HcActionsheet;
         "hc-actionsheet-content": HcActionsheetContent;
         "hc-actionsheet-item": HcActionsheetItem;
+        "hc-address": HcAddress;
         "hc-alert": HcAlert;
         "hc-badge": HcBadge;
         "hc-button": HcButton;
         "hc-calendar": HcCalendar;
+        "hc-calendar-content": HcCalendarContent;
+        "hc-calendar-day": HcCalendarDay;
+        "hc-calendar-month": HcCalendarMonth;
+        "hc-calendar-week": HcCalendarWeek;
         "hc-cell": HcCell;
         "hc-checkbox": HcCheckbox;
         "hc-checkbox-group": HcCheckboxGroup;
@@ -1475,6 +1658,8 @@ declare namespace LocalJSX {
         "hc-page": HcPage;
         "hc-panel": HcPanel;
         "hc-picker": HcPicker;
+        "hc-picker-content": HcPickerContent;
+        "hc-picker-handle": HcPickerHandle;
         "hc-picker-item": HcPickerItem;
         "hc-picker-view": HcPickerView;
         "hc-popover": HcPopover;
@@ -1487,6 +1672,10 @@ declare namespace LocalJSX {
         "hc-ripple": HcRipple;
         "hc-row": HcRow;
         "hc-search": HcSearch;
+        "hc-selection": HcSelection;
+        "hc-selection-content": HcSelectionContent;
+        "hc-selection-handle": HcSelectionHandle;
+        "hc-selection-item": HcSelectionItem;
         "hc-signature": HcSignature;
         "hc-skeleton": HcSkeleton;
         "hc-slider": HcSlider;
@@ -1517,10 +1706,15 @@ declare module "@stencil/core" {
             "hc-actionsheet": LocalJSX.HcActionsheet & JSXBase.HTMLAttributes<HTMLHcActionsheetElement>;
             "hc-actionsheet-content": LocalJSX.HcActionsheetContent & JSXBase.HTMLAttributes<HTMLHcActionsheetContentElement>;
             "hc-actionsheet-item": LocalJSX.HcActionsheetItem & JSXBase.HTMLAttributes<HTMLHcActionsheetItemElement>;
+            "hc-address": LocalJSX.HcAddress & JSXBase.HTMLAttributes<HTMLHcAddressElement>;
             "hc-alert": LocalJSX.HcAlert & JSXBase.HTMLAttributes<HTMLHcAlertElement>;
             "hc-badge": LocalJSX.HcBadge & JSXBase.HTMLAttributes<HTMLHcBadgeElement>;
             "hc-button": LocalJSX.HcButton & JSXBase.HTMLAttributes<HTMLHcButtonElement>;
             "hc-calendar": LocalJSX.HcCalendar & JSXBase.HTMLAttributes<HTMLHcCalendarElement>;
+            "hc-calendar-content": LocalJSX.HcCalendarContent & JSXBase.HTMLAttributes<HTMLHcCalendarContentElement>;
+            "hc-calendar-day": LocalJSX.HcCalendarDay & JSXBase.HTMLAttributes<HTMLHcCalendarDayElement>;
+            "hc-calendar-month": LocalJSX.HcCalendarMonth & JSXBase.HTMLAttributes<HTMLHcCalendarMonthElement>;
+            "hc-calendar-week": LocalJSX.HcCalendarWeek & JSXBase.HTMLAttributes<HTMLHcCalendarWeekElement>;
             "hc-cell": LocalJSX.HcCell & JSXBase.HTMLAttributes<HTMLHcCellElement>;
             "hc-checkbox": LocalJSX.HcCheckbox & JSXBase.HTMLAttributes<HTMLHcCheckboxElement>;
             "hc-checkbox-group": LocalJSX.HcCheckboxGroup & JSXBase.HTMLAttributes<HTMLHcCheckboxGroupElement>;
@@ -1552,6 +1746,8 @@ declare module "@stencil/core" {
             "hc-page": LocalJSX.HcPage & JSXBase.HTMLAttributes<HTMLHcPageElement>;
             "hc-panel": LocalJSX.HcPanel & JSXBase.HTMLAttributes<HTMLHcPanelElement>;
             "hc-picker": LocalJSX.HcPicker & JSXBase.HTMLAttributes<HTMLHcPickerElement>;
+            "hc-picker-content": LocalJSX.HcPickerContent & JSXBase.HTMLAttributes<HTMLHcPickerContentElement>;
+            "hc-picker-handle": LocalJSX.HcPickerHandle & JSXBase.HTMLAttributes<HTMLHcPickerHandleElement>;
             "hc-picker-item": LocalJSX.HcPickerItem & JSXBase.HTMLAttributes<HTMLHcPickerItemElement>;
             "hc-picker-view": LocalJSX.HcPickerView & JSXBase.HTMLAttributes<HTMLHcPickerViewElement>;
             "hc-popover": LocalJSX.HcPopover & JSXBase.HTMLAttributes<HTMLHcPopoverElement>;
@@ -1564,6 +1760,10 @@ declare module "@stencil/core" {
             "hc-ripple": LocalJSX.HcRipple & JSXBase.HTMLAttributes<HTMLHcRippleElement>;
             "hc-row": LocalJSX.HcRow & JSXBase.HTMLAttributes<HTMLHcRowElement>;
             "hc-search": LocalJSX.HcSearch & JSXBase.HTMLAttributes<HTMLHcSearchElement>;
+            "hc-selection": LocalJSX.HcSelection & JSXBase.HTMLAttributes<HTMLHcSelectionElement>;
+            "hc-selection-content": LocalJSX.HcSelectionContent & JSXBase.HTMLAttributes<HTMLHcSelectionContentElement>;
+            "hc-selection-handle": LocalJSX.HcSelectionHandle & JSXBase.HTMLAttributes<HTMLHcSelectionHandleElement>;
+            "hc-selection-item": LocalJSX.HcSelectionItem & JSXBase.HTMLAttributes<HTMLHcSelectionItemElement>;
             "hc-signature": LocalJSX.HcSignature & JSXBase.HTMLAttributes<HTMLHcSignatureElement>;
             "hc-skeleton": LocalJSX.HcSkeleton & JSXBase.HTMLAttributes<HTMLHcSkeletonElement>;
             "hc-slider": LocalJSX.HcSlider & JSXBase.HTMLAttributes<HTMLHcSliderElement>;

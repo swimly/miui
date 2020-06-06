@@ -1,6 +1,13 @@
 ##### HC-Input 输入框
 
 输入框是表单的重要组成部分，用来收集用户的输入信息，使用位置广泛，且变化比较多！通过`focusin`自动获取焦点
+
+##### 手机扫一扫
+可以通过扫描下方二维码，在手机上查看文档！
+<div class="qrcode" id="qrcode"></div>
+
+或者[点击查看案例](https://swimly.cn:8080/miui/examples/input.html)
+
 ###### 普通输入框
 默认输入框
 ``` html
@@ -10,6 +17,25 @@
 <div class="phone">
   <hc-input placeholder="请填写"></hc-input>
   <hc-input focusin placeholder="我会自动获取焦点"></hc-input>
+</div>
+
+###### 不同类型输入框
+正则验证
+``` html
+  <hc-input type="number" placeholder="数字"></hc-input>
+  <hc-input type="tel" placeholder="电话号码"></hc-input>
+  <hc-input type="email" placeholder="邮箱"></hc-input>
+  <hc-input type="phone" placeholder="手机号"></hc-input>
+  <hc-input type="url" placeholder="网址"></hc-input>
+  <hc-input type="cn" placeholder="中文"></hc-input>
+```
+<div class="phone">
+  <hc-input type="number" placeholder="数字"></hc-input>
+  <hc-input type="tel" placeholder="电话号码"></hc-input>
+  <hc-input type="email" placeholder="邮箱"></hc-input>
+  <hc-input type="phone" placeholder="手机号"></hc-input>
+  <hc-input type="url" placeholder="网址"></hc-input>
+  <hc-input type="cn" placeholder="中文"></hc-input>
 </div>
 
 ###### 不同弧度
@@ -137,7 +163,80 @@
   <hc-input verify="warning" placeholder="请填写" type="textarea"></hc-input>
   <hc-input verify="success" placeholder="请填写" type="textarea"></hc-input>
 </div>
+
+###### 禁用和只读
+`disabled`禁用，`readonly`只读
+``` html
+  <hc-input placeholder="请填写"></hc-input>
+  <hc-input focusin placeholder="我会自动获取焦点"></hc-input>
+```
+<div class="phone">
+  <hc-input placeholder="请填写" readonly></hc-input>
+  <hc-input disabled placeholder="我会自动获取焦点"></hc-input>
+</div>
+
+###### Props属性
+
+常用属性汇总！
+
+名称|描述|类型|可选值|默认值
+--|--|:--:|--|:--:
+type|类型|string|`text`、`number`、`tel`、`email`、`phone`|text
+size|大小|string|`mini`、`small`、`default`、`large`|-
+placeholder|提示文字|string|-|-
+prefix-icon|开头图标|string|-|-
+suffix-icon|末尾图标|string|-|-
+icon-color|图标颜色|string|色值|-
+icon-size|图标大小|number|数值|-
+align|文字水平对齐方式|string|`left`、`center`、`right`|left
+rows|文字行数|number|-|-
+clearable|是否有清空按钮|boolean|`true`、`false`|false
+clear-icon|清空图标|string|`hc-icon`|reeor-fill
+max-length|最长可输入字符|number|数值|-
+min-length|最小可输入字符|number|数值|-
+light|简洁输入框|boolean|`true`、`false`|false
+conner|圆角|boolean|`true`、`false`|false
+rounder|圆弧|boolean|`true`、`false`|false
+dark|深色|boolean|`true`、`false`|false
+readonly|只读|boolean|`true`、`false`|false
+disabled|禁用|boolean|`true`、`false`|false
+dark|深色|boolean|`true`、`false`|false
+focusin|是否获取焦点|boolean|`true`、`false`|false
+verify|验证|string|`success`、`error`、`warning`|-
+value|值|string||
+
+###### Methods方法
+
+常用方法汇总！
+
+名称|描述|参数|返回值|
+--|--|:--:|--|
+Verify|验证输入内容|`null`|`null`
+
+###### Events事件
+
+常用事件汇总！调用方法
+
+``` javascript
+button.addEventListener('XX', (e) => {})
+```
+
+名称|描述|参数|返回值|
+--|--|:--:|--|
+vchange|输入值改变|`null`|`object`
+
 <!-- Auto Generated Below -->
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
+
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://swimly.cn:8080/miui/examples/docs/#/../../src/components/hc-input/readme",
+    width: 128,
+    height: 128,
+    colorDark : "#42b983",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+</script>

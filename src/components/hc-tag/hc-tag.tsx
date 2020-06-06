@@ -39,7 +39,7 @@ export class HcTag implements ComponentInterface {
   renderClose () {
     if (this.closable) {
       return (
-        <hc-icon onClick={this.onClose.bind(this)} id="close" name="close"></hc-icon>
+        <hc-icon size={18} onClick={this.onClose.bind(this)} id="close" name="close"></hc-icon>
       )
     }
   }

@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  .title{
+    font-size: $--app-selection-fontsize * 1.1;
+    font-weight:normal;
+    text-align:center;
+    margin:0;
+    padding: $--app-selection-fontsize 0;
+  }
+  .handle{
+    padding: 0 $--app-selection-fontsize;
+  }
+}

@@ -43,9 +43,9 @@ class HcSwiper {
                 flexDirection: this.vertical ? 'column' : 'row'
             } }, this.children.map((item) => {
             return (h("div", { innerHTML: item.outerHTML }));
-        })), h("div", { class: "indicate" }, arr.map((item, index) => {
+        })), h("slot", { name: "indicate" }, h("div", { class: "indicate" }, arr.map((item, index) => {
             return (h("span", { class: this.current == index ? 'active' : '' }, item));
-        }))));
+        })))));
     }
     bindTouch() {
         this.$wrap = this.el.shadowRoot.querySelector('.wrap');

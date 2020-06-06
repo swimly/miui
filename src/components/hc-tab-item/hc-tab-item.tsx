@@ -8,7 +8,16 @@ import { Component, ComponentInterface, Host, h, Element, Prop, EventEmitter, Ev
 export class HcTabItem implements ComponentInterface {
   @Prop() index: number;
   @Element() el:HTMLElement;
-  @Event() vchange: EventEmitter;  
+  @Event() vclick: EventEmitter;
+  @Event() vchange: EventEmitter;
+  componentDidLoad () {
+    var slot = this.el.shadowRoot.querySelector('slot')
+    slot.addEventListener('slotchange', () => {
+      this.vchange.emit({
+        label: this.el.innerText
+      })
+    })
+  }
   render() {
     return (
       <Host onClick={this.bindClick.bind(this)}>
@@ -17,7 +26,7 @@ export class HcTabItem implements ComponentInterface {
     );
   }
   bindClick () {
-    this.vchange.emit({
+    this.vclick.emit({
       index: this.index,
       props: this.el.getBoundingClientRect()
     })

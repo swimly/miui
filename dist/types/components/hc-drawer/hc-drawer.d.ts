@@ -1,4 +1,4 @@
-import { ComponentInterface } from '../../stencil-public-runtime';
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
 export declare class HcDrawer implements ComponentInterface {
     place: string;
     display: boolean;
@@ -8,6 +8,7 @@ export declare class HcDrawer implements ComponentInterface {
     rounder: boolean;
     command: boolean;
     el: HTMLElement;
+    vshow: EventEmitter;
     $mask: any;
     Dhandle(v: boolean): void;
     componentDidLoad(): void;

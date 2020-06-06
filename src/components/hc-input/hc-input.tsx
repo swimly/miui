@@ -1,5 +1,5 @@
 import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event, Method } from '@stencil/core';
-
+import {checkRegx} from '../../utils/pattern'
 @Component({
   tag: 'hc-input',
   styleUrl: 'hc-input.scss',
@@ -7,7 +7,6 @@ import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmit
 })
 export class HcInput implements ComponentInterface {
   @Prop() type: string = 'text';
-  @Prop() value: string;
   @Prop() placeholder: string;
   @Prop() prefixIcon: string;
   @Prop() suffixIcon: string;
@@ -22,9 +21,13 @@ export class HcInput implements ComponentInterface {
   @Prop() size: string;
   @Prop() light: boolean;
   @Prop() conner: boolean;
+  @Prop () rounder: boolean;
   @Prop() dark: boolean;
   @Prop() focusin: boolean;
   @Prop() verify: string;
+  @Prop() value: string;
+  @Prop() readonly: boolean;
+  @Prop() disabled: boolean;
   @Element() el:HTMLElement;
   @Event() vchange: EventEmitter;
   @Watch('value')
@@ -103,6 +106,8 @@ export class HcInput implements ComponentInterface {
           rows={this.rows} 
           style={{textAlign: this.align}} 
           placeholder={this.placeholder}
+          readonly={this.readonly}
+          disabled={this.disabled}
         ></textarea>
       )
     } else {
@@ -118,16 +123,19 @@ export class HcInput implements ComponentInterface {
           style={{textAlign: this.align}} 
           type={this.type} 
           placeholder={this.placeholder}
+          readonly={this.readonly}
+          disabled={this.disabled}
         />
       )
     }
   }
   bindBlur () {
     this.focusin = false
-    console.log('blur')
+    if (this.value && !checkRegx(this.type, this.value)) {
+      this.verify = 'error'
+    }
   }
   bindFocus () {
-    console.log('focus')
     this.focusin = true
   }
   onChange (e) {

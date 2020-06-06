@@ -1,19 +1,20 @@
-export declare class HcPickerView {
-    titles: string;
+import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
+export declare class HcPickerView implements ComponentInterface {
+    current: number;
+    vis: number;
+    rate: number;
+    itemHeight: number;
     el: HTMLElement;
-    $drawer: any;
-    $handle: any;
+    $wrap: HTMLElement;
+    $children: Element[];
+    offset: number;
+    vchange: EventEmitter;
+    count(): number;
+    currentHandle(v: number): void;
+    baseOffset(): number;
     componentDidLoad(): void;
     render(): any;
-    bindClick(): void;
-    destory(): Promise<void>;
-    parse(source: any, value: any): Promise<{
-        source: any;
-        data: any[];
-        value: any[];
-        valueString: any;
-    }>;
-    isCascade(data: any): boolean;
-    isPlainObject(obj: any): boolean;
-    _typeof(obj: any): any;
+    Moving(number: any): Promise<void>;
+    bindTouch(): void;
+    easeout: (A: any, B: any, rate: any, callback: any, callback1: any) => void;
 }

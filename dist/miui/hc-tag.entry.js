@@ -25,7 +25,7 @@ class HcTag {
     }
     renderClose() {
         if (this.closable) {
-            return (h("hc-icon", { onClick: this.onClose.bind(this), id: "close", name: "close" }));
+            return (h("hc-icon", { size: 18, onClick: this.onClose.bind(this), id: "close", name: "close" }));
         }
     }
     onClose(e) {

@@ -1,12 +1,34 @@
 :host {
   display: flex;
-  background-color:$--app-input-default-background;
-  // border:1px solid $--app-input-default-border;
   color: $--app-input-icon-color;
   font-size: $--app-input-default-size;
   padding: $--app-input-default-size / 3 * 2;
   align-items:center;
-  @include border_1px('default', $--app-input-default-border, 0);
+  position: relative;
+  &:after{
+    content:"";
+    display:block;
+    top:0;
+    left:0;
+    width:200%;
+    height:200%;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    border:1px solid $--app-input-default-border;
+    position: absolute;
+    transition: 0.3s;
+    z-index:2
+  }
+  &:before{
+    content:"";
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background: $--app-input-default-background;
+    z-index:1;
+  }
   input,
   textarea{
     flex:1;
@@ -20,6 +42,9 @@
     line-height:1.6;
     font-size: inherit;
     resize:none;
+    padding:0;
+    position: relative;
+    z-index:10;
     &::-webkit-search-cancel-button{
       -webkit-appearance: none;
     }
@@ -35,6 +60,7 @@
     font-size: $--app-input-icon-size;
     position: relative;
     z-index:10;
+    color: $--app-input-icon-color;
   }
   .count{
     font-size:$--app-input-count-size;
@@ -86,9 +112,12 @@
   background:none;
 }
 :host([dark]){
-  background:$--app-input-dark;
+  &:before{
+    background:$--app-input-dark;
+  }
   &:after{
-    border-color:$--app-input-dark;
+    // border-color:$--app-input-dark;
+    display:none;
   }
 }
 :host([type="textarea"][light]){
@@ -99,32 +128,57 @@
   padding:0.5rem 0.8rem 0.8rem 0.8rem;
   .clear{
     position: absolute;
-    right:$--app-input-icon-size / 2;
+    right:$--app-input-icon-size;
     bottom:$--app-input-icon-size / 2;
   }
   .count{
     position: absolute;
     bottom:$--app-input-icon-size / 2;
-    left: $--app-input-icon-size / 2;
+    left: $--app-input-icon-size;
   }
 }
 :host([focusin]){
   &:after{
     border-color: $--app-input-focus-color;
+    opacity:0.6;
   }
 }
 :host([verify="error"]){
+  &:before{
+    background-color: $--app-input-error;
+    opacity:0.05;
+  }
   &:after{
     border-color: $--app-input-error;
+    opacity:0.3;
   }
-}
-:host([verify="success"]){
-  &:after{
-    border-color: $--app-input-success;
+  input,textarea{
+    color: $--app-input-error;
   }
 }
 :host([verify="warning"]){
+  &:before{
+    background-color: $--app-input-warning;
+    opacity:0.05;
+  }
   &:after{
     border-color: $--app-input-warning;
+    opacity:0.3;
+  }
+  input,textarea{
+    color: $--app-input-warning;
+  }
+}
+:host([verify="success"]){
+  &:before{
+    background-color: $--app-input-success;
+    opacity:0.05;
+  }
+  &:after{
+    border-color: $--app-input-success;
+    opacity:0.3;
+  }
+  input,textarea{
+    color: $--app-input-success;
   }
 }

@@ -1,5 +1,12 @@
 ##### HC-Button 按钮
 按钮在项目中是最常用的一个控件，所以按钮的可变形，可定制性就尤为重要！
+
+##### 手机扫一扫
+可以通过扫描下方二维码，在手机上查看文档！
+<div class="qrcode" id="qrcode"></div>
+
+或者[点击查看案例](https://swimly.cn:8080/miui/examples/button.html)
+
 ###### 默认按钮
 默认按钮只需要标签`hc-button`即可，也可以通过自定义属性`label`来给按钮添加文字！
 ``` html
@@ -183,17 +190,6 @@
   <hc-button class="click" conner icon="add">提交</hc-button>
   <hc-button class="click" conner type="primary">提交</hc-button>
 </div>
-<script>
-  var clicks = document.querySelectorAll('.click')
-  clicks.forEach(click => {
-    click.addEventListener('click', () => {
-      click.Loading()
-      setTimeout(() => {
-        click.Loaded()
-      }, 3000)
-    })
-  })
-</script>
 
 ###### 禁用按钮
 
@@ -215,7 +211,7 @@
   <hc-button light type="primary" disabled error-text="别点了，都已经禁用了，点个什么劲">提交</hc-button>
 </div>
 
-###### 属性
+###### Props属性
 
 常用属性汇总！
 
@@ -236,4 +232,50 @@ color|按钮字体颜色|string|任意颜色值|-
 icon|按钮图标|string|参照`hc-icon`|-
 label|按钮文字|string|任意字符|-
 
+###### Methods方法
+
+常用方法汇总！调用方法
+
+``` javascript
+button.Loading()
+button.Loaded()
+```
+
+名称|描述|参数|返回值|
+--|--|:--:|--|
+Loading|按钮加载|`null`|`null`
+Loaded|加载完成|`null`|`null`
+
+###### Events事件
+
+常用事件汇总！调用方法
+
+``` javascript
+button.addEventListener('XX', (e) => {})
+```
+
+名称|描述|参数|返回值|
+--|--|:--:|--|
+vclick|点击事件|`null`|`null`
+
 *组件维护人： [swimly](https://github.com/swimly)*
+
+<script>
+  var clicks = document.querySelectorAll('.click')
+  clicks.forEach(click => {
+    click.addEventListener('click', () => {
+      click.Loading()
+      setTimeout(() => {
+        click.Loaded()
+      }, 3000)
+    })
+  })
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://swimly.cn:8080/miui/examples/docs/#/../../src/components/hc-button/readme",
+    width: 128,
+    height: 128,
+    colorDark : "#42b983",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+</script>

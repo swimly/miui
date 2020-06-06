@@ -7,19 +7,10 @@
   <hc-radio value="0">设计ui</hc-radio>
 ```
 <div class="phone">
-  <hc-radio value="1" checked>前端开发</hc-radio>
-  <hc-radio value="0">设计ui</hc-radio>
-</div>
-
-###### 圆角单选框
-根据弧度的不同，单选框可以衍生出两种形式：  `conner`， `rounder`，类似`hc-button`， `hc-input`等等一系列组件！
-``` html
-  <hc-radio conner value="1" checked>前端开发</hc-radio>
-  <hc-radio rounder value="0">设计ui</hc-radio>
-```
-<div class="phone">
-  <hc-radio conner value="1" checked>前端开发</hc-radio>
-  <hc-radio rounder value="0">设计ui</hc-radio>
+  <hc-row>
+    <hc-radio value="1" checked>前端开发</hc-radio>
+    <hc-radio value="0">设计ui</hc-radio>
+  </hc-row>
 </div>
 
 ###### 不同主题的单选框
@@ -31,10 +22,12 @@
   <hc-radio type="warning" rounder value="0">设计ui</hc-radio>
 ```
 <div class="phone">
-  <hc-radio type="primary" conner value="1" checked>前端开发</hc-radio>
-  <hc-radio type="danger" rounder value="0">设计ui</hc-radio>
-  <hc-radio type="success" rounder value="0">设计ui</hc-radio>
-  <hc-radio type="warning" rounder value="0">设计ui</hc-radio>
+  <hc-row>
+    <hc-radio type="primary" conner value="1" checked>前端开发</hc-radio>
+    <hc-radio type="danger" rounder value="0">设计ui</hc-radio>
+    <hc-radio type="success" rounder value="0">设计ui</hc-radio>
+    <hc-radio type="warning" rounder value="0">设计ui</hc-radio>
+  </hc-row>
 </div>
 
 ###### 不同排列形式

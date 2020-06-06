@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selection</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>多层选择</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-selection id="s">
+          <hc-selection-handle>请选择</hc-selection-handle>
+          <hc-selection-content>
+            <hc-selection-item value="0">湖北省</hc-selection-item>
+            <hc-selection-item value="1">湖南省</hc-selection-item>
+            <hc-selection-item value="2">浙江省</hc-selection-item>
+            <hc-selection-item value="3">江苏省</hc-selection-item>
+            <hc-selection-item value="4">陕西省</hc-selection-item>
+            <hc-selection-item value="5">广东省</hc-selection-item>
+            <hc-selection-item value="6">广西省</hc-selection-item>
+            <hc-selection-item value="7">河北省</hc-selection-item>
+          </hc-selection-content>
+        </hc-selection>
+        <hc-cell label="地区" align="right" id="address">湖北</hc-cell>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module">
+    import {hc_selection} from '../www/build/hc-selection.entry.js'
+    window.Selection = new hc_selection({})
+  </script>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    var selection = document.querySelector('#s')
+    var random = new Date().getTime()
+    selection.addEventListener('vchoice', (e) => {
+      // 在这里模拟请求数据
+      console.log(e.detail)
+      if (e.detail.label == '湖北省') {
+        selection.SetData([{
+          label: '武汉市',
+          value: '4'
+        }])
+      }
+      if (e.detail.label == '武汉市') {
+        selection.Finish()
+      }
+    })
+    selection.addEventListener('vlevel', (e) => {
+      console.log(e.detail)
+    })
+    document.querySelector('#address').addEventListener('click', () => {
+      Selection.generate({
+        data: [{
+          label: '湖北',
+          value: '1'
+        }, {
+          label: '湖南',
+          value: '2'
+        }]
+      })
+    })
+  </script>
+</body>
+</html>

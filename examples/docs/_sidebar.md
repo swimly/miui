@@ -1,5 +1,6 @@
 * [首页](/)
 * [起步](../../README)
+* [主题定制](./_theme)
 * 组件
   * 基础
   * [hc-page 页面](../../src/components/hc-page/readme)
@@ -35,3 +36,4 @@
   * [hc-notify 消息栏](../../src/components/hc-notify/readme)
   * [hc-actionsheet 动作面板](../../src/components/hc-actionsheet/readme)
   * [hc-keyboard 安全键盘](../../src/components/hc-keyboard/readme)
+  * [hc-picker 下拉选择](../../src/components/hc-picker/readme)

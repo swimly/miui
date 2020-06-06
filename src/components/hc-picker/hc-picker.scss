@@ -1,25 +1,23 @@
 :host {
-  display: block;
-  height:$--app-picker-view * $--app-picker-item-height;
-  -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, #fff 40%, #fff 60%, transparent 95%, transparent);
-  position: relative;
-  overflow:hidden;
-  height: $--app-picker-item-height * $--app-picker-view;
-  flex:1;
-  -webkit-user-select: none;
-  .indicate{
-    position: absolute;
-    height: $--app-picker-item-height;
-    width:100%;
-    left:0;
-    top:50%;
-    transform: translateY(-50%);
-    background:$--app-picker-indicate-background;
-    z-index:1;
+  display:block;
+  font-size:$--app-picker-fontsize;
+  .title{
+    font-size: $--app-picker-title-fontsize;
+    color: $--app-picker-title-color;
+    text-align:center;
+    font-weight: normal;
+    margin: $--app-picker-padding 0;
   }
-  .wrap{
-    display:block;
-    position: relative;
-    z-index:10;
+  .footer{
+    height: $--app-picker-item-height;
+    padding: $--app-picker-padding;
+    hc-col{
+      &:first-child{
+        padding-right: $--app-picker-padding / 2;
+      }
+      &:last-child{
+        padding-left: $--app-picker-padding / 2;
+      }
+    }
   }
 }

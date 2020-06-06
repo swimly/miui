@@ -7,14 +7,14 @@
     font-size: $--app-badge-fontsize;
     background: $--app-badge-background;
     color: $--app-badge-color;
-    padding: 0 $--app-badge-fontsize / 2.4;
+    padding: 0 $--app-badge-fontsize * 0.34;
     border-radius: $--app-badge-fontsize * 2;
     left:0;
     top:0;
     transform: translate(-$--app-badge-fontsize / 2, -50%);
     box-sizing: border-box;
     border:1px solid $--app-badge-color;
-    z-index:10;
+    z-index:99;
   }
 }
 :host([dot]){

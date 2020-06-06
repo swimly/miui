@@ -5,8 +5,7 @@
   flex-shrink: 0;
   font-size:$--app-tab-fontsize;
   color: $--app-tab-color;
-  margin: 0 $--app-tab-padding 0 0;
-  transition:0.3s;
+  margin: 0 $--app-tab-padding * 0.5 0 0;
 }
 :host([active]) {
   color:$--app-tab-active-color;

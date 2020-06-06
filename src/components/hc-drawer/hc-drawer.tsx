@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Method, Prop, Element, Watch } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Method, Prop, Element, Watch, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'hc-drawer',
@@ -14,6 +14,7 @@ export class HcDrawer implements ComponentInterface {
   @Prop() rounder: boolean;
   @Prop() command: boolean = false;
   @Element() el: HTMLElement;
+  @Event() vshow: EventEmitter;
   $mask;
   @Watch('display')
   Dhandle (v: boolean) {
@@ -34,6 +35,10 @@ export class HcDrawer implements ComponentInterface {
     }
     if (this.place) {
       this.el.setAttribute('place', this.place)
+    }
+    if (this.display) {
+      this.el.setAttribute('display', `${this.display}`)
+      this.vshow.emit(null)
     }
   }
   render() {
@@ -61,6 +66,10 @@ export class HcDrawer implements ComponentInterface {
         this.destory()
       })
     }
+    // 通知drawer已经打开
+    setTimeout((e) => {
+      this.vshow.emit({e})
+    }, 300)
   }
   @Method()
   async destory () {

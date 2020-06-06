@@ -1,62 +1,45 @@
-# hc-picker-view
+# hc-picker
 
-
-
-<!-- Auto Generated Below -->
-
-
-## Properties
-
-| Property | Attribute | Description | Type     | Default |
-| -------- | --------- | ----------- | -------- | ------- |
-| `titles` | `titles`  |             | `string` | `'请选择'` |
-
-
-## Methods
-
-### `destory() => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-### `parse(source: any, value: any) => Promise<{ source: any; data: any[]; value: any[]; valueString: any; }>`
-
-
-
-#### Returns
-
-Type: `Promise<{ source: any; data: any[]; value: any[]; valueString: any; }>`
-
-
-
-
-## Dependencies
-
-### Depends on
-
-- [hc-drawer](../hc-drawer)
-- [hc-row](../hc-row)
-- [hc-col](../hc-col)
-- [hc-button](../hc-button)
-
-### Graph
-```mermaid
-graph TD;
-  hc-picker-view --> hc-drawer
-  hc-picker-view --> hc-row
-  hc-picker-view --> hc-col
-  hc-picker-view --> hc-button
-  hc-drawer --> hc-masker
-  hc-button --> hc-ripple
-  hc-button --> hc-icon
-  style hc-picker-view fill:#f9f,stroke:#333,stroke-width:4px
-```
-
+<div class="phone">
+  <hc-picker id="auto" current="1">
+    <hc-picker-item value="0">2020</hc-picker-item>
+    <hc-picker-item value="1">2019</hc-picker-item>
+    <hc-picker-item value="1">2018</hc-picker-item>
+    <hc-picker-item value="1">2017</hc-picker-item>
+    <hc-picker-item value="1">2016</hc-picker-item>
+    <hc-picker-item value="1">2015</hc-picker-item>
+    <hc-picker-item value="1">2014</hc-picker-item>
+    <hc-picker-item value="1">2013</hc-picker-item>
+    <hc-picker-item value="1">2012</hc-picker-item>
+    <hc-picker-item value="0">2011</hc-picker-item>
+    <hc-picker-item value="1">2010</hc-picker-item>
+    <hc-picker-item value="1">2009</hc-picker-item>
+    <hc-picker-item value="1">2008</hc-picker-item>
+    <hc-picker-item value="1">2007</hc-picker-item>
+    <hc-picker-item value="1">2006</hc-picker-item>
+    <hc-picker-item value="1">2005</hc-picker-item>
+    <hc-picker-item value="1">2004</hc-picker-item>
+    <hc-picker-item value="1">2003</hc-picker-item>
+    <hc-picker-item value="0">2020</hc-picker-item>
+    <hc-picker-item value="1">2019</hc-picker-item>
+    <hc-picker-item value="1">2018</hc-picker-item>
+    <hc-picker-item value="1">2017</hc-picker-item>
+    <hc-picker-item value="1">2016</hc-picker-item>
+    <hc-picker-item value="1">2015</hc-picker-item>
+    <hc-picker-item value="1">2014</hc-picker-item>
+    <hc-picker-item value="1">2013</hc-picker-item>
+    <hc-picker-item value="1">2012</hc-picker-item>
+    <hc-picker-item value="0">2011</hc-picker-item>
+    <hc-picker-item value="1">2010</hc-picker-item>
+    <hc-picker-item value="1">2009</hc-picker-item>
+    <hc-picker-item value="1">2008</hc-picker-item>
+    <hc-picker-item value="1">2007</hc-picker-item>
+    <hc-picker-item value="1">2006</hc-picker-item>
+    <hc-picker-item value="1">2005</hc-picker-item>
+    <hc-picker-item value="1">2004</hc-picker-item>
+    <hc-picker-item value="1">2003</hc-picker-item>
+  </hc-picker>
+</div>
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

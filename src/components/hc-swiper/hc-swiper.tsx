@@ -65,15 +65,17 @@ export class HcSwiper implements ComponentInterface {
             })
           }
         </div>
-        <div class="indicate">
-          {
-            arr.map((item, index) => {
-              return (
-                <span class={this.current == index ? 'active' : ''}>{item}</span>
-              )
-            })
-          }
-        </div>
+        <slot name="indicate">
+          <div class="indicate">
+            {
+              arr.map((item, index) => {
+                return (
+                  <span class={this.current == index ? 'active' : ''}>{item}</span>
+                )
+              })
+            }
+          </div>
+        </slot>
       </Host>
     );
   }

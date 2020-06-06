@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
 
 const hcDrawerCss = ":host{display:flex;flex-direction:column;background-color:var(--background-color-white);position:fixed;z-index:101}:host([place=up]){top:0;left:0;width:100%;transform:translateY(-100%)}:host([place=up][rounder]){border-radius:0 0 1rem 1rem}:host([place=down]){bottom:0;left:0;width:100%;transform:translateY(100%)}:host([place=down][rounder]){border-radius:1rem 1rem 0 0}:host([place=left]){top:0;left:0;height:100%;transform:translateX(-100%)}:host([place=left][rounder]){border-radius:0 1rem 1rem 0}:host([place=right]){top:0;right:0;height:100%;transform:translateX(100%)}:host([place=right][rounder]){border-radius:1rem 0 0 1rem}:host([display=true]){transform:translate(0, 0)}";
 
@@ -9,6 +9,7 @@ class HcDrawer {
         this.clickable = true;
         this.masker = true;
         this.command = false;
+        this.vshow = createEvent(this, "vshow", 7);
     }
     Dhandle(v) {
         if (v) {
@@ -30,6 +31,10 @@ class HcDrawer {
         if (this.place) {
             this.el.setAttribute('place', this.place);
         }
+        if (this.display) {
+            this.el.setAttribute('display', `${this.display}`);
+            this.vshow.emit(null);
+        }
     }
     render() {
         return (h(Host, null, h("slot", null, h("div", { innerHTML: this.content }))));
@@ -50,6 +55,10 @@ class HcDrawer {
                 this.destory();
             });
         }
+        // 通知drawer已经打开
+        setTimeout((e) => {
+            this.vshow.emit({ e });
+        }, 300);
     }
     async destory() {
         this.display = false;

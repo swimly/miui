@@ -1,7 +1,6 @@
 import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
 export declare class HcInput implements ComponentInterface {
     type: string;
-    value: string;
     placeholder: string;
     prefixIcon: string;
     suffixIcon: string;
@@ -16,9 +15,13 @@ export declare class HcInput implements ComponentInterface {
     size: string;
     light: boolean;
     conner: boolean;
+    rounder: boolean;
     dark: boolean;
     focusin: boolean;
     verify: string;
+    value: string;
+    readonly: boolean;
+    disabled: boolean;
     el: HTMLElement;
     vchange: EventEmitter;
     valueHandle(v: any): void;
