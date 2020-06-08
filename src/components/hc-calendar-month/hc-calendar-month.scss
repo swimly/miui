@@ -1,5 +1,20 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: $--app-calendar-fontsize * 15;
+  // height: $--app-calendar-fontsize * 15;
+  position: relative;
+  height:100%;
+  &:after{
+    content:attr(month);
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: $--app-calendar-fontsize * 4;
+    color: $--app-calendar-placeholder;
+    z-index:1;
+  }
+}
+:host([range]){
+  height:auto;
 }

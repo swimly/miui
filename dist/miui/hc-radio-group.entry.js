@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcRadioGroupCss = ":host{display:flex;flex-direction:row}:host([vertical]){flex-direction:column}";
 

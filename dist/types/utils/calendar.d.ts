@@ -1,4 +1,5 @@
 export declare function getMonthDaysArray(year: any, month: any): any[];
+export declare function getRangeMonthDays(date: any, range: any): any[];
 export declare function get3MonthDays(date: any): any[];
 export declare function get3WeekDays(date: any): any[];
 export declare function getWeekDaysArray(year: any, week: any): any[];
@@ -12,3 +13,5 @@ export declare function getDateOfWeek(year: any, weekNumber: any): Date;
 export declare function generateWeek(year: any, week: any): any[];
 export declare function getDiffDate(targetDate: any): number;
 export declare function transformWeekToString(week: any): string;
+export declare function dateFormat(fmt: any, date: any): any;
+export declare function DisDate(time: any, dis: any): string;

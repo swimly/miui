@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcTabItemCss = ":host{display:flex;flex-direction:row;align-items:center;flex-shrink:0;font-size:0.8rem;color:var(--color-text-primary);margin:0 1rem 0 0}:host([active]){color:var(--color-primary)}";
 

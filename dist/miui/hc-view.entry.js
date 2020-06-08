@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcViewCss = ":host{display:block;flex:1;overflow:auto;padding:0.5rem}";
 

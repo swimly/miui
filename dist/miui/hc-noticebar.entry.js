@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcNoticebarCss = ":host{display:flex;flex-direction:row;align-items:center;position:relative;height:2.1rem;padding:0 0.5rem;font-size:0.7rem;color:var(--color-warning)}:host .bg{content:\"\";display:block;position:absolute;right:0;bottom:0;left:0;top:0;background:var(--color-warning);opacity:0.1;z-index:1}:host .content{flex:1;white-space:nowrap;height:100%;display:flex;flex-direction:row;align-items:center;overflow:hidden;position:relative;margin:0 0.5rem}:host .content .wrap{position:absolute;transition-timing-function:linear;transition-delay:0s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}:host .close{position:relative;z-index:2}";
 

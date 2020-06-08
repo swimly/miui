@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcCollapseItemCss = ":host{display:block;padding:0.3rem 0;margin:0.3rem 0;position:relative}:host::after{content:\"\";box-sizing:border-box;border-radius:0;position:absolute;box-sizing:border-box;transition:0.3s;bottom:0;left:0;width:100%;height:1px;background:var(--border-color-base);transform-origin:left bottom;transform:scaleY(0.5)}:host hc-row{font-size:0.75rem;color:var(--color-text-primary)}:host hc-row hc-icon{color:var(--color-text-placeholder);transition:0.3s}:host .content{overflow:hidden;box-sizing:border-box;transition:0.3s}:host([visible]) hc-row hc-icon{transform:rotate(-180deg)}";
 

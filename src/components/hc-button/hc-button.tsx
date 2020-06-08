@@ -1,5 +1,5 @@
 import { Component, ComponentInterface, Host, h, Prop, Element, Method, Watch, Event, EventEmitter } from '@stencil/core';
-import {hc_toast} from '../../../dist/miui/hc-toast.entry.js'
+// import {hc_toast} from '../../../dist/esm/hc-toast.entry.js'
 @Component({
   tag: 'hc-button',
   styleUrl: 'hc-button.scss',
@@ -75,11 +75,11 @@ export class HcButton implements ComponentInterface {
       this.vclick.emit(e)
     } else {
       if (this.errorText) {
-        const Toast = new hc_toast({})
-        Toast.generate({
-          content: this.errorText,
-          place: 'down'
-        })
+        // const Toast = new hc_toast({})
+        // Toast.generate({
+        //   content: this.errorText,
+        //   place: 'down'
+        // })
       }
     }
   }

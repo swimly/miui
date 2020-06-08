@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
 
 const hcHeaderCss = ":host{display:flex;height:2.4rem;align-items:center;background-color:var(--background-color-dark);color:var(--color-text-primary);padding:0 0.6rem}:host h1{font-size:0.9rem;color:inherit;flex:1;text-align:center;font-weight:normal}:host .area{width:4rem;display:flex;flex-direction:row;align-items:center}:host .area .label{transform:scale(0.7);transform-origin:left center}:host .area.right{justify-content:flex-end}";
 

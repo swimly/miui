@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  margin-bottom:$--app-calendar-fontsize * 0.5;
+  .title{
+    font-size: $--app-calendar-fontsize * 1.2;
+    margin-bottom: $--app-calendar-fontsize * 0.6;
+  }
+  .week{
+    font-size: $--app-calendar-fontsize * 0.8;
+    color: $--app-calendar-color;
+  }
+}

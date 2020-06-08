@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
 
 const hcListItemCss = ":host{display:flex;padding:0.8rem 0;position:relative;flex-direction:row}:host::after{content:\"\";box-sizing:border-box;border-radius:0;position:absolute;box-sizing:border-box;transition:0.3s;bottom:0;left:0;width:100%;height:1px;background:var(--border-color-base);transform-origin:left bottom;transform:scaleY(0.5)}:host .cover{width:4rem;height:4rem;margin-right:0.5rem}:host .content{flex:1}:host .content .head{font-size:0.8rem;color:var(--color-text-primary);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.6;text-align:justify}:host .content .append{color:var(--color-text-regular)}:host .content .date{font-size:0.6rem;color:var(--color-text-regular)}:host([reverse]){flex-direction:row-reverse}:host([reverse]) .cover{margin:0 0 0 0.5rem}:host([size=small]){padding:0.7rem 0}:host([size=mini]){padding:0.5rem 0}";
 

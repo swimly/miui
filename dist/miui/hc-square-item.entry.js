@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
 
 const hcSquareItemCss = ":host{display:flex;flex-direction:column;align-items:center;margin:0.5rem 0}";
 

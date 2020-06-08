@@ -250,4 +250,7 @@ $--app-selection-line: var(--border-color-base);
 
 // calendar
 $--app-calendar-fontsize: 0.8rem;
-$--app-calendar-color: var(--color-text-regular);
+$--app-calendar-color: var(--color-text-primary);
+$--app-calendar-color1: var(--color-text-placeholder);
+$--app-calendar-basecolor: var(--color-primary);
+$--app-calendar-placeholder: var(--color-text-placeholder);

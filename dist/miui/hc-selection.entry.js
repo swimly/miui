@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcSelectionCss = ":host{display:block}:host .title{font-size:0.88rem;font-weight:normal;text-align:center;margin:0;padding:0.8rem 0}:host .handle{padding:0 0.8rem}";
 

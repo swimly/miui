@@ -7,9 +7,10 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class HcCalendarWeek {
   @Prop() width: number;
+  @Prop() week: number;
   render() {
     return (
-      <Host>
+      <Host {...{week: this.week}}>
         <slot></slot>
       </Host>
     );

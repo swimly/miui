@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcIconCss = ":host{display:inline-flex;flex-direction:row;align-items:center;transform-origin:center center;font-size:inherit}:host .hc-icon{width:1rem;height:1rem;font-size:inherit;fill:currentColor;overflow:hidden}:host .hc-icon svg{color:inherit;font-size:inherit}:host([spin]) .hc-icon{animation:rotate 0.8s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}";
 

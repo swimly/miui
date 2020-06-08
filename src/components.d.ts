@@ -62,17 +62,42 @@ export namespace Components {
     }
     interface HcCalendar {
         "date": string;
+        "range": number;
         "type": string;
+        "weekday": number;
     }
     interface HcCalendarContent {
+        "isWeek": boolean;
+        "range": number;
+        "vertical": boolean;
         "width": number;
     }
     interface HcCalendarDay {
+        "date": string;
+        "day": number;
+        "isCurrent": boolean;
+        "isCweek": boolean;
+        "isMonth": boolean;
+        "isToday": boolean;
+        "isWeek": boolean;
+        "month": number;
+        "range": number;
+        "week": number;
+        "weekday": number;
+        "year": number;
+    }
+    interface HcCalendarHead {
+        "date": string;
+        "type": string;
     }
     interface HcCalendarMonth {
+        "month": number;
+        "multiple": boolean;
+        "range": number;
         "width": number;
     }
     interface HcCalendarWeek {
+        "week": number;
         "width": number;
     }
     interface HcCell {
@@ -468,9 +493,13 @@ export namespace Components {
         "background": string;
         "closable": boolean;
         "color": string;
+        "conner": boolean;
         "light": boolean;
         "outline": boolean;
         "plain": boolean;
+        "rounder": boolean;
+        "size": string;
+        "type": string;
     }
     interface HcText {
         "background": string;
@@ -583,6 +612,12 @@ declare global {
     var HTMLHcCalendarDayElement: {
         prototype: HTMLHcCalendarDayElement;
         new (): HTMLHcCalendarDayElement;
+    };
+    interface HTMLHcCalendarHeadElement extends Components.HcCalendarHead, HTMLStencilElement {
+    }
+    var HTMLHcCalendarHeadElement: {
+        prototype: HTMLHcCalendarHeadElement;
+        new (): HTMLHcCalendarHeadElement;
     };
     interface HTMLHcCalendarMonthElement extends Components.HcCalendarMonth, HTMLStencilElement {
     }
@@ -1027,6 +1062,7 @@ declare global {
         "hc-calendar": HTMLHcCalendarElement;
         "hc-calendar-content": HTMLHcCalendarContentElement;
         "hc-calendar-day": HTMLHcCalendarDayElement;
+        "hc-calendar-head": HTMLHcCalendarHeadElement;
         "hc-calendar-month": HTMLHcCalendarMonthElement;
         "hc-calendar-week": HTMLHcCalendarWeekElement;
         "hc-cell": HTMLHcCellElement;
@@ -1155,17 +1191,45 @@ declare namespace LocalJSX {
     }
     interface HcCalendar {
         "date"?: string;
+        "range"?: number;
         "type"?: string;
+        "weekday"?: number;
     }
     interface HcCalendarContent {
+        "isWeek"?: boolean;
+        "onVswitch"?: (event: CustomEvent<any>) => void;
+        "range"?: number;
+        "vertical"?: boolean;
         "width"?: number;
     }
     interface HcCalendarDay {
+        "date"?: string;
+        "day"?: number;
+        "isCurrent"?: boolean;
+        "isCweek"?: boolean;
+        "isMonth"?: boolean;
+        "isToday"?: boolean;
+        "isWeek"?: boolean;
+        "month"?: number;
+        "range"?: number;
+        "week"?: number;
+        "weekday"?: number;
+        "year"?: number;
+    }
+    interface HcCalendarHead {
+        "date"?: string;
+        "onVdatechange"?: (event: CustomEvent<any>) => void;
+        "onVtypechange"?: (event: CustomEvent<any>) => void;
+        "type"?: string;
     }
     interface HcCalendarMonth {
+        "month"?: number;
+        "multiple"?: boolean;
+        "range"?: number;
         "width"?: number;
     }
     interface HcCalendarWeek {
+        "week"?: number;
         "width"?: number;
     }
     interface HcCell {
@@ -1557,10 +1621,14 @@ declare namespace LocalJSX {
         "background"?: string;
         "closable"?: boolean;
         "color"?: string;
+        "conner"?: boolean;
         "light"?: boolean;
         "onVclose"?: (event: CustomEvent<any>) => void;
         "outline"?: boolean;
         "plain"?: boolean;
+        "rounder"?: boolean;
+        "size"?: string;
+        "type"?: string;
     }
     interface HcText {
         "background"?: string;
@@ -1625,6 +1693,7 @@ declare namespace LocalJSX {
         "hc-calendar": HcCalendar;
         "hc-calendar-content": HcCalendarContent;
         "hc-calendar-day": HcCalendarDay;
+        "hc-calendar-head": HcCalendarHead;
         "hc-calendar-month": HcCalendarMonth;
         "hc-calendar-week": HcCalendarWeek;
         "hc-cell": HcCell;
@@ -1713,6 +1782,7 @@ declare module "@stencil/core" {
             "hc-calendar": LocalJSX.HcCalendar & JSXBase.HTMLAttributes<HTMLHcCalendarElement>;
             "hc-calendar-content": LocalJSX.HcCalendarContent & JSXBase.HTMLAttributes<HTMLHcCalendarContentElement>;
             "hc-calendar-day": LocalJSX.HcCalendarDay & JSXBase.HTMLAttributes<HTMLHcCalendarDayElement>;
+            "hc-calendar-head": LocalJSX.HcCalendarHead & JSXBase.HTMLAttributes<HTMLHcCalendarHeadElement>;
             "hc-calendar-month": LocalJSX.HcCalendarMonth & JSXBase.HTMLAttributes<HTMLHcCalendarMonthElement>;
             "hc-calendar-week": LocalJSX.HcCalendarWeek & JSXBase.HTMLAttributes<HTMLHcCalendarWeekElement>;
             "hc-cell": LocalJSX.HcCell & JSXBase.HTMLAttributes<HTMLHcCellElement>;

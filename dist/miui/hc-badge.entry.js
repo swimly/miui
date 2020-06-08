@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcBadgeCss = ":host{display:inline-block;position:relative;vertical-align:middle}:host .number{position:absolute;font-size:0.6rem;background:var(--color-danger);color:var(--color-text-white);padding:0 0.204rem;border-radius:1.2rem;left:0;top:0;transform:translate(-0.3rem, -50%);box-sizing:border-box;border:1px solid var(--color-text-white);z-index:99}:host([dot]) .number{font-size:0;width:0.5rem;height:0.5rem;padding:0}";
 

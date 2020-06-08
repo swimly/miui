@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
 
 const hcAddressCss = ":host{display:block}";
 

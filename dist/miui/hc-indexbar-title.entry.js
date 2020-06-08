@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
 
 const hcIndexbarTitleCss = ":host{display:block;font-size:0.6rem;color:var(--color-text-placeholder);background:var(--background-color-base);padding:0.6rem}";
 

@@ -12,8 +12,29 @@ export class HcTag implements ComponentInterface {
   @Prop() background: string;
   @Prop() outline: boolean;
   @Prop() light: boolean;
+  @Prop() rounder: boolean;
+  @Prop() conner: boolean;
+  @Prop() type: string;
+  @Prop() size: string;
   @Element() el:HTMLElement;
   @Event() vclose: EventEmitter;
+  componentWillLoad () {
+    if (this.rounder) {
+      this.el.setAttribute('rounder', 'true')
+    }
+    if (this.conner) {
+      this.el.setAttribute('conner', 'true')
+    }
+    if (this.size) {
+      this.el.setAttribute('size', `${this.size}`)
+    }
+    if (this.type) {
+      this.el.setAttribute('type', `${this.type}`)
+    }
+    if (this.outline) {
+      this.el.setAttribute('outline', `${this.outline}`)
+    }
+  }
   render() {
     var color;
     if (this.plain || this.light || this.outline) {

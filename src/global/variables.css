@@ -34,7 +34,7 @@ html {
   --color-text-primary: #262626;
   --color-text-regular: #666;
   --color-text-secondary: #8c8c8c;
-  --color-text-placeholder: #b2b2b2;
+  --color-text-placeholder: rgba(0,0,0, 0.1);
   --color-text-white: #fff;
   /* bordercolor */
   --border-color-base: #e6e6e6;

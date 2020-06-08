@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-e5ececff.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
 
 const hcSwiperItemCss = ":host{display:flex;flex-direction:row;flex-wrap:wrap}";
 
