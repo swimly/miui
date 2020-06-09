@@ -226,6 +226,11 @@
 :host([rounder]){
   .button{
     border-radius: $--app-button-height;
+    &:before{
+      border-radius: $--app-button-height * 2;
+      right:0;
+      left:0;
+    }
     .line{
       border-radius: $--app-button-height * 2;
     }

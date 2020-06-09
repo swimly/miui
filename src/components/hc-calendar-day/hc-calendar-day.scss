@@ -26,6 +26,7 @@
     box-sizing: border-box;
   }
 }
+
 :host([is-month]),
 :host([is-week]),
 :host([range]){
@@ -38,16 +39,37 @@
     border-color:$--app-calendar-basecolor;
   }
 }
-:host([is-today]) {
-  color: var(--color-text-white) !important;
+:host([is-today][is-current]) {
+  color: var(--color-text-white);
   &:after{
     border-color:$--app-calendar-basecolor;
     background-color: $--app-calendar-basecolor;
   }
 }
 :host([is-current][range]) {
-  color: $--app-calendar-color !important;
+  color: $--app-calendar-color;
   &::after{
     display:none;
   }
+}
+:host([range]){
+  font-size:0;
+}
+:host([range][is-month]){
+  font-size: $--app-calendar-fontsize;
+}
+
+:host([select][range][is-month]){
+  background:$--app-calendar-select;
+  color:$--app-calendar-basecolor !important;
+}
+:host([begin][range][is-month]){
+  background: $--app-calendar-basecolor;
+  border-radius: 0.3rem 0 0 0.3rem;
+  color: var(--color-text-white) !important;
+}
+:host([end][range][is-month]){
+  background: $--app-calendar-basecolor;
+  border-radius: 0 0.3rem 0.3rem 0;
+  color: var(--color-text-white) !important;
 }

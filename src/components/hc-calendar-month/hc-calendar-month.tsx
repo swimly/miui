@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element } from '@stencil/core';
+import { Component, Host, h, Prop, Element, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'hc-calendar-month',
@@ -6,27 +6,44 @@ import { Component, Host, h, Prop, Element } from '@stencil/core';
   shadow: true,
 })
 export class HcCalendarMonth {
+  @Prop() index: number;
   @Prop() width: number;
   @Prop() month: number;
-  @Prop() multiple: boolean;
+  @Prop() year: number;
   @Prop() range: number;
   @Element() el: HTMLElement;
+  @Event() vmonthchange: EventEmitter;
   componentDidLoad () {
-    var children = Array.from(this.el.children)
-    if (this.multiple && this.range) {
-      children.forEach((item, index) => {
-        if (index == children.length - 1) {
-          item.setAttribute('hide', 'true')
-        }
-      })
+    if (this.range) {
+      this.bindObverse()
+      if (this.index == 0) {
+        this.el.shadowRoot.querySelector('.title').classList.add('hide')
+      }
     }
   }
   render() {
+    var title = (<span></span>)
+    if (this.range) {
+      title = (<h2 {...{year: this.year, month: this.month}} class="title">{this.year}年{this.month}月</h2>)
+    }
     return (
-      <Host {...{month: this.month, multiple: this.multiple, range: this.range}} style={{width: `${this.width}px`}}>
+      <Host {...{month: this.month, range: this.range, year: this.year}} style={{width: `${this.width}px`}}>
+        {title}
         <slot></slot>
       </Host>
     );
   }
-
+  bindObverse () {
+    var io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry && entry.isIntersecting) {
+          this.vmonthchange.emit({
+            year: entry.target.getAttribute('year'),
+            month: entry.target.getAttribute('month')
+          })
+        }
+      })
+    })
+    io.observe(this.el.shadowRoot.querySelector('.title'))
+  }
 }

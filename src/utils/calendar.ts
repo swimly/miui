@@ -1,5 +1,5 @@
 
-export function getMonthDaysArray (year, month) {
+export function getMonthDaysArray(year, month) {
   // 获取上月，本月，下月三个月的数据
   const firstDay = getFirstDay(year, month)
   const curMonthDay = getMonthLength(year, month)
@@ -40,18 +40,18 @@ export function getMonthDaysArray (year, month) {
   return dayArr
 }
 
-export function getRangeMonthDays (date, range) {
+export function getRangeMonthDays(date, range) {
   var time = new Date(date)
   var year = time.getFullYear()
   var month = time.getMonth() + 1
   var data = []
-  for (var i = 0; i < range; i ++) {
+  for (var i = 0; i < range; i++) {
     data.push({
       year: year,
       month: month,
       days: getMonthDaysArray(year, month)
     })
-    month ++
+    month++
     if (month > 12) {
       month = 1
       year += 1
@@ -60,7 +60,7 @@ export function getRangeMonthDays (date, range) {
   return data
 }
 
-export function get3MonthDays (date) {
+export function get3MonthDays(date) {
   var data = []
   var time = new Date(date)
   var weekday = time.getDay()
@@ -82,7 +82,7 @@ export function get3MonthDays (date) {
   return data
 }
 
-export function get3WeekDays (date) {
+export function get3WeekDays(date) {
   var data = []
   var time = new Date(date)
   var year = time.getFullYear()
@@ -104,7 +104,7 @@ export function get3WeekDays (date) {
   var lw = cweek > 1 ? cweek - 1 : fdw == 1 ? lweeks : lweeks - 1;
   var ny = cweek < weeks ? year : year + 1;
   var nw = cweek < weeks ? cweek + 1 : ldw == 0 ? 1 : 2
-  var arr = [[ly, lw], [year, cweek], [ny, nw]]
+  var arr = [[ly, weekday > 1 ? lw - 1 : lw], [year, weekday > 1 ? cweek - 1 : cweek], [ny, weekday > 1 ? nw - 1 : nw]]
   arr.map((item) => {
     data.push({
       year: item[0],
@@ -115,33 +115,33 @@ export function get3WeekDays (date) {
   return data
 }
 
-export function getWeekDaysArray (year, week) {
+export function getWeekDaysArray(year, week) {
   var d = new Date(year, 0, 1 + (week) * 7)
-    var new_Date = new Date(d)
-    var timesStamp = new_Date.getTime();
-    var currenDay = new_Date.getDay();
-    var dates = [];
-    for (var i = 0; i < 7; i++) {
-      var dateString = new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7)).toLocaleDateString().replace(/\//g, '-')
-      var dateArr = dateString.split('-')
-      var weekday = (new Date(`${dateArr[0]}/${dateArr[1]}/${dateArr[2]}`)).getDay()
-      weekday = weekday > 0 ? weekday : 7
-      dates.push({
-        year: parseInt(dateArr[0]),
-        month: parseInt(dateArr[1]),
-        week: getWeekOfYear(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2])),
-        day: parseInt(dateArr[2]),
-        weekday: weekday
-      });
-    }
-    return dates
+  var new_Date = new Date(d)
+  var timesStamp = new_Date.getTime();
+  var currenDay = new_Date.getDay();
+  var dates = [];
+  for (var i = 0; i < 7; i++) {
+    var dateString = new Date(timesStamp + 24 * 60 * 60 * 1000 * (i - (currenDay + 6) % 7)).toLocaleDateString().replace(/\//g, '-')
+    var dateArr = dateString.split('-')
+    var weekday = (new Date(`${dateArr[0]}/${dateArr[1]}/${dateArr[2]}`)).getDay()
+    weekday = weekday > 0 ? weekday : 7
+    dates.push({
+      year: parseInt(dateArr[0]),
+      month: parseInt(dateArr[1]),
+      week: getWeekOfYear(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2])),
+      day: parseInt(dateArr[2]),
+      weekday: weekday
+    });
+  }
+  return dates
 }
 
 export function getMonthLength(year, month) {
   return new Date(year, month, 0).getDate()
 }
 
-export function getFirstDay (year, month) {
+export function getFirstDay(year, month) {
   return new Date(year, month - 1, 0).getDay()
 }
 
@@ -193,7 +193,7 @@ export function generateWeek(year, week) {
   return getDates(year, getDateOfWeek(year, week))
 }
 
-export function getDiffDate (targetDate) {
+export function getDiffDate(targetDate) {
   let date1 = new Date(targetDate)
   let date2 = new Date()
   date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
@@ -203,34 +203,68 @@ export function getDiffDate (targetDate) {
   return diffDate
 }
 
-export function transformWeekToString (week) {
+export function transformWeekToString(week) {
   return ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'][week]
 }
 
-export function dateFormat (fmt, date) {
+export function dateFormat(fmt, date) {
   let ret;
-    const opt = {
-        "Y+": date.getFullYear().toString(),        // 年
-        "m+": (date.getMonth() + 1).toString(),     // 月
-        "d+": date.getDate().toString(),            // 日
-        "H+": date.getHours().toString(),           // 时
-        "M+": date.getMinutes().toString(),         // 分
-        "S+": date.getSeconds().toString()          // 秒
+  const opt = {
+    "Y+": date.getFullYear().toString(),        // 年
+    "m+": (date.getMonth() + 1).toString(),     // 月
+    "d+": date.getDate().toString(),            // 日
+    "H+": date.getHours().toString(),           // 时
+    "M+": date.getMinutes().toString(),         // 分
+    "S+": date.getSeconds().toString()          // 秒
+  };
+  for (let k in opt) {
+    ret = new RegExp("(" + k + ")").exec(fmt);
+    if (ret) {
+      fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
     };
-    for (let k in opt) {
-        ret = new RegExp("(" + k + ")").exec(fmt);
-        if (ret) {
-            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
-        };
-    };
-    return fmt;
+  };
+  return fmt;
 }
 
-export function DisDate (time, dis) {
+export function DisDate(time, dis) {
   var date1 = new Date(time)
   // var time1 =date1.getFullYear()+"-"+(date1.getMonth()+1)+"-"+date1.getDate();//time1表示当前时间
   var date2 = new Date(date1);
-  date2.setDate(date1.getDate()+ dis);
-  var time2 = date2.getFullYear()+"/"+(date2.getMonth()+1)+"/"+date2.getDate();
+  date2.setDate(date1.getDate() + dis);
+  var time2 = date2.getFullYear() + "/" + (date2.getMonth() + 1) + "/" + date2.getDate();
   return time2
+}
+
+/**
+   **datestr:形如‘2017-06-12’的字符串
+  **return Date 对象
+   **/
+function getDate(datestr) {
+  var temp = datestr.split("/");
+  if (temp[1] === '01') {
+    temp[0] = parseInt(temp[0], 10) - 1;
+    temp[1] = '12';
+  } else {
+    temp[1] = parseInt(temp[1], 10) - 1;
+  }
+  //new Date()的月份入参实际都是当前值-1
+  var date = new Date(temp[0], temp[1], temp[2]);
+  return date;
+}
+/**
+***获取两个日期间的所有日期
+***默认start<end
+**/
+export function getDiffDates(start, end) {
+  var startTime = getDate(start);
+  var endTime = getDate(end);
+  var dateArr = [];
+  while ((endTime.getTime() - startTime.getTime()) >= 0) {
+    var year = startTime.getFullYear();
+    var month = (startTime.getMonth() + 1).toString().length === 1 ? "0" + (parseInt(startTime.getMonth().toString(), 10) + 1) : (startTime.getMonth() + 1);
+    var day = startTime.getDate().toString().length === 1 ? "0" + startTime.getDate() : startTime.getDate();
+    dateArr.push(year + "/" + month + "/" + day);
+    startTime.setDate(startTime.getDate() + 1);
+  }
+  return dateArr;
 }

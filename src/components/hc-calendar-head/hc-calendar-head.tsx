@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Watch, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, Watch, Event, EventEmitter, Method, Element } from '@stencil/core';
 import {dateFormat, getDiffDate} from '../../utils/calendar'
 @Component({
   tag: 'hc-calendar-head',
@@ -8,13 +8,24 @@ import {dateFormat, getDiffDate} from '../../utils/calendar'
 export class HcCalendarHead {
   @Prop() date: string;
   @Prop() type: string;
+  @Prop() range: number;
+  @Prop() header: string;
   @Event() vtypechange: EventEmitter
   @Event() vdatechange: EventEmitter
+  @Element() el: HTMLElement;
   @Watch('date')
   dateHandle (v: string) {
     this.vdatechange.emit(v)
   }
   componentDidLoad () {
+    var head = this.header.split(',')
+    var titles = this.el.shadowRoot.querySelector('.title').querySelectorAll('hc-col')
+    titles.forEach(tit => {
+      var id = tit.getAttribute('id')
+      if (head.indexOf(id) < 0) {
+        tit.style.display = 'none'
+      }
+    })
   }
   render() {
     var arr = ['一', '二', '三', '四', '五', '六', '日']
@@ -28,28 +39,40 @@ export class HcCalendarHead {
       </hc-row>
     )
     var dif = getDiffDate(this.date)
-    var str = ''
+    var diff = (<span></span>)
     var today = (<span></span>);
-    if (dif > 0) {
-      str = `${dif}天前`
-      today = (<hc-tag size="small" onClick={this.backToday.bind(this)} type="primary" rounder outline>今</hc-tag>)
-    } else if (dif < 0) {
-      str = `${-dif}天后`
-      today = (<hc-tag size="small" onClick={this.backToday.bind(this)} type="primary" rounder outline>今</hc-tag>)
-    } else {
-      str = '今日'
+    if (!this.range) {
+      if (dif > 0) {
+        diff = <hc-tag rounder size='small'>{dif}天前</hc-tag>
+        today = (<hc-tag size="small" onClick={this.backToday.bind(this)} type="primary" rounder outline>今</hc-tag>)
+      } else if (dif < 0) {
+        diff = <hc-tag rounder size='small'>{-dif}天后</hc-tag>
+        today = (<hc-tag size="small" onClick={this.backToday.bind(this)} type="primary" rounder outline>今</hc-tag>)
+      } else {
+        diff = <hc-tag rounder size='small'>今日</hc-tag>
+      }
     }
-    var type = this.type == 'week' ? '周' : '月'
+    var types = this.type == 'week' ? '周' : '月';
+    var type;
+    if (!this.range) {
+      var type = (
+        <hc-tag style={{marginLeft: `10px`}} type="primary" size="small" rounder outline onClick={this.changeType.bind(this)}>{types}</hc-tag>
+      )
+    } else {
+      type = (<span></span>)
+    }
     return (
       <Host>
-        <hc-row class="title">
-          <hc-col span={10}>{dateFormat('YYYY年mm月', new Date(this.date))}</hc-col>
-          <hc-col>
-            <hc-tag rounder size='small'>{str}</hc-tag>
+        <hc-row class="title" align="center">
+          <hc-col align="center" span={10} id="title">{dateFormat('YYYY年mm月', new Date(this.date))}</hc-col>
+          <hc-col id="diff" flex={1}>
+            {diff}
           </hc-col>
-          <hc-col flex={1} align="right">
+          <hc-col id="today">
             {today}
-            <hc-tag style={{marginLeft: `10px`}} type="primary" size="small" rounder outline onClick={this.changeType.bind(this)}>{type}</hc-tag>
+          </hc-col>
+          <hc-col id="type" align="right">
+            {type}
           </hc-col>
         </hc-row>
         {weekday}
@@ -64,5 +87,9 @@ export class HcCalendarHead {
   backToday () {
     var time = new Date()
     this.date = `${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()}`
+  }
+  @Method()
+  async setTitle (v) {
+    this.el.shadowRoot.querySelector('#title').innerHTML = dateFormat('YYYY年mm月', new Date(v))
   }
 }

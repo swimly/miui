@@ -15,3 +15,8 @@ export declare function getDiffDate(targetDate: any): number;
 export declare function transformWeekToString(week: any): string;
 export declare function dateFormat(fmt: any, date: any): any;
 export declare function DisDate(time: any, dis: any): string;
+/**
+***获取两个日期间的所有日期
+***默认start<end
+**/
+export declare function getDiffDates(start: any, end: any): any[];

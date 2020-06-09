@@ -30,11 +30,12 @@ html {
   --color-success: #67C23A;
   --color-danger: #F56C6C;
   --color-info: #909399;
+  --color-primary-light: #d9e6f3;
   /* fontcolor */
   --color-text-primary: #262626;
   --color-text-regular: #666;
   --color-text-secondary: #8c8c8c;
-  --color-text-placeholder: rgba(0,0,0, 0.1);
+  --color-text-placeholder: rgba(242, 243, 245, 0.8);
   --color-text-white: #fff;
   /* bordercolor */
   --border-color-base: #e6e6e6;

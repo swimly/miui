@@ -10,6 +10,7 @@
 }
 :host([vertical]){
   overflow:auto;
+  // height: $--app-calendar-fontsize * 12;
   .wrap{
     flex-direction: column;
     height:auto;

@@ -61,8 +61,16 @@ export namespace Components {
         "type": string;
     }
     interface HcCalendar {
+        "command": boolean;
+        "current": string;
         "date": string;
+        "destory": () => Promise<void>;
+        "generate": (option?: object) => Promise<HTMLHcCalendarElement>;
+        "header": string;
+        "padding": number;
         "range": number;
+        "section": string;
+        "showButtons": boolean;
         "type": string;
         "weekday": number;
     }
@@ -73,8 +81,8 @@ export namespace Components {
         "width": number;
     }
     interface HcCalendarDay {
-        "date": string;
         "day": number;
+        "index": number;
         "isCurrent": boolean;
         "isCweek": boolean;
         "isMonth": boolean;
@@ -82,19 +90,24 @@ export namespace Components {
         "isWeek": boolean;
         "month": number;
         "range": number;
+        "section": string;
         "week": number;
         "weekday": number;
         "year": number;
     }
     interface HcCalendarHead {
         "date": string;
+        "header": string;
+        "range": number;
+        "setTitle": (v: any) => Promise<void>;
         "type": string;
     }
     interface HcCalendarMonth {
+        "index": number;
         "month": number;
-        "multiple": boolean;
         "range": number;
         "width": number;
+        "year": number;
     }
     interface HcCalendarWeek {
         "week": number;
@@ -1190,8 +1203,16 @@ declare namespace LocalJSX {
         "type"?: string;
     }
     interface HcCalendar {
+        "command"?: boolean;
+        "current"?: string;
         "date"?: string;
+        "header"?: string;
+        "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVdone"?: (event: CustomEvent<any>) => void;
+        "padding"?: number;
         "range"?: number;
+        "section"?: string;
+        "showButtons"?: boolean;
         "type"?: string;
         "weekday"?: number;
     }
@@ -1203,30 +1224,37 @@ declare namespace LocalJSX {
         "width"?: number;
     }
     interface HcCalendarDay {
-        "date"?: string;
         "day"?: number;
+        "index"?: number;
         "isCurrent"?: boolean;
         "isCweek"?: boolean;
         "isMonth"?: boolean;
         "isToday"?: boolean;
         "isWeek"?: boolean;
         "month"?: number;
+        "onVclick"?: (event: CustomEvent<any>) => void;
+        "onVrange"?: (event: CustomEvent<any>) => void;
         "range"?: number;
+        "section"?: string;
         "week"?: number;
         "weekday"?: number;
         "year"?: number;
     }
     interface HcCalendarHead {
         "date"?: string;
+        "header"?: string;
         "onVdatechange"?: (event: CustomEvent<any>) => void;
         "onVtypechange"?: (event: CustomEvent<any>) => void;
+        "range"?: number;
         "type"?: string;
     }
     interface HcCalendarMonth {
+        "index"?: number;
         "month"?: number;
-        "multiple"?: boolean;
+        "onVmonthchange"?: (event: CustomEvent<any>) => void;
         "range"?: number;
         "width"?: number;
+        "year"?: number;
     }
     interface HcCalendarWeek {
         "week"?: number;

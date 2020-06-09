@@ -22,8 +22,41 @@
         <hc-title>区间</hc-title>
         <hc-calendar range="12"></hc-calendar>
       </hc-panel>
+      <hc-panel>
+        <hc-title>指令形式</hc-title>
+        <hc-button id="zl" style="margin-bottom:10px;">选择日期区间</hc-button>
+        <hc-button id="zl1">选择单日期</hc-button>
+      </hc-panel>
     </hc-view>
   </hc-page>
+  <script type="module">
+    import {hc_calendar} from '../www/build/hc-calendar.entry.js'
+    window.Calendar = new hc_calendar({})
+  </script>
   <script type="module" src="../www/build/miui.esm.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+  <script>
+    document.querySelector('#zl').addEventListener('click', () => {
+      Calendar.generate({
+        header: 'title',
+        date: '2010/1/3',
+        range: 3
+      }).then(res => {
+        res.addEventListener('vdone', (e) => {
+          console.log(e.detail)
+        })
+      })
+    })
+    document.querySelector('#zl1').addEventListener('click', () => {
+      Calendar.generate({
+        header: 'title,diff,today'
+      }).then(res => {
+        res.addEventListener('vdone', (e) => {
+          console.log(e.detail)
+        })
+      })
+    })
+  </script>
 </body>
 </html>

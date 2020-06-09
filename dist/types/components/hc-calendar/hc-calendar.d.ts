@@ -1,14 +1,34 @@
+import { EventEmitter } from '../../stencil-public-runtime';
 export declare class HcCalendar {
     type: string;
     date: string;
     range: number;
+    current: string;
     weekday: number;
+    section: string;
+    padding: number;
+    header: string;
+    command: boolean;
+    showButtons: boolean;
     el: HTMLElement;
+    vchange: EventEmitter;
+    vdone: EventEmitter;
     data: any;
+    select: any;
+    $drawer: any;
     dateHandle(v: string): void;
+    currentHandle(v: string): void;
+    weekdayHandl(v: string): void;
+    sectionHandle(v: string): void;
     componentDidLoad(): void;
     render(): any;
     onSwitch(e: any): void;
     onTypeChange(e: any): void;
     onDateChange(e: any): void;
+    onMonthChange(e: any): void;
+    onClick(e: any): void;
+    onRange(e: any): void;
+    onClear(): void;
+    destory(): Promise<void>;
+    generate(option?: object): Promise<HTMLHcCalendarElement>;
 }

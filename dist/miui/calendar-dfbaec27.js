@@ -102,7 +102,7 @@ function get3WeekDays(date) {
     var lw = cweek > 1 ? cweek - 1 : fdw == 1 ? lweeks : lweeks - 1;
     var ny = cweek < weeks ? year : year + 1;
     var nw = cweek < weeks ? cweek + 1 : ldw == 0 ? 1 : 2;
-    var arr = [[ly, lw], [year, cweek], [ny, nw]];
+    var arr = [[ly, weekday > 1 ? lw - 1 : lw], [year, weekday > 1 ? cweek - 1 : cweek], [ny, weekday > 1 ? nw - 1 : nw]];
     arr.map((item) => {
         data.push({
             year: item[0],
@@ -224,5 +224,39 @@ function DisDate(time, dis) {
     var time2 = date2.getFullYear() + "/" + (date2.getMonth() + 1) + "/" + date2.getDate();
     return time2;
 }
+/**
+   **datestr:形如‘2017-06-12’的字符串
+  **return Date 对象
+   **/
+function getDate(datestr) {
+    var temp = datestr.split("/");
+    if (temp[1] === '01') {
+        temp[0] = parseInt(temp[0], 10) - 1;
+        temp[1] = '12';
+    }
+    else {
+        temp[1] = parseInt(temp[1], 10) - 1;
+    }
+    //new Date()的月份入参实际都是当前值-1
+    var date = new Date(temp[0], temp[1], temp[2]);
+    return date;
+}
+/**
+***获取两个日期间的所有日期
+***默认start<end
+**/
+function getDiffDates(start, end) {
+    var startTime = getDate(start);
+    var endTime = getDate(end);
+    var dateArr = [];
+    while ((endTime.getTime() - startTime.getTime()) >= 0) {
+        var year = startTime.getFullYear();
+        var month = (startTime.getMonth() + 1).toString().length === 1 ? "0" + (parseInt(startTime.getMonth().toString(), 10) + 1) : (startTime.getMonth() + 1);
+        var day = startTime.getDate().toString().length === 1 ? "0" + startTime.getDate() : startTime.getDate();
+        dateArr.push(year + "/" + month + "/" + day);
+        startTime.setDate(startTime.getDate() + 1);
+    }
+    return dateArr;
+}
 
-export { DisDate as D, getRangeMonthDays as a, get3MonthDays as b, dateFormat as d, get3WeekDays as g };
+export { DisDate as D, getRangeMonthDays as a, get3MonthDays as b, getDiffDates as c, dateFormat as d, getDiffDate as e, get3WeekDays as g };

@@ -1,3 +1,14 @@
 :host {
   display: block;
+  .footer{
+    padding: 0 $--app-calendar-fontsize $--app-calendar-fontsize $--app-calendar-fontsize;
+    hc-col{
+      &:last-child{
+        padding-left: $--app-calendar-fontsize * 0.5;
+      }
+      &:first-child{
+        padding-right: $--app-calendar-fontsize * 0.5;
+      }
+    }
+  }
 }
