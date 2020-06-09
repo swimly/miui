@@ -59,6 +59,7 @@
 :host([size="mini"]) {
   .slider{
     height: $--app-slider-height * 0.7;
+    overflow:hidden;
     .handle{
       width:$--app-slider-height * 0.7;
       height:$--app-slider-height * 0.7;

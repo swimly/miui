@@ -11,13 +11,19 @@ export declare class HcVideo {
     muted: boolean;
     height: number;
     controls: boolean;
+    showControls: boolean;
+    forbidJump: boolean;
+    fullScreen: boolean;
     el: HTMLElement;
     $video: any;
     $control: any;
+    $timer: any;
+    fullHandle(v: boolean): void;
     mutedHandle(v: boolean): void;
     playHandle(v: boolean): void;
     durationHandle(v: number): void;
     currentHandle(v: number): void;
+    showHandle(v: boolean): void;
     componentDidLoad(): void;
     render(): any;
     onEnded(): void;
@@ -31,4 +37,6 @@ export declare class HcVideo {
     onPlay(e: any): void;
     bindPlay(v: any): void;
     bindMuted(v: any): void;
+    onClick(): void;
+    onFullScreen(e: any): void;
 }

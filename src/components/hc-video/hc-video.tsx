@@ -17,9 +17,21 @@ export class HcVideo {
   @Prop() muted: boolean;
   @Prop() height: number;
   @Prop() controls: boolean = false;
+  @Prop() showControls: boolean;
+  @Prop() forbidJump: boolean = true;
+  @Prop() fullScreen: boolean;
   @Element() el:HTMLElement;
   $video;
   $control;
+  $timer;
+  @Watch('fullScreen')
+  fullHandle (v: boolean) {
+    if (v) {
+      this.el.setAttribute('full-screen', 'true')
+    } else {
+      this.el.removeAttribute('full-screen')
+    }
+  }
   @Watch('muted')
   mutedHandle (v: boolean) {
     this.bindMuted(v)
@@ -27,6 +39,7 @@ export class HcVideo {
   @Watch('play')
   playHandle (v: boolean) {
     this.bindPlay(v)
+    this.el.shadowRoot.querySelector('hc-video-controls').Playing(v)
   }
   @Watch('duration')
   durationHandle (v: number) {
@@ -35,6 +48,17 @@ export class HcVideo {
   @Watch('current')
   currentHandle (v: number) {
     this.el.shadowRoot.querySelector('hc-video-controls').setAttribute('current', `${v}`)
+  }
+  @Watch('showControls')
+  showHandle (v: boolean) {
+    if (v) {
+      this.el.setAttribute('show-controls', 'true')
+      this.el.shadowRoot.querySelector('.play').setAttribute('checked', 'true')
+    } else {
+      this.el.removeAttribute('show-controls')
+      this.el.shadowRoot.querySelector('.play').removeAttribute('checked')
+    }
+    this.el.shadowRoot.querySelector('hc-video-controls').Playing(v)
   }
   componentDidLoad () {
     this.$video = this.el.shadowRoot.querySelector('video')
@@ -45,11 +69,11 @@ export class HcVideo {
     if (this.muted) {
       this.muted = true
     }
-    console.log('didloaded')
   }
   render() {
     return (
-      <Host>
+      <Host onClick={this.onClick.bind(this)}>
+        <hc-switch class="play" active-color="#fff" id="play" custom icon-size={52} onVchange={this.bindPlay.bind(this)} type="favorites" off-icon="play" active-icon="suspended"></hc-switch>
         <video
           onProgress={this.onPlaying.bind(this)}
           onTimeUpdate={this.onTimeUpdate.bind(this)}
@@ -64,10 +88,14 @@ export class HcVideo {
           x5-video-player-type="h5-page"
           src={this.src}
         ></video>
-        <hc-video-controls 
+        <hc-video-controls
+          {...{
+            'forbid-jump': this.forbidJump
+          }}
           onVprogress={this.onProgress.bind(this)}
           onVmute={this.onMute.bind(this)}
           onVplay={this.onPlay.bind(this)}
+          onVfull={this.onFullScreen.bind(this)}
         ></hc-video-controls>
       </Host>
     );
@@ -94,7 +122,11 @@ export class HcVideo {
     // this.loaded = Math.round((this.$video.buffered.end(0) / this.duration)*100)
   }
   onProgress (e) {
-    console.log(e.detail.value)
+    console.log(e.detail, this.duration)
+    var bili = e.detail.value.bili / 100
+    var time = this.duration * bili
+    this.el.shadowRoot.querySelector('video').currentTime = time
+    this.play = true
   }
   onMute (e) {
     this.muted = e.detail.value
@@ -103,10 +135,16 @@ export class HcVideo {
     this.play = e.detail.value
   }
   bindPlay (v) {
-    if (v) {
+    var b = typeof v == 'object' ? v.detail.checked : v
+    if (b) {
       this.$video.play()
+      this.showControls = true
+      setTimeout(() => {
+        this.el.shadowRoot.querySelector('hc-video-controls').style.transform = `translateY(100%)`;
+      }, 3000)
     } else {
       this.$video.pause();
+      this.showControls = false
     }
   }
   bindMuted (v) {
@@ -115,5 +153,14 @@ export class HcVideo {
     } else {
       this.$video.muted = false;
     }
+  }
+  onClick () {
+    this.el.shadowRoot.querySelector('hc-video-controls').style.transform = `translateY(0)`;
+    setTimeout(() => {
+      this.el.shadowRoot.querySelector('hc-video-controls').style.transform = `translateY(100%)`;
+    }, 3000)
+  }
+  onFullScreen (e) {
+    this.fullScreen = e.detail
   }
 }

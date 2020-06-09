@@ -1,13 +1,13 @@
 :host {
   display: inline-flex;
   font-size: $--app-switch-label-size;
-  color: $--app-switch-label-color;
+  color: inherit;
   flex-direction: row;
   align-items:center;
   vertical-align: middle;
   hc-icon{
     font-size: $--app-switch-size;
-    color: $--app-switch-icon-color;
+    color: inherit;
     transition:0.3s;
   }
   .active{

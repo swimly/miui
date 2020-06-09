@@ -481,6 +481,7 @@ export namespace Components {
         "width": number;
     }
     interface HcSwitch {
+        "Switch": (v: any) => Promise<void>;
         "activeColor": string;
         "activeIcon": string;
         "checked": boolean;
@@ -547,6 +548,8 @@ export namespace Components {
         "controls": boolean;
         "current": number;
         "duration": number;
+        "forbidJump": boolean;
+        "fullScreen": boolean;
         "height": number;
         "loaded": number;
         "muted": boolean;
@@ -554,11 +557,15 @@ export namespace Components {
         "play": boolean;
         "poster": string;
         "preload": string;
+        "showControls": boolean;
         "src": string;
     }
     interface HcVideoControls {
+        "Playing": (v: any) => Promise<void>;
         "current": number;
         "duration": number;
+        "forbidJump": boolean;
+        "fullScreen": boolean;
         "muted": boolean;
         "play": boolean;
     }
@@ -1582,6 +1589,7 @@ declare namespace LocalJSX {
         "max"?: number;
         "min"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVjump"?: (event: CustomEvent<any>) => void;
         "readonly"?: boolean;
         "size"?: string;
         "step"?: number;
@@ -1689,6 +1697,8 @@ declare namespace LocalJSX {
         "controls"?: boolean;
         "current"?: number;
         "duration"?: number;
+        "forbidJump"?: boolean;
+        "fullScreen"?: boolean;
         "height"?: number;
         "loaded"?: number;
         "muted"?: boolean;
@@ -1696,12 +1706,16 @@ declare namespace LocalJSX {
         "play"?: boolean;
         "poster"?: string;
         "preload"?: string;
+        "showControls"?: boolean;
         "src"?: string;
     }
     interface HcVideoControls {
         "current"?: number;
         "duration"?: number;
+        "forbidJump"?: boolean;
+        "fullScreen"?: boolean;
         "muted"?: boolean;
+        "onVfull"?: (event: CustomEvent<any>) => void;
         "onVmute"?: (event: CustomEvent<any>) => void;
         "onVplay"?: (event: CustomEvent<any>) => void;
         "onVprogress"?: (event: CustomEvent<any>) => void;

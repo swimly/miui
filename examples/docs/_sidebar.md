@@ -37,3 +37,7 @@
   * [hc-actionsheet 动作面板](../../src/components/hc-actionsheet/readme)
   * [hc-keyboard 安全键盘](../../src/components/hc-keyboard/readme)
   * [hc-picker 下拉选择](../../src/components/hc-picker/readme)
+  * 高级
+  * [hc-calendar 日历](../../src/components/hc-calendar/readme)
+  * [hc-video 视频](../../src/components/hc-video/readme)
+  * [hc-tab 切换](../../src/components/hc-tab/readme)

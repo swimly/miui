@@ -1,7 +1,7 @@
 import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
 import { h as hammer } from './hammer-a3a84d6d.js';
 
-const hcSliderCss = ":host{display:block;padding:0.3rem 0}:host .slider{display:flex;position:relative;height:0.5rem;background:var(--background-color-dark);border-radius:0.5rem;border-left:none;border-right:none}:host .slider .bar{position:absolute;left:0;top:0;height:100%;background:var(--color-primary);border-radius:0.5rem 0 0 0.5rem}:host .slider .handle{display:flex;width:0.7rem;height:0.7rem;background:var(--background-color-white);border:0.1rem solid var(--color-primary);border-radius:50%;position:absolute;top:50%;left:0;margin-top:-0.35rem;flex-direction:row;align-items:center;justify-content:center;box-sizing:border-box}:host .slider .step{display:flex;flex-direction:row;flex:1;font-size:0;align-items:center}:host .slider .step span{flex:1;display:inline-block;height:0.25rem;box-sizing:border-box}:host .slider .step span:last-child{border-right:none}:host([disabled]){opacity:0.7}:host([size=mini]) .slider{height:0.35rem}:host([size=mini]) .slider .handle{width:0.35rem;height:0.35rem;margin-top:-0.175rem;background-color:var(--background-color-dark);border-color:var(--background-color-dark);border-radius:0;border-right-width:1rem}:host([size=small]) .slider{height:0.4rem}:host([size=small]) .slider .handle{width:0.6rem;height:0.6rem;margin-top:-0.3rem}:host([size=large]) .slider{height:0.55rem}:host([size=large]) .slider .handle{width:0.825rem;height:0.825rem;margin-top:-0.4125rem}";
+const hcSliderCss = ":host{display:block;padding:0.3rem 0}:host .slider{display:flex;position:relative;height:0.5rem;background:var(--background-color-dark);border-radius:0.5rem;border-left:none;border-right:none}:host .slider .bar{position:absolute;left:0;top:0;height:100%;background:var(--color-primary);border-radius:0.5rem 0 0 0.5rem}:host .slider .handle{display:flex;width:0.7rem;height:0.7rem;background:var(--background-color-white);border:0.1rem solid var(--color-primary);border-radius:50%;position:absolute;top:50%;left:0;margin-top:-0.35rem;flex-direction:row;align-items:center;justify-content:center;box-sizing:border-box}:host .slider .step{display:flex;flex-direction:row;flex:1;font-size:0;align-items:center}:host .slider .step span{flex:1;display:inline-block;height:0.25rem;box-sizing:border-box}:host .slider .step span:last-child{border-right:none}:host([disabled]){opacity:0.7}:host([size=mini]) .slider{height:0.35rem;overflow:hidden}:host([size=mini]) .slider .handle{width:0.35rem;height:0.35rem;margin-top:-0.175rem;background-color:var(--background-color-dark);border-color:var(--background-color-dark);border-radius:0;border-right-width:1rem}:host([size=small]) .slider{height:0.4rem}:host([size=small]) .slider .handle{width:0.6rem;height:0.6rem;margin-top:-0.3rem}:host([size=large]) .slider{height:0.55rem}:host([size=large]) .slider .handle{width:0.825rem;height:0.825rem;margin-top:-0.4125rem}";
 
 class HcSlider {
     constructor(hostRef) {
@@ -14,10 +14,14 @@ class HcSlider {
         this.offset = 0;
         this.maxWidth = 0;
         this.vchange = createEvent(this, "vchange", 7);
+        this.vjump = createEvent(this, "vjump", 7);
     }
     componentWillRender() {
         if (this.disabled) {
             this.el.setAttribute('disabled', 'true');
+        }
+        if (this.readonly) {
+            this.el.setAttribute('readonly', 'true');
         }
     }
     componentDidLoad() {
@@ -44,12 +48,19 @@ class HcSlider {
             } }), h("slot", null, this.renderDiv()))));
     }
     jump(e) {
-        if (this.step)
+        if (this.step || this.readonly || this.disabled)
             return;
         var left = this.el.getBoundingClientRect().x;
         this.offset = e.x - left;
         this.$handle.style.transform = `translate3d(${Math.round(e.x - left)}px, 0, 0)`;
         this.$bar.style.width = `${Math.round(e.x - left + this.el.offsetHeight / 2)}px`;
+        var bili = Math.round(this.offset / this.el.offsetWidth * 100);
+        var result = {
+            bili: bili,
+            value: Math.round(this.min + bili * (this.max - this.min) / 100)
+        };
+        this.value = bili;
+        this.vjump.emit(result);
     }
     bindTouch() {
         var hammer$1 = new hammer(this.el);

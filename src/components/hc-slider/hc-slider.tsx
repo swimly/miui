@@ -16,6 +16,7 @@ export class HcSlider {
   @Prop() size: string;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
+  @Event() vjump: EventEmitter;
   offset: number = 0;
   $handle;
   $bar;
@@ -23,6 +24,9 @@ export class HcSlider {
   componentWillRender () {
     if (this.disabled) {
       this.el.setAttribute('disabled', 'true')
+    }
+    if (this.readonly) {
+      this.el.setAttribute('readonly', 'true')
     }
   }
   componentDidLoad () {
@@ -59,11 +63,18 @@ export class HcSlider {
     );
   }
   jump (e) {
-    if (this.step) return
+    if (this.step || this.readonly || this.disabled) return
     var left = this.el.getBoundingClientRect().x
     this.offset = e.x - left
     this.$handle.style.transform = `translate3d(${Math.round(e.x - left)}px, 0, 0)`
     this.$bar.style.width = `${Math.round(e.x -left + this.el.offsetHeight / 2)}px`
+    var bili = Math.round(this.offset / this.el.offsetWidth * 100)
+    var result = {
+      bili: bili,
+      value: Math.round(this.min + bili * (this.max - this.min) / 100)
+    }
+    this.value = bili
+    this.vjump.emit(result)
   }
   bindTouch () {
     var hammer = new Hammer(this.el)

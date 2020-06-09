@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Watch, Element, EventEmitter, Event, Method } from '@stencil/core';
 
 @Component({
   tag: 'hc-switch',
@@ -52,5 +52,10 @@ export class HcSwitch implements ComponentInterface {
   onClick () {
     if (this.disabled || this.readonly) return;
     this.checked = !this.checked;
+  }
+  @Method()
+  async Switch (v) {
+    this.checked = v
+    console.log('我到这了')
   }
 }

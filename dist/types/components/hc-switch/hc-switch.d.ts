@@ -15,4 +15,5 @@ export declare class HcSwitch implements ComponentInterface {
     render(): any;
     renderSwitch(): any;
     onClick(): void;
+    Switch(v: any): Promise<void>;
 }

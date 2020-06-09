@@ -10,6 +10,7 @@ export declare class HcSlider {
     size: string;
     el: HTMLElement;
     vchange: EventEmitter;
+    vjump: EventEmitter;
     offset: number;
     $handle: any;
     $bar: any;
