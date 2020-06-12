@@ -6,52 +6,64 @@ class HcActionsheet {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.head = "请选择";
-        this.mode = 'single'; //multiple
         this.value = '';
-        this.content = '[]';
+        this.data = '';
         this.vchange = createEvent(this, "vchange", 7);
         this.vdone = createEvent(this, "vdone", 7);
     }
+    valueHandle(v) {
+        this.el.setAttribute('value', v);
+    }
     componentDidLoad() {
-        this.$handle = this.el.shadowRoot.querySelector('slot');
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
-        var slot = this.el.shadowRoot.querySelectorAll('slot')[1];
-        if (slot.assignedElements()[0]) {
-            this.$children = slot.assignedElements()[0].querySelectorAll('hc-actionsheet-item');
-            this.renderActive();
-            this.bindChange();
-        }
-        else {
-            this.$children = this.el.shadowRoot.querySelectorAll('hc-actionsheet-item');
-        }
-        this.bindClick();
     }
     render() {
-        var content = eval(`(${this.content})`);
-        var value = this.value.split(',');
-        return (h(Host, null, h("slot", { name: "handle" }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.head), h("div", { class: "wrap" }, h("slot", null, h("hc-actionsheet-content", null, content.map((item) => {
-            return (h("hc-actionsheet-item", Object.assign({}, {
-                active: value.indexOf(item.value) >= 0
-            }, { onClick: this.onToggle.bind(this, item), value: item.value }), item.label));
-        })))), h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { onClick: this.destory.bind(this, '取消'), type: "info", rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { onClick: this.destory.bind(this, '确定'), type: "primary", rounder: true }, "\u786E\u5B9A"))))));
+        var computedData;
+        var handle = null;
+        if (!this.command && !this.data) {
+            var data = [];
+            var children = this.el.children;
+            var content = children[1];
+            var items = Array.from(content.children);
+            items.forEach(item => {
+                data.push({
+                    label: item.innerHTML,
+                    value: item.getAttribute('value')
+                });
+            });
+            handle = children[0].innerHTML;
+            computedData = data;
+        }
+        else {
+            computedData = JSON.parse(this.data);
+        }
+        var value = this.value ? this.value.split(',') : [];
+        console.log(value);
+        return (h(Host, null, h("hc-actionsheet-handle", { innerHTML: handle, onClick: this.generate.bind(this, null) }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.head), h("div", { class: "content" }, computedData.map((item) => (h("hc-actionsheet-item", { onClick: this.onClick.bind(this, item), value: item.value, active: value.indexOf(item.value) >= 0 }, item.label)))), h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { onClick: this.destory.bind(this), type: "info", rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { onClick: this.destory.bind(this), type: "primary", rounder: true }, "\u786E\u5B9A"))))));
     }
-    // 渲染当前选中
-    renderActive() {
+    onClick(item) {
         var value = this.value.split(',');
-        this.$children.forEach(item => {
-            if (value.indexOf(item.getAttribute('value')) >= 0) {
-                item.setAttribute('active', 'true');
+        if (this.multiple) {
+            var index = value.indexOf(item.value);
+            if (index >= 0) {
+                value.splice(index, 1);
             }
-        });
-    }
-    // handle点击展开
-    bindClick() {
-        this.$handle.addEventListener('click', () => {
-            this.generate();
-        });
+            else {
+                if (value[0] == '') {
+                    value[0] = item.value;
+                }
+                else {
+                    value.push(item.value);
+                }
+            }
+        }
+        else {
+            value = [item.value];
+        }
+        this.value = value.join(',');
     }
     // 销毁
-    async destory(label) {
+    async destory(e) {
         this.$drawer.destory();
         setTimeout(() => {
             if (this.command) {
@@ -63,68 +75,12 @@ class HcActionsheet {
         this.vdone.emit({
             value: this.value.split(','),
             valuestring: this.value,
-            action: label
-        });
-    }
-    // 指令模式点击切换
-    onToggle(item) {
-        var value = this.value.split(',');
-        if (this.mode == 'single') {
-            value = [item.value];
-        }
-        else {
-            var i = value.indexOf(item.value);
-            if (i >= 0) {
-                value.splice(i, 1);
-            }
-            else {
-                value.push(item.value);
-            }
-        }
-        this.$children.forEach(child => {
-            if (value.indexOf(child.getAttribute('value')) >= 0) {
-                child.setAttribute('active', `true`);
-            }
-            else {
-                child.removeAttribute('active');
-            }
-        });
-        this.value = value.join(',');
-    }
-    // 普通模式点击切换
-    bindChange() {
-        var value = this.value.split(',');
-        this.$children.forEach((child) => {
-            child.addEventListener('click', () => {
-                var s = child.getAttribute('value');
-                if (this.mode == 'single') {
-                    this.$children.forEach(c => {
-                        c.removeAttribute('active');
-                    });
-                    value = [s];
-                    child.setAttribute('active', 'true');
-                }
-                else {
-                    if (child.getAttribute('active')) {
-                        child.removeAttribute('active');
-                        var i = value.indexOf(s);
-                        value.splice(i, 1);
-                    }
-                    else {
-                        child.setAttribute('active', 'true');
-                        value.push(s);
-                    }
-                }
-                this.value = value.join(',');
-                this.vchange.emit({
-                    value: value,
-                    valueString: value.join(',')
-                });
-            });
+            event: e
         });
     }
     // 初始化
     async generate(option = null) {
+        console.log(option);
         if (option) {
             var actionsheet = document.createElement('hc-actionsheet');
             for (let key in option) {
@@ -139,16 +95,19 @@ class HcActionsheet {
             }
             actionsheet.setAttribute('command', 'true');
             document.body.appendChild(actionsheet);
-            setTimeout(() => {
-                actionsheet.generate();
-            }, 100);
+            actionsheet.generate();
             return actionsheet;
         }
         else {
-            this.$drawer.generate();
+            setTimeout(() => {
+                this.$drawer.generate();
+            }, 30);
         }
     }
     get el() { return getElement(this); }
+    static get watchers() { return {
+        "value": ["valueHandle"]
+    }; }
 }
 HcActionsheet.style = hcActionsheetCss;
 

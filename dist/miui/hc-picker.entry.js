@@ -6,34 +6,84 @@ class HcPickerView {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.titles = '请选择';
+        this.value = '';
+        this.valueProp = 'value';
+        this.labelProp = 'label';
     }
     valueHandle(v) {
         console.log(v);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
-        this.$handle = this.el.shadowRoot.querySelectorAll('slot')[0];
-        this.$content = this.el.shadowRoot.querySelectorAll('slot')[1].assignedElements()[0];
-        this.$drawer.setAttribute('place', 'down');
-        this.$drawer.setAttribute('rounder', `true`);
-        this.bindClick();
-        this.$content.addEventListener('vchange', (e) => {
-            this.value = e.detail.value;
-        });
     }
     render() {
-        return (h(Host, null, h("slot", { name: "handle" }), h("hc-drawer", { place: "down" }, h("h2", { class: "title" }, this.titles), h("div", null, h("slot", null)), h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { type: "info", onClick: this.destory.bind(this), rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { type: "primary", onClick: this.destory.bind(this), rounder: true }, "\u786E\u5B9A"))))));
+        var handle = null;
+        var data = [];
+        if (this.command && this.data) {
+            var source = JSON.parse(this.data);
+            data = this.parse(source, this.value).data;
+            console.log(data);
+        }
+        else {
+            var children = this.el.children;
+            var content = Array.from(children[1].children);
+            content.forEach((group) => {
+                var items = Array.from(group.children);
+                var child = [];
+                items.forEach(item => {
+                    child.push({
+                        label: item.innerHTML,
+                        value: item.getAttribute('value')
+                    });
+                });
+                data.push(child);
+            });
+            handle = children[0].innerHTML;
+        }
+        return (h(Host, null, h("hc-picker-handle", { onClick: this.onDisplay.bind(this), innerHTML: handle }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.titles), h("hc-picker-content", { data: JSON.stringify(data), value: this.value, onVchange: this.onChange.bind(this) }, data.map(group => (h("hc-picker-view", null, group.map(item => (h("hc-picker-item", { value: item[this.valueProp] }, item[this.labelProp]))))))), h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { type: "info", onClick: this.destory.bind(this), rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { type: "primary", onClick: this.destory.bind(this), rounder: true }, "\u786E\u5B9A"))))));
     }
-    bindClick() {
-        this.$handle.addEventListener('click', () => {
-            this.$drawer.generate();
-        });
+    onChange(e) {
+        console.log(e.detail);
+    }
+    async onDisplay() {
+        this.$drawer.generate();
     }
     async destory() {
         this.$drawer.destory();
+        setTimeout(() => {
+            if (this.command) {
+                setTimeout(() => {
+                    document.body.removeChild(this.el);
+                }, 300);
+            }
+        }, 300);
+    }
+    async generate(option = null) {
+        if (option) {
+            var picker = document.createElement('hc-picker');
+            for (let key in option) {
+                var prop;
+                if (typeof option[key] !== 'string') {
+                    prop = JSON.stringify(option[key]);
+                }
+                else {
+                    prop = option[key];
+                }
+                picker.setAttribute(key, prop);
+            }
+            picker.setAttribute('command', 'true');
+            document.body.appendChild(picker);
+            picker.generate();
+            return picker;
+        }
+        else {
+            setTimeout(() => {
+                this.onDisplay();
+            }, 30);
+        }
     }
     // 格式化数据
-    async parse(source, value) {
+    parse(source, value) {
         var index = 0;
         var format = [];
         var selected = [];

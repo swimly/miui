@@ -6,6 +6,7 @@ import Hammer from 'hammerjs'
   shadow: true,
 })
 export class HcPickerView implements ComponentInterface {
+  @Prop() value: string;
   @Prop() current: number = 0;
   @Prop() vis: number = 5;
   @Prop() rate: number = 8;
@@ -41,6 +42,9 @@ export class HcPickerView implements ComponentInterface {
     })
     this.$children[this.current].setAttribute('active', `true`)
     this.bindTouch()
+    if (this.current) {
+      this.el.setAttribute('current', `${this.current}`)
+    }
   }
   render() {
     this.offset = this.baseOffset() - this.current * this.itemHeight

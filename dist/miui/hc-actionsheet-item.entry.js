@@ -6,15 +6,29 @@ class HcActionsheetItem {
     constructor(hostRef) {
         registerInstance(this, hostRef);
     }
+    activeHandle(v) {
+        if (v) {
+            this.el.setAttribute('active', 'true');
+        }
+        else {
+            this.el.removeAttribute('active');
+        }
+    }
     componentDidLoad() {
         if (this.value) {
             this.el.setAttribute('value', this.value);
+        }
+        if (this.active) {
+            this.el.setAttribute('active', 'true');
         }
     }
     render() {
         return (h(Host, null, h("slot", null), h("hc-icon", { name: "seleted" })));
     }
     get el() { return getElement(this); }
+    static get watchers() { return {
+        "active": ["activeHandle"]
+    }; }
 }
 HcActionsheetItem.style = hcActionsheetItemCss;
 

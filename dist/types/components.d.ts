@@ -8,16 +8,19 @@ import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 export namespace Components {
     interface HcActionsheet {
         "command": boolean;
-        "content": string;
-        "destory": (label: any) => Promise<void>;
+        "data": string;
+        "destory": (e: any) => Promise<void>;
         "generate": (option?: object) => Promise<HTMLHcActionsheetElement>;
         "head": string;
-        "mode": string;
+        "multiple": boolean;
         "value": string;
     }
     interface HcActionsheetContent {
     }
+    interface HcActionsheetHandle {
+    }
     interface HcActionsheetItem {
+        "active": boolean;
         "value": string;
     }
     interface HcAddress {
@@ -304,13 +307,18 @@ export namespace Components {
     interface HcPanel {
     }
     interface HcPicker {
+        "command": boolean;
+        "data": string;
         "destory": () => Promise<void>;
-        "parse": (source: any, value: any) => Promise<{ source: any; data: any[]; value: any[]; valueString: any; }>;
+        "generate": (option?: object) => Promise<HTMLHcPickerElement>;
+        "labelProp": string;
+        "onDisplay": () => Promise<void>;
         "titles": string;
         "value": string;
+        "valueProp": string;
     }
     interface HcPickerContent {
-        "current": string;
+        "data": string;
         "value": string;
     }
     interface HcPickerHandle {
@@ -318,12 +326,14 @@ export namespace Components {
     interface HcPickerItem {
         "active": boolean;
         "height": number;
+        "value": string;
     }
     interface HcPickerView {
         "Moving": (number: any) => Promise<void>;
         "current": number;
         "itemHeight": number;
         "rate": number;
+        "value": string;
         "vis": number;
     }
     interface HcPopover {
@@ -584,6 +594,12 @@ declare global {
     var HTMLHcActionsheetContentElement: {
         prototype: HTMLHcActionsheetContentElement;
         new (): HTMLHcActionsheetContentElement;
+    };
+    interface HTMLHcActionsheetHandleElement extends Components.HcActionsheetHandle, HTMLStencilElement {
+    }
+    var HTMLHcActionsheetHandleElement: {
+        prototype: HTMLHcActionsheetHandleElement;
+        new (): HTMLHcActionsheetHandleElement;
     };
     interface HTMLHcActionsheetItemElement extends Components.HcActionsheetItem, HTMLStencilElement {
     }
@@ -1074,6 +1090,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "hc-actionsheet": HTMLHcActionsheetElement;
         "hc-actionsheet-content": HTMLHcActionsheetContentElement;
+        "hc-actionsheet-handle": HTMLHcActionsheetHandleElement;
         "hc-actionsheet-item": HTMLHcActionsheetItemElement;
         "hc-address": HTMLHcAddressElement;
         "hc-alert": HTMLHcAlertElement;
@@ -1160,16 +1177,19 @@ declare global {
 declare namespace LocalJSX {
     interface HcActionsheet {
         "command"?: boolean;
-        "content"?: string;
+        "data"?: string;
         "head"?: string;
-        "mode"?: string;
+        "multiple"?: boolean;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "onVdone"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
     interface HcActionsheetContent {
     }
+    interface HcActionsheetHandle {
+    }
     interface HcActionsheetItem {
+        "active"?: boolean;
         "value"?: string;
     }
     interface HcAddress {
@@ -1456,11 +1476,15 @@ declare namespace LocalJSX {
     interface HcPanel {
     }
     interface HcPicker {
+        "command"?: boolean;
+        "data"?: string;
+        "labelProp"?: string;
         "titles"?: string;
         "value"?: string;
+        "valueProp"?: string;
     }
     interface HcPickerContent {
-        "current"?: string;
+        "data"?: string;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
@@ -1469,12 +1493,14 @@ declare namespace LocalJSX {
     interface HcPickerItem {
         "active"?: boolean;
         "height"?: number;
+        "value"?: string;
     }
     interface HcPickerView {
         "current"?: number;
         "itemHeight"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "rate"?: number;
+        "value"?: string;
         "vis"?: number;
     }
     interface HcPopover {
@@ -1727,6 +1753,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "hc-actionsheet": HcActionsheet;
         "hc-actionsheet-content": HcActionsheetContent;
+        "hc-actionsheet-handle": HcActionsheetHandle;
         "hc-actionsheet-item": HcActionsheetItem;
         "hc-address": HcAddress;
         "hc-alert": HcAlert;
@@ -1816,6 +1843,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "hc-actionsheet": LocalJSX.HcActionsheet & JSXBase.HTMLAttributes<HTMLHcActionsheetElement>;
             "hc-actionsheet-content": LocalJSX.HcActionsheetContent & JSXBase.HTMLAttributes<HTMLHcActionsheetContentElement>;
+            "hc-actionsheet-handle": LocalJSX.HcActionsheetHandle & JSXBase.HTMLAttributes<HTMLHcActionsheetHandleElement>;
             "hc-actionsheet-item": LocalJSX.HcActionsheetItem & JSXBase.HTMLAttributes<HTMLHcActionsheetItemElement>;
             "hc-address": LocalJSX.HcAddress & JSXBase.HTMLAttributes<HTMLHcAddressElement>;
             "hc-alert": LocalJSX.HcAlert & JSXBase.HTMLAttributes<HTMLHcAlertElement>;

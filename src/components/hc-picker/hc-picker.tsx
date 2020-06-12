@@ -7,7 +7,11 @@ import { Component, Host, h, Element, Method, Prop, Watch } from '@stencil/core'
 })
 export class HcPickerView {
   @Prop() titles: string = '请选择';
-  @Prop() value: string;
+  @Prop() value: string = '';
+  @Prop() data: string;
+  @Prop() valueProp: string = 'value'
+  @Prop() labelProp: string = 'label'
+  @Prop() command: boolean
   @Element() el: HTMLElement
   $drawer;
   $handle;
@@ -18,24 +22,46 @@ export class HcPickerView {
   }
   componentDidLoad () {
     this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
-    this.$handle = this.el.shadowRoot.querySelectorAll('slot')[0]
-    this.$content = this.el.shadowRoot.querySelectorAll('slot')[1].assignedElements()[0]
-    this.$drawer.setAttribute('place', 'down')
-    this.$drawer.setAttribute('rounder', `true`)
-    this.bindClick()
-    this.$content.addEventListener('vchange', (e) => {
-      this.value = e.detail.value
-    })
   }
   render() {
+    var handle = null
+    var data = []
+    if (this.command && this.data) {
+      var source = JSON.parse(this.data)
+      data = this.parse(source, this.value).data
+      console.log(data)
+    } else {
+      var children = this.el.children
+      var content = Array.from(children[1].children)
+      content.forEach((group) => {
+        var items = Array.from(group.children)
+        var child = []
+        items.forEach(item => {
+          child.push({
+            label: item.innerHTML,
+            value: item.getAttribute('value')
+          })
+        })
+        data.push(child)
+      })
+      handle = children[0].innerHTML
+    }
     return (
       <Host>
-        <slot name="handle"></slot>
-        <hc-drawer place="down">
+        <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={handle}></hc-picker-handle>
+        <hc-drawer place="down" rounder>
           <h2 class="title">{this.titles}</h2>
-          <div>
-            <slot></slot>
-          </div>
+          <hc-picker-content data={JSON.stringify(data)} value={this.value} onVchange={this.onChange.bind(this)}>
+            {data.map(group => (
+              <hc-picker-view>
+                {
+                  group.map(item => (
+                    <hc-picker-item value={item[this.valueProp]}>{item[this.labelProp]}</hc-picker-item>
+                  ))
+                }
+              </hc-picker-view>
+            ))}
+          </hc-picker-content>
           <hc-row class="footer">
             <hc-col span={12}>
               <hc-button type="info" onClick={this.destory.bind(this)} rounder={true}>取消</hc-button>
@@ -48,18 +74,49 @@ export class HcPickerView {
       </Host>
     );
   }
-  bindClick () {
-    this.$handle.addEventListener('click', () => {
-      this.$drawer.generate()
-    })
+  onChange (e) {
+    console.log(e.detail)
+  }
+  @Method()
+  async onDisplay () {
+    this.$drawer.generate()
   }
   @Method()
   async destory () {
     this.$drawer.destory()
+    setTimeout(() => {
+      if (this.command) {
+        setTimeout(() => {
+          document.body.removeChild(this.el)
+        }, 300)
+      }
+    }, 300)
   }
   @Method()
+  async generate (option: object = null) {
+    if (option) {
+      var picker = document.createElement('hc-picker')
+      for (let key in option) {
+        var prop;
+        if (typeof option[key] !== 'string') {
+          prop = JSON.stringify(option[key])
+        } else {
+          prop = option[key]
+        }
+        picker.setAttribute(key, prop)
+      }
+      picker.setAttribute('command', 'true')
+      document.body.appendChild(picker)
+      picker.generate()
+      return picker;
+    } else {
+      setTimeout(() => {
+        this.onDisplay()
+      }, 30)
+    }
+  }
   // 格式化数据
-  async parse(source, value) {
+  parse(source, value) {
     var index = 0
     var format = []
     var selected = []

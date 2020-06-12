@@ -56,6 +56,9 @@ class HcPickerView {
         });
         this.$children[this.current].setAttribute('active', `true`);
         this.bindTouch();
+        if (this.current) {
+            this.el.setAttribute('current', `${this.current}`);
+        }
     }
     render() {
         this.offset = this.baseOffset() - this.current * this.itemHeight;

@@ -1,5 +1,6 @@
 import { ComponentInterface, EventEmitter } from '../../stencil-public-runtime';
 export declare class HcPickerView implements ComponentInterface {
+    value: string;
     current: number;
     vis: number;
     rate: number;

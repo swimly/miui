@@ -1,9 +1,9 @@
 import { EventEmitter } from '../../stencil-public-runtime';
 export declare class HcActionsheet {
     head: string;
-    mode: string;
+    multiple: boolean;
     value: string;
-    content: string;
+    data: string;
     command: boolean;
     el: HTMLElement;
     vchange: EventEmitter;
@@ -11,12 +11,10 @@ export declare class HcActionsheet {
     $drawer: any;
     $handle: any;
     $children: any;
+    valueHandle(v: string): void;
     componentDidLoad(): void;
     render(): any;
-    renderActive(): void;
-    bindClick(): void;
-    destory(label: any): Promise<void>;
-    onToggle(item: any): void;
-    bindChange(): void;
+    onClick(item: any): void;
+    destory(e: any): Promise<void>;
     generate(option?: object): Promise<HTMLHcActionsheetElement>;
 }

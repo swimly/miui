@@ -3,6 +3,7 @@
 miui是一个遵循`miui12`设计的前端ui组件库，利用stencil编写，能与 vue、react、angular、ember无缝衔接！基本上做到一处编写到处可用！
 
 [Github](https://github.com/swimly/miui)
+[示例](https://swimly.cn:8080/miui)
 [起步](../../README)
 
 <style>
@@ -66,5 +67,9 @@ miui是一个遵循`miui12`设计的前端ui组件库，利用stencil编写，�
   .cover-main p a:first-child{
     background:none;
     color: #42b983 !important;
+  }
+  .cover-main p a:nth-child(2){
+    background:#F56C6C;
+    border-color:#F56C6C;
   }
 </style>

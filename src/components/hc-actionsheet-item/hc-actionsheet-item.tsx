@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element } from '@stencil/core';
+import { Component, Host, h, Prop, Element, Watch } from '@stencil/core';
 
 @Component({
   tag: 'hc-actionsheet-item',
@@ -7,10 +7,22 @@ import { Component, Host, h, Prop, Element } from '@stencil/core';
 })
 export class HcActionsheetItem {
   @Prop() value: string;
+  @Prop() active: boolean;
   @Element() el: HTMLElement;
+  @Watch('active')
+  activeHandle (v: boolean) {
+    if (v) {
+      this.el.setAttribute('active', 'true')
+    } else {
+      this.el.removeAttribute('active')
+    }
+  }
   componentDidLoad () {
     if (this.value) {
       this.el.setAttribute('value', this.value)
+    }
+    if (this.active) {
+      this.el.setAttribute('active', 'true')
     }
   }
   render() {

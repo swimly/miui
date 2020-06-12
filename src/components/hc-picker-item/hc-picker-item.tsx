@@ -8,6 +8,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class HcPickerItem {
   @Prop() active: boolean;
   @Prop() height: number = 44;
+  @Prop() value: string;
   render() {
     return (
       <Host style={{
