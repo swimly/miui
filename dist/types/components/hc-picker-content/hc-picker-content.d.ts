@@ -3,8 +3,6 @@ export declare class HcPickerContent {
     value: string;
     data: string;
     el: HTMLElement;
-    vchange: EventEmitter;
-    currentHandle(v: string): void;
-    componentDidLoad(): void;
+    vdatachange: EventEmitter;
     render(): any;
 }

@@ -2,9 +2,8 @@ export declare class HcPickerView {
     titles: string;
     value: string;
     data: string;
-    valueProp: string;
-    labelProp: string;
     command: boolean;
+    reset: boolean;
     el: HTMLElement;
     $drawer: any;
     $handle: any;
@@ -12,17 +11,14 @@ export declare class HcPickerView {
     valueHandle(v: string): void;
     componentDidLoad(): void;
     render(): any;
-    onChange(e: any): void;
+    onDataChange(index: any, e: any): void;
+    renderCurrent(data: any): number;
+    computedData(): {
+        data: any[];
+        handle: string;
+        value: any[];
+    };
     onDisplay(): Promise<void>;
     destory(): Promise<void>;
     generate(option?: object): Promise<HTMLHcPickerElement>;
-    parse(source: any, value: any): {
-        source: any;
-        data: any[];
-        value: any[];
-        valueString: any;
-    };
-    isCascade(data: any): boolean;
-    isPlainObject(obj: any): boolean;
-    _typeof(obj: any): any;
 }

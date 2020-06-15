@@ -311,11 +311,10 @@ export namespace Components {
         "data": string;
         "destory": () => Promise<void>;
         "generate": (option?: object) => Promise<HTMLHcPickerElement>;
-        "labelProp": string;
         "onDisplay": () => Promise<void>;
+        "reset": boolean;
         "titles": string;
         "value": string;
-        "valueProp": string;
     }
     interface HcPickerContent {
         "data": string;
@@ -331,6 +330,7 @@ export namespace Components {
     interface HcPickerView {
         "Moving": (number: any) => Promise<void>;
         "current": number;
+        "data": string;
         "itemHeight": number;
         "rate": number;
         "value": string;
@@ -1478,14 +1478,13 @@ declare namespace LocalJSX {
     interface HcPicker {
         "command"?: boolean;
         "data"?: string;
-        "labelProp"?: string;
+        "reset"?: boolean;
         "titles"?: string;
         "value"?: string;
-        "valueProp"?: string;
     }
     interface HcPickerContent {
         "data"?: string;
-        "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVdatachange"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
     interface HcPickerHandle {
@@ -1497,8 +1496,9 @@ declare namespace LocalJSX {
     }
     interface HcPickerView {
         "current"?: number;
+        "data"?: string;
         "itemHeight"?: number;
-        "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVscrollend"?: (event: CustomEvent<any>) => void;
         "rate"?: number;
         "value"?: string;
         "vis"?: number;

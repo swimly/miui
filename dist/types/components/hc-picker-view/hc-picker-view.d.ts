@@ -5,17 +5,18 @@ export declare class HcPickerView implements ComponentInterface {
     vis: number;
     rate: number;
     itemHeight: number;
+    data: string;
     el: HTMLElement;
     $wrap: HTMLElement;
     $children: Element[];
     offset: number;
-    vchange: EventEmitter;
-    count(): number;
+    vscrollend: EventEmitter;
     currentHandle(v: number): void;
+    count(): number;
     baseOffset(): number;
     componentDidLoad(): void;
     render(): any;
+    renderActive(index: any): void;
     Moving(number: any): Promise<void>;
     bindTouch(): void;
-    easeout: (A: any, B: any, rate: any, callback: any, callback1: any) => void;
 }

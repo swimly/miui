@@ -13,19 +13,19 @@
       <hc-panel>
         <hc-title>普通</hc-title>
         <hc-picker-view id="auto" current="1">
-          <hc-picker-item value="0">2020</hc-picker-item>
-          <hc-picker-item value="1">2019</hc-picker-item>
-          <hc-picker-item value="1">2018</hc-picker-item>
-          <hc-picker-item value="1">2017</hc-picker-item>
-          <hc-picker-item value="1">2016</hc-picker-item>
-          <hc-picker-item value="1">2015</hc-picker-item>
-          <hc-picker-item value="1">2014</hc-picker-item>
-          <hc-picker-item value="1">2013</hc-picker-item>
+          <hc-picker-item value="2020">2020</hc-picker-item>
+          <hc-picker-item value="2019">2019</hc-picker-item>
+          <hc-picker-item value="2018">2018</hc-picker-item>
+          <hc-picker-item value="2017">2017</hc-picker-item>
+          <hc-picker-item value="2016">2016</hc-picker-item>
+          <hc-picker-item value="2015">2015</hc-picker-item>
+          <hc-picker-item value="2014">2014</hc-picker-item>
+          <hc-picker-item value="2013">2013</hc-picker-item>
         </hc-picker-view>
       </hc-panel>
       <hc-panel>
         <hc-title>slot</hc-title>
-        <hc-picker>
+        <hc-picker value="2018">
           <hc-picker-handle>
             <hc-button>选择日期</hc-button>
           </hc-picker-handle>
@@ -42,7 +42,7 @@
             </hc-picker-view>
           </hc-picker-content>
         </hc-picker>
-        <hc-picker>
+        <hc-picker value="2017,3" reset="false">
           <hc-picker-handle>
             <hc-button>请选择年月</hc-button>
           </hc-picker-handle>
@@ -87,14 +87,13 @@
     window.Picker = new hc_picker({})
     window.china = china
   </script>
-  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script> -->
   <script>
     document.querySelector('#zl').addEventListener('click', () => {
       Picker.generate({
         data: china,
-        value: '湖北省,武汉市,江夏区',
-        'label-prop': 'name'
+        value: '湖北省,武汉市,江夏区'
       })
     })
   </script>

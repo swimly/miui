@@ -13,6 +13,8 @@ export class HcPickerItem {
     return (
       <Host style={{
         height: `${this.height}px`
+      }} {...{
+        value: this.value
       }}>
         <slot></slot>
       </Host>

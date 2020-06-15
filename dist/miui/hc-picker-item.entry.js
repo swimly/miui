@@ -8,9 +8,11 @@ class HcPickerItem {
         this.height = 44;
     }
     render() {
-        return (h(Host, { style: {
+        return (h(Host, Object.assign({ style: {
                 height: `${this.height}px`
-            } }, h("slot", null)));
+            } }, {
+            value: this.value
+        }), h("slot", null)));
     }
 }
 HcPickerItem.style = hcPickerItemCss;

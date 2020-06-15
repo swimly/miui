@@ -1,5 +1,5 @@
 import { Component, Host, h, Element, Method, Prop, Watch } from '@stencil/core';
-
+import {parse} from '../../utils/picker'
 @Component({
   tag: 'hc-picker',
   styleUrl: 'hc-picker.scss',
@@ -9,55 +9,39 @@ export class HcPickerView {
   @Prop() titles: string = '请选择';
   @Prop() value: string = '';
   @Prop() data: string;
-  @Prop() valueProp: string = 'value'
-  @Prop() labelProp: string = 'label'
   @Prop() command: boolean
+  @Prop() reset: boolean = true;
   @Element() el: HTMLElement
   $drawer;
   $handle;
   $content;
   @Watch('value')
-  valueHandle (v:string) {
+  valueHandle (v: string) {
+    this.el.setAttribute('value', v)
     console.log(v)
   }
   componentDidLoad () {
     this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
   }
   render() {
-    var handle = null
-    var data = []
-    if (this.command && this.data) {
-      var source = JSON.parse(this.data)
-      data = this.parse(source, this.value).data
-      console.log(data)
-    } else {
-      var children = this.el.children
-      var content = Array.from(children[1].children)
-      content.forEach((group) => {
-        var items = Array.from(group.children)
-        var child = []
-        items.forEach(item => {
-          child.push({
-            label: item.innerHTML,
-            value: item.getAttribute('value')
-          })
-        })
-        data.push(child)
-      })
-      handle = children[0].innerHTML
-    }
+    var data = this.computedData()
     return (
       <Host>
-        <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={handle}></hc-picker-handle>
+        <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={data.handle}></hc-picker-handle>
         <hc-drawer place="down" rounder>
           <h2 class="title">{this.titles}</h2>
-          <hc-picker-content data={JSON.stringify(data)} value={this.value} onVchange={this.onChange.bind(this)}>
-            {data.map(group => (
-              <hc-picker-view>
+          <hc-picker-content>
+            {data.data.map((column, index) => (
+              <hc-picker-view value={data.value[index]} current={this.renderCurrent.bind(this, {
+                data: data.data[index],
+                value: data.value[index]
+              })()} onVscrollend={this.onDataChange.bind(this, index)}>
                 {
-                  group.map(item => (
-                    <hc-picker-item value={item[this.valueProp]}>{item[this.labelProp]}</hc-picker-item>
-                  ))
+                  column.map(item => {
+                    return (
+                      <hc-picker-item value={item.value}>{item.label}</hc-picker-item>
+                      )
+                  })
                 }
               </hc-picker-view>
             ))}
@@ -74,8 +58,64 @@ export class HcPickerView {
       </Host>
     );
   }
-  onChange (e) {
-    console.log(e.detail)
+  onDataChange (index, e) {
+    var value = this.value.split(',')
+    for (var i = 0; i < value.length; i ++) {
+      if (i > index && this.reset) {
+        if (this.command) {
+          value[i] = ''
+        } else {
+          value[i] = this.computedData().data[i][0].label
+        }
+      }
+      if (i == index) {
+        value[i] = e.detail.label
+      }
+    }
+    if (this.command) {
+      var result = parse(JSON.parse(this.data), value.join(','))
+      this.value = result.valueString
+    } else {
+      this.value = value.join(',')
+    }
+  }
+  renderCurrent (data) {
+    var index = 0;
+    data.data.forEach((item, i) => {
+      if (item.label == data.value) {
+        index = i
+      }
+    })
+    return index;
+  }
+  // 将内容转换成数组
+  computedData () {
+    var data = []
+    var value = []
+    var handle = this.command ? '' : this.el.children[0].innerHTML
+    if (this.command) {
+      var computed = parse(JSON.parse(this.data), this.value)
+      data = computed.data
+      value = computed.value
+    } else {
+      var children = Array.from(this.el.children[1].children)
+      children.forEach(view => {
+        var column = []
+        Array.from(view.children).forEach(item => {
+          column.push({
+            label: item.innerHTML,
+            value: item.getAttribute('value')
+          })
+        })
+        data.push(column)
+      })
+    }
+    value = this.value ? this.value.split(',') : []
+    return {
+      data,
+      handle,
+      value
+    }
   }
   @Method()
   async onDisplay () {
@@ -114,44 +154,5 @@ export class HcPickerView {
         this.onDisplay()
       }, 30)
     }
-  }
-  // 格式化数据
-  parse(source, value) {
-    var index = 0
-    var format = []
-    var selected = []
-    var label = value.split(',')
-    var current = this.isCascade(source) ? source : source[index]
-    while (current && Array.isArray(current) && current.length) {
-      format.push(current)
-      if (label && label[index] !== undefined) {
-        current.some((item) => {
-          if (item.name == label[index]) {
-            selected[index] = item
-            return true
-          }
-        })
-      }
-      if (!selected[index]) {
-        selected[index] = current[0]
-      }
-      index ++
-      current = this.isCascade(source) ? selected[selected.length - 1].children : source[index]
-    }
-    return {
-      source: source,
-      data: format,
-      value: selected,
-      valueString: value
-    }
-  }
-  isCascade (data) {
-    return data[0] && this.isPlainObject(data[0])
-  }
-  isPlainObject(obj) {
-    return this._typeof(obj) === 'object'
-  }
-  _typeof(obj) {
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
   }
 }
