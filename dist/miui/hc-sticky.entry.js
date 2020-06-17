@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 function getparents(el, parentSelector /* optional */) {
     // If no parentSelector defined will bubble up all the way to *document*

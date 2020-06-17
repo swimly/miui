@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 import { p as parse } from './picker-e34a3c80.js';
 
 const hcPickerCss = ":host{display:block;font-size:0.7rem}:host .title{font-size:0.9rem;color:var(--color-text-primary);text-align:center;font-weight:normal;margin:1rem 0}:host .footer{height:2.2rem;padding:1rem}:host .footer hc-col:first-child{padding-right:0.5rem}:host .footer hc-col:last-child{padding-left:0.5rem}";
@@ -9,10 +9,10 @@ class HcPickerView {
         this.titles = '请选择';
         this.value = '';
         this.reset = true;
+        this.vchange = createEvent(this, "vchange", 7);
     }
     valueHandle(v) {
         this.el.setAttribute('value', v);
-        console.log(v);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
@@ -93,6 +93,9 @@ class HcPickerView {
     }
     async destory() {
         this.$drawer.destory();
+        this.vchange.emit({
+            value: this.value
+        });
         setTimeout(() => {
             if (this.command) {
                 setTimeout(() => {

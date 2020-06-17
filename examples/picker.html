@@ -80,20 +80,24 @@
       </hc-panel>
     </hc-view>
   </hc-page>
-  <script type="module" src="../www/build/miui.esm.js"></script>
   <script type="module">
     import china from '../src/utils/china.js'
     import {hc_picker} from '../www/build/hc-picker.entry.js'
     window.Picker = new hc_picker({})
     window.china = china
   </script>
-  <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script> -->
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
   <script>
     document.querySelector('#zl').addEventListener('click', () => {
       Picker.generate({
         data: china,
         value: '湖北省,武汉市,江夏区'
+      }).then(res => {
+        res.addEventListener('vchange', (e) => {
+          console.log(e.detail.value)
+        })
       })
     })
   </script>

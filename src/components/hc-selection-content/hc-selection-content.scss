@@ -1,9 +1,8 @@
 :host {
   display: block;
-  padding: $--app-selection-fontsize;
-  overflow:auto;
   height:$--app-selection-fontsize * 20;
   position: relative;
+  overflow:hidden;
   .mask{
     position: absolute;
     top:0;
@@ -18,6 +17,13 @@
     opacity:0;
     z-index:-1;
     transition: 0.3s;
+  }
+  .wrap{
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height:100%;
+    transition:0.3s;
   }
 }
 :host([loading]){

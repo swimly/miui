@@ -9,6 +9,12 @@
     flex-wrap: nowrap;
     height: $--app-tab-height;
     transition:0.3s;
+    .content{
+      display:flex;
+      flex-direction: row;
+      align-items:center;
+      flex:1;
+    }
   }
   .indicate{
     position: absolute;

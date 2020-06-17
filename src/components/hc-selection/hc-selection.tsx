@@ -1,5 +1,5 @@
 import { Component, Host, h, Element, Prop, Event, EventEmitter, Method } from '@stencil/core';
-
+import {parse} from '../../utils/picker'
 @Component({
   tag: 'hc-selection',
   styleUrl: 'hc-selection.scss',
@@ -7,117 +7,87 @@ import { Component, Host, h, Element, Prop, Event, EventEmitter, Method } from '
 })
 export class HcSelection {
   @Prop() heading: string = '请选择所在地区'
-  @Prop() value: string = '';
+  @Prop() value: string = '请选择';
   @Prop() level: number = 0;
   @Prop() data: string;
+  @Prop() current: number = 0;
   @Prop() command: boolean;
+  @Prop() width: number;
+  @Prop() footer: boolean = true;
   @Element() el: HTMLElement;
   @Event() vchoice: EventEmitter;
   @Event() vlevel: EventEmitter;
   $drawer;
   $tab;
-  $children;
-  $content;
-  $swiper;
+  $data;
+  $value;
   componentDidLoad () {
     this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
     this.$tab = this.el.shadowRoot.querySelector('hc-tab')
-    this.$swiper = this.el.shadowRoot.querySelector('hc-swiper')
-    this.$content = this.el.shadowRoot.querySelector('hc-selection-content')
-    this.$drawer.addEventListener('vshow', () => {
-      this.$tab.auto = true
-    })
-    this.$content.addEventListener('vchange', (e) => {
-      this.onItemClick(e)
-    })
-    this.$tab.addEventListener('vchange', (e) => {
-      var children = Array.from(this.$tab.children)
-      children.forEach((child, i) => {
-        if (i > e.detail.current) {
-          this.$tab.removeChild(child)
-        }
-      })
-      this.vlevel.emit({
-        level: e.detail.current
-      })
-    })
   }
   render() {
-    this.$children = Array.from(this.el.children)
+    this.$value = this.value.split(',')
+    this.$data = parse(JSON.parse(this.data), this.value).data
     return (
       <Host>
-        {this.renderHandle(this.$children)}
         <hc-drawer rounder place="down">
           <h2 class="title">{this.heading}</h2>
           <div class="handle">
-            <hc-tab auto={false}>
-              <hc-tab-item>请选择</hc-tab-item>
-            </hc-tab>
+            <hc-tab current={this.current} data={this.value}></hc-tab>
           </div>
-          {this.renderContent(this.$children)}
+          <hc-selection-content width={this.width * this.$data.length} offset={-this.current * this.width}>
+            {
+              this.$data.map((view, index) => (
+                <hc-selection-view width={this.width}>
+                  {
+                    view.map((item) => (
+                      <hc-selection-item active={this.$value.indexOf(item.label) >= 0} value={item.value} onClick={this.onClick.bind(this, item, index)}>{item.label}</hc-selection-item>
+                    ))
+                  }
+                </hc-selection-view>
+              ))
+            }
+          </hc-selection-content>
+          {this.renderFooter()}
         </hc-drawer>
       </Host>
     );
   }
+  onClick (item, index) {
+    this.$value[index] = item.label
+    if (this.current < this.$data.length - 1) {
+      this.$value[index + 1] = '请选择'
+    }
+    this.value = this.$value.join(',')
+    setTimeout(() => {
+      this.current = this.current < this.$data.length - 1 ? index + 1 : this.$data.length - 1;
+    }, 50)
+    if (this.current == this.$data.length - 1) {
+      setTimeout(() => {
+        this.$tab.auto = new Date().getTime()
+      }, 120)
+    }
+  }
   onDisplay () {
     this.$drawer.generate()
+    this.$tab.auto = true
+    this.width = this.el.offsetWidth
   }
-  renderHandle (children) {
-    if (!this.command) {
-      var wrap = document.createElement('div')
-      wrap.appendChild(children[0])
-      return (
-        <div onClick={this.onDisplay.bind(this)} innerHTML={wrap.innerHTML}></div>
-      )
-    } else {
-      return (
-        <div></div>
-      )
-    }
-  }
-  renderContent (children) {
-    if (!this.command) {
-      var wrap = document.createElement('div')
-      wrap.appendChild(children[1])
-      return (
-        <div innerHTML={wrap.innerHTML}></div>
-      )
-    } else {
-      var data = eval(`(${this.data})`)
-      var html = ''
-      data.forEach(item => {
-        html += `<hc-selection-item value="${item.value}">${item.label}</hc-selection-item>`
-      })
-      return (
-        <hc-selection-content onVchange={this.onItemClick.bind(this)} innerHTML={html}>
-        </hc-selection-content>
+  renderFooter () {
+    var dom = null
+    if (this.footer) {
+      dom = (
+        <hc-row class="footer">
+          <hc-col span={12}>
+            <hc-button onClick={this.destory.bind(this)} type="info" rounder={true}>取消</hc-button>
+          </hc-col>
+          <hc-col align="right" span={12}>
+          <hc-button onClick={this.destory.bind(this)} type="primary" rounder={true}>确定</hc-button>
+          </hc-col>
+        </hc-row>
       )
     }
-  }
-  onItemClick (e) {
-    this.$tab.children[this.$tab.children.length - 1].innerHTML = e.detail.label
-    // 显示加载
-    this.$content.Loading()
-    this.vchoice.emit(e.detail)
-  }
-  @Method()
-  async SetData (arr) {
-    var tabitem = document.createElement('hc-tab-item')
-    tabitem.innerText = '请选择'
-    this.$tab.appendChild(tabitem)
-    var length = this.$tab.children.length
-    this.$tab.Switch(length - 1)
-    var str = ''
-    arr.forEach(item => {
-      str += `<hc-selection-item value="${item.value}">${item.label}</hc-selection-item>`
-    })
-    this.$content.innerHTML = str
-    this.$content.Loaded()
-  }
-  @Method()
-  async Finish () {
-    this.$content.Loaded()
-    this.destory()
+    return dom
   }
   @Method()
   async destory () {

@@ -1,93 +1,54 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
+import { p as parse } from './picker-e34a3c80.js';
 
-const hcSelectionCss = ":host{display:block}:host .title{font-size:0.88rem;font-weight:normal;text-align:center;margin:0;padding:0.8rem 0}:host .handle{padding:0 0.8rem}";
+const hcSelectionCss = ":host{display:block}:host .title{font-size:0.88rem;font-weight:normal;text-align:center;margin:0;padding:0.8rem 0}:host .handle{padding:0 0.8rem}:host .footer{margin:0.8rem}:host .footer hc-col:first-child{padding-right:0.4rem}:host .footer hc-col:last-child{padding-left:0.4rem}";
 
 class HcSelection {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.heading = '请选择所在地区';
-        this.value = '';
+        this.value = '请选择';
         this.level = 0;
+        this.current = 0;
+        this.footer = true;
         this.vchoice = createEvent(this, "vchoice", 7);
         this.vlevel = createEvent(this, "vlevel", 7);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
         this.$tab = this.el.shadowRoot.querySelector('hc-tab');
-        this.$swiper = this.el.shadowRoot.querySelector('hc-swiper');
-        this.$content = this.el.shadowRoot.querySelector('hc-selection-content');
-        this.$drawer.addEventListener('vshow', () => {
-            this.$tab.auto = true;
-        });
-        this.$content.addEventListener('vchange', (e) => {
-            this.onItemClick(e);
-        });
-        this.$tab.addEventListener('vchange', (e) => {
-            var children = Array.from(this.$tab.children);
-            children.forEach((child, i) => {
-                if (i > e.detail.current) {
-                    this.$tab.removeChild(child);
-                }
-            });
-            this.vlevel.emit({
-                level: e.detail.current
-            });
-        });
     }
     render() {
-        this.$children = Array.from(this.el.children);
-        return (h(Host, null, this.renderHandle(this.$children), h("hc-drawer", { rounder: true, place: "down" }, h("h2", { class: "title" }, this.heading), h("div", { class: "handle" }, h("hc-tab", { auto: false }, h("hc-tab-item", null, "\u8BF7\u9009\u62E9"))), this.renderContent(this.$children))));
+        this.$value = this.value.split(',');
+        this.$data = parse(JSON.parse(this.data), this.value).data;
+        return (h(Host, null, h("hc-drawer", { rounder: true, place: "down" }, h("h2", { class: "title" }, this.heading), h("div", { class: "handle" }, h("hc-tab", { current: this.current, data: this.value })), h("hc-selection-content", { width: this.width * this.$data.length, offset: -this.current * this.width }, this.$data.map((view, index) => (h("hc-selection-view", { width: this.width }, view.map((item) => (h("hc-selection-item", { active: this.$value.indexOf(item.label) >= 0, value: item.value, onClick: this.onClick.bind(this, item, index) }, item.label))))))), this.renderFooter())));
+    }
+    onClick(item, index) {
+        this.$value[index] = item.label;
+        if (this.current < this.$data.length - 1) {
+            this.$value[index + 1] = '请选择';
+        }
+        this.value = this.$value.join(',');
+        setTimeout(() => {
+            this.current = this.current < this.$data.length - 1 ? index + 1 : this.$data.length - 1;
+        }, 50);
+        if (this.current == this.$data.length - 1) {
+            setTimeout(() => {
+                this.$tab.auto = new Date().getTime();
+            }, 120);
+        }
     }
     onDisplay() {
         this.$drawer.generate();
+        this.$tab.auto = true;
+        this.width = this.el.offsetWidth;
     }
-    renderHandle(children) {
-        if (!this.command) {
-            var wrap = document.createElement('div');
-            wrap.appendChild(children[0]);
-            return (h("div", { onClick: this.onDisplay.bind(this), innerHTML: wrap.innerHTML }));
+    renderFooter() {
+        var dom = null;
+        if (this.footer) {
+            dom = (h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { onClick: this.destory.bind(this), type: "info", rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { onClick: this.destory.bind(this), type: "primary", rounder: true }, "\u786E\u5B9A"))));
         }
-        else {
-            return (h("div", null));
-        }
-    }
-    renderContent(children) {
-        if (!this.command) {
-            var wrap = document.createElement('div');
-            wrap.appendChild(children[1]);
-            return (h("div", { innerHTML: wrap.innerHTML }));
-        }
-        else {
-            var data = eval(`(${this.data})`);
-            var html = '';
-            data.forEach(item => {
-                html += `<hc-selection-item value="${item.value}">${item.label}</hc-selection-item>`;
-            });
-            return (h("hc-selection-content", { onVchange: this.onItemClick.bind(this), innerHTML: html }));
-        }
-    }
-    onItemClick(e) {
-        this.$tab.children[this.$tab.children.length - 1].innerHTML = e.detail.label;
-        // 显示加载
-        this.$content.Loading();
-        this.vchoice.emit(e.detail);
-    }
-    async SetData(arr) {
-        var tabitem = document.createElement('hc-tab-item');
-        tabitem.innerText = '请选择';
-        this.$tab.appendChild(tabitem);
-        var length = this.$tab.children.length;
-        this.$tab.Switch(length - 1);
-        var str = '';
-        arr.forEach(item => {
-            str += `<hc-selection-item value="${item.value}">${item.label}</hc-selection-item>`;
-        });
-        this.$content.innerHTML = str;
-        this.$content.Loaded();
-    }
-    async Finish() {
-        this.$content.Loaded();
-        this.destory();
+        return dom;
     }
     async destory() {
         this.$drawer.destory();

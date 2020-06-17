@@ -8,6 +8,8 @@ export declare class HcSwiper implements ComponentInterface {
     autoplay: boolean;
     duration: number;
     indicate: string;
+    auto: boolean;
+    notouch: boolean;
     el: HTMLElement;
     vchange: EventEmitter;
     children: Element[];

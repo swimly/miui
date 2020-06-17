@@ -405,26 +405,34 @@ export namespace Components {
         "shape": string;
     }
     interface HcSelection {
-        "Finish": () => Promise<void>;
-        "SetData": (arr: any) => Promise<void>;
         "command": boolean;
+        "current": number;
         "data": string;
         "destory": () => Promise<void>;
+        "footer": boolean;
         "generate": (option?: object) => Promise<void>;
         "heading": string;
         "level": number;
         "value": string;
+        "width": number;
     }
     interface HcSelectionContent {
         "Loaded": () => Promise<void>;
         "Loading": () => Promise<void>;
         "loading": boolean;
+        "offset": number;
         "value": string;
+        "width": number;
     }
     interface HcSelectionHandle {
     }
     interface HcSelectionItem {
+        "active": boolean;
+        "index": number;
         "value": string;
+    }
+    interface HcSelectionView {
+        "width": number;
     }
     interface HcSignature {
         "background": string;
@@ -474,12 +482,14 @@ export namespace Components {
         "color": string;
     }
     interface HcSwiper {
+        "auto": boolean;
         "autoplay": boolean;
         "current": number;
         "duration": number;
         "height": number;
         "indicate": string;
         "loop": boolean;
+        "notouch": boolean;
         "slideNext": () => Promise<void>;
         "slidePrev": () => Promise<void>;
         "slideTo": (index: any, duration?: number) => Promise<void>;
@@ -503,15 +513,20 @@ export namespace Components {
         "type": string;
     }
     interface HcTab {
-        "Switch": (number: any) => Promise<void>;
+        "Init": () => Promise<void>;
+        "MoveTo": (index: any) => Promise<void>;
         "align": string;
-        "auto": boolean;
+        "auto": string;
         "current": number;
+        "data": string;
         "direction": string;
+        "indicateWidth": number;
         "touch": boolean;
     }
     interface HcTabItem {
+        "active": boolean;
         "index": number;
+        "label": string;
     }
     interface HcTag {
         "background": string;
@@ -961,6 +976,12 @@ declare global {
         prototype: HTMLHcSelectionItemElement;
         new (): HTMLHcSelectionItemElement;
     };
+    interface HTMLHcSelectionViewElement extends Components.HcSelectionView, HTMLStencilElement {
+    }
+    var HTMLHcSelectionViewElement: {
+        prototype: HTMLHcSelectionViewElement;
+        new (): HTMLHcSelectionViewElement;
+    };
     interface HTMLHcSignatureElement extends Components.HcSignature, HTMLStencilElement {
     }
     var HTMLHcSignatureElement: {
@@ -1151,6 +1172,7 @@ declare global {
         "hc-selection-content": HTMLHcSelectionContentElement;
         "hc-selection-handle": HTMLHcSelectionHandleElement;
         "hc-selection-item": HTMLHcSelectionItemElement;
+        "hc-selection-view": HTMLHcSelectionViewElement;
         "hc-signature": HTMLHcSignatureElement;
         "hc-skeleton": HTMLHcSkeletonElement;
         "hc-slider": HTMLHcSliderElement;
@@ -1478,6 +1500,7 @@ declare namespace LocalJSX {
     interface HcPicker {
         "command"?: boolean;
         "data"?: string;
+        "onVchange"?: (event: CustomEvent<any>) => void;
         "reset"?: boolean;
         "titles"?: string;
         "value"?: string;
@@ -1575,23 +1598,33 @@ declare namespace LocalJSX {
     }
     interface HcSelection {
         "command"?: boolean;
+        "current"?: number;
         "data"?: string;
+        "footer"?: boolean;
         "heading"?: string;
         "level"?: number;
         "onVchoice"?: (event: CustomEvent<any>) => void;
         "onVlevel"?: (event: CustomEvent<any>) => void;
         "value"?: string;
+        "width"?: number;
     }
     interface HcSelectionContent {
         "loading"?: boolean;
+        "offset"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "value"?: string;
+        "width"?: number;
     }
     interface HcSelectionHandle {
     }
     interface HcSelectionItem {
+        "active"?: boolean;
+        "index"?: number;
         "onVclick"?: (event: CustomEvent<any>) => void;
         "value"?: string;
+    }
+    interface HcSelectionView {
+        "width"?: number;
     }
     interface HcSignature {
         "background"?: string;
@@ -1640,12 +1673,14 @@ declare namespace LocalJSX {
         "color"?: string;
     }
     interface HcSwiper {
+        "auto"?: boolean;
         "autoplay"?: boolean;
         "current"?: number;
         "duration"?: number;
         "height"?: number;
         "indicate"?: string;
         "loop"?: boolean;
+        "notouch"?: boolean;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "vertical"?: boolean;
         "width"?: number;
@@ -1668,16 +1703,21 @@ declare namespace LocalJSX {
     }
     interface HcTab {
         "align"?: string;
-        "auto"?: boolean;
+        "auto"?: string;
         "current"?: number;
+        "data"?: string;
         "direction"?: string;
+        "indicateWidth"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "touch"?: boolean;
     }
     interface HcTabItem {
+        "active"?: boolean;
         "index"?: number;
+        "label"?: string;
         "onVchange"?: (event: CustomEvent<any>) => void;
         "onVclick"?: (event: CustomEvent<any>) => void;
+        "onVlabel"?: (event: CustomEvent<any>) => void;
     }
     interface HcTag {
         "background"?: string;
@@ -1814,6 +1854,7 @@ declare namespace LocalJSX {
         "hc-selection-content": HcSelectionContent;
         "hc-selection-handle": HcSelectionHandle;
         "hc-selection-item": HcSelectionItem;
+        "hc-selection-view": HcSelectionView;
         "hc-signature": HcSignature;
         "hc-skeleton": HcSkeleton;
         "hc-slider": HcSlider;
@@ -1904,6 +1945,7 @@ declare module "@stencil/core" {
             "hc-selection-content": LocalJSX.HcSelectionContent & JSXBase.HTMLAttributes<HTMLHcSelectionContentElement>;
             "hc-selection-handle": LocalJSX.HcSelectionHandle & JSXBase.HTMLAttributes<HTMLHcSelectionHandleElement>;
             "hc-selection-item": LocalJSX.HcSelectionItem & JSXBase.HTMLAttributes<HTMLHcSelectionItemElement>;
+            "hc-selection-view": LocalJSX.HcSelectionView & JSXBase.HTMLAttributes<HTMLHcSelectionViewElement>;
             "hc-signature": LocalJSX.HcSignature & JSXBase.HTMLAttributes<HTMLHcSignatureElement>;
             "hc-skeleton": LocalJSX.HcSkeleton & JSXBase.HTMLAttributes<HTMLHcSkeletonElement>;
             "hc-slider": LocalJSX.HcSlider & JSXBase.HTMLAttributes<HTMLHcSliderElement>;

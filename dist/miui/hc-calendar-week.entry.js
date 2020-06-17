@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host } from './index-6dd25a1a.js';
 
 const hcCalendarWeekCss = ":host{display:flex;flex-direction:row;align-items:center;position:relative;z-index:2;flex:1}:host([hide]){display:none}";
 

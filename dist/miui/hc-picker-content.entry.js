@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 const hcPickerContentCss = ":host{display:flex;flex-direction:row}";
 

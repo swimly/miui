@@ -1,0 +1,143 @@
+.ZHBG_page{
+  background:#E9EDF4;
+}
+.lbcpcontent_grid,
+.LC_pagemodule_info,
+.part-transverse-split-div{
+  border:none !important;
+  border-radius:4px !important;
+  /* overflow:hidden; */
+}
+.lbcpcontent_module-box .lbcpcontent_module-head{
+  border-bottom:1px solid #EAEAEA !important;
+}
+.lbcpcontent_module-box .title{
+  font-size:18px !important;
+  color:#7885A1 !important;
+  padding-left: 40px !important;
+  position: relative;
+}
+.lbcpcontent_module-box .title img{
+  position: absolute;
+  left:10px;
+  top:50%;
+  transform: translate(0, -50%);
+}
+.lbcpcontent_tab li{
+  font-size:14px !important;
+  color:#999 !important;
+  font-weight: normal !important;
+}
+.more a{
+  font-size:14px !important;
+  color:#7885A1 !important;
+}
+.lbcpcontent_tab .oatab_active{
+  color:#0082FB !important;
+  border:none !important;
+}
+.lbcpcontent_tab .oatab_active:before{
+  border:none !important;
+  height: 4px;
+  background:#0082FB;
+  width:30px;
+  margin-left:-15px !important;
+  border-radius:4px;
+}
+.lbcpcontent_tab li .loap_tag{
+  background:#FF6666 !important;
+  z-index:100;
+}
+.lbcpcontent_list a{
+  font-size:14px;
+  color:#333;
+}
+.lbcpcontent_list a[bt="datetime"]{
+  color:#999;
+  font-size:12px;
+}
+.lbcpcontent_list a[bt="text"]{
+  font-weight:normal !important;
+  color:inherit !important;
+}
+.lbcpcontent_list a[md="publishdeptoruser"]{
+  font-size: 14px !important;
+}
+.lbcpcontent_list li{
+  height:46px !important;
+}
+.lbcpcontent_bg-green{
+  background: #0082FB !important;
+}
+.lbcpcontent_list .exp{
+  height:18px !important;
+  line-height:18px !important;
+  width: auto !important;
+  padding:0 6px;
+}
+.ZHBG_page .ZHBG_header{
+  background:linear-gradient(90deg,rgba(13,106,224,1) 0%,rgba(0,145,220,1) 100%) !important;
+  box-shadow:0px 0px 6px rgba(70,117,157,0.16);
+}
+.LROA-nzz-td{
+  font-size:14px !important;
+  color:#333;
+}
+.loap_indexcalendar_cell td{
+  font-size:14px !important;
+}
+/* .ZHBG_page .ZHBG_aside{
+  background:#fff !important;
+  color:#333 !important;
+} */
+
+.pub-table tr,
+.pub-table{
+  border-color: #EAEAEA !important;
+}
+.lbcpcontent_grid-item .bg-f7{
+  background:none;
+}
+.pub{
+  right: 0 !important;
+  top:12px !important;
+}
+.pub-item{
+  background: #0183FC !important;
+  width:auto !important;
+  display:inline-block;
+  border-radius:4px !important;
+}
+.pub-item a{
+  color: #fff !important;
+}
+.upload{
+  padding:12px 0 !important;
+  cursor: pointer;
+  display:inline-block !important;
+}
+.calendar{
+  padding: 5px 20px 0 20px !important;
+}
+.calendar .calendar-title-box{
+  border:none !important;
+}
+.calendar-table th{
+  padding:12px 0;
+  font-weight: normal;
+  color:#0183FC;
+}
+.calendar circle{
+  stroke-width: 1px !important;
+  stroke: none !important;
+}
+.calendar svg text{
+  font-size: 14px !important;
+}
+.currentDay svg text{
+  fill: #0183FC !important;
+  font-size: 14px !important;
+}
+.currentDay svg circle{
+  stroke: #0183FC !important;
+}

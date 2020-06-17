@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host } from './index-6dd25a1a.js';
 
 const hcPanelCss = ":host{display:block;background:var(--background-color-white);padding:1rem;margin-bottom:0.5rem;border-radius:0.2rem}";
 

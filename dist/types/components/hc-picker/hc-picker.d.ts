@@ -1,3 +1,4 @@
+import { EventEmitter } from '../../stencil-public-runtime';
 export declare class HcPickerView {
     titles: string;
     value: string;
@@ -5,6 +6,7 @@ export declare class HcPickerView {
     command: boolean;
     reset: boolean;
     el: HTMLElement;
+    vchange: EventEmitter;
     $drawer: any;
     $handle: any;
     $content: any;

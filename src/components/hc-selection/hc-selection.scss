@@ -10,4 +10,15 @@
   .handle{
     padding: 0 $--app-selection-fontsize;
   }
+  .footer{
+    margin: $--app-selection-fontsize;
+    hc-col{
+      &:first-child{
+        padding-right: $--app-selection-fontsize / 2;
+      }
+      &:last-child{
+        padding-left: $--app-selection-fontsize / 2;
+      }
+    }
+  }
 }

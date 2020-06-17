@@ -9,130 +9,127 @@ export class HcTab implements ComponentInterface {
   @Prop() current: number = 0;
   @Prop() direction: string = 'horizontal';
   @Prop() align: string = 'flex-start';
-  @Prop() auto: boolean = true;
+  @Prop() auto: string;
   @Prop() touch: boolean;
+  @Prop() data: string;
+  @Prop() indicateWidth: number = 15;
   @Element() el:HTMLElement;
-  offset: number = 0;
-  scroll: number = 0;
-  width: number = 0;
-  prev: number = 0;
-  pos = [];
-  $slot;
-  $wrap;
+  $children;
+  $indicate;
+  $content;
+  position;
   max;
-  $indicate: HTMLElement;
-  $children: Element[];
   @Event() vchange: EventEmitter;
   @Watch('current')
   currentHandle (v: number) {
-    this.renderScroll(v)
+    this.el.setAttribute('current', `${v}`)
+    this.renderIndicate()
     this.vchange.emit({
       current: v
     })
   }
-  @Watch('auto')
-  autoHandle (v:boolean) {
-    if (v) {
-      this.computed()
-    }
-  }
   componentDidLoad () {
-    this.$slot = this.el.shadowRoot.querySelector('slot')
-    this.$wrap = this.el.shadowRoot.querySelector('.wrap')
+    this.$content = this.el.shadowRoot.querySelector('.content')
     this.$indicate = this.el.shadowRoot.querySelector('.indicate')
-    this.$children = this.$slot.assignedElements()
-    this.offset = this.el.offsetLeft
-    this.width = this.el.offsetWidth;
-    if (this.auto) {
-      this.computed()
-    }
-    this.$slot.addEventListener('slotchange', () => {
-      this.pos = []
-      this.$children = this.$slot.assignedElements()
-      setTimeout(() => {
-        this.computed()
-      }, 30)
-    })
-    this.$children.forEach((item) => {
-      item.addEventListener('vchange', () => {
-        this.pos = []
-        this.computed()
-      })
-    })
+    this.Init()
+    this.renderIndicate()
+  }
+  componentDidUpdate () {
+    this.Init()
   }
   render() {
+    var children = Array.from(this.el.children)
+    var data = []
+    if (this.data) {
+      data = this.data.indexOf('{') >= 0 ? JSON.parse(this.data) : this.data.split(',')
+    } else {
+      children.forEach(item => {
+        data.push({
+          label: item.innerHTML,
+          value: item.getAttribute('value')
+        })
+      })
+    }
     return (
       <Host>
-        <div class="wrap" style={{
+        <div class="wrap">
+          <div class="content" style={{
           justifyContent: this.align
-        }}>
-          <slot></slot>
-          <div class="indicate"></div>
+          }}>
+            {
+              data.map((item, index) => {
+                var label = typeof item == 'string' ? item : item.label
+                return (
+                  <hc-tab-item label={label} onVlabel={this.onLabelChange.bind(this)} active={this.current == index} onClick={this.onClick.bind(this, index)}>{label}</hc-tab-item>
+                )
+              })
+            }
+            <div class="indicate"></div>
+          </div>
         </div>
       </Host>
     );
   }
-  bindTouch () {
-    var last = this.pos[this.pos.length - 1]
-    if (last.x + last.width <= this.el.offsetWidth + this.el.offsetLeft || !this.touch) {
-      return false;
+  onLabelChange () {
+    setTimeout(() => {
+      this.Init()
+      this.renderIndicate()
+    }, 30)
+  }
+  onClick (index) {
+    this.current = index
+  }
+  renderIndicate () {
+    var itemWidth = this.position[this.current].width
+    var itemLeft = this.position[this.current].left
+    var left = itemLeft + itemWidth / 2 - this.indicateWidth / 2
+    this.$indicate.style.width = `${this.indicateWidth}px`
+    this.$indicate.style.transform = `translate3d(${left}px, 0, 0)`
+    var half = this.el.offsetWidth / 2
+    if (left > half) {
+      this.renderScroll(half)
     }
+    if (left < half) {
+      this.renderScroll(0)
+    }
+  }
+  renderScroll (half) {
+    if (this.max <= this.el.offsetWidth + this.el.offsetLeft) return
+    var maxDis = this.max - this.el.offsetWidth
+    var left = this.position[this.current].left
+    var dis = half ? left - half > maxDis ? maxDis : left - half : half
+    this.$content.style.transition = '0.3s'
+    this.$content.style.transform = `translate3d(${-dis}px, 0, 0)`
+  }
+  bindTouch () {
     var hammer = new Hammer(this.el)
     hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
     hammer.on('panstart', () => {
-      this.$wrap.style.transition = '0s'
     })
     hammer.on('pan', (e) => {
-      var dis = this.scroll + e.deltaX
-      dis = dis > 0 ? 0 : dis < -this.max ? -this.max : dis
-      this.$wrap.style.transform = `translate3d(${dis}px, 0, 0)`;
     })
     hammer.on('panend', (e) => {
-      this.scroll += e.deltaX
     })
   }
-  onChange (e) {
-    this.current = e.detail.index
-  }
-  // 计算每个hc-tab-item的位置
-  computed () {
-    this.$children.forEach((child, index) => {
-      child.setAttribute('index', `${index}`)
-      this.pos.push(child.getBoundingClientRect())
-      child.addEventListener('vclick', this.onChange.bind(this))
-    })
-    this.renderScroll(this.current)
-    this.bindTouch()
-  }
-  // 渲染indicate和wrap的运动
-  renderScroll (index) {
-    var move = 0;
-    var fullwidth = this.el.clientWidth;
-    this.$children.forEach(item => {
-      item.removeAttribute('active')
-    })
-    this.$wrap.style.transition = '0.3s'
-    this.$children[index].setAttribute('active', 'true')
-    var indicateLeft = this.pos[index].x - this.offset + (this.pos[index].width - this.$indicate.offsetWidth) / 2
-    var last = this.pos[this.pos.length - 1]
-    var isFull = last.x + last.width - this.pos[0].x > this.el.offsetWidth
-    var maxDis = last.x + last.width - this.pos[0].x - this.el.offsetWidth
-    this.max = maxDis
-    if (this.pos[index].x > fullwidth / 2 && isFull) {
-      move = this.pos[index].x + this.pos[index].width / 2 - fullwidth / 2 - this.offset
-      move = move > maxDis ? maxDis : move
-      this.$wrap.style.transform = `translate3d(${-move}px, 0, 0)`
-    } else {
-      this.$wrap.style.transform = `translate3d(${0}px, 0, 0)`
-    }
-    this.scroll = -move
-    this.$indicate.style.transform = `translate3d(${indicateLeft}px, 0, 0)`
-  }
-  // 选中第几个
   @Method()
-  async Switch (number) {
-    setTimeout(() => {
-      this.current = number
-    }, 30)
+  async MoveTo (index) {
+    this.current = index
+  }
+  @Method()
+  async Init () {
+    this.$children = this.el.shadowRoot.querySelectorAll('hc-tab-item')
+    var position = []
+    this.$children.forEach(item => {
+      position.push({
+        left: item.offsetLeft,
+        width: item.offsetWidth
+      })
+    })
+    var last = position.length - 1
+    this.max = position[last].left + position[last].width
+    this.position = position
+    if (this.max <= this.el.offsetWidth) {
+      this.$content.style.transform = `translate3d(${0}px, 0, 0)`
+    }
   }
 }

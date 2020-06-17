@@ -15,6 +15,8 @@ export class HcSwiper implements ComponentInterface {
   @Prop() autoplay: boolean = false;
   @Prop() duration: number = 3000;
   @Prop() indicate: string;
+  @Prop() auto: boolean;
+  @Prop() notouch: boolean;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
   children: Element[];
@@ -25,7 +27,12 @@ export class HcSwiper implements ComponentInterface {
     if (this.indicate) {
       this.el.setAttribute('indicate', this.indicate)
     }
-    this.bindTouch()
+    if (this.notouch) {
+      this.el.setAttribute('notouch', 'true')
+    }
+    if (!this.notouch) {
+      this.bindTouch()
+    }
     this.autoMove()
   }
   render() {

@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 const hcNotifyCss = ":host{display:flex;flex-direction:row;align-items:center;position:fixed;width:100%;height:2.4rem;font-size:0.7rem;background-color:var(--color-primary);color:var(--color-text-white);padding:0 1rem;box-sizing:border-box;transition:0.3s;overflow:hidden;z-index:100}:host .content{margin:0 0.3rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}:host([place=up]){top:0;left:0;transform:translate3d(0, -100%, 0)}:host([place=down]){bottom:0;left:0;transform:translate3d(0, 100%, 0)}:host([align=center]){justify-content:center}:host([visible]){transform:translate3d(0, 0, 0)}";
 

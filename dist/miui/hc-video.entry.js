@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 const hcVideoCss = ":host{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:0.3s}:host video{width:100%;vertical-align:top}:host .play{position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);color:var(--color-text-white);z-index:10;transition:0.3s}:host hc-video-controls{position:absolute;left:0;bottom:0;width:100%;transition:0.3s;transform:translateY(100%)}:host([show-controls]) hc-video-controls{transform:translateY(0)}:host([show-controls]) .play{transform:translate(-50%, -50%) scale(2);opacity:0;z-index:-1}:host([full-screen]){position:fixed;top:0;left:0;bottom:0;right:0;z-index:100;background:var(--background-color-black)}";
 

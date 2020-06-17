@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 import { h as hammer } from './hammer-a3a84d6d.js';
 
 const hcSwipemenuCss = ":host{display:block;position:relative;overflow:hidden}:host .content{background:var(--background-color-white);position:relative;z-index:10;display:block}:host .handle{position:absolute;right:0;top:0;height:100%;display:flex;flex-direction:row;flex-wrap:nowrap;overflow:hidden;justify-content:flex-end;width:auto;z-index:9}";

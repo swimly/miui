@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Method, Prop, Watch } from '@stencil/core';
+import { Component, Host, h, Element, Method, Prop, Watch, Event, EventEmitter } from '@stencil/core';
 import {parse} from '../../utils/picker'
 @Component({
   tag: 'hc-picker',
@@ -11,14 +11,14 @@ export class HcPickerView {
   @Prop() data: string;
   @Prop() command: boolean
   @Prop() reset: boolean = true;
-  @Element() el: HTMLElement
+  @Element() el: HTMLElement;
+  @Event() vchange: EventEmitter;
   $drawer;
   $handle;
   $content;
   @Watch('value')
   valueHandle (v: string) {
     this.el.setAttribute('value', v)
-    console.log(v)
   }
   componentDidLoad () {
     this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
@@ -124,6 +124,9 @@ export class HcPickerView {
   @Method()
   async destory () {
     this.$drawer.destory()
+    this.vchange.emit({
+      value: this.value
+    })
     setTimeout(() => {
       if (this.command) {
         setTimeout(() => {

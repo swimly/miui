@@ -1,6 +1,6 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
-const hcSelectionContentCss = ":host{display:block;padding:0.8rem;overflow:auto;height:16rem;position:relative}:host .mask{position:absolute;top:0;left:0;bottom:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:var(--background-color-white);opacity:0;z-index:-1;transition:0.3s}:host([loading]){overflow:hidden}:host([loading]) .mask{z-index:10;opacity:1}";
+const hcSelectionContentCss = ":host{display:block;height:16rem;position:relative;overflow:hidden}:host .mask{position:absolute;top:0;left:0;bottom:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:var(--background-color-white);opacity:0;z-index:-1;transition:0.3s}:host .wrap{display:flex;flex-direction:row;align-items:flex-start;height:100%;transition:0.3s}:host([loading]){overflow:hidden}:host([loading]) .mask{z-index:10;opacity:1}";
 
 class HcSelectionContent {
     constructor(hostRef) {
@@ -29,7 +29,7 @@ class HcSelectionContent {
         });
     }
     render() {
-        return (h(Host, null, h("slot", null), h("div", { class: "mask" }, h("hc-icon", { name: "loading", spin: true }))));
+        return (h(Host, null, h("div", { class: "wrap", style: { width: `${this.width}px`, transform: `translate3d(${this.offset}px, 0, 0)` } }, h("slot", null)), h("div", { class: "mask" }, h("hc-icon", { name: "loading", spin: true }))));
     }
     bindClick() {
         var children = Array.from(this.el.children);

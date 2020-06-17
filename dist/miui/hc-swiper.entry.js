@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 import { h as hammer } from './hammer-a3a84d6d.js';
 
 const hcSwiperCss = ":host{display:block;overflow:hidden;position:relative}:host .wrap{display:flex;flex-direction:row}:host .indicate{position:absolute;bottom:0;right:0;width:100%;display:flex;flex-direction:row;align-items:center;justify-content:center}:host .indicate span{display:inline-block;width:1rem;height:0.2rem;background:var(--background-color-white);opacity:0.4;margin:0.5rem 0.2rem;border-radius:0.2rem;font-size:0}:host .indicate span.active{opacity:1}:host([indicate=light]) .indicate span{margin-bottom:0;background:var(--background-color-darker)}";
@@ -16,7 +16,12 @@ class HcSwiper {
         if (this.indicate) {
             this.el.setAttribute('indicate', this.indicate);
         }
-        this.bindTouch();
+        if (this.notouch) {
+            this.el.setAttribute('notouch', 'true');
+        }
+        if (!this.notouch) {
+            this.bindTouch();
+        }
         this.autoMove();
     }
     render() {

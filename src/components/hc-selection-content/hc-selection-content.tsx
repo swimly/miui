@@ -8,6 +8,8 @@ import { Component, Host, h, Element, Event, EventEmitter, Prop, Watch, Method }
 export class HcSelectionContent {
   @Prop() value: string;
   @Prop() loading: boolean;
+  @Prop() offset: number;
+  @Prop() width: number;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
   current;
@@ -36,7 +38,9 @@ export class HcSelectionContent {
   render() {
     return (
       <Host>
-        <slot></slot>
+        <div class="wrap" style={{width: `${this.width}px`,transform: `translate3d(${this.offset}px, 0, 0)`}}>
+          <slot></slot>
+        </div>
         <div class="mask">
           <hc-icon name="loading" spin></hc-icon>
         </div>

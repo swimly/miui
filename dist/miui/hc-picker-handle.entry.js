@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host } from './index-6dd25a1a.js';
 
 const hcPickerHandleCss = ":host{display:block}";
 

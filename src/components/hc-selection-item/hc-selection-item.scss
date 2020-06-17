@@ -2,8 +2,9 @@
   display: flex;
   font-size: $--app-selection-fontsize;
   color: $--app-selection-color;
-  padding: $--app-selection-fontsize * 0.8 0;
+  padding: $--app-selection-fontsize * 0.8 $--app-selection-fontsize;
   position: relative;
+  z-index:100;
   &:after{
     content: "";
     display:block;
@@ -15,4 +16,7 @@
     background:$--app-selection-line;
     transform:scaleY(0.5);
   }
+}
+:host([active]){
+  color: $--app-selection-activecolor;
 }

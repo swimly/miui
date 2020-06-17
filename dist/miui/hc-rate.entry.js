@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-17e92c35.js';
+import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 import { h as hammer } from './hammer-a3a84d6d.js';
 
 const hcRateCss = ":host{display:flex;flex-direction:row;align-items:center;font-size:0.8rem}:host .star hc-icon{color:var(--color-text-primary)}:host .star hc-icon:last-child{display:none}:host .star.active{color:var(--color-primary)}:host .star.active hc-icon:last-child{display:block}:host .star.active hc-icon:first-child{display:none}";

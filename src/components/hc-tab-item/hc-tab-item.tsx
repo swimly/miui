@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Element, Prop, EventEmitter, Event } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Element, Prop, EventEmitter, Event, Watch } from '@stencil/core';
 
 @Component({
   tag: 'hc-tab-item',
@@ -7,16 +7,35 @@ import { Component, ComponentInterface, Host, h, Element, Prop, EventEmitter, Ev
 })
 export class HcTabItem implements ComponentInterface {
   @Prop() index: number;
+  @Prop() label: string;
+  @Prop() active: boolean;
   @Element() el:HTMLElement;
   @Event() vclick: EventEmitter;
   @Event() vchange: EventEmitter;
+  @Event() vlabel: EventEmitter;
+  @Watch('active')
+  activeHandle (v: boolean) {
+    if (v) {
+      this.el.setAttribute('active', 'true')
+    } else {
+      this.el.removeAttribute('active')
+    }
+  }
+  @Watch('label')
+  labelHandle (v) {
+    this.el.setAttribute('label', v)
+    this.vlabel.emit(this.el.getBoundingClientRect())
+  }
   componentDidLoad () {
-    var slot = this.el.shadowRoot.querySelector('slot')
-    slot.addEventListener('slotchange', () => {
-      this.vchange.emit({
-        label: this.el.innerText
-      })
-    })
+    if (this.active) {
+      this.el.setAttribute('active', `${this.active}`)
+    }
+    if (this.index !== undefined) {
+      this.el.setAttribute('index', `${this.index}`)
+    }
+    if (this.label) {
+      this.el.setAttribute('label', this.label)
+    }
   }
   render() {
     return (
