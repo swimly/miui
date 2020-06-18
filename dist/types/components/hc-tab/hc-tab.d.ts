@@ -8,6 +8,7 @@ export declare class HcTab implements ComponentInterface {
     data: string;
     indicateWidth: number;
     el: HTMLElement;
+    vclick: EventEmitter;
     $children: any;
     $indicate: any;
     $content: any;

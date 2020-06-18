@@ -11,8 +11,7 @@ class HcSelection {
         this.level = 0;
         this.current = 0;
         this.footer = true;
-        this.vchoice = createEvent(this, "vchoice", 7);
-        this.vlevel = createEvent(this, "vlevel", 7);
+        this.vchange = createEvent(this, "vchange", 7);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
@@ -21,7 +20,14 @@ class HcSelection {
     render() {
         this.$value = this.value.split(',');
         this.$data = parse(JSON.parse(this.data), this.value).data;
-        return (h(Host, null, h("hc-drawer", { rounder: true, place: "down" }, h("h2", { class: "title" }, this.heading), h("div", { class: "handle" }, h("hc-tab", { current: this.current, data: this.value })), h("hc-selection-content", { width: this.width * this.$data.length, offset: -this.current * this.width }, this.$data.map((view, index) => (h("hc-selection-view", { width: this.width }, view.map((item) => (h("hc-selection-item", { active: this.$value.indexOf(item.label) >= 0, value: item.value, onClick: this.onClick.bind(this, item, index) }, item.label))))))), this.renderFooter())));
+        return (h(Host, null, h("hc-drawer", { rounder: true, place: "down" }, h("h2", { class: "title" }, this.heading), h("div", { class: "handle" }, h("hc-tab", { onVclick: this.onIndexChange.bind(this), current: this.current, data: this.value })), h("hc-selection-content", { width: this.width * this.$data.length, offset: -this.current * this.width }, this.$data.map((view, index) => (h("hc-selection-view", { width: this.width }, view.map((item) => (h("hc-selection-item", { active: this.$value.indexOf(item.label) >= 0, value: item.value, onClick: this.onClick.bind(this, item, index) }, item.label))))))), this.renderFooter())));
+    }
+    onIndexChange(e) {
+        var value = this.value.split(',');
+        value[e.detail.current] = '请选择';
+        value = value.slice(0, e.detail.current + 1);
+        this.value = value.join(',');
+        this.current = e.detail.current;
     }
     onClick(item, index) {
         this.$value[index] = item.label;
@@ -52,6 +58,9 @@ class HcSelection {
     }
     async destory() {
         this.$drawer.destory();
+        this.vchange.emit({
+            value: this.value
+        });
         if (this.command) {
             setTimeout(() => {
                 document.body.removeChild(this.el);

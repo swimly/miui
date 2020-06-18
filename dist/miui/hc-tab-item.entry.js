@@ -5,7 +5,7 @@ const hcTabItemCss = ":host{display:flex;flex-direction:row;align-items:center;f
 class HcTabItem {
     constructor(hostRef) {
         registerInstance(this, hostRef);
-        this.vclick = createEvent(this, "vclick", 7);
+        this.vtap = createEvent(this, "vtap", 7);
         this.vchange = createEvent(this, "vchange", 7);
         this.vlabel = createEvent(this, "vlabel", 7);
     }
@@ -36,7 +36,7 @@ class HcTabItem {
         return (h(Host, { onClick: this.bindClick.bind(this) }, h("slot", null)));
     }
     bindClick() {
-        this.vclick.emit({
+        this.vtap.emit({
             index: this.index,
             props: this.el.getBoundingClientRect()
         });

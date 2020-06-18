@@ -4,7 +4,7 @@ export declare class HcTabItem implements ComponentInterface {
     label: string;
     active: boolean;
     el: HTMLElement;
-    vclick: EventEmitter;
+    vtap: EventEmitter;
     vchange: EventEmitter;
     vlabel: EventEmitter;
     activeHandle(v: boolean): void;

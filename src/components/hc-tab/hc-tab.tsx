@@ -14,6 +14,7 @@ export class HcTab implements ComponentInterface {
   @Prop() data: string;
   @Prop() indicateWidth: number = 15;
   @Element() el:HTMLElement;
+  @Event() vclick: EventEmitter;
   $children;
   $indicate;
   $content;
@@ -22,7 +23,7 @@ export class HcTab implements ComponentInterface {
   @Event() vchange: EventEmitter;
   @Watch('current')
   currentHandle (v: number) {
-    this.el.setAttribute('current', `${v}`)
+    // this.el.setAttribute('current', `${v}`)
     this.renderIndicate()
     this.vchange.emit({
       current: v
@@ -78,6 +79,9 @@ export class HcTab implements ComponentInterface {
   }
   onClick (index) {
     this.current = index
+    this.vclick.emit({
+      current: index
+    })
   }
   renderIndicate () {
     var itemWidth = this.position[this.current].width

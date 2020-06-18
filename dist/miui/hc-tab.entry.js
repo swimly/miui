@@ -10,10 +10,11 @@ class HcTab {
         this.direction = 'horizontal';
         this.align = 'flex-start';
         this.indicateWidth = 15;
+        this.vclick = createEvent(this, "vclick", 7);
         this.vchange = createEvent(this, "vchange", 7);
     }
     currentHandle(v) {
-        this.el.setAttribute('current', `${v}`);
+        // this.el.setAttribute('current', `${v}`)
         this.renderIndicate();
         this.vchange.emit({
             current: v
@@ -57,6 +58,9 @@ class HcTab {
     }
     onClick(index) {
         this.current = index;
+        this.vclick.emit({
+            current: index
+        });
     }
     renderIndicate() {
         var itemWidth = this.position[this.current].width;

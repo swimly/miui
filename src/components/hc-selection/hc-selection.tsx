@@ -15,8 +15,7 @@ export class HcSelection {
   @Prop() width: number;
   @Prop() footer: boolean = true;
   @Element() el: HTMLElement;
-  @Event() vchoice: EventEmitter;
-  @Event() vlevel: EventEmitter;
+  @Event() vchange: EventEmitter;
   $drawer;
   $tab;
   $data;
@@ -33,7 +32,7 @@ export class HcSelection {
         <hc-drawer rounder place="down">
           <h2 class="title">{this.heading}</h2>
           <div class="handle">
-            <hc-tab current={this.current} data={this.value}></hc-tab>
+            <hc-tab onVclick={this.onIndexChange.bind(this)} current={this.current} data={this.value}></hc-tab>
           </div>
           <hc-selection-content width={this.width * this.$data.length} offset={-this.current * this.width}>
             {
@@ -52,6 +51,13 @@ export class HcSelection {
         </hc-drawer>
       </Host>
     );
+  }
+  onIndexChange (e) {
+    var value = this.value.split(',')
+    value[e.detail.current] = '请选择'
+    value = value.slice(0, e.detail.current + 1)
+    this.value = value.join(',')
+    this.current = e.detail.current
   }
   onClick (item, index) {
     this.$value[index] = item.label
@@ -92,6 +98,9 @@ export class HcSelection {
   @Method()
   async destory () {
     this.$drawer.destory()
+    this.vchange.emit({
+      value: this.value
+    })
     if (this.command) {
       setTimeout(() => {
         document.body.removeChild(this.el)

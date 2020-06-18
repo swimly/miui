@@ -9,14 +9,14 @@ export declare class HcSelection {
     width: number;
     footer: boolean;
     el: HTMLElement;
-    vchoice: EventEmitter;
-    vlevel: EventEmitter;
+    vchange: EventEmitter;
     $drawer: any;
     $tab: any;
     $data: any;
     $value: any;
     componentDidLoad(): void;
     render(): any;
+    onIndexChange(e: any): void;
     onClick(item: any, index: any): void;
     onDisplay(): void;
     renderFooter(): any;

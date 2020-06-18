@@ -10,7 +10,7 @@ export class HcTabItem implements ComponentInterface {
   @Prop() label: string;
   @Prop() active: boolean;
   @Element() el:HTMLElement;
-  @Event() vclick: EventEmitter;
+  @Event() vtap: EventEmitter;
   @Event() vchange: EventEmitter;
   @Event() vlabel: EventEmitter;
   @Watch('active')
@@ -45,7 +45,7 @@ export class HcTabItem implements ComponentInterface {
     );
   }
   bindClick () {
-    this.vclick.emit({
+    this.vtap.emit({
       index: this.index,
       props: this.el.getBoundingClientRect()
     })

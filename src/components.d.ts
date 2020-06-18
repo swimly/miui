@@ -1603,8 +1603,7 @@ declare namespace LocalJSX {
         "footer"?: boolean;
         "heading"?: string;
         "level"?: number;
-        "onVchoice"?: (event: CustomEvent<any>) => void;
-        "onVlevel"?: (event: CustomEvent<any>) => void;
+        "onVchange"?: (event: CustomEvent<any>) => void;
         "value"?: string;
         "width"?: number;
     }
@@ -1709,6 +1708,7 @@ declare namespace LocalJSX {
         "direction"?: string;
         "indicateWidth"?: number;
         "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVclick"?: (event: CustomEvent<any>) => void;
         "touch"?: boolean;
     }
     interface HcTabItem {
@@ -1716,8 +1716,8 @@ declare namespace LocalJSX {
         "index"?: number;
         "label"?: string;
         "onVchange"?: (event: CustomEvent<any>) => void;
-        "onVclick"?: (event: CustomEvent<any>) => void;
         "onVlabel"?: (event: CustomEvent<any>) => void;
+        "onVtap"?: (event: CustomEvent<any>) => void;
     }
     interface HcTag {
         "background"?: string;
