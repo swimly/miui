@@ -24,6 +24,7 @@ export namespace Components {
         "value": string;
     }
     interface HcAddress {
+        "type": string;
     }
     interface HcAlert {
         "clickable": boolean;
@@ -182,6 +183,7 @@ export namespace Components {
         "display": boolean;
         "generate": (option?: object) => Promise<void>;
         "masker": boolean;
+        "onDisplay": () => Promise<void>;
         "place": string;
         "rounder": boolean;
     }
@@ -322,10 +324,11 @@ export namespace Components {
     interface HcPicker {
         "command": boolean;
         "data": string;
-        "destory": () => Promise<boolean>;
+        "destory": () => Promise<void>;
         "event": boolean;
         "footer": boolean;
         "generate": (option?: object) => Promise<HTMLHcPickerElement>;
+        "hide": () => Promise<void>;
         "onDisplay": () => Promise<void>;
         "reset": boolean;
         "titles": string;
@@ -1237,6 +1240,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface HcAddress {
+        "type"?: string;
     }
     interface HcAlert {
         "clickable"?: boolean;
@@ -1536,7 +1540,7 @@ declare namespace LocalJSX {
         "event"?: boolean;
         "footer"?: boolean;
         "onVchange"?: (event: CustomEvent<any>) => void;
-        "onVclick"?: (event: CustomEvent<any>) => void;
+        "onVhide"?: (event: CustomEvent<any>) => void;
         "reset"?: boolean;
         "titles"?: string;
         "value"?: string;

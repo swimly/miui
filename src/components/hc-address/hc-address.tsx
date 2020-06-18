@@ -1,4 +1,4 @@
-import { Component, Host, h, Element } from '@stencil/core';
+import { Component, Host, h, Element, Prop } from '@stencil/core';
 import china from '../../utils/china'
 @Component({
   tag: 'hc-address',
@@ -6,6 +6,7 @@ import china from '../../utils/china'
   shadow: true,
 })
 export class HcAddress {
+  @Prop() type: string = 'picker'
   @Element() el: HTMLElement;
   $picker
   componentDidLoad () {
@@ -16,8 +17,8 @@ export class HcAddress {
       <Host>
         <div class="handle" onClick={this.renderDom.bind(this)}>
           <slot></slot>
-          <hc-picker onVclick={this.onHide.bind(this)} event={true} command={true} data={JSON.stringify(china)}></hc-picker>
         </div>
+        <hc-picker onVchange={this.getValue.bind(this)} onVhide={this.onHide.bind(this)} event={true} command={true} data={JSON.stringify(china)}></hc-picker>
       </Host>
     );
   }
@@ -25,6 +26,9 @@ export class HcAddress {
     this.$picker.generate()
   }
   onHide () {
-    console.log('可以关闭了')
+    this.$picker.destory()
+  }
+  getValue (e) {
+    console.log(e.detail.value)
   }
 }

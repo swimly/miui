@@ -13,8 +13,8 @@ export declare class HcDrawer implements ComponentInterface {
     Dhandle(v: boolean): void;
     componentDidLoad(): void;
     render(): any;
-    onDisplay(): void;
+    onDisplay(): Promise<void>;
     destory(): Promise<void>;
+    renderMasker(): boolean;
     generate(option?: object): Promise<void>;
-    generateDom(tag: any, option: any): any;
 }

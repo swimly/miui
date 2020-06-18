@@ -15,7 +15,7 @@ export class HcPickerView {
   @Prop() event: boolean;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
-  @Event() vclick: EventEmitter;
+  @Event() vhide: EventEmitter;
   $drawer;
   $handle;
   $content;
@@ -134,23 +134,22 @@ export class HcPickerView {
     this.$drawer.generate()
   }
   @Method()
+  async hide () {
+    this.$drawer.destory()
+  }
+  @Method()
   async destory () {
-    if (this.event) {
-      this.vclick.emit()
-      return false;
-    } else {
-      this.$drawer.destory()
-      this.vchange.emit({
-        value: this.value
-      })
-      setTimeout(() => {
-        if (this.command) {
-          setTimeout(() => {
-            document.body.removeChild(this.el)
-          }, 300)
-        }
-      }, 300)
-    }
+    this.$drawer.destory()
+    this.vchange.emit({
+      value: this.value
+    })
+    setTimeout(() => {
+      if (this.command && document.querySelector('hc-picker')) {
+        setTimeout(() => {
+          document.body.removeChild(this.el)
+        }, 300)
+      }
+    }, 300)
   }
   @Method()
   async generate (option: object = null) {

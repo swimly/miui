@@ -11,7 +11,7 @@ class HcPickerView {
         this.reset = true;
         this.footer = true;
         this.vchange = createEvent(this, "vchange", 7);
-        this.vclick = createEvent(this, "vclick", 7);
+        this.vhide = createEvent(this, "vhide", 7);
     }
     valueHandle(v) {
         this.el.setAttribute('value', v);
@@ -100,24 +100,21 @@ class HcPickerView {
     async onDisplay() {
         this.$drawer.generate();
     }
+    async hide() {
+        this.$drawer.destory();
+    }
     async destory() {
-        if (this.event) {
-            this.vclick.emit();
-            return false;
-        }
-        else {
-            this.$drawer.destory();
-            this.vchange.emit({
-                value: this.value
-            });
-            setTimeout(() => {
-                if (this.command) {
-                    setTimeout(() => {
-                        document.body.removeChild(this.el);
-                    }, 300);
-                }
-            }, 300);
-        }
+        this.$drawer.destory();
+        this.vchange.emit({
+            value: this.value
+        });
+        setTimeout(() => {
+            if (this.command && document.querySelector('hc-picker')) {
+                setTimeout(() => {
+                    document.body.removeChild(this.el);
+                }, 300);
+            }
+        }, 300);
     }
     async generate(option = null) {
         if (option) {

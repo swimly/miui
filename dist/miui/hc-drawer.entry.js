@@ -8,7 +8,7 @@ class HcDrawer {
         this.place = 'down';
         this.clickable = true;
         this.masker = true;
-        this.command = false;
+        this.rounder = true;
         this.vshow = createEvent(this, "vshow", 7);
     }
     Dhandle(v) {
@@ -25,64 +25,60 @@ class HcDrawer {
         }
     }
     componentDidLoad() {
-        if (this.rounder) {
-            this.el.setAttribute('rounder', `true`);
-        }
-        if (this.place) {
-            this.el.setAttribute('place', this.place);
-        }
-        if (this.display) {
-            this.el.setAttribute('display', `${this.display}`);
-            this.vshow.emit(null);
-        }
+        this.$mask = this.el.shadowRoot.querySelector('hc-masker');
     }
     render() {
-        return (h(Host, null, h("slot", null, h("div", { innerHTML: this.content }))));
+        return (h(Host, Object.assign({}, {
+            place: this.place,
+            clickable: this.clickable,
+            masker: this.masker,
+            rounder: this.rounder,
+            command: this.command
+        }), h("slot", null, h("div", { innerHTML: this.content }))));
     }
-    onDisplay() {
+    async onDisplay() {
+        this.renderMasker();
+        this.el.style.display = 'block';
         this.el.style.transition = '0.3s';
-        this.display = true;
-        this.$mask = document.createElement('hc-masker');
-        this.$mask.command = true;
-        this.$mask.clickable = false;
-        if (!this.masker) {
-            this.$mask.fill = 'transparent';
-        }
-        document.body.appendChild(this.$mask);
-        this.$mask.generate();
-        if (this.clickable && this.masker) {
-            this.$mask.addEventListener('vclick', () => {
-                this.destory();
-            });
-        }
-        // 通知drawer已经打开
-        setTimeout((e) => {
-            this.vshow.emit({ e });
-        }, 300);
+        setTimeout(() => {
+            this.display = true;
+        }, 30);
     }
     async destory() {
         this.display = false;
-        this.$mask.destory();
+        if (this.masker) {
+            this.$mask.destory();
+        }
+        setTimeout(() => {
+            this.el.style.display = 'none';
+            this.el.style.transition = '0s';
+        }, 300);
+    }
+    renderMasker() {
+        if (!this.masker) {
+            return false;
+        }
+        var has = document.querySelector('hc-masker');
+        if (has) {
+            this.$mask = has;
+        }
+        else {
+            this.$mask = document.createElement('hc-masker');
+            document.body.appendChild(this.$mask);
+        }
+        this.$mask.generate();
+        if (this.clickable) {
+            this.$mask.addEventListener('click', () => {
+                this.destory();
+            });
+        }
     }
     async generate(option = null) {
         if (option) {
-            this.generateDom('hc-drawer', option);
         }
         else {
             this.onDisplay();
         }
-    }
-    generateDom(tag, option) {
-        let dom = document.createElement(tag);
-        option.command = true;
-        for (let key in option) {
-            dom.setAttribute(key, option[key]);
-        }
-        document.body.appendChild(dom);
-        setTimeout(() => {
-            dom.generate();
-        }, 30);
-        return dom;
     }
     get el() { return getElement(this); }
     static get watchers() { return {

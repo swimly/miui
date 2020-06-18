@@ -10716,23 +10716,27 @@ const china = [{
   }]
 }];
 
-const hcAddressCss = ":host{display:block}";
+const hcAddressCss = ":host{display:block}:host .footer{height:2.2rem;padding:1rem}:host .footer hc-col:first-child{padding-right:0.5rem}:host .footer hc-col:last-child{padding-left:0.5rem}";
 
 class HcAddress {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.type = 'picker';
     }
     componentDidLoad() {
         this.$picker = this.el.shadowRoot.querySelector('hc-picker');
     }
     render() {
-        return (h(Host, null, h("div", { class: "handle", onClick: this.renderDom.bind(this) }, h("slot", null), h("hc-picker", { onVclick: this.onHide.bind(this), event: true, command: true, data: JSON.stringify(china) }))));
+        return (h(Host, null, h("div", { class: "handle", onClick: this.renderDom.bind(this) }, h("slot", null)), h("hc-picker", { onVchange: this.getValue.bind(this), onVhide: this.onHide.bind(this), event: true, command: true, data: JSON.stringify(china) })));
     }
     renderDom() {
         this.$picker.generate();
     }
     onHide() {
-        console.log('可以关闭了');
+        this.$picker.destory();
+    }
+    getValue(e) {
+        console.log(e.detail.value);
     }
     get el() { return getElement(this); }
 }
