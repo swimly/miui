@@ -133,10 +133,7 @@ $--app-picker-active: var(--color-primary);
 $--app-picker-padding: 1rem;
 $--app-picker-title-fontsize: 0.9rem;
 $--app-picker-title-color: var(--color-text-primary);
-$--app-picker-cancel-background: var(--background-color-base);
-$--app-picker-cancel-color: var(--color-text-primary);
-$--app-picker-confirm-background: var(--color-primary);
-$--app-picker-confirm-color: var(--color-text-white);
+$--app-picker-type-color: var(--color-text-secondary);
 
 // alert
 $--app-alert-background: var(--background-color-white);

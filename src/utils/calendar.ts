@@ -211,11 +211,11 @@ export function dateFormat(fmt, date) {
   let ret;
   const opt = {
     "Y+": date.getFullYear().toString(),        // 年
-    "m+": (date.getMonth() + 1).toString(),     // 月
-    "d+": date.getDate().toString(),            // 日
-    "H+": date.getHours().toString(),           // 时
-    "M+": date.getMinutes().toString(),         // 分
-    "S+": date.getSeconds().toString()          // 秒
+    "M+": (date.getMonth() + 1).toString(),     // 月
+    "D+": date.getDate().toString(),            // 日
+    "h+": date.getHours().toString(),           // 时
+    "m+": date.getMinutes().toString(),         // 分
+    "s+": date.getSeconds().toString()          // 秒
   };
   for (let k in opt) {
     ret = new RegExp("(" + k + ")").exec(fmt);

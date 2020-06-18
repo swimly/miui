@@ -8,7 +8,7 @@ import { Component, ComponentInterface, Host, h, Method, Prop, Watch, Element, E
 export class HcMasker implements ComponentInterface {
   @Prop() fill: string = 'rgba(0,0,0,0.7)';
   @Prop() display: boolean = false;
-  @Prop() clickable: boolean = true;
+  @Prop() clickable: boolean;
   @Prop() command: boolean = false;
   @Prop() place: string;
   @Prop() offset: number;

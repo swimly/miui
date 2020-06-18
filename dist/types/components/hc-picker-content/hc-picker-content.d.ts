@@ -1,8 +1,9 @@
 import { EventEmitter } from '../../stencil-public-runtime';
 export declare class HcPickerContent {
     value: string;
-    data: string;
     el: HTMLElement;
-    vdatachange: EventEmitter;
+    vvaluechange: EventEmitter;
+    valueHandle(v: string): void;
+    componentDidLoad(): void;
     render(): any;
 }

@@ -7,7 +7,6 @@ class HcMasker {
         registerInstance(this, hostRef);
         this.fill = 'rgba(0,0,0,0.7)';
         this.display = false;
-        this.clickable = true;
         this.command = false;
         this.vclick = createEvent(this, "vclick", 7);
     }

@@ -5,8 +5,11 @@ export declare class HcPickerView {
     data: string;
     command: boolean;
     reset: boolean;
+    footer: boolean;
+    event: boolean;
     el: HTMLElement;
     vchange: EventEmitter;
+    vclick: EventEmitter;
     $drawer: any;
     $handle: any;
     $content: any;
@@ -21,6 +24,6 @@ export declare class HcPickerView {
         value: any[];
     };
     onDisplay(): Promise<void>;
-    destory(): Promise<void>;
+    destory(): Promise<boolean>;
     generate(option?: object): Promise<HTMLHcPickerElement>;
 }

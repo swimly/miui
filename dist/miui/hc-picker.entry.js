@@ -9,22 +9,31 @@ class HcPickerView {
         this.titles = '请选择';
         this.value = '';
         this.reset = true;
+        this.footer = true;
         this.vchange = createEvent(this, "vchange", 7);
+        this.vclick = createEvent(this, "vclick", 7);
     }
     valueHandle(v) {
         this.el.setAttribute('value', v);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
+        if (this.data) {
+            this.el.setAttribute('data', this.data);
+        }
     }
     render() {
         var data = this.computedData();
+        var footer = null;
+        if (this.footer) {
+            footer = (h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { type: "info", onClick: this.destory.bind(this), rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { type: "primary", onClick: this.destory.bind(this), rounder: true }, "\u786E\u5B9A"))));
+        }
         return (h(Host, null, h("hc-picker-handle", { onClick: this.onDisplay.bind(this), innerHTML: data.handle }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.titles), h("hc-picker-content", null, data.data.map((column, index) => (h("hc-picker-view", { value: data.value[index], current: this.renderCurrent.bind(this, {
                 data: data.data[index],
                 value: data.value[index]
             })(), onVscrollend: this.onDataChange.bind(this, index) }, column.map(item => {
             return (h("hc-picker-item", { value: item.value }, item.label));
-        }))))), h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { type: "info", onClick: this.destory.bind(this), rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { type: "primary", onClick: this.destory.bind(this), rounder: true }, "\u786E\u5B9A"))))));
+        }))))), footer)));
     }
     onDataChange(index, e) {
         var value = this.value.split(',');
@@ -62,8 +71,8 @@ class HcPickerView {
     computedData() {
         var data = [];
         var value = [];
-        var handle = this.command ? '' : this.el.children[0].innerHTML;
-        if (this.command) {
+        var handle = !this.el.children.length ? '' : this.el.children[0].innerHTML;
+        if (!this.el.children.length) {
             var computed = parse(JSON.parse(this.data), this.value);
             data = computed.data;
             value = computed.value;
@@ -92,17 +101,23 @@ class HcPickerView {
         this.$drawer.generate();
     }
     async destory() {
-        this.$drawer.destory();
-        this.vchange.emit({
-            value: this.value
-        });
-        setTimeout(() => {
-            if (this.command) {
-                setTimeout(() => {
-                    document.body.removeChild(this.el);
-                }, 300);
-            }
-        }, 300);
+        if (this.event) {
+            this.vclick.emit();
+            return false;
+        }
+        else {
+            this.$drawer.destory();
+            this.vchange.emit({
+                value: this.value
+            });
+            setTimeout(() => {
+                if (this.command) {
+                    setTimeout(() => {
+                        document.body.removeChild(this.el);
+                    }, 300);
+                }
+            }, 300);
+        }
     }
     async generate(option = null) {
         if (option) {

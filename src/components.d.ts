@@ -159,6 +159,19 @@ export namespace Components {
     }
     interface HcCountdown {
     }
+    interface HcDate {
+        "command": boolean;
+        "destory": () => Promise<void>;
+        "end": number;
+        "footer": boolean;
+        "generate": (option?: object) => Promise<HTMLHcDateElement>;
+        "heading": string;
+        "indicate": boolean;
+        "onDisplay": () => Promise<void>;
+        "start": number;
+        "type": string;
+        "value": string;
+    }
     interface HcDialog {
     }
     interface HcDrawer {
@@ -309,7 +322,9 @@ export namespace Components {
     interface HcPicker {
         "command": boolean;
         "data": string;
-        "destory": () => Promise<void>;
+        "destory": () => Promise<boolean>;
+        "event": boolean;
+        "footer": boolean;
         "generate": (option?: object) => Promise<HTMLHcPickerElement>;
         "onDisplay": () => Promise<void>;
         "reset": boolean;
@@ -317,7 +332,6 @@ export namespace Components {
         "value": string;
     }
     interface HcPickerContent {
-        "data": string;
         "value": string;
     }
     interface HcPickerHandle {
@@ -331,6 +345,7 @@ export namespace Components {
         "Moving": (number: any) => Promise<void>;
         "current": number;
         "data": string;
+        "index": number;
         "itemHeight": number;
         "rate": number;
         "value": string;
@@ -723,6 +738,12 @@ declare global {
     var HTMLHcCountdownElement: {
         prototype: HTMLHcCountdownElement;
         new (): HTMLHcCountdownElement;
+    };
+    interface HTMLHcDateElement extends Components.HcDate, HTMLStencilElement {
+    }
+    var HTMLHcDateElement: {
+        prototype: HTMLHcDateElement;
+        new (): HTMLHcDateElement;
     };
     interface HTMLHcDialogElement extends Components.HcDialog, HTMLStencilElement {
     }
@@ -1130,6 +1151,7 @@ declare global {
         "hc-collapse": HTMLHcCollapseElement;
         "hc-collapse-item": HTMLHcCollapseItemElement;
         "hc-countdown": HTMLHcCountdownElement;
+        "hc-date": HTMLHcDateElement;
         "hc-dialog": HTMLHcDialogElement;
         "hc-drawer": HTMLHcDrawerElement;
         "hc-dropdown": HTMLHcDropdownElement;
@@ -1353,6 +1375,17 @@ declare namespace LocalJSX {
     }
     interface HcCountdown {
     }
+    interface HcDate {
+        "command"?: boolean;
+        "end"?: number;
+        "footer"?: boolean;
+        "heading"?: string;
+        "indicate"?: boolean;
+        "onVchange"?: (event: CustomEvent<any>) => void;
+        "start"?: number;
+        "type"?: string;
+        "value"?: string;
+    }
     interface HcDialog {
     }
     interface HcDrawer {
@@ -1500,14 +1533,16 @@ declare namespace LocalJSX {
     interface HcPicker {
         "command"?: boolean;
         "data"?: string;
+        "event"?: boolean;
+        "footer"?: boolean;
         "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVclick"?: (event: CustomEvent<any>) => void;
         "reset"?: boolean;
         "titles"?: string;
         "value"?: string;
     }
     interface HcPickerContent {
-        "data"?: string;
-        "onVdatachange"?: (event: CustomEvent<any>) => void;
+        "onVvaluechange"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
     interface HcPickerHandle {
@@ -1520,6 +1555,7 @@ declare namespace LocalJSX {
     interface HcPickerView {
         "current"?: number;
         "data"?: string;
+        "index"?: number;
         "itemHeight"?: number;
         "onVscrollend"?: (event: CustomEvent<any>) => void;
         "rate"?: number;
@@ -1812,6 +1848,7 @@ declare namespace LocalJSX {
         "hc-collapse": HcCollapse;
         "hc-collapse-item": HcCollapseItem;
         "hc-countdown": HcCountdown;
+        "hc-date": HcDate;
         "hc-dialog": HcDialog;
         "hc-drawer": HcDrawer;
         "hc-dropdown": HcDropdown;
@@ -1903,6 +1940,7 @@ declare module "@stencil/core" {
             "hc-collapse": LocalJSX.HcCollapse & JSXBase.HTMLAttributes<HTMLHcCollapseElement>;
             "hc-collapse-item": LocalJSX.HcCollapseItem & JSXBase.HTMLAttributes<HTMLHcCollapseItemElement>;
             "hc-countdown": LocalJSX.HcCountdown & JSXBase.HTMLAttributes<HTMLHcCountdownElement>;
+            "hc-date": LocalJSX.HcDate & JSXBase.HTMLAttributes<HTMLHcDateElement>;
             "hc-dialog": LocalJSX.HcDialog & JSXBase.HTMLAttributes<HTMLHcDialogElement>;
             "hc-drawer": LocalJSX.HcDrawer & JSXBase.HTMLAttributes<HTMLHcDrawerElement>;
             "hc-dropdown": LocalJSX.HcDropdown & JSXBase.HTMLAttributes<HTMLHcDropdownElement>;

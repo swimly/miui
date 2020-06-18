@@ -7,9 +7,9 @@ import {get3MonthDays, get3WeekDays, dateFormat, getRangeMonthDays, DisDate, get
 })
 export class HcCalendar {
   @Prop() type: string;
-  @Prop() date: string = dateFormat('YYYY/mm/dd', new Date());
+  @Prop() date: string = dateFormat('YYYY/MM/DD', new Date());
   @Prop() range: number;
-  @Prop() current: string = dateFormat('YYYY/mm/dd', new Date());
+  @Prop() current: string = dateFormat('YYYY/MM/DD', new Date());
   @Prop() weekday: number = new Date(this.date).getDay();
   @Prop() section: string = '';
   @Prop() padding: number = 0;

@@ -259,4 +259,4 @@ function getDiffDates(start, end) {
     return dateArr;
 }
 
-export { DisDate as D, getRangeMonthDays as a, get3MonthDays as b, getDiffDates as c, dateFormat as d, getDiffDate as e, get3WeekDays as g };
+export { DisDate as D, get3WeekDays as a, getRangeMonthDays as b, get3MonthDays as c, dateFormat as d, getDiffDates as e, getDiffDate as f, getMonthLength as g };

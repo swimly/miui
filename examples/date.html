@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>date</title>
+  <link rel="stylesheet" href="../www/build/miui.css">
+</head>
+<body>
+  <hc-page>
+    <hc-header>日期时间选择</hc-header>
+    <hc-view>
+      <hc-panel>
+        <hc-title>普通</hc-title>
+        <hc-date footer="false"></hc-date>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义选择类型</hc-title>
+        <hc-date type="YYYY,MM,DD,hh,mm,ss" footer="false"></hc-date>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>弹出选择</hc-title>
+        <hc-date heading="请选择时间" type="YYYY,MM,DD" indicate>
+          <hc-button type="primary" conner plain>选择日期</hc-button>
+        </hc-date>
+      </hc-panel>
+      <hc-panel>
+        <hc-title>自定义指令</hc-title>
+        <hc-button type="primary" conner plain id="zl">选择日期</hc-button>
+      </hc-panel>
+    </hc-view>
+  </hc-page>
+  <script type="module">
+    import {hc_date} from '../www/build/hc-date.entry.js'
+    window.Dat = new hc_date({})
+  </script>
+  <script type="module" src="../www/build/miui.esm.js"></script>
+  <script>
+    document.querySelector('#zl').addEventListener('click', () => {
+      Dat.generate({
+        type: 'YYYY,MM',
+        indicate: true,
+        start: 2010,
+        end: 2020
+      })
+    })
+  </script>
+</body>
+</html>

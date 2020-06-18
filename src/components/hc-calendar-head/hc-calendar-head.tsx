@@ -64,7 +64,7 @@ export class HcCalendarHead {
     return (
       <Host>
         <hc-row class="title" align="center">
-          <hc-col align="center" span={10} id="title">{dateFormat('YYYY年mm月', new Date(this.date))}</hc-col>
+          <hc-col align="center" span={10} id="title">{dateFormat('YYYY年MM月', new Date(this.date))}</hc-col>
           <hc-col id="diff" flex={1}>
             {diff}
           </hc-col>
@@ -90,6 +90,6 @@ export class HcCalendarHead {
   }
   @Method()
   async setTitle (v) {
-    this.el.shadowRoot.querySelector('#title').innerHTML = dateFormat('YYYY年mm月', new Date(v))
+    this.el.shadowRoot.querySelector('#title').innerHTML = dateFormat('YYYY年MM月', new Date(v))
   }
 }

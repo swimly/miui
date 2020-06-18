@@ -1,5 +1,5 @@
 import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
-import { e as getDiffDate, d as dateFormat } from './calendar-dfbaec27.js';
+import { e as getDiffDate, d as dateFormat } from './calendar-9d35348e.js';
 
 const hcCalendarHeadCss = ":host{display:block;margin-bottom:0.4rem}:host .title{font-size:0.96rem;margin-bottom:0.48rem}:host .week{font-size:0.64rem;color:var(--color-text-primary)}";
 
@@ -49,7 +49,7 @@ class HcCalendarHead {
         else {
             type = (h("span", null));
         }
-        return (h(Host, null, h("hc-row", { class: "title", align: "center" }, h("hc-col", { align: "center", span: 10, id: "title" }, dateFormat('YYYY年mm月', new Date(this.date))), h("hc-col", { id: "diff", flex: 1 }, diff), h("hc-col", { id: "today" }, today), h("hc-col", { id: "type", align: "right" }, type)), weekday, h("slot", null)));
+        return (h(Host, null, h("hc-row", { class: "title", align: "center" }, h("hc-col", { align: "center", span: 10, id: "title" }, dateFormat('YYYY年MM月', new Date(this.date))), h("hc-col", { id: "diff", flex: 1 }, diff), h("hc-col", { id: "today" }, today), h("hc-col", { id: "type", align: "right" }, type)), weekday, h("slot", null)));
     }
     changeType() {
         this.type = this.type == 'week' ? 'month' : 'week';
@@ -60,7 +60,7 @@ class HcCalendarHead {
         this.date = `${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()}`;
     }
     async setTitle(v) {
-        this.el.shadowRoot.querySelector('#title').innerHTML = dateFormat('YYYY年mm月', new Date(v));
+        this.el.shadowRoot.querySelector('#title').innerHTML = dateFormat('YYYY年MM月', new Date(v));
     }
     get el() { return getElement(this); }
     static get watchers() { return {

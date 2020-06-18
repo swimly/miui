@@ -6,6 +6,7 @@ export declare class HcPickerView implements ComponentInterface {
     rate: number;
     itemHeight: number;
     data: string;
+    index: number;
     el: HTMLElement;
     $wrap: HTMLElement;
     $children: Element[];

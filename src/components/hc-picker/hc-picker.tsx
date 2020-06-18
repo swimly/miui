@@ -11,8 +11,11 @@ export class HcPickerView {
   @Prop() data: string;
   @Prop() command: boolean
   @Prop() reset: boolean = true;
+  @Prop() footer: boolean = true;
+  @Prop() event: boolean;
   @Element() el: HTMLElement;
   @Event() vchange: EventEmitter;
+  @Event() vclick: EventEmitter;
   $drawer;
   $handle;
   $content;
@@ -22,9 +25,25 @@ export class HcPickerView {
   }
   componentDidLoad () {
     this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
+    if (this.data) {
+      this.el.setAttribute('data', this.data)
+    }
   }
   render() {
     var data = this.computedData()
+    var footer = null;
+    if (this.footer) {
+      footer = (
+        <hc-row class="footer">
+          <hc-col span={12}>
+            <hc-button type="info" onClick={this.destory.bind(this)} rounder={true}>取消</hc-button>
+          </hc-col>
+          <hc-col align="right" span={12}>
+            <hc-button type="primary" onClick={this.destory.bind(this)} rounder={true}>确定</hc-button>
+          </hc-col>
+        </hc-row>
+      )
+    }
     return (
       <Host>
         <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={data.handle}></hc-picker-handle>
@@ -46,14 +65,7 @@ export class HcPickerView {
               </hc-picker-view>
             ))}
           </hc-picker-content>
-          <hc-row class="footer">
-            <hc-col span={12}>
-              <hc-button type="info" onClick={this.destory.bind(this)} rounder={true}>取消</hc-button>
-            </hc-col>
-            <hc-col align="right" span={12}>
-              <hc-button type="primary" onClick={this.destory.bind(this)} rounder={true}>确定</hc-button>
-            </hc-col>
-          </hc-row>
+          {footer}
         </hc-drawer>
       </Host>
     );
@@ -92,8 +104,8 @@ export class HcPickerView {
   computedData () {
     var data = []
     var value = []
-    var handle = this.command ? '' : this.el.children[0].innerHTML
-    if (this.command) {
+    var handle = !this.el.children.length ? '' : this.el.children[0].innerHTML
+    if (!this.el.children.length) {
       var computed = parse(JSON.parse(this.data), this.value)
       data = computed.data
       value = computed.value
@@ -123,17 +135,22 @@ export class HcPickerView {
   }
   @Method()
   async destory () {
-    this.$drawer.destory()
-    this.vchange.emit({
-      value: this.value
-    })
-    setTimeout(() => {
-      if (this.command) {
-        setTimeout(() => {
-          document.body.removeChild(this.el)
-        }, 300)
-      }
-    }, 300)
+    if (this.event) {
+      this.vclick.emit()
+      return false;
+    } else {
+      this.$drawer.destory()
+      this.vchange.emit({
+        value: this.value
+      })
+      setTimeout(() => {
+        if (this.command) {
+          setTimeout(() => {
+            document.body.removeChild(this.el)
+          }, 300)
+        }
+      }, 300)
+    }
   }
   @Method()
   async generate (option: object = null) {

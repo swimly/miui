@@ -13,6 +13,7 @@ export class HcPickerView implements ComponentInterface {
   @Prop() rate: number = 8;
   @Prop() itemHeight: number = 44;
   @Prop() data: string;
+  @Prop() index: number;
   @Element() el: HTMLElement;
   $wrap: HTMLElement;
   $children: Element[];
@@ -20,12 +21,18 @@ export class HcPickerView implements ComponentInterface {
   @Event() vscrollend: EventEmitter
   @Watch('current')
   currentHandle (v: number) {
-    this.renderActive(v)
-    var data = {
-      label: this.$children[v].innerHTML,
-      value: this.$children[v].getAttribute('value'),
-      current: v
+    var index = v
+    if (v < 0) {
+      index = 0
     }
+    this.renderActive(index)
+    var data = {
+      label: this.$children[index].innerHTML,
+      value: this.$children[index].getAttribute('value'),
+      current: index,
+      index: this.index
+    }
+    this.el.setAttribute('value', this.$children[index].innerHTML)
     this.vscrollend.emit(data)
   }
   count() {
@@ -43,6 +50,10 @@ export class HcPickerView implements ComponentInterface {
     }
     this.renderActive(this.current)
     this.bindTouch()
+    var slot = this.el.shadowRoot.querySelector('slot')
+    slot.addEventListener('slotchange', () => {
+      this.$children = Array.from(this.el.children)
+    })
   }
   render() {
     this.$children = Array.from(this.el.children)
@@ -86,7 +97,7 @@ export class HcPickerView implements ComponentInterface {
   }
   @Method()
   async Moving (number) {
-    this.current = number
+    this.current = number < 0 ? 0 : number
   }
   bindTouch() {
     this.$wrap = this.el.shadowRoot.querySelector('.wrap')
