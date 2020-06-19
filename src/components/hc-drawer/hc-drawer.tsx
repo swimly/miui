@@ -42,7 +42,7 @@ export class HcDrawer implements ComponentInterface {
         command: this.command
       }}>
         <slot>
-          <div innerHTML={this.content}></div>
+          <div innerHTML={this.content} class="content"></div>
         </slot>
       </Host>
     );
@@ -59,23 +59,21 @@ export class HcDrawer implements ComponentInterface {
   @Method()
   async destory () {
     this.display = false
-    if (this.masker) {
-      this.$mask.destory()
-    }
+    this.$mask.destory()
     setTimeout(() => {
       this.el.style.display = 'none'
       this.el.style.transition = '0s'
     }, 300)
   }
   renderMasker () {
-    if (!this.masker) {
-      return false
-    }
     var has = document.querySelector('hc-masker')
     if (has) {
       this.$mask = has
     } else {
       this.$mask = document.createElement('hc-masker')
+      if (!this.masker) {
+        this.$mask.setAttribute('fill', 'rgba(0,0,0,0)')
+      }
       document.body.appendChild(this.$mask)
     }
     this.$mask.generate()

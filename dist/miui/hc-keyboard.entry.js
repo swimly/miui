@@ -33,18 +33,55 @@ const keys = {
                 value: 12
             }],
         [{
-                label: 'en',
+                label: '0',
                 value: 12,
-                icon: 'return',
-                background: '#D0D1D5'
+                flex: 2
+            }, {
+                label: '.',
+                value: 12
+            }]
+    ],
+    cardnumber: [
+        [{
+                label: '1',
+                value: 12
+            }, {
+                label: '2',
+                value: 12
+            }, {
+                label: '3',
+                value: 12
+            }],
+        [{
+                label: '4',
+                value: 12
+            }, {
+                label: '5',
+                value: 12
+            }, {
+                label: '6',
+                value: 12
+            }],
+        [{
+                label: '7',
+                value: 12
+            }, {
+                label: '8',
+                value: 12
+            }, {
+                label: '9',
+                value: 12
+            }],
+        [{
+                label: 'X',
+                value: 12
             }, {
                 label: '0',
                 value: 12
             }, {
                 label: 'back',
                 value: 12,
-                icon: 'leftarrow',
-                background: '#D0D1D5'
+                icon: 'tuige'
             }]
     ],
     en: [
@@ -585,7 +622,7 @@ const keys = {
         ]]
 };
 
-const hcKeyboardCss = ":host .head{background-color:var(--background-color-base);font-size:0.7rem;color:var(--color-primary);padding:0.4666666667rem 0.7rem}:host .keys{display:flex;flex-direction:column;background-color:var(--background-color-base);padding:0 0.2rem 0.2rem 0.2rem;font-size:0.7rem;height:11rem}:host .keys hc-row{flex:1}:host .keys hc-row hc-col{padding:0.15rem;box-sizing:border-box;height:100%}:host .keys hc-row hc-col .key{background-color:var(--background-color-white);width:100%;height:100%;display:flex;flex-direction:row;align-items:center;justify-content:center;color:var(--color-text-primary);border-radius:0.2333333333rem;font-size:inherit}:host .keys hc-row hc-col .key:not(style):active{background:var(--background-color-basegray)}:host([type=number]){font-size:0.98rem}";
+const hcKeyboardCss = ":host{font-size:0.8rem}:host hc-drawer{background-color:var(--background-color-base);padding:0.3rem}:host .head{background-color:var(--background-color-base);font-size:0.64rem;color:var(--color-text-primary);padding:0.5333333333rem 0.8rem}:host .tool{height:100%}:host .tool hc-col{padding:0.15rem 0;width:100%;font-size:0.8rem}:host .tool hc-col .key{padding:0 0.3rem;width:100%}:host .content{height:11rem}:host .content hc-col{height:100%}:host .keys{display:flex;flex-direction:column;padding:0 0.2rem 0 0;height:100%}:host .keys hc-row{flex:1}:host .keys hc-row hc-col{padding:0.15rem;box-sizing:border-box;height:100%}:host .key{background-color:var(--background-color-white);width:100%;height:100%;display:flex;flex-direction:row;align-items:center;justify-content:center;color:var(--color-text-primary);border-radius:0.2666666667rem;font-size:inherit;box-sizing:border-box}:host .key:not(style):active{background:var(--background-color-basegray)}:host .key.done{background:var(--color-primary);color:var(--color-text-white)}:host .key.done:not(style):active{background:var(--color-primary)}:host([type=number]),:host([type=cardnumber]){font-size:1.12rem}";
 
 class HcKeyboard {
     constructor(hostRef) {
@@ -600,6 +637,7 @@ class HcKeyboard {
     }
     valueHandle(v) {
         this.vchange.emit(v);
+        this.el.children[0].setAttribute('value', v);
         if (this.$type == 'carnumber') {
             if (v.length == 0) {
                 this.type = 'carnumber';
@@ -611,8 +649,8 @@ class HcKeyboard {
             this.el.setAttribute('type', this.type);
         }
         this.$type = this.type;
-        var slot = this.el.shadowRoot.querySelector('slot');
-        slot.addEventListener('click', () => {
+        this.$slot = this.el.shadowRoot.querySelector('slot');
+        this.$slot.addEventListener('click', () => {
             this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
             this.value = '';
             this.$drawer.generate();
@@ -620,15 +658,22 @@ class HcKeyboard {
     }
     render() {
         var data = keys[this.type];
-        return (h(Host, null, h("slot", null), h("hc-drawer", { place: "down", masker: false }, h("hc-row", { class: "head", valign: "center" }, h("hc-col", null), h("hc-col", { flex: 1 }, "\u5B89\u5168\u952E\u76D8"), h("hc-icon", { onClick: this.destory.bind(this), size: 24, name: "arrow-down" })), h("div", { class: "keys" }, data.map(row => {
+        var tool = null;
+        if (this.type == 'number') {
+            tool = (h("hc-col", { span: 5 }, h("hc-row", { direction: "column", class: "tool" }, h("hc-col", { flex: 1, align: "center" }, h("span", { class: "key", onClick: this.del.bind(this) }, h("hc-icon", { size: 28, name: "tuige" }))), h("hc-col", { flex: 1 }, h("span", { class: "key done", onClick: this.destory.bind(this) }, "\u5B8C\u6210")))));
+        }
+        return (h(Host, null, h("slot", null), h("hc-drawer", { place: "down", masker: false }, h("hc-row", { class: "head", valign: "center" }, h("hc-col", { align: "center" }, h("hc-icon", { size: 24, name: "keyboard" })), h("hc-col", { align: "center" }, "\u5B89\u5168\u952E\u76D8"), h("hc-col", { flex: 1, align: "right" }, h("hc-icon", { onClick: this.destory.bind(this), size: 24, name: "arrow-down" }))), h("hc-row", { class: "content" }, h("hc-col", { flex: 1 }, h("div", { class: "keys" }, data.map(row => {
             return (h("hc-row", null, row.map(item => {
                 return (h("hc-col", { id: item.label, flex: item.flex ? item.flex : 1, onClick: this.onClick.bind(this, item) }, this.renderItem(item)));
             })));
-        })))));
+        }))), tool))));
+    }
+    del() {
+        this.value = this.value.substring(0, this.value.length - 1);
     }
     renderItem(item) {
         if (item.icon) {
-            return (h("span", { class: "key", style: { backgroundColor: item.background, color: item.color, fontSize: item.fontSize } }, h("hc-icon", { size: 20, name: item.icon })));
+            return (h("span", { class: "key", style: { backgroundColor: item.background, color: item.color, fontSize: item.fontSize } }, h("hc-icon", { size: 24, name: item.icon })));
         }
         else {
             return (h("span", { class: "key", style: { backgroundColor: item.background, color: item.color, fontSize: item.fontSize } }, item.label));

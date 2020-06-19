@@ -31,18 +31,55 @@ export default {
       value: 12
     }],
     [{
-      label: 'en',
+      label: '0',
       value: 12,
-      icon: 'return',
-      background: '#D0D1D5'
+      flex:2
+    }, {
+      label: '.',
+      value: 12
+    }]
+  ],
+  cardnumber: [
+    [{
+      label: '1',
+      value: 12
+    }, {
+      label: '2',
+      value: 12
+    }, {
+      label: '3',
+      value: 12
+    }],
+    [{
+      label: '4',
+      value: 12
+    }, {
+      label: '5',
+      value: 12
+    }, {
+      label: '6',
+      value: 12
+    }],
+    [{
+      label: '7',
+      value: 12
+    }, {
+      label: '8',
+      value: 12
+    }, {
+      label: '9',
+      value: 12
+    }],
+    [{
+      label: 'X',
+      value: 12
     }, {
       label: '0',
       value: 12
     }, {
       label: 'back',
       value: 12,
-      icon: 'leftarrow',
-      background: '#D0D1D5'
+      icon: 'tuige'
     }]
   ],
   en: [

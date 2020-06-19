@@ -11,7 +11,7 @@ class HcSelection {
         this.level = 0;
         this.current = 0;
         this.footer = true;
-        this.vchange = createEvent(this, "vchange", 7);
+        this.vdone = createEvent(this, "vdone", 7);
     }
     componentDidLoad() {
         this.$drawer = this.el.shadowRoot.querySelector('hc-drawer');
@@ -46,8 +46,7 @@ class HcSelection {
     }
     onDisplay() {
         this.$drawer.generate();
-        this.$tab.auto = true;
-        this.width = this.el.offsetWidth;
+        this.width = document.body.offsetWidth;
     }
     renderFooter() {
         var dom = null;
@@ -58,7 +57,7 @@ class HcSelection {
     }
     async destory() {
         this.$drawer.destory();
-        this.vchange.emit({
+        this.vdone.emit({
             value: this.value
         });
         if (this.command) {

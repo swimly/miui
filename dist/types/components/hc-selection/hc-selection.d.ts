@@ -9,7 +9,7 @@ export declare class HcSelection {
     width: number;
     footer: boolean;
     el: HTMLElement;
-    vchange: EventEmitter;
+    vdone: EventEmitter;
     $drawer: any;
     $tab: any;
     $data: any;

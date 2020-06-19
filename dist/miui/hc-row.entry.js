@@ -7,6 +7,7 @@ class HcRow {
         registerInstance(this, hostRef);
         this.align = 'flex-start';
         this.valign = 'center';
+        this.direction = 'row';
     }
     render() {
         var pos = {
@@ -19,7 +20,7 @@ class HcRow {
             center: 'center',
             bottom: 'flex-end'
         };
-        return (h(Host, { style: { justifyContent: `${pos[this.align]}`, alignItems: pos1[this.valign], flexWrap: this.wrap ? 'wrap' : 'nowrap' } }, h("slot", null)));
+        return (h(Host, { style: { flexDirection: this.direction, justifyContent: `${pos[this.align]}`, alignItems: pos1[this.valign], flexWrap: this.wrap ? 'wrap' : 'nowrap' } }, h("slot", null)));
     }
 }
 HcRow.style = hcRowCss;

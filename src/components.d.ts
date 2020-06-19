@@ -364,6 +364,9 @@ export namespace Components {
     }
     interface HcProgress {
     }
+    interface HcPullrefresh {
+        "scrolltop": number;
+    }
     interface HcRadio {
         "Check": (status: any) => Promise<void>;
         "checked": boolean;
@@ -412,6 +415,7 @@ export namespace Components {
     }
     interface HcRow {
         "align": string;
+        "direction": string;
         "valign": string;
         "wrap": boolean;
     }
@@ -934,6 +938,12 @@ declare global {
         prototype: HTMLHcProgressElement;
         new (): HTMLHcProgressElement;
     };
+    interface HTMLHcPullrefreshElement extends Components.HcPullrefresh, HTMLStencilElement {
+    }
+    var HTMLHcPullrefreshElement: {
+        prototype: HTMLHcPullrefreshElement;
+        new (): HTMLHcPullrefreshElement;
+    };
     interface HTMLHcRadioElement extends Components.HcRadio, HTMLStencilElement {
     }
     var HTMLHcRadioElement: {
@@ -1186,6 +1196,7 @@ declare global {
         "hc-popover": HTMLHcPopoverElement;
         "hc-popover-item": HTMLHcPopoverItemElement;
         "hc-progress": HTMLHcProgressElement;
+        "hc-pullrefresh": HTMLHcPullrefreshElement;
         "hc-radio": HTMLHcRadioElement;
         "hc-radio-group": HTMLHcRadioGroupElement;
         "hc-rate": HTMLHcRateElement;
@@ -1240,6 +1251,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface HcAddress {
+        "onVfinish"?: (event: CustomEvent<any>) => void;
         "type"?: string;
     }
     interface HcAlert {
@@ -1539,7 +1551,7 @@ declare namespace LocalJSX {
         "data"?: string;
         "event"?: boolean;
         "footer"?: boolean;
-        "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVdone"?: (event: CustomEvent<any>) => void;
         "onVhide"?: (event: CustomEvent<any>) => void;
         "reset"?: boolean;
         "titles"?: string;
@@ -1576,6 +1588,9 @@ declare namespace LocalJSX {
         "onVclick"?: (event: CustomEvent<any>) => void;
     }
     interface HcProgress {
+    }
+    interface HcPullrefresh {
+        "scrolltop"?: number;
     }
     interface HcRadio {
         "checked"?: boolean;
@@ -1626,6 +1641,7 @@ declare namespace LocalJSX {
     }
     interface HcRow {
         "align"?: string;
+        "direction"?: string;
         "valign"?: string;
         "wrap"?: boolean;
     }
@@ -1643,7 +1659,7 @@ declare namespace LocalJSX {
         "footer"?: boolean;
         "heading"?: string;
         "level"?: number;
-        "onVchange"?: (event: CustomEvent<any>) => void;
+        "onVdone"?: (event: CustomEvent<any>) => void;
         "value"?: string;
         "width"?: number;
     }
@@ -1884,6 +1900,7 @@ declare namespace LocalJSX {
         "hc-popover": HcPopover;
         "hc-popover-item": HcPopoverItem;
         "hc-progress": HcProgress;
+        "hc-pullrefresh": HcPullrefresh;
         "hc-radio": HcRadio;
         "hc-radio-group": HcRadioGroup;
         "hc-rate": HcRate;
@@ -1976,6 +1993,7 @@ declare module "@stencil/core" {
             "hc-popover": LocalJSX.HcPopover & JSXBase.HTMLAttributes<HTMLHcPopoverElement>;
             "hc-popover-item": LocalJSX.HcPopoverItem & JSXBase.HTMLAttributes<HTMLHcPopoverItemElement>;
             "hc-progress": LocalJSX.HcProgress & JSXBase.HTMLAttributes<HTMLHcProgressElement>;
+            "hc-pullrefresh": LocalJSX.HcPullrefresh & JSXBase.HTMLAttributes<HTMLHcPullrefreshElement>;
             "hc-radio": LocalJSX.HcRadio & JSXBase.HTMLAttributes<HTMLHcRadioElement>;
             "hc-radio-group": LocalJSX.HcRadioGroup & JSXBase.HTMLAttributes<HTMLHcRadioGroupElement>;
             "hc-rate": LocalJSX.HcRate & JSXBase.HTMLAttributes<HTMLHcRateElement>;

@@ -4,6 +4,10 @@
   background-color: $--app-drawer-background;
   position: fixed;
   z-index:101;
+  box-sizing: border-box;
+  .content{
+    box-sizing: border-box;
+  }
 }
 :host([place="up"]){
   top:0;

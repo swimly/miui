@@ -2,13 +2,20 @@ declare const _default: {
     number: ({
         label: string;
         value: number;
-        icon: string;
-        background: string;
+        flex: number;
     } | {
         label: string;
         value: number;
+        flex?: undefined;
+    })[][];
+    cardnumber: ({
+        label: string;
+        value: number;
         icon?: undefined;
-        background?: undefined;
+    } | {
+        label: string;
+        value: number;
+        icon: string;
     })[][];
     en: (({
         label: string;

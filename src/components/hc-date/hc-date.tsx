@@ -10,7 +10,7 @@ export class HcDate {
   @Prop() value: string = dateFormat(this.type, new Date());
   @Prop() start: number = 1980;
   @Prop() end: number = 2050;
-  @Prop() heading: string;
+  @Prop() heading: string = '请选择';
   @Prop() footer: boolean = true;
   @Prop() indicate: boolean;
   @Prop() command: boolean;

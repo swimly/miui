@@ -10,6 +10,7 @@ class HcDate {
         this.value = dateFormat(this.type, new Date());
         this.start = 1980;
         this.end = 2050;
+        this.heading = '请选择';
         this.footer = true;
         this.vchange = createEvent(this, "vchange", 7);
     }

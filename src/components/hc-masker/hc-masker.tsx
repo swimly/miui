@@ -28,19 +28,22 @@ export class HcMasker implements ComponentInterface {
     }
   }
   componentDidRender () {
-  }
-  render() {
-    let background = this.fill;
+    if (this.fill) {
+      this.el.setAttribute('fill', this.fill)
+    }
+    var background = this.fill
     if (this.place == 'bottom') {
       background = `linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${this.offset}px, ${this.fill} ${this.offset}px, ${this.fill} 100%)`
     }
     if (this.place == 'top') {
       background = `linear-gradient(${this.fill} 0px, ${this.fill} ${this.offset}px, rgba(0,0,0,0) ${this.offset}px, rgba(0,0,0,0) 100%)`
     }
+    this.el.style.background = background
+  }
+  render() {
     return (
       <Host 
-        onClick={this.onClick.bind(this)} 
-        style={{background: background}}
+        onClick={this.onClick.bind(this)}
       >
         <slot></slot>
       </Host>

@@ -10,10 +10,12 @@ export declare class HcKeyboard {
     vchange: EventEmitter;
     $drawer: any;
     $type: any;
+    $slot: any;
     typeHandle(v: string): void;
     valueHandle(v: any): void;
     componentDidLoad(): void;
     render(): any;
+    del(): void;
     renderItem(item: any): any;
     onClick(item: any): void;
     destory(): Promise<void>;

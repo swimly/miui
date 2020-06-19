@@ -1,6 +1,6 @@
 import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
-const hcDrawerCss = ":host{display:flex;flex-direction:column;background-color:var(--background-color-white);position:fixed;z-index:101}:host([place=up]){top:0;left:0;width:100%;transform:translateY(-100%)}:host([place=up][rounder]){border-radius:0 0 1rem 1rem}:host([place=down]){bottom:0;left:0;width:100%;transform:translateY(100%)}:host([place=down][rounder]){border-radius:1rem 1rem 0 0}:host([place=left]){top:0;left:0;height:100%;transform:translateX(-100%)}:host([place=left][rounder]){border-radius:0 1rem 1rem 0}:host([place=right]){top:0;right:0;height:100%;transform:translateX(100%)}:host([place=right][rounder]){border-radius:1rem 0 0 1rem}:host([display=true]){transform:translate(0, 0)}";
+const hcDrawerCss = ":host{display:flex;flex-direction:column;background-color:var(--background-color-white);position:fixed;z-index:101;box-sizing:border-box}:host .content{box-sizing:border-box}:host([place=up]){top:0;left:0;width:100%;transform:translateY(-100%)}:host([place=up][rounder]){border-radius:0 0 1rem 1rem}:host([place=down]){bottom:0;left:0;width:100%;transform:translateY(100%)}:host([place=down][rounder]){border-radius:1rem 1rem 0 0}:host([place=left]){top:0;left:0;height:100%;transform:translateX(-100%)}:host([place=left][rounder]){border-radius:0 1rem 1rem 0}:host([place=right]){top:0;right:0;height:100%;transform:translateX(100%)}:host([place=right][rounder]){border-radius:1rem 0 0 1rem}:host([display=true]){transform:translate(0, 0)}";
 
 class HcDrawer {
     constructor(hostRef) {
@@ -34,7 +34,7 @@ class HcDrawer {
             masker: this.masker,
             rounder: this.rounder,
             command: this.command
-        }), h("slot", null, h("div", { innerHTML: this.content }))));
+        }), h("slot", null, h("div", { innerHTML: this.content, class: "content" }))));
     }
     async onDisplay() {
         this.renderMasker();
@@ -46,24 +46,22 @@ class HcDrawer {
     }
     async destory() {
         this.display = false;
-        if (this.masker) {
-            this.$mask.destory();
-        }
+        this.$mask.destory();
         setTimeout(() => {
             this.el.style.display = 'none';
             this.el.style.transition = '0s';
         }, 300);
     }
     renderMasker() {
-        if (!this.masker) {
-            return false;
-        }
         var has = document.querySelector('hc-masker');
         if (has) {
             this.$mask = has;
         }
         else {
             this.$mask = document.createElement('hc-masker');
+            if (!this.masker) {
+                this.$mask.setAttribute('fill', 'rgba(0,0,0,0)');
+            }
             document.body.appendChild(this.$mask);
         }
         this.$mask.generate();

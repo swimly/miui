@@ -9,6 +9,7 @@ export class HcRow implements ComponentInterface {
   @Prop() align: string = 'flex-start'
   @Prop() valign: string = 'center'
   @Prop() wrap: boolean;
+  @Prop() direction: string = 'row'
   render() {
     var pos = {
       left: 'flex-start',
@@ -21,7 +22,7 @@ export class HcRow implements ComponentInterface {
       bottom: 'flex-end'
     }
     return (
-      <Host style={{justifyContent: `${pos[this.align]}`, alignItems: pos1[this.valign], flexWrap: this.wrap ? 'wrap' : 'nowrap'}}>
+      <Host style={{flexDirection: this.direction,justifyContent: `${pos[this.align]}`, alignItems: pos1[this.valign], flexWrap: this.wrap ? 'wrap' : 'nowrap'}}>
         <slot></slot>
       </Host>
     );

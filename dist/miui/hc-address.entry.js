@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 const china = [{
   "value": "11",
@@ -10722,12 +10722,20 @@ class HcAddress {
     constructor(hostRef) {
         registerInstance(this, hostRef);
         this.type = 'picker';
+        this.vfinish = createEvent(this, "vfinish", 7);
     }
     componentDidLoad() {
-        this.$picker = this.el.shadowRoot.querySelector('hc-picker');
+        this.$picker = this.el.shadowRoot.querySelector(`hc-${this.type}`);
     }
     render() {
-        return (h(Host, null, h("div", { class: "handle", onClick: this.renderDom.bind(this) }, h("slot", null)), h("hc-picker", { onVchange: this.getValue.bind(this), onVhide: this.onHide.bind(this), event: true, command: true, data: JSON.stringify(china) })));
+        var content = null;
+        if (this.type == 'picker') {
+            content = (h("hc-picker", { onVdone: this.getValue.bind(this), onVhide: this.onHide.bind(this), event: true, command: true, data: JSON.stringify(china) }));
+        }
+        else {
+            content = (h("hc-selection", { onVdone: this.getValue.bind(this), data: JSON.stringify(china) }));
+        }
+        return (h(Host, null, h("div", { class: "handle", onClick: this.renderDom.bind(this) }, h("slot", null)), content));
     }
     renderDom() {
         this.$picker.generate();
@@ -10736,7 +10744,9 @@ class HcAddress {
         this.$picker.destory();
     }
     getValue(e) {
-        console.log(e.detail.value);
+        this.vfinish.emit({
+            value: e.detail.value
+        });
     }
     get el() { return getElement(this); }
 }

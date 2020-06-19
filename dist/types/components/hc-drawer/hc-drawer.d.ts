@@ -15,6 +15,6 @@ export declare class HcDrawer implements ComponentInterface {
     render(): any;
     onDisplay(): Promise<void>;
     destory(): Promise<void>;
-    renderMasker(): boolean;
+    renderMasker(): void;
     generate(option?: object): Promise<void>;
 }

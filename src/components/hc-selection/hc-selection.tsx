@@ -15,7 +15,7 @@ export class HcSelection {
   @Prop() width: number;
   @Prop() footer: boolean = true;
   @Element() el: HTMLElement;
-  @Event() vchange: EventEmitter;
+  @Event() vdone: EventEmitter;
   $drawer;
   $tab;
   $data;
@@ -76,8 +76,7 @@ export class HcSelection {
   }
   onDisplay () {
     this.$drawer.generate()
-    this.$tab.auto = true
-    this.width = this.el.offsetWidth
+    this.width = document.body.offsetWidth
   }
   renderFooter () {
     var dom = null
@@ -98,7 +97,7 @@ export class HcSelection {
   @Method()
   async destory () {
     this.$drawer.destory()
-    this.vchange.emit({
+    this.vdone.emit({
       value: this.value
     })
     if (this.command) {

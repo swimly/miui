@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  height:100%;
+  position: relative;
+  .mask{
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:99;
+  }
+  .content{
+    height:100%;
+    overflow: scroll;
+  }
+}

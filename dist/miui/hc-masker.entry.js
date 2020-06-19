@@ -24,16 +24,20 @@ class HcMasker {
         }
     }
     componentDidRender() {
-    }
-    render() {
-        let background = this.fill;
+        if (this.fill) {
+            this.el.setAttribute('fill', this.fill);
+        }
+        var background = this.fill;
         if (this.place == 'bottom') {
             background = `linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) ${this.offset}px, ${this.fill} ${this.offset}px, ${this.fill} 100%)`;
         }
         if (this.place == 'top') {
             background = `linear-gradient(${this.fill} 0px, ${this.fill} ${this.offset}px, rgba(0,0,0,0) ${this.offset}px, rgba(0,0,0,0) 100%)`;
         }
-        return (h(Host, { onClick: this.onClick.bind(this), style: { background: background } }, h("slot", null)));
+        this.el.style.background = background;
+    }
+    render() {
+        return (h(Host, { onClick: this.onClick.bind(this) }, h("slot", null)));
     }
     onClick() {
         if (this.clickable) {

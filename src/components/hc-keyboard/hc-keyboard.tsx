@@ -16,6 +16,7 @@ export class HcKeyboard {
   @Event() vchange: EventEmitter;
   $drawer;
   $type;
+  $slot;
   @Watch('type')
   typeHandle (v: string) {
     this.el.setAttribute('type', v)
@@ -23,6 +24,7 @@ export class HcKeyboard {
   @Watch('value')
   valueHandle (v) {
     this.vchange.emit(v)
+    this.el.children[0].setAttribute('value', v)
     if (this.$type == 'carnumber') {
       if (v.length == 0) {
         this.type = 'carnumber'
@@ -34,8 +36,8 @@ export class HcKeyboard {
       this.el.setAttribute('type', this.type)
     }
     this.$type = this.type
-    var slot = this.el.shadowRoot.querySelector('slot')
-    slot.addEventListener('click', () => {
+    this.$slot = this.el.shadowRoot.querySelector('slot')
+    this.$slot.addEventListener('click', () => {
       this.$drawer = this.el.shadowRoot.querySelector('hc-drawer')
       this.value = ''
       this.$drawer.generate()
@@ -43,43 +45,72 @@ export class HcKeyboard {
   }
   render() {
     var data = keys[this.type]
+    var tool = null
+    if (this.type == 'number') {
+      tool = (
+        <hc-col span={5}>
+          <hc-row direction="column" class="tool">
+            <hc-col flex={1} align="center">
+              <span class="key" onClick={this.del.bind(this)}>
+                <hc-icon size={28} name="tuige"></hc-icon>
+              </span>
+            </hc-col>
+            <hc-col flex={1}>
+              <span class="key done" onClick={this.destory.bind(this)}>完成</span>
+            </hc-col>
+          </hc-row>
+        </hc-col>
+      )
+    }
     return (
       <Host>
         <slot></slot>
         <hc-drawer place="down" masker={false}>
           <hc-row class="head" valign="center">
-            <hc-col></hc-col>
-            <hc-col flex={1}>安全键盘</hc-col>
-            <hc-icon onClick={this.destory.bind(this)} size={24} name="arrow-down"></hc-icon>
+          <hc-col align="center">
+            <hc-icon size={24} name="keyboard"></hc-icon>
+          </hc-col>
+            <hc-col align="center">安全键盘</hc-col>
+            <hc-col flex={1} align="right">
+              <hc-icon onClick={this.destory.bind(this)} size={24} name="arrow-down"></hc-icon>
+            </hc-col>
           </hc-row>
-          <div class="keys">
-            {
-              data.map(row => {
-                return (
-                  <hc-row>
-                    {
-                      row.map(item => {
-                        return (
-                          <hc-col id={item.label} flex={item.flex ? item.flex : 1} onClick={this.onClick.bind(this, item)}>
-                            {this.renderItem(item)}
-                          </hc-col>
-                        )
-                      })
-                    }
-                  </hc-row>
-                )
-              })
-            }
-          </div>
+          <hc-row class="content">
+            <hc-col flex={1}>
+              <div class="keys">
+                {
+                  data.map(row => {
+                    return (
+                      <hc-row>
+                        {
+                          row.map(item => {
+                            return (
+                              <hc-col id={item.label} flex={item.flex ? item.flex : 1} onClick={this.onClick.bind(this, item)}>
+                                {this.renderItem(item)}
+                              </hc-col>
+                            )
+                          })
+                        }
+                      </hc-row>
+                    )
+                  })
+                }
+              </div>
+            </hc-col>
+            {tool}
+          </hc-row>
         </hc-drawer>
       </Host>
     );
+  }
+  del () {
+    this.value = this.value.substring(0, this.value.length - 1)
   }
   renderItem (item) {
     if (item.icon) {
       return (
         <span class="key" style={{backgroundColor: item.background, color: item.color, fontSize: item.fontSize}}>
-          <hc-icon size={20} name={item.icon}></hc-icon>
+          <hc-icon size={24} name={item.icon}></hc-icon>
         </span>
       )
     } else {

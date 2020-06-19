@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Prop } from '@stencil/core';
+import { Component, Host, h, Element, Prop, Event, EventEmitter } from '@stencil/core';
 import china from '../../utils/china'
 @Component({
   tag: 'hc-address',
@@ -8,17 +8,28 @@ import china from '../../utils/china'
 export class HcAddress {
   @Prop() type: string = 'picker'
   @Element() el: HTMLElement;
+  @Event() vfinish: EventEmitter;
   $picker
   componentDidLoad () {
-    this.$picker = this.el.shadowRoot.querySelector('hc-picker')
+    this.$picker = this.el.shadowRoot.querySelector(`hc-${this.type}`)
   }
   render() {
+    var content = null
+    if (this.type == 'picker') {
+      content = (
+        <hc-picker onVdone={this.getValue.bind(this)} onVhide={this.onHide.bind(this)} event={true} command={true} data={JSON.stringify(china)}></hc-picker>
+      )
+    } else {
+      content = (
+        <hc-selection onVdone={this.getValue.bind(this)} data={JSON.stringify(china)}></hc-selection>
+      )
+    }
     return (
       <Host>
         <div class="handle" onClick={this.renderDom.bind(this)}>
           <slot></slot>
         </div>
-        <hc-picker onVchange={this.getValue.bind(this)} onVhide={this.onHide.bind(this)} event={true} command={true} data={JSON.stringify(china)}></hc-picker>
+        {content}
       </Host>
     );
   }
@@ -29,6 +40,8 @@ export class HcAddress {
     this.$picker.destory()
   }
   getValue (e) {
-    console.log(e.detail.value)
+    this.vfinish.emit({
+      value: e.detail.value
+    })
   }
 }

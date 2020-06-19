@@ -1,42 +1,72 @@
 :host {
+  font-size: $--app-keyboard-fontsize;
+  hc-drawer{
+    background-color: $--app-keyboard-background;
+    padding:0.3rem;
+  }
   .head{
     background-color: $--app-keyboard-background;
-    font-size: $--app-keyboard-fontsize;
-    color: var(--color-primary);
+    font-size: $--app-keyboard-fontsize * 0.8;
+    color: $--app-keyboard-color;
     padding: $--app-keyboard-fontsize / 1.5 $--app-keyboard-fontsize;
+  }
+  .tool{
+    height:100%;
+    hc-col{
+      padding:0.15rem 0;
+      width:100%;
+      font-size: $--app-keyboard-fontsize;
+      .key{
+        padding:0 0.3rem;
+        width:100%;
+      }
+    }
+  }
+  .content{
+    height: $--app-keyboard-height;
+    hc-col{
+      height:100%;
+    }
   }
   .keys{
     display:flex;
     flex-direction: column;
-    background-color: $--app-keyboard-background;
-    padding:0 0.2rem 0.2rem 0.2rem;
-    font-size: $--app-keyboard-fontsize;
-    height: $--app-keyboard-height;
+    padding:0 0.2rem 0 0;
+    height:100%;
     hc-row{
       flex:1;
       hc-col{
         padding:0.15rem;
         box-sizing: border-box;
         height:100%;
-        .key{
-          background-color: $--app-keyboard-key-color;
-          width:100%;
-          height:100%;
-          display:flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          color:$--app-keyboard-color;
-          border-radius: $--app-keyboard-fontsize / 3;
-          font-size: inherit;
-          &:not(style):active{
-            background: $--app-keyboard-active;
-          }
-        }
+      }
+    }
+  }
+  .key{
+    background-color: $--app-keyboard-key-color;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color:$--app-keyboard-color;
+    border-radius: $--app-keyboard-fontsize / 3;
+    font-size: inherit;
+    box-sizing: border-box;
+    &:not(style):active{
+      background: $--app-keyboard-active;
+    }
+    &.done{
+      background: var(--color-primary);
+      color: var(--color-text-white);
+      &:not(style):active{
+        background: var(--color-primary);
       }
     }
   }
 }
-:host([type="number"]){
+:host([type="number"]),
+:host([type="cardnumber"]){
   font-size: $--app-keyboard-fontsize * 1.4;
 }

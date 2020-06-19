@@ -8,11 +8,12 @@ export declare class HcPickerView {
     footer: boolean;
     event: boolean;
     el: HTMLElement;
-    vchange: EventEmitter;
+    vdone: EventEmitter;
     vhide: EventEmitter;
     $drawer: any;
     $handle: any;
     $content: any;
+    $data: any;
     valueHandle(v: string): void;
     componentDidLoad(): void;
     render(): any;

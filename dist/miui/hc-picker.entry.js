@@ -10,7 +10,7 @@ class HcPickerView {
         this.value = '';
         this.reset = true;
         this.footer = true;
-        this.vchange = createEvent(this, "vchange", 7);
+        this.vdone = createEvent(this, "vdone", 7);
         this.vhide = createEvent(this, "vhide", 7);
     }
     valueHandle(v) {
@@ -23,14 +23,14 @@ class HcPickerView {
         }
     }
     render() {
-        var data = this.computedData();
+        this.$data = this.computedData();
         var footer = null;
         if (this.footer) {
             footer = (h("hc-row", { class: "footer" }, h("hc-col", { span: 12 }, h("hc-button", { type: "info", onClick: this.destory.bind(this), rounder: true }, "\u53D6\u6D88")), h("hc-col", { align: "right", span: 12 }, h("hc-button", { type: "primary", onClick: this.destory.bind(this), rounder: true }, "\u786E\u5B9A"))));
         }
-        return (h(Host, null, h("hc-picker-handle", { onClick: this.onDisplay.bind(this), innerHTML: data.handle }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.titles), h("hc-picker-content", null, data.data.map((column, index) => (h("hc-picker-view", { value: data.value[index], current: this.renderCurrent.bind(this, {
-                data: data.data[index],
-                value: data.value[index]
+        return (h(Host, null, h("hc-picker-handle", { onClick: this.onDisplay.bind(this), innerHTML: this.$data.handle }), h("hc-drawer", { place: "down", rounder: true }, h("h2", { class: "title" }, this.titles), h("hc-picker-content", null, this.$data.data.map((column, index) => (h("hc-picker-view", { value: this.$data.value[index], current: this.renderCurrent.bind(this, {
+                data: this.$data.data[index],
+                value: this.$data.value[index]
             })(), onVscrollend: this.onDataChange.bind(this, index) }, column.map(item => {
             return (h("hc-picker-item", { value: item.value }, item.label));
         }))))), footer)));
@@ -105,8 +105,9 @@ class HcPickerView {
     }
     async destory() {
         this.$drawer.destory();
-        this.vchange.emit({
-            value: this.value
+        var value = this.value ? this.value : `${this.$data.data[0][0].label},${this.$data.data[1][0].label},${this.$data.data[2][0].label}`;
+        this.vdone.emit({
+            value: value
         });
         setTimeout(() => {
             if (this.command && document.querySelector('hc-picker')) {

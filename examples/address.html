@@ -3,16 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>switch</title>
+  <title>address</title>
   <link rel="stylesheet" href="../www/build/miui.css">
+  <style>
+    hc-button{
+      margin-bottom:1rem;
+    }
+  </style>
 </head>
 <body>
   <hc-page>
-    <hc-header>开关</hc-header>
+    <hc-header>地址</hc-header>
     <hc-view>
       <hc-panel>
         <hc-title>普通</hc-title>
         <hc-address>
+          <hc-button type="primary" conner>选择地区</hc-button>
+        </hc-address>
+        <hc-address type="selection">
           <hc-button type="primary" conner>选择地区</hc-button>
         </hc-address>
       </hc-panel>

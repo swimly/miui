@@ -14,11 +14,12 @@ export class HcPickerView {
   @Prop() footer: boolean = true;
   @Prop() event: boolean;
   @Element() el: HTMLElement;
-  @Event() vchange: EventEmitter;
+  @Event() vdone: EventEmitter;
   @Event() vhide: EventEmitter;
   $drawer;
   $handle;
   $content;
+  $data;
   @Watch('value')
   valueHandle (v: string) {
     this.el.setAttribute('value', v)
@@ -30,7 +31,7 @@ export class HcPickerView {
     }
   }
   render() {
-    var data = this.computedData()
+    this.$data = this.computedData()
     var footer = null;
     if (this.footer) {
       footer = (
@@ -46,14 +47,14 @@ export class HcPickerView {
     }
     return (
       <Host>
-        <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={data.handle}></hc-picker-handle>
+        <hc-picker-handle onClick={this.onDisplay.bind(this)} innerHTML={this.$data.handle}></hc-picker-handle>
         <hc-drawer place="down" rounder>
           <h2 class="title">{this.titles}</h2>
           <hc-picker-content>
-            {data.data.map((column, index) => (
-              <hc-picker-view value={data.value[index]} current={this.renderCurrent.bind(this, {
-                data: data.data[index],
-                value: data.value[index]
+            {this.$data.data.map((column, index) => (
+              <hc-picker-view value={this.$data.value[index]} current={this.renderCurrent.bind(this, {
+                data: this.$data.data[index],
+                value: this.$data.value[index]
               })()} onVscrollend={this.onDataChange.bind(this, index)}>
                 {
                   column.map(item => {
@@ -140,8 +141,9 @@ export class HcPickerView {
   @Method()
   async destory () {
     this.$drawer.destory()
-    this.vchange.emit({
-      value: this.value
+    var value = this.value ? this.value : `${this.$data.data[0][0].label},${this.$data.data[1][0].label},${this.$data.data[2][0].label}`
+    this.vdone.emit({
+      value: value
     })
     setTimeout(() => {
       if (this.command && document.querySelector('hc-picker')) {
