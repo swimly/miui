@@ -111,8 +111,10 @@ export class HcTab implements ComponentInterface {
     hammer.on('panstart', () => {
     })
     hammer.on('pan', (e) => {
+      console.log(e)
     })
     hammer.on('panend', (e) => {
+      console.log(e)
     })
   }
   @Method()

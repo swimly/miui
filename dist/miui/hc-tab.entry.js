@@ -91,8 +91,10 @@ class HcTab {
         hammer$1.on('panstart', () => {
         });
         hammer$1.on('pan', (e) => {
+            console.log(e);
         });
         hammer$1.on('panend', (e) => {
+            console.log(e);
         });
     }
     async MoveTo(index) {

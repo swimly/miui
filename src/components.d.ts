@@ -365,6 +365,8 @@ export namespace Components {
     interface HcProgress {
     }
     interface HcPullrefresh {
+        "footer": boolean;
+        "maxHeight": number;
         "scrolltop": number;
     }
     interface HcRadio {
@@ -1590,6 +1592,8 @@ declare namespace LocalJSX {
     interface HcProgress {
     }
     interface HcPullrefresh {
+        "footer"?: boolean;
+        "maxHeight"?: number;
         "scrolltop"?: number;
     }
     interface HcRadio {
