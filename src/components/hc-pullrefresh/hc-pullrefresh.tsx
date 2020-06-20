@@ -1,4 +1,4 @@
-import { Component, Host, h, Element, Prop, Watch } from '@stencil/core';
+import { Component, Host, h, Element, Prop, Watch, Event, EventEmitter, Method } from '@stencil/core';
 @Component({
   tag: 'hc-pullrefresh',
   styleUrl: 'hc-pullrefresh.scss',
@@ -7,14 +7,24 @@ import { Component, Host, h, Element, Prop, Watch } from '@stencil/core';
 export class HcPullrefresh {
   @Prop() scrolltop: number = 0;
   @Prop() footer: boolean;
-  @Prop() maxHeight: number = 80;
+  @Prop() maxHeight: number = 60;
   @Element() el: HTMLElement;
+  @Event() vrefresh: EventEmitter;
+  @Event() vloading: EventEmitter;
   $content;
+  $refresh;
+  $loading;
+  $scroll;
   startY = 0;
-  moca = 0.9;
+  moca = 0.8;
+  canPull = false;
+  dis = 0;
+  maxScroll = 0;
   @Watch('scrolltop')
   scrollHandle (v: number) {
     this.el.setAttribute('scrolltop', `${v}`)
+    this.canPull = v > 0 ? false : true;
+    console.log(this.canPull)
   }
   @Watch('footer')
   footerHandle (v: boolean) {
@@ -22,6 +32,11 @@ export class HcPullrefresh {
   }
   componentDidLoad () {
     this.$content = this.el.shadowRoot.querySelector('.content')
+    this.$refresh = this.el.shadowRoot.querySelector('.up')
+    this.$loading = this.el.shadowRoot.querySelector('.down')
+    var wrap = this.el.shadowRoot.querySelector('.wrap').clientHeight
+    this.$scroll = this.el.shadowRoot.querySelector('.scroll');
+    this.maxScroll = wrap - this.$scroll.clientHeight
   }
   render() {
     return (
@@ -31,19 +46,21 @@ export class HcPullrefresh {
         onTouchmove={this.onTouchMove.bind(this)}
         onTouchend={this.onTouchEnd.bind(this)}
       >
-        <div class="content" onScroll={this.onScroll.bind(this)}>
-          <div class="wrap">
-            <slot></slot>
+        <div class="content">
+          <hc-pullrefresh-indicate height={this.maxHeight} class="up"></hc-pullrefresh-indicate>
+          <div class="scroll" onScroll={this.onScroll.bind(this)}>
+            <div class="wrap">
+              <slot></slot>
+            </div>
           </div>
+          <hc-pullrefresh-indicate icons="rising,falling,loading,success,cry" labels="上拉加载,松手加载,加载中,加载成功,加载失败" height={this.maxHeight} class="down"></hc-pullrefresh-indicate>
         </div>
       </Host>
     );
   }
   onScroll (e) {
-    var wrap = this.el.shadowRoot.querySelector('.wrap').clientHeight
-    var content = this.$content.clientHeight;
     this.scrolltop = e.target.scrollTop
-    if (wrap - content == this.scrolltop) {
+    if (this.maxScroll == this.scrolltop) {
       this.footer = true
     } else {
       this.footer = false
@@ -52,38 +69,81 @@ export class HcPullrefresh {
   onTouchStart (e) {
     this.$content.style.transition = '0s'
     this.startY = e.changedTouches[0].pageY
+    if (this.scrolltop == 0) {
+      this.canPull = true
+      this.$refresh.status = 0
+      this.$loading.status = 0
+    }
   }
   onTouchMove (e) {
     var touch = e.changedTouches[0]
     var deltaY = touch.pageY - this.startY
-    var dis = this.jump(deltaY, this.maxHeight)
-    console.log(dis)
-    if (this.scrolltop == 0 && deltaY > 0) {
+    this.dis = this.jump(deltaY)
+    if (this.canPull && deltaY > 0) {
       // 下拉刷新
-      console.log('可以开始')
       e.preventDefault()
-      this.$content.style.transform = `translate3d(0,${dis}px,0)`
+      this.$content.style.transform = `translate3d(0,${this.dis}px,0)`
+      if (this.dis > this.maxHeight) {
+        this.$refresh.status = 1
+      }
     }
     if (this.footer && deltaY < 0) {
       // 上拉加载
-      this.$content.style.transform = `translate3d(0,${deltaY}px,0)`
+      this.$content.style.transform = `translate3d(0,${this.dis}px,0)`
+      if (this.dis < -this.maxHeight) {
+        this.$loading.status = 1
+      }
     }
   }
-  onTouchEnd (e) {
-    var touch = e.changedTouches[0]
-    if (touch.pageY - this.startY > 0 && !this.scrolltop) {
-      this.$content.style.transition = '0.3s'
+  onTouchEnd () {
+    this.$content.style.transition = '0.3s'
+    if (this.dis > this.maxHeight && this.canPull) {
+      this.$refresh.status = 2
+      this.$content.style.transform = `translate3d(0,${this.maxHeight}px,0)`
+      this.vrefresh.emit()
+    } else if (this.dis < -this.maxHeight && this.footer) {
+      this.$loading.status = 2
+      this.$content.style.transform = `translate3d(0,${-this.maxHeight}px,0)`
+      this.vloading.emit()
+    } else if (this.canPull || this.footer) {
       this.$content.style.transform = `translate3d(0,0,0)`
-      this.$content.scrollTop = 1;
     }
-    if (touch.pageY - this.startY < 0 && this.footer) {
-      this.$content.style.transition = '0.3s'
-      this.$content.style.transform = `translate3d(0,0,0)`
-    }
-    this.moca = 0.9
+    this.moca = 0.8
   }
-  jump (current, target) {
-    this.moca = this.moca > 0.5 ? this.moca - 0.05 : 0.5
+  jump (current) {
+    this.moca = this.moca > 0.4 ? this.moca - 0.08 : 0.4
     return current * this.moca
+  }
+  @Method()
+  async RefreshSuccess () {
+    this.$refresh.status = 3
+    setTimeout(() => {
+      this.$content.style.transform = `translate3d(0,0,0)`
+      this.$scroll.scrollTop = 1;
+    }, 1000)
+  }
+  @Method()
+  async RefreshFailed () {
+    this.$refresh.status = 4
+    setTimeout(() => {
+      this.$content.style.transform = `translate3d(0,0,0)`
+      this.$scroll.scrollTop = 1;
+    }, 1000)
+  }
+  @Method()
+  async LoadingSuccess () {
+    this.$loading.status = 3
+    setTimeout(() => {
+      this.$content.style.transform = `translate3d(0,0,0)`
+      this.$scroll.scrollTop = this.maxScroll - 1
+    }, 1000)
+  }
+  @Method()
+  async LoadingFailed () {
+    this.$loading.status = 4
+    setTimeout(() => {
+      this.$content.style.transform = `translate3d(0,0,0)`
+      this.$scroll.scrollTop = this.maxScroll - 1
+    }, 1000)
   }
 }

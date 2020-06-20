@@ -1,6 +1,6 @@
 import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
-const hcIconCss = ":host{display:inline-flex;flex-direction:row;align-items:center;transform-origin:center center;font-size:inherit}:host .hc-icon{width:1rem;height:1rem;font-size:inherit;fill:currentColor;overflow:hidden}:host .hc-icon svg{color:inherit;font-size:inherit}:host([spin]) .hc-icon{animation:rotate 0.8s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}";
+const hcIconCss = ":host{display:inline-flex;flex-direction:row;align-items:center;transform-origin:center center;font-size:inherit}:host .hc-icon{width:1rem;height:1rem;font-size:inherit;fill:currentColor;overflow:hidden}:host .hc-icon svg{color:inherit;font-size:inherit;vertical-align:top}:host([spin]) .hc-icon{animation:rotate 0.8s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}";
 
 class HcIcon {
     constructor(hostRef) {
@@ -60,7 +60,7 @@ class HcIcon {
         }
     }
     render() {
-        return (h(Host, { onClick: this.onClick.bind(this) }, h("svg", { class: "hc-icon", "aria-hidden": "true", viewBox: `0 0 ${this.view} ${this.view}` }, this.renderCore())));
+        return (h(Host, { onClick: this.onClick.bind(this), style: { height: `${this.size}px` } }, h("svg", { class: "hc-icon", "aria-hidden": "true", viewBox: `0 0 ${this.view} ${this.view}` }, this.renderCore())));
     }
     onClick(e) {
         this.vclick.emit(e);

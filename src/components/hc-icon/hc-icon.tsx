@@ -71,7 +71,7 @@ export class HcIcon implements ComponentInterface {
   }
   render() {
     return (
-      <Host onClick={this.onClick.bind(this)}>
+      <Host onClick={this.onClick.bind(this)} style={{height: `${this.size}px`}}>
         <svg class="hc-icon" aria-hidden="true" viewBox={`0 0 ${this.view} ${this.view}`}>
           {this.renderCore()}
         </svg>

@@ -365,9 +365,20 @@ export namespace Components {
     interface HcProgress {
     }
     interface HcPullrefresh {
+        "LoadingFailed": () => Promise<void>;
+        "LoadingSuccess": () => Promise<void>;
+        "RefreshFailed": () => Promise<void>;
+        "RefreshSuccess": () => Promise<void>;
         "footer": boolean;
         "maxHeight": number;
         "scrolltop": number;
+    }
+    interface HcPullrefreshIndicate {
+        "height": number;
+        "icons": string;
+        "labels": string;
+        "loading": boolean;
+        "status": number;
     }
     interface HcRadio {
         "Check": (status: any) => Promise<void>;
@@ -946,6 +957,12 @@ declare global {
         prototype: HTMLHcPullrefreshElement;
         new (): HTMLHcPullrefreshElement;
     };
+    interface HTMLHcPullrefreshIndicateElement extends Components.HcPullrefreshIndicate, HTMLStencilElement {
+    }
+    var HTMLHcPullrefreshIndicateElement: {
+        prototype: HTMLHcPullrefreshIndicateElement;
+        new (): HTMLHcPullrefreshIndicateElement;
+    };
     interface HTMLHcRadioElement extends Components.HcRadio, HTMLStencilElement {
     }
     var HTMLHcRadioElement: {
@@ -1199,6 +1216,7 @@ declare global {
         "hc-popover-item": HTMLHcPopoverItemElement;
         "hc-progress": HTMLHcProgressElement;
         "hc-pullrefresh": HTMLHcPullrefreshElement;
+        "hc-pullrefresh-indicate": HTMLHcPullrefreshIndicateElement;
         "hc-radio": HTMLHcRadioElement;
         "hc-radio-group": HTMLHcRadioGroupElement;
         "hc-rate": HTMLHcRateElement;
@@ -1594,7 +1612,16 @@ declare namespace LocalJSX {
     interface HcPullrefresh {
         "footer"?: boolean;
         "maxHeight"?: number;
+        "onVloading"?: (event: CustomEvent<any>) => void;
+        "onVrefresh"?: (event: CustomEvent<any>) => void;
         "scrolltop"?: number;
+    }
+    interface HcPullrefreshIndicate {
+        "height"?: number;
+        "icons"?: string;
+        "labels"?: string;
+        "loading"?: boolean;
+        "status"?: number;
     }
     interface HcRadio {
         "checked"?: boolean;
@@ -1905,6 +1932,7 @@ declare namespace LocalJSX {
         "hc-popover-item": HcPopoverItem;
         "hc-progress": HcProgress;
         "hc-pullrefresh": HcPullrefresh;
+        "hc-pullrefresh-indicate": HcPullrefreshIndicate;
         "hc-radio": HcRadio;
         "hc-radio-group": HcRadioGroup;
         "hc-rate": HcRate;
@@ -1998,6 +2026,7 @@ declare module "@stencil/core" {
             "hc-popover-item": LocalJSX.HcPopoverItem & JSXBase.HTMLAttributes<HTMLHcPopoverItemElement>;
             "hc-progress": LocalJSX.HcProgress & JSXBase.HTMLAttributes<HTMLHcProgressElement>;
             "hc-pullrefresh": LocalJSX.HcPullrefresh & JSXBase.HTMLAttributes<HTMLHcPullrefreshElement>;
+            "hc-pullrefresh-indicate": LocalJSX.HcPullrefreshIndicate & JSXBase.HTMLAttributes<HTMLHcPullrefreshIndicateElement>;
             "hc-radio": LocalJSX.HcRadio & JSXBase.HTMLAttributes<HTMLHcRadioElement>;
             "hc-radio-group": LocalJSX.HcRadioGroup & JSXBase.HTMLAttributes<HTMLHcRadioGroupElement>;
             "hc-rate": LocalJSX.HcRate & JSXBase.HTMLAttributes<HTMLHcRateElement>;

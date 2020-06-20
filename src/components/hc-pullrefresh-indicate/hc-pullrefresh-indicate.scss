@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: center;
+  font-size:$--app-pullrefresh-fontsize;
+  color:$--app-pullrefresh-color;
+  height: $--app-pullrefresh-fontsize * 4;
+}
