@@ -219,11 +219,12 @@ export namespace Components {
         "fit": string;
         "height": number;
         "lazy": boolean;
-        "radius": number;
         "src": string;
-        "status": number;
         "watermark": string;
         "width": number;
+    }
+    interface HcImagepreview {
+        "data": string;
     }
     interface HcIndexbar {
         "index": number;
@@ -603,6 +604,8 @@ export namespace Components {
         "place": string;
         "theme": string;
     }
+    interface HcTouch {
+    }
     interface HcVideo {
         "autoplay": boolean;
         "controls": boolean;
@@ -818,6 +821,12 @@ declare global {
     var HTMLHcImageElement: {
         prototype: HTMLHcImageElement;
         new (): HTMLHcImageElement;
+    };
+    interface HTMLHcImagepreviewElement extends Components.HcImagepreview, HTMLStencilElement {
+    }
+    var HTMLHcImagepreviewElement: {
+        prototype: HTMLHcImagepreviewElement;
+        new (): HTMLHcImagepreviewElement;
     };
     interface HTMLHcIndexbarElement extends Components.HcIndexbar, HTMLStencilElement {
     }
@@ -1143,6 +1152,12 @@ declare global {
         prototype: HTMLHcToastElement;
         new (): HTMLHcToastElement;
     };
+    interface HTMLHcTouchElement extends Components.HcTouch, HTMLStencilElement {
+    }
+    var HTMLHcTouchElement: {
+        prototype: HTMLHcTouchElement;
+        new (): HTMLHcTouchElement;
+    };
     interface HTMLHcVideoElement extends Components.HcVideo, HTMLStencilElement {
     }
     var HTMLHcVideoElement: {
@@ -1193,6 +1208,7 @@ declare global {
         "hc-header": HTMLHcHeaderElement;
         "hc-icon": HTMLHcIconElement;
         "hc-image": HTMLHcImageElement;
+        "hc-imagepreview": HTMLHcImagepreviewElement;
         "hc-indexbar": HTMLHcIndexbarElement;
         "hc-indexbar-group": HTMLHcIndexbarGroupElement;
         "hc-indexbar-item": HTMLHcIndexbarItemElement;
@@ -1247,6 +1263,7 @@ declare global {
         "hc-text": HTMLHcTextElement;
         "hc-title": HTMLHcTitleElement;
         "hc-toast": HTMLHcToastElement;
+        "hc-touch": HTMLHcTouchElement;
         "hc-video": HTMLHcVideoElement;
         "hc-video-controls": HTMLHcVideoControlsElement;
         "hc-view": HTMLHcViewElement;
@@ -1467,11 +1484,12 @@ declare namespace LocalJSX {
         "fit"?: string;
         "height"?: number;
         "lazy"?: boolean;
-        "radius"?: number;
         "src"?: string;
-        "status"?: number;
         "watermark"?: string;
         "width"?: number;
+    }
+    interface HcImagepreview {
+        "data"?: string;
     }
     interface HcIndexbar {
         "index"?: number;
@@ -1845,6 +1863,8 @@ declare namespace LocalJSX {
         "place"?: string;
         "theme"?: string;
     }
+    interface HcTouch {
+    }
     interface HcVideo {
         "autoplay"?: boolean;
         "controls"?: boolean;
@@ -1909,6 +1929,7 @@ declare namespace LocalJSX {
         "hc-header": HcHeader;
         "hc-icon": HcIcon;
         "hc-image": HcImage;
+        "hc-imagepreview": HcImagepreview;
         "hc-indexbar": HcIndexbar;
         "hc-indexbar-group": HcIndexbarGroup;
         "hc-indexbar-item": HcIndexbarItem;
@@ -1963,6 +1984,7 @@ declare namespace LocalJSX {
         "hc-text": HcText;
         "hc-title": HcTitle;
         "hc-toast": HcToast;
+        "hc-touch": HcTouch;
         "hc-video": HcVideo;
         "hc-video-controls": HcVideoControls;
         "hc-view": HcView;
@@ -2003,6 +2025,7 @@ declare module "@stencil/core" {
             "hc-header": LocalJSX.HcHeader & JSXBase.HTMLAttributes<HTMLHcHeaderElement>;
             "hc-icon": LocalJSX.HcIcon & JSXBase.HTMLAttributes<HTMLHcIconElement>;
             "hc-image": LocalJSX.HcImage & JSXBase.HTMLAttributes<HTMLHcImageElement>;
+            "hc-imagepreview": LocalJSX.HcImagepreview & JSXBase.HTMLAttributes<HTMLHcImagepreviewElement>;
             "hc-indexbar": LocalJSX.HcIndexbar & JSXBase.HTMLAttributes<HTMLHcIndexbarElement>;
             "hc-indexbar-group": LocalJSX.HcIndexbarGroup & JSXBase.HTMLAttributes<HTMLHcIndexbarGroupElement>;
             "hc-indexbar-item": LocalJSX.HcIndexbarItem & JSXBase.HTMLAttributes<HTMLHcIndexbarItemElement>;
@@ -2057,6 +2080,7 @@ declare module "@stencil/core" {
             "hc-text": LocalJSX.HcText & JSXBase.HTMLAttributes<HTMLHcTextElement>;
             "hc-title": LocalJSX.HcTitle & JSXBase.HTMLAttributes<HTMLHcTitleElement>;
             "hc-toast": LocalJSX.HcToast & JSXBase.HTMLAttributes<HTMLHcToastElement>;
+            "hc-touch": LocalJSX.HcTouch & JSXBase.HTMLAttributes<HTMLHcTouchElement>;
             "hc-video": LocalJSX.HcVideo & JSXBase.HTMLAttributes<HTMLHcVideoElement>;
             "hc-video-controls": LocalJSX.HcVideoControls & JSXBase.HTMLAttributes<HTMLHcVideoControlsElement>;
             "hc-view": LocalJSX.HcView & JSXBase.HTMLAttributes<HTMLHcViewElement>;

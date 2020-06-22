@@ -66,6 +66,7 @@ class HcPullrefresh {
         }
         if (this.footer && deltaY < 0) {
             // 上拉加载
+            e.preventDefault();
             this.$content.style.transform = `translate3d(0,${this.dis}px,0)`;
             if (this.dis < -this.maxHeight) {
                 this.$loading.status = 1;

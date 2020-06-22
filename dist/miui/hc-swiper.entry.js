@@ -10,6 +10,7 @@ class HcSwiper {
         this.loop = false;
         this.autoplay = false;
         this.duration = 3000;
+        this.moca = 0.8;
         this.vchange = createEvent(this, "vchange", 7);
     }
     componentDidLoad() {
@@ -52,7 +53,12 @@ class HcSwiper {
             return (h("span", { class: this.current == index ? 'active' : '' }, item));
         })))));
     }
+    jump(current) {
+        this.moca = this.moca > 0.4 ? this.moca - 0.08 : 0.4;
+        return current * this.moca;
+    }
     bindTouch() {
+        var force = 0.8;
         this.$wrap = this.el.shadowRoot.querySelector('.wrap');
         var hammer$1 = new hammer(this.el);
         this.vertical ? hammer$1.get('pan').set({ direction: hammer.DIRECTION_VERTICAL }) : hammer$1.get('pan').set({ direction: hammer.DIRECTION_HORIZONTAL });
@@ -62,18 +68,23 @@ class HcSwiper {
         });
         hammer$1.on('pan', (e) => {
             var dis = this.vertical ? e.deltaY : e.deltaX;
+            dis = this.jump(dis);
             this.renderMove(this.offset + dis);
         });
         hammer$1.on('panend', (e) => {
             var dis = this.vertical ? e.deltaY : e.deltaX;
             this.$wrap.style.transition = '0.3s';
-            if (dis > 50) {
+            if (dis > 100) {
                 this.slidePrev();
             }
-            if (dis < -50) {
+            else if (dis < -100) {
                 this.slideNext();
             }
+            else {
+                this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`;
+            }
             this.autoMove();
+            force = 0.8;
         });
     }
     async slidePrev() {

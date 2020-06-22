@@ -23,6 +23,7 @@ export class HcSwiper implements ComponentInterface {
   $wrap: HTMLElement;
   offset: number;
   timer;
+  moca = 0.8;
   componentDidLoad () {
     if (this.indicate) {
       this.el.setAttribute('indicate', this.indicate)
@@ -86,7 +87,12 @@ export class HcSwiper implements ComponentInterface {
       </Host>
     );
   }
+  jump (current) {
+    this.moca = this.moca > 0.4 ? this.moca - 0.08 : 0.4
+    return current * this.moca
+  }
   bindTouch () {
+    var force = 0.8;
     this.$wrap = this.el.shadowRoot.querySelector('.wrap')
     var hammer = new Hammer(this.el)
     this.vertical ? hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL }) : hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
@@ -96,18 +102,21 @@ export class HcSwiper implements ComponentInterface {
     })
     hammer.on('pan', (e) => {
       var dis = this.vertical ? e.deltaY : e.deltaX
+      dis = this.jump(dis)
       this.renderMove(this.offset + dis)
     })
     hammer.on('panend', (e) => {
       var dis = this.vertical ? e.deltaY : e.deltaX
       this.$wrap.style.transition = '0.3s'
-      if (dis > 50) {
+      if (dis > 100) {
         this.slidePrev()
-      }
-      if (dis < -50) {
+      } else if (dis < -100) {
         this.slideNext()
+      } else {
+        this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`
       }
       this.autoMove()
+      force = 0.8
     })
   }
   @Method()

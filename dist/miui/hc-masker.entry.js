@@ -1,6 +1,6 @@
 import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
-const hcMaskerCss = ":host{display:block;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0, 0, 0, 0.7);z-index:-1;transition:0.3s ease-out;opacity:0}:host([display]){z-index:99;opacity:1}";
+const hcMaskerCss = ":host{display:flex;flex-direction:column;align-items:center;justify-content:center;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0, 0, 0, 0.7);z-index:-1;transition:0.3s ease-out;opacity:0}:host([display]){z-index:99;opacity:1}";
 
 class HcMasker {
     constructor(hostRef) {

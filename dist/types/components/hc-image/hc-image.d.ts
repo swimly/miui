@@ -1,18 +1,16 @@
-import { ComponentInterface } from '../../stencil-public-runtime';
-export declare class HcImage implements ComponentInterface {
+export declare class HcImage {
     src: string;
-    lazy: boolean;
     width: number;
     height: number;
-    radius: number;
-    status: number;
+    lazy: boolean;
     fit: string;
     watermark: string;
     el: HTMLElement;
     $image: any;
-    srcHandle(): void;
-    loadImage(image: any): void;
+    scale: any;
     componentDidLoad(): void;
-    statusHandle(value: number): void;
     render(): any;
+    loading(): void;
+    getSize(image: any): void;
+    bindobverse(): void;
 }

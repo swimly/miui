@@ -16,8 +16,10 @@ export declare class HcSwiper implements ComponentInterface {
     $wrap: HTMLElement;
     offset: number;
     timer: any;
+    moca: number;
     componentDidLoad(): void;
     render(): any;
+    jump(current: any): number;
     bindTouch(): void;
     slidePrev(): Promise<void>;
     slideNext(): Promise<void>;
