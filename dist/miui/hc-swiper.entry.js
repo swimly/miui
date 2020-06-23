@@ -13,6 +13,9 @@ class HcSwiper {
         this.moca = 0.8;
         this.vchange = createEvent(this, "vchange", 7);
     }
+    notouchHandle(v) {
+        this.el.setAttribute('current', `${v}`);
+    }
     componentDidLoad() {
         if (this.indicate) {
             this.el.setAttribute('indicate', this.indicate);
@@ -24,6 +27,12 @@ class HcSwiper {
             this.bindTouch();
         }
         this.autoMove();
+        var children = this.el.shadowRoot.querySelectorAll('hc-touch');
+        children.forEach(item => {
+            item.addEventListener('vchange', (e) => {
+                this.notouch = e.detail.value;
+            });
+        });
     }
     render() {
         var children = Array.from(this.el.children);
@@ -54,37 +63,49 @@ class HcSwiper {
         })))));
     }
     jump(current) {
-        this.moca = this.moca > 0.4 ? this.moca - 0.08 : 0.4;
+        this.moca = this.moca > 0.6 ? this.moca - 0.09 : 0.6;
         return current * this.moca;
     }
     bindTouch() {
-        var force = 0.8;
         this.$wrap = this.el.shadowRoot.querySelector('.wrap');
-        var hammer$1 = new hammer(this.el);
-        this.vertical ? hammer$1.get('pan').set({ direction: hammer.DIRECTION_VERTICAL }) : hammer$1.get('pan').set({ direction: hammer.DIRECTION_HORIZONTAL });
-        hammer$1.on('panstart', () => {
-            this.$wrap.style.transition = '0s';
-            clearInterval(this.timer);
+        this.hammer = new hammer(this.el);
+        // this.vertical ? hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL }) : hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
+        this.hammer.get('pinch').set({
+            enable: true
         });
-        hammer$1.on('pan', (e) => {
-            var dis = this.vertical ? e.deltaY : e.deltaX;
-            dis = this.jump(dis);
-            this.renderMove(this.offset + dis);
-        });
-        hammer$1.on('panend', (e) => {
-            var dis = this.vertical ? e.deltaY : e.deltaX;
-            this.$wrap.style.transition = '0.3s';
-            if (dis > 100) {
-                this.slidePrev();
+        this.hammer.on('doubletap panstart pan pinch panend pinchend', (ev) => {
+            if (ev.type == 'panstart') {
+                this.$wrap.style.transition = '0s';
+                clearInterval(this.timer);
             }
-            else if (dis < -100) {
-                this.slideNext();
+            //pan    
+            if (ev.type == 'pan') {
+                if (this.notouch)
+                    return;
+                if (ev.pointers.length > 1) {
+                    return false;
+                }
+                var dis = this.vertical ? ev.deltaY : ev.deltaX;
+                dis = this.jump(dis);
+                this.renderMove(this.offset + dis);
             }
-            else {
-                this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`;
+            //panend
+            if (ev.type == "panend") {
+                if (this.notouch)
+                    return;
+                var dis = this.vertical ? ev.deltaY : ev.deltaX;
+                this.$wrap.style.transition = '0.3s';
+                if (dis > 150) {
+                    this.slidePrev();
+                }
+                else if (dis < -150) {
+                    this.slideNext();
+                }
+                else {
+                    this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`;
+                }
+                this.autoMove();
             }
-            this.autoMove();
-            force = 0.8;
         });
     }
     async slidePrev() {
@@ -105,7 +126,6 @@ class HcSwiper {
         }
         else {
             // 非循环模式
-            console.log('到这里了');
             if (this.offset < 0) {
                 this.offset += move;
             }
@@ -172,6 +192,9 @@ class HcSwiper {
         });
     }
     get el() { return getElement(this); }
+    static get watchers() { return {
+        "current": ["notouchHandle"]
+    }; }
 }
 HcSwiper.style = hcSwiperCss;
 

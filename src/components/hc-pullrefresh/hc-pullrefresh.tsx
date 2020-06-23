@@ -5,7 +5,7 @@ import { Component, Host, h, Element, Prop, Watch, Event, EventEmitter, Method }
   shadow: true,
 })
 export class HcPullrefresh {
-  @Prop() scrolltop: number = 0;
+  @Prop() offset: number = 0;
   @Prop() footer: boolean;
   @Prop() maxHeight: number = 60;
   @Element() el: HTMLElement;
@@ -20,9 +20,9 @@ export class HcPullrefresh {
   canPull = false;
   dis = 0;
   maxScroll = 0;
-  @Watch('scrolltop')
+  @Watch('offset')
   scrollHandle (v: number) {
-    this.el.setAttribute('scrolltop', `${v}`)
+    this.el.setAttribute('offset', `${v}`)
     this.canPull = v > 0 ? false : true;
     console.log(this.canPull)
   }
@@ -41,7 +41,7 @@ export class HcPullrefresh {
   render() {
     return (
       <Host
-        {...{scrolltop: this.scrolltop}}
+        {...{offset: this.offset}}
         onTouchstart={this.onTouchStart.bind(this)}
         onTouchmove={this.onTouchMove.bind(this)}
         onTouchend={this.onTouchEnd.bind(this)}
@@ -59,8 +59,8 @@ export class HcPullrefresh {
     );
   }
   onScroll (e) {
-    this.scrolltop = e.target.scrollTop
-    if (this.maxScroll == this.scrolltop) {
+    this.offset = e.target.scrollTop
+    if (this.maxScroll == this.offset) {
       this.footer = true
     } else {
       this.footer = false
@@ -69,7 +69,7 @@ export class HcPullrefresh {
   onTouchStart (e) {
     this.$content.style.transition = '0s'
     this.startY = e.changedTouches[0].pageY
-    if (this.scrolltop == 0) {
+    if (this.offset == 0) {
       this.canPull = true
       this.$refresh.status = 0
       this.$loading.status = 0

@@ -372,7 +372,7 @@ export namespace Components {
         "RefreshSuccess": () => Promise<void>;
         "footer": boolean;
         "maxHeight": number;
-        "scrolltop": number;
+        "offset": number;
     }
     interface HcPullrefreshIndicate {
         "height": number;
@@ -633,6 +633,8 @@ export namespace Components {
         "play": boolean;
     }
     interface HcView {
+        "background": string;
+        "padding": number;
     }
 }
 declare global {
@@ -1630,9 +1632,9 @@ declare namespace LocalJSX {
     interface HcPullrefresh {
         "footer"?: boolean;
         "maxHeight"?: number;
+        "offset"?: number;
         "onVloading"?: (event: CustomEvent<any>) => void;
         "onVrefresh"?: (event: CustomEvent<any>) => void;
-        "scrolltop"?: number;
     }
     interface HcPullrefreshIndicate {
         "height"?: number;
@@ -1791,6 +1793,7 @@ declare namespace LocalJSX {
     }
     interface HcSwiperItem {
         "height"?: number;
+        "onVdisabled"?: (event: CustomEvent<any>) => void;
         "width"?: number;
     }
     interface HcSwitch {
@@ -1864,6 +1867,7 @@ declare namespace LocalJSX {
         "theme"?: string;
     }
     interface HcTouch {
+        "onVchange"?: (event: CustomEvent<any>) => void;
     }
     interface HcVideo {
         "autoplay"?: boolean;
@@ -1895,7 +1899,9 @@ declare namespace LocalJSX {
         "play"?: boolean;
     }
     interface HcView {
+        "background"?: string;
         "onVscroll"?: (event: CustomEvent<any>) => void;
+        "padding"?: number;
     }
     interface IntrinsicElements {
         "hc-actionsheet": HcActionsheet;

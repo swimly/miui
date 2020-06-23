@@ -1,10 +1,11 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 
 const hcSwiperItemCss = ":host{display:flex;flex-direction:row;flex-wrap:wrap}";
 
 class HcSwiperItem {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.vdisabled = createEvent(this, "vdisabled", 7);
     }
     componentDidLoad() {
         const slot = this.el.shadowRoot.querySelector('slot');
@@ -12,6 +13,9 @@ class HcSwiperItem {
         children.forEach((item) => {
             item.setAttribute('width', `${this.width}`);
             item.setAttribute('height', `${this.height}`);
+            item.addEventListener('vchange', () => {
+                this.vdisabled.emit();
+            });
         });
     }
     render() {

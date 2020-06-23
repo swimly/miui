@@ -1,6 +1,6 @@
 import { EventEmitter } from '../../stencil-public-runtime';
 export declare class HcPullrefresh {
-    scrolltop: number;
+    offset: number;
     footer: boolean;
     maxHeight: number;
     el: HTMLElement;

@@ -9,12 +9,9 @@ export class HcPage implements ComponentInterface {
 
   render() {
     return (
-      <Host onTouchmove={this.onTouchMove.bind(this)}>
+      <Host>
         <slot></slot>
       </Host>
     );
-  }
-  onTouchMove (e) {
-    // e.preventDefault()
   }
 }

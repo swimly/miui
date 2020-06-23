@@ -17,6 +17,8 @@ export declare class HcSwiper implements ComponentInterface {
     offset: number;
     timer: any;
     moca: number;
+    hammer: any;
+    notouchHandle(v: boolean): void;
     componentDidLoad(): void;
     render(): any;
     jump(current: any): number;

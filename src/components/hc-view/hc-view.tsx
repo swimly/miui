@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, EventEmitter, Event, Element } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, EventEmitter, Event, Element, Prop } from '@stencil/core';
 
 @Component({
   tag: 'hc-view',
@@ -7,10 +7,15 @@ import { Component, ComponentInterface, Host, h, EventEmitter, Event, Element } 
 })
 export class HcView implements ComponentInterface {
   @Event() vscroll: EventEmitter;
+  @Prop() background: string;
+  @Prop() padding: number;
   @Element() el:HTMLElement;
   render() {
     return (
-      <Host onScroll={this.onScroll.bind(this)}>
+      <Host onScroll={this.onScroll.bind(this)} style={{
+        backgroundColor: this.background,
+        padding: `${this.padding}px`
+      }}>
         <slot></slot>
       </Host>
     );

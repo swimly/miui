@@ -11,6 +11,20 @@
     <hc-header>轮播图</hc-header>
     <hc-view>
       <hc-panel>
+        <hc-title>手势缩放</hc-title>
+        <hc-swiper loop height="200">
+          <hc-swiper-item>
+            <hc-image src="http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="http://img1.imgtn.bdimg.com/it/u=2937873876,302237995&fm=26&gp=0.jpg"></hc-image>
+          </hc-swiper-item>
+          <hc-swiper-item>
+            <hc-image src="http://img3.imgtn.bdimg.com/it/u=3622639324,53139701&fm=26&gp=0.jpg"></hc-image>
+          </hc-swiper-item>
+        </hc-swiper>
+      </hc-panel>
+      <hc-panel>
         <hc-title>普通</hc-title>
         <hc-swiper loop id="control" height="200">
           <hc-swiper-item style="background:#409EFF;color:#fff;">1</hc-swiper-item>
@@ -48,13 +62,13 @@
         <hc-title>垂直方向</hc-title>
         <hc-swiper vertical height="200">
           <hc-swiper-item>
-            <hc-image src="../assets/img1.png"></hc-image>
+            <hc-image src="http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg"></hc-image>
           </hc-swiper-item>
           <hc-swiper-item>
-            <hc-image src="../assets/img2.png"></hc-image>
+            <hc-image src="http://img1.imgtn.bdimg.com/it/u=2937873876,302237995&fm=26&gp=0.jpg"></hc-image>
           </hc-swiper-item>
           <hc-swiper-item>
-            <hc-image src="../assets/img3.png"></hc-image>
+            <hc-image src="http://img3.imgtn.bdimg.com/it/u=3622639324,53139701&fm=26&gp=0.jpg"></hc-image>
           </hc-swiper-item>
         </hc-swiper>
       </hc-panel>
@@ -62,18 +76,20 @@
         <hc-title>垂直无限轮播</hc-title>
         <hc-swiper vertical loop height="200">
           <hc-swiper-item>
-            <hc-image src="../assets/img1.png"></hc-image>
+            <hc-image src="http://e.hiphotos.baidu.com/zhidao/pic/item/b64543a98226cffc7a951157b8014a90f703ea9c.jpg"></hc-image>
           </hc-swiper-item>
           <hc-swiper-item>
-            <hc-image src="../assets/img2.png"></hc-image>
+            <hc-image src="http://img1.imgtn.bdimg.com/it/u=2937873876,302237995&fm=26&gp=0.jpg"></hc-image>
           </hc-swiper-item>
           <hc-swiper-item>
-            <hc-image src="../assets/img3.png"></hc-image>
+            <hc-image src="http://img3.imgtn.bdimg.com/it/u=3622639324,53139701&fm=26&gp=0.jpg"></hc-image>
           </hc-swiper-item>
         </hc-swiper>
       </hc-panel>
     </hc-view>
   </hc-page>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
   <script type="module" src="../www/build/miui.esm.js"></script>
   <script>
     var swiper = document.querySelector('#control')

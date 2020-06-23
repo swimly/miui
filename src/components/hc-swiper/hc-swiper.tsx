@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Element, Prop, Method, EventEmitter, Event } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Element, Prop, Method, EventEmitter, Event, Watch } from '@stencil/core';
 import Hammer from 'hammerjs'
 
 @Component({
@@ -24,6 +24,11 @@ export class HcSwiper implements ComponentInterface {
   offset: number;
   timer;
   moca = 0.8;
+  hammer;
+  @Watch('current')
+  notouchHandle (v: boolean) {
+    this.el.setAttribute('current', `${v}`)
+  }
   componentDidLoad () {
     if (this.indicate) {
       this.el.setAttribute('indicate', this.indicate)
@@ -35,6 +40,12 @@ export class HcSwiper implements ComponentInterface {
       this.bindTouch()
     }
     this.autoMove()
+    var children = this.el.shadowRoot.querySelectorAll('hc-touch')
+    children.forEach(item => {
+      item.addEventListener('vchange', (e) => {
+        this.notouch = (e as CustomEvent).detail.value
+      })
+    })
   }
   render() {
     var children = Array.from(this.el.children)
@@ -88,35 +99,45 @@ export class HcSwiper implements ComponentInterface {
     );
   }
   jump (current) {
-    this.moca = this.moca > 0.4 ? this.moca - 0.08 : 0.4
+    this.moca = this.moca > 0.6 ? this.moca - 0.09 : 0.6
     return current * this.moca
   }
   bindTouch () {
-    var force = 0.8;
     this.$wrap = this.el.shadowRoot.querySelector('.wrap')
-    var hammer = new Hammer(this.el)
-    this.vertical ? hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL }) : hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
-    hammer.on('panstart', () => {
-      this.$wrap.style.transition = '0s'
-      clearInterval(this.timer)
+    this.hammer = new Hammer(this.el)
+    // this.vertical ? hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL }) : hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
+    this.hammer.get('pinch').set({
+      enable: true
     })
-    hammer.on('pan', (e) => {
-      var dis = this.vertical ? e.deltaY : e.deltaX
-      dis = this.jump(dis)
-      this.renderMove(this.offset + dis)
-    })
-    hammer.on('panend', (e) => {
-      var dis = this.vertical ? e.deltaY : e.deltaX
-      this.$wrap.style.transition = '0.3s'
-      if (dis > 100) {
-        this.slidePrev()
-      } else if (dis < -100) {
-        this.slideNext()
-      } else {
-        this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`
+    this.hammer.on('doubletap panstart pan pinch panend pinchend', (ev) => {
+      if (ev.type == 'panstart') {
+        this.$wrap.style.transition = '0s'
+        clearInterval(this.timer)
       }
-      this.autoMove()
-      force = 0.8
+      //pan    
+      if (ev.type == 'pan') {
+        if (this.notouch) return
+        if (ev.pointers.length > 1) {
+          return false
+        }
+        var dis = this.vertical ? ev.deltaY : ev.deltaX
+        dis = this.jump(dis)
+        this.renderMove(this.offset + dis)
+      }
+      //panend
+      if (ev.type == "panend") {
+        if (this.notouch) return
+        var dis = this.vertical ? ev.deltaY : ev.deltaX
+        this.$wrap.style.transition = '0.3s'
+        if (dis > 150) {
+          this.slidePrev()
+        } else if (dis < -150) {
+          this.slideNext()
+        } else {
+          this.$wrap.style.transform = this.vertical ? `translateY(${this.offset}px)` : `translateX(${this.offset}px)`
+        }
+        this.autoMove()
+      }
     })
   }
   @Method()
@@ -137,7 +158,6 @@ export class HcSwiper implements ComponentInterface {
       }
     } else {
       // 非循环模式
-      console.log('到这里了')
       if (this.offset < 0) {
         this.offset += move
       }

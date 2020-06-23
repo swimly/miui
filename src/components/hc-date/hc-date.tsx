@@ -33,7 +33,11 @@ export class HcDate {
     var footer = null
     var types = null
     this.date = this.value.split(',');
-    this.YYYY = Array.from({length: this.end - this.start + 1}, (v, k) => `${k + this.start}`).reverse()
+    this.YYYY = Array.from({length: this.end - this.start + 1}, (v, k) => {
+      if ( !v ) {
+        return `${k + this.start}`
+      }
+    }).reverse()
     this.MM = this.computedArray(12, 1);
     this.DD = this.computedArray(getMonthLength(this.date[0], this.date[1]), 1)
     this.hh = this.computedArray(24, 0)
@@ -116,7 +120,9 @@ export class HcDate {
   }
   computedArray (length, dis) {
     return Array.from({length: length}, (v, k) => {
-      return k + dis >= 10 ? `${k + dis}` : `0${k + dis}`
+      if (!v) {
+        return k + dis >= 10 ? `${k + dis}` : `0${k + dis}`
+      }
     })
   }
   onChange (e) {

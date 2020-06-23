@@ -1,4 +1,4 @@
-import { Component, Host, h, Element } from '@stencil/core';
+import { Component, Host, h, Element, Event, EventEmitter } from '@stencil/core';
 import Hammer from 'hammerjs'
 @Component({
   tag: 'hc-touch',
@@ -7,6 +7,7 @@ import Hammer from 'hammerjs'
 })
 export class HcTouch {
   @Element() el: HTMLElement;
+  @Event() vchange: EventEmitter;
   componentDidLoad() {
     this.bindTouch()
   }
@@ -23,6 +24,7 @@ export class HcTouch {
     this.hammerIt(this.el.shadowRoot.querySelector('.content'))
   }
   hammerIt(elm) {
+    var _this = this
     var hammertime = new Hammer(elm, {});
     hammertime.get('pinch').set({
       enable: true
@@ -64,17 +66,21 @@ export class HcTouch {
         posY = last_posY + ev.deltaY;
         max_pos_x = Math.ceil((scale - 1) * el.clientWidth / 2);
         max_pos_y = Math.ceil((scale - 1) * el.clientHeight / 2);
-        if (posX > max_pos_x) {
+        if (posX >= max_pos_x) {
           posX = max_pos_x;
         }
-        if (posX < -max_pos_x) {
+        if (posX <= -max_pos_x) {
           posX = -max_pos_x;
         }
         if (posY > max_pos_y) {
-          posY = max_pos_y;
         }
         if (posY < -max_pos_y) {
           posY = -max_pos_y;
+        }
+        if (scale > 1) {
+          _this.vchange.emit({
+            value: true
+          })
         }
       }
 
@@ -83,7 +89,15 @@ export class HcTouch {
       if (ev.type == "pinch") {
         scale = Math.max(.999, Math.min(last_scale * (ev.scale), 4));
       }
-      if (ev.type == "pinchend") { last_scale = scale; }
+      if (ev.type == "pinchend") { 
+        last_scale = scale;
+        // console.log(last_scale)
+        if (last_scale <= 1.1) {
+          _this.vchange.emit({
+            value: false
+          })
+        }
+       }
 
       //panend
       if (ev.type == "panend") {
@@ -95,6 +109,11 @@ export class HcTouch {
         transform =
           "translate3d(" + posX + "px," + posY + "px, 0) " +
           "scale3d(" + scale + ", " + scale + ", 1)";
+        // if (Math.abs(posX) == max_pos_x) {
+        //   _this.vchange.emit({
+        //     value: false
+        //   })
+        // }
       }
 
       if (transform) {

@@ -7,13 +7,25 @@
   <link rel="stylesheet" href="./www/build/miui.css">
   <style>
     a{
-      display: block;
+      display: flex;
+      flex-direction: row;
+      align-items:center;
+      justify-content: space-between;
       text-decoration: none;
       color:var(--color-text-primary);
       font-size:0.8rem;
-      padding:1rem 0;
-      border-bottom:1px dashed var(--border-color-base);
+      padding:0.7rem 1rem;
+      background: var(--background-color-base);
+      margin-bottom:0.8rem;
+      border-radius:2rem;
       -webkit-tap-highlight-color: transparent;
+    }
+    a:last-child{
+      margin:0;
+    }
+    hc-icon{
+      font-size:0.7rem;
+      color:var(--color-text-secondary);
     }
     a:last-child{
       border:none;
@@ -21,6 +33,7 @@
     p{
       font-size:0.8rem;
       color: var(--color-text-primary);
+      margin-bottom:1rem;
     }
     p span{
       color:var(--color-primary);
@@ -30,55 +43,185 @@
 </head>
 <body>
   <hc-page>
-    <hc-view>
-      <hc-panel>
-        <p>当前总计 <span id="count"></span> 个组件</p>
-      </hc-panel>
+    <hc-view background="#fff" padding="0">
       <hc-panel id="component">
-        <a href="examples/button.html">button 按钮</a>
-        <a href="examples/input.html">input 输入框</a>
-        <a href="examples/radio.html">radio 单选框</a>
-        <a href="examples/checkbox.html">checkbox 复选框</a>
-        <a href="examples/switch.html">switch 开关</a>
-        <a href="examples/icon.html">icon 图标</a>
-        <a href="examples/tag.html">tag 标签</a>
-        <a href="examples/image.html">image 图片</a>
-        <a href="examples/form.html">form 表单</a>
-        <a href="examples/list.html">list 列表</a>
-        <a href="examples/cell.html">cell 单元格</a>
-        <a href="examples/toast.html">toast 吐司</a>
-        <a href="examples/masker.html">masker 遮罩</a>
-        <a href="examples/drawer.html">drawer 抽屉</a>
-        <a href="examples/swiper.html">swiper 轮播</a>
-        <a href="examples/alert.html">alert 提示框</a>
-        <a href="examples/ripple.html">ripple 水波纹</a>
-        <a href="examples/skeleton.html">skeleton 骨架屏</a>
-        <a href="examples/tab.html">tab 切换</a>
-        <a href="examples/actionsheet.html">actionsheet 单选</a>
-        <a href="examples/picker.html">picker 选择</a>
-        <a href="examples/swipemenu.html">swipemenu 滑动菜单</a>
-        <a href="examples/popover.html">popover 弹出</a>
-        <a href="examples/notify.html">notify 提示框</a>
-        <a href="examples/sticky.html">sticky 粘性布局</a>
-        <a href="examples/slider.html">slider 滑块</a>
-        <a href="examples/rate.html">rate 星星评分</a>
-        <a href="examples/collapse.html">collapse 折叠面板</a>
-        <a href="examples/search.html">search 搜索</a>
-        <a href="examples/noticebar.html">noticebar 通知栏</a>
-        <a href="examples/indexbar.html">indexbar 索引栏</a>
-        <a href="examples/text.html">text 段落</a>
-        <a href="examples/badge.html">badge 徽章</a>
-        <a href="examples/signature.html">signature 签名</a>
-        <a href="examples/square.html">square 九宫格</a>
-        <a href="examples/video.html">video 视频</a>
-        <a href="examples/keyboard.html">keyboard 键盘</a>
-        <a href="examples/selection.html">selection 多层选择</a>
-        <a href="examples/calendar.html">calendar 日历</a>
-        <a href="examples/date.html">date 日期时间</a>
-        <a href="examples/address.html">address 地区选择</a>
-        <a href="examples/pullrefresh.html">pullrefresh 下拉刷新</a>
-        <a href="examples/touch.html">touch 放大</a>
-        <a href="examples/imagepreview.html">imagepreview 图片预览</a>
+        <p>当前总计 <span id="count"></span> 个组件</p>
+        <a href="examples/button.html">
+          <span>button 按钮</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/input.html">
+          <span>input 输入框</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/radio.html">
+          <span>radio 单选框</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/checkbox.html">
+          <span>checkbox 复选框</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/switch.html">
+          <span>switch 开关</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/icon.html">
+          <span>icon 图标</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/tag.html">
+          <span>tag 标签</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/image.html">
+          <span>image 图片</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/form.html">
+          <span>form 表单</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/list.html">
+          <span>list 列表</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/cell.html">
+          <span>cell 单元格</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/toast.html">
+          <span>toast 吐司</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/masker.html">
+          <span>masker 遮罩</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/drawer.html">
+          <span>drawer 抽屉</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/swiper.html">
+          <span>swiper 轮播</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/alert.html">
+          <span>alert 提示框</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/ripple.html">
+          <span>ripple 水波纹</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/skeleton.html">
+          <span>skeleton 骨架屏</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/tab.html">
+          <span>tab 切换</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/actionsheet.html">
+          <span>actionsheet 单选</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/picker.html">
+          <span>picker 选择</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/swipemenu.html">
+          <span>swipemenu 滑动菜单</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/popover.html">
+          <span>popover 弹出</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/notify.html">
+          <span>notify 提示框</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/sticky.html">
+          <span>sticky 粘性布局</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/slider.html">
+          <span>slider 滑块</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/rate.html">
+          <span>rate 星星评分</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/collapse.html">
+          <span>collapse 折叠面板</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/search.html">
+          <span>search 搜索</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/noticebar.html">
+          <span>noticebar 通知栏</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/indexbar.html">
+          <span>indexbar 索引栏</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/text.html">
+          <span>text 段落</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/badge.html">
+          <span>badge 徽章</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/signature.html">
+          <span>signature 签名</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/square.html">
+          <span>square 九宫格</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/video.html">
+          <span>video 视频</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/keyboard.html">
+          <span>keyboard 键盘</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/selection.html">
+          <span>selection 多层选择</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/calendar.html">
+          <span>calendar 日历</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/date.html">
+          <span>date 日期时间</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/address.html">
+          <span>address 地区选择</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/pullrefresh.html">
+          <span>pullrefresh 下拉刷新</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/touch.html">
+          <span>touch 放大</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
+        <a href="examples/imagepreview.html">
+          <span>imagepreview 图片预览</span>
+          <hc-icon name="arrow-right"></hc-icon>
+        </a>
         <!-- <a href="examples/echarts.html">echarts 图表</a> -->
         <!-- <a href="examples/code.html">code</a> -->
       </hc-panel>

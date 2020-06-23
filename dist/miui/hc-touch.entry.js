@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, g as getElement } from './index-6dd25a1a.js';
+import { r as registerInstance, c as createEvent, h, H as Host, g as getElement } from './index-6dd25a1a.js';
 import { h as hammer } from './hammer-a3a84d6d.js';
 
 const hcTouchCss = ":host{display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;width:100%;height:100%}";
@@ -6,6 +6,7 @@ const hcTouchCss = ":host{display:flex;flex-direction:column;align-items:center;
 class HcTouch {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.vchange = createEvent(this, "vchange", 7);
     }
     componentDidLoad() {
         this.bindTouch();
@@ -17,6 +18,7 @@ class HcTouch {
         this.hammerIt(this.el.shadowRoot.querySelector('.content'));
     }
     hammerIt(elm) {
+        var _this = this;
         var hammertime = new hammer(elm, {});
         hammertime.get('pinch').set({
             enable: true
@@ -48,17 +50,21 @@ class HcTouch {
                 posY = last_posY + ev.deltaY;
                 max_pos_x = Math.ceil((scale - 1) * el.clientWidth / 2);
                 max_pos_y = Math.ceil((scale - 1) * el.clientHeight / 2);
-                if (posX > max_pos_x) {
+                if (posX >= max_pos_x) {
                     posX = max_pos_x;
                 }
-                if (posX < -max_pos_x) {
+                if (posX <= -max_pos_x) {
                     posX = -max_pos_x;
                 }
                 if (posY > max_pos_y) {
-                    posY = max_pos_y;
                 }
                 if (posY < -max_pos_y) {
                     posY = -max_pos_y;
+                }
+                if (scale > 1) {
+                    _this.vchange.emit({
+                        value: true
+                    });
                 }
             }
             //pinch
@@ -67,6 +73,12 @@ class HcTouch {
             }
             if (ev.type == "pinchend") {
                 last_scale = scale;
+                // console.log(last_scale)
+                if (last_scale <= 1.1) {
+                    _this.vchange.emit({
+                        value: false
+                    });
+                }
             }
             //panend
             if (ev.type == "panend") {
@@ -77,6 +89,11 @@ class HcTouch {
                 transform =
                     "translate3d(" + posX + "px," + posY + "px, 0) " +
                         "scale3d(" + scale + ", " + scale + ", 1)";
+                // if (Math.abs(posX) == max_pos_x) {
+                //   _this.vchange.emit({
+                //     value: false
+                //   })
+                // }
             }
             if (transform) {
                 el.style.webkitTransform = transform;

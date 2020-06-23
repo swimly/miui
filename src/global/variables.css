@@ -25,10 +25,10 @@ html {
 
 :root{
   /* functionalcolor */
-  --color-primary: #409EFF;
-  --color-warning: #E6A23C;
-  --color-success: #67C23A;
-  --color-danger: #F56C6C;
+  --color-primary: #2170D9;
+  --color-warning: #d98321;
+  --color-success: #21d94f;
+  --color-danger: #e90000;
   --color-info: #909399;
   --color-primary-light: #d9e6f3;
   /* fontcolor */

@@ -8,7 +8,10 @@ class HcView {
         this.vscroll = createEvent(this, "vscroll", 7);
     }
     render() {
-        return (h(Host, { onScroll: this.onScroll.bind(this) }, h("slot", null)));
+        return (h(Host, { onScroll: this.onScroll.bind(this), style: {
+                backgroundColor: this.background,
+                padding: `${this.padding}px`
+            } }, h("slot", null)));
     }
     onScroll(e) {
         this.vscroll.emit({

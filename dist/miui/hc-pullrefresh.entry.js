@@ -5,7 +5,7 @@ const hcPullrefreshCss = ":host{display:block;height:100%;position:relative;over
 class HcPullrefresh {
     constructor(hostRef) {
         registerInstance(this, hostRef);
-        this.scrolltop = 0;
+        this.offset = 0;
         this.maxHeight = 60;
         this.startY = 0;
         this.moca = 0.8;
@@ -16,7 +16,7 @@ class HcPullrefresh {
         this.vloading = createEvent(this, "vloading", 7);
     }
     scrollHandle(v) {
-        this.el.setAttribute('scrolltop', `${v}`);
+        this.el.setAttribute('offset', `${v}`);
         this.canPull = v > 0 ? false : true;
         console.log(this.canPull);
     }
@@ -32,11 +32,11 @@ class HcPullrefresh {
         this.maxScroll = wrap - this.$scroll.clientHeight;
     }
     render() {
-        return (h(Host, Object.assign({}, { scrolltop: this.scrolltop }, { onTouchstart: this.onTouchStart.bind(this), onTouchmove: this.onTouchMove.bind(this), onTouchend: this.onTouchEnd.bind(this) }), h("div", { class: "content" }, h("hc-pullrefresh-indicate", { height: this.maxHeight, class: "up" }), h("div", { class: "scroll", onScroll: this.onScroll.bind(this) }, h("div", { class: "wrap" }, h("slot", null))), h("hc-pullrefresh-indicate", { icons: "rising,falling,loading,success,cry", labels: "\u4E0A\u62C9\u52A0\u8F7D,\u677E\u624B\u52A0\u8F7D,\u52A0\u8F7D\u4E2D,\u52A0\u8F7D\u6210\u529F,\u52A0\u8F7D\u5931\u8D25", height: this.maxHeight, class: "down" }))));
+        return (h(Host, Object.assign({}, { offset: this.offset }, { onTouchstart: this.onTouchStart.bind(this), onTouchmove: this.onTouchMove.bind(this), onTouchend: this.onTouchEnd.bind(this) }), h("div", { class: "content" }, h("hc-pullrefresh-indicate", { height: this.maxHeight, class: "up" }), h("div", { class: "scroll", onScroll: this.onScroll.bind(this) }, h("div", { class: "wrap" }, h("slot", null))), h("hc-pullrefresh-indicate", { icons: "rising,falling,loading,success,cry", labels: "\u4E0A\u62C9\u52A0\u8F7D,\u677E\u624B\u52A0\u8F7D,\u52A0\u8F7D\u4E2D,\u52A0\u8F7D\u6210\u529F,\u52A0\u8F7D\u5931\u8D25", height: this.maxHeight, class: "down" }))));
     }
     onScroll(e) {
-        this.scrolltop = e.target.scrollTop;
-        if (this.maxScroll == this.scrolltop) {
+        this.offset = e.target.scrollTop;
+        if (this.maxScroll == this.offset) {
             this.footer = true;
         }
         else {
@@ -46,7 +46,7 @@ class HcPullrefresh {
     onTouchStart(e) {
         this.$content.style.transition = '0s';
         this.startY = e.changedTouches[0].pageY;
-        if (this.scrolltop == 0) {
+        if (this.offset == 0) {
             this.canPull = true;
             this.$refresh.status = 0;
             this.$loading.status = 0;
@@ -124,7 +124,7 @@ class HcPullrefresh {
     }
     get el() { return getElement(this); }
     static get watchers() { return {
-        "scrolltop": ["scrollHandle"],
+        "offset": ["scrollHandle"],
         "footer": ["footerHandle"]
     }; }
 }

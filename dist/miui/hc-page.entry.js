@@ -7,10 +7,7 @@ class HcPage {
         registerInstance(this, hostRef);
     }
     render() {
-        return (h(Host, { onTouchmove: this.onTouchMove.bind(this) }, h("slot", null)));
-    }
-    onTouchMove(e) {
-        // e.preventDefault()
+        return (h(Host, null, h("slot", null)));
     }
 }
 HcPage.style = hcPageCss;
